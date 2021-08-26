@@ -23,7 +23,10 @@ trait ParametersTrait
         return isset($this->parameters[$name]);
     }
 
-    public function removeParameter(string $name): self
+    /**
+     * @return static
+     */
+    public function removeParameter(string $name)
     {
         if ($this->hasParameter($name)) {
             unset($this->parameters[$name]);
@@ -47,15 +50,19 @@ trait ParametersTrait
 
     /**
      * @param array|string|int|float|bool|\stdClass $value
+     * @return static
      */
-    public function addParameter(string $name, $value): self
+    public function addParameter(string $name, $value)
     {
         $this->parameters[$name] = $value;
 
         return $this;
     }
 
-    public function setParameters(array $parameters): self
+    /**
+     * @return static
+     */
+    public function setParameters(array $parameters)
     {
         $this->parameters = $parameters;
 

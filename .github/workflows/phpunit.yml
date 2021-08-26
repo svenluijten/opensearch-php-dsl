@@ -16,22 +16,37 @@ jobs:
           discovery.type: single-node
     strategy:
       matrix:
-        php: ['7.4', '8.0', '8.1']
+        php-version:
+          - "7.4"
+          - "8.0"
+          - "8.1"
+        dependencies:
+          - lowest
+          - highest
     steps:
     - uses: actions/checkout@v2
   
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.php }}
+        php-version: ${{ matrix.php-version }}
         tools: composer:v2
         coverage: xdebug
 
     - name: Validate composer.json and composer.lock
       run: composer validate
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+    - name: Set composer platform version
+      if: matrix.php-verison == '8.1'
+      run: composer config platform.php 8.0.9
+
+    - name: Install lowest dependencies with composer
+      if: matrix.dependencies == 'lowest'
+      run: composer update --no-ansi --no-interaction --no-progress --prefer-lowest
+
+    - name: Install highest dependencies with composer
+      if: matrix.dependencies == 'highest'
+      run: composer update --no-ansi --no-interaction --no-progress
 
     - name: Wait for Elasticsearch
       run: php ./.github/wait_for_es.php
@@ -39,7 +54,7 @@ jobs:
     - name: Run PHPUnit
       run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
-    - name: Run PHPCS
+    - name: Run PHP-CS-Fixer
       run: vendor/bin/php-cs-fixer --dry-run
     
     - name: Upload Codecov

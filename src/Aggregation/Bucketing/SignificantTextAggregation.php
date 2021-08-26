@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,7 +14,7 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Bucketing;
 /**
  * Class representing TermsAggregation.
  *
- * @link https://goo.gl/xI7zoa
+ * @see https://goo.gl/xI7zoa
  */
 class SignificantTextAggregation extends TermsAggregation
 {

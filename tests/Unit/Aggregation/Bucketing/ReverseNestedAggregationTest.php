@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,12 +14,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Bucketing;
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\ReverseNestedAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 
+/**
+ * @internal
+ */
 class ReverseNestedAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test for reverse_nested aggregation toArray() method exception.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $termAggregation = new TermsAggregation('acme');
 
@@ -40,7 +43,7 @@ class ReverseNestedAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for reverse_nested aggregation toArray() without path.
      */
-    public function testToArrayNoPath()
+    public function testToArrayNoPath(): void
     {
         $termAggregation = new TermsAggregation('acme');
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Geo;
 
 use ONGR\ElasticsearchDSL\Query\Geo\GeoBoundingBoxQuery;
 
+/**
+ * @internal
+ */
 class GeoBoundingBoxQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test if exception is thrown when geo points are not set.
      */
-    public function testGeoBoundBoxQueryException()
+    public function testGeoBoundBoxQueryException(): void
     {
         $this->expectException(\LogicException::class);
         $query = new GeoBoundingBoxQuery('location', []);
@@ -88,7 +91,7 @@ class GeoBoundingBoxQueryTest extends \PHPUnit\Framework\TestCase
                     'right' => -71.12,
                     'bottom' => 40.01,
                     'top' => 40.73,
-                    'left' => -74.1
+                    'left' => -74.1,
                 ],
                 ['parameter' => 'value'],
                 [
@@ -107,14 +110,14 @@ class GeoBoundingBoxQueryTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests toArray method.
      *
-     * @param string $field      Field name.
-     * @param array  $values     Bounding box values.
-     * @param array  $parameters Optional parameters.
-     * @param array  $expected   Expected result.
+     * @param string $field field name
+     * @param array $values bounding box values
+     * @param array $parameters optional parameters
+     * @param array $expected expected result
      *
      * @dataProvider getArrayDataProvider
      */
-    public function testToArray($field, $values, $parameters, $expected)
+    public function testToArray($field, $values, $parameters, $expected): void
     {
         $query = new GeoBoundingBoxQuery($field, $values, $parameters);
         $result = $query->toArray();

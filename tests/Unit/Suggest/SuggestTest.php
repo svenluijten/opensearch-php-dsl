@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Suggest;
 
 use ONGR\ElasticsearchDSL\Suggest\Suggest;
 
+/**
+ * @internal
+ */
 class SuggestTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests getType method.
      */
-    public function testSuggestGetType()
+    public function testSuggestGetType(): void
     {
         $suggest = new Suggest('foo', 'term', 'acme', 'bar');
         $this->assertEquals('term', $suggest->getType());
@@ -43,10 +46,10 @@ class SuggestTest extends \PHPUnit\Framework\TestCase
                         'text' => 'bar',
                         'term' => [
                             'field' => 'acme',
-                            'size' => 5
-                        ]
-                    ]
-                ]
+                            'size' => 5,
+                        ],
+                    ],
+                ],
             ],
             [
                 'suggest' => new Suggest(
@@ -63,8 +66,8 @@ class SuggestTest extends \PHPUnit\Framework\TestCase
                             'field' => 'acme',
                             'max_errors' => 0.5,
                         ],
-                    ]
-                ]
+                    ],
+                ],
             ],
             [
                 'suggest' => new Suggest(
@@ -79,10 +82,10 @@ class SuggestTest extends \PHPUnit\Framework\TestCase
                         'text' => 'bar',
                         'completion' => [
                             'field' => 'acme',
-                            'fuzziness' => 2
-                        ]
-                    ]
-                ]
+                            'fuzziness' => 2,
+                        ],
+                    ],
+                ],
             ],
             [
                 'suggest' => new Suggest(
@@ -99,22 +102,19 @@ class SuggestTest extends \PHPUnit\Framework\TestCase
                             'field' => 'acme',
                             'size' => 3,
                             'context' => [
-                                'color' => 'red'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'color' => 'red',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 
     /**
-     * @param Suggest $suggest
-     * @param array $expected
-     *
      * @dataProvider getTestToArrayData()
      */
-    public function testToArray(Suggest $suggest, array $expected)
+    public function testToArray(Suggest $suggest, array $expected): void
     {
         $this->assertEquals($expected, $suggest->toArray());
     }

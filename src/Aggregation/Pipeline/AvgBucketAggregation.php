@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,7 +14,7 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 /**
  * Class representing Avg Bucket Pipeline Aggregation.
  *
- * @link https://goo.gl/SWK2nP
+ * @see https://goo.gl/SWK2nP
  */
 class AvgBucketAggregation extends AbstractPipelineAggregation
 {

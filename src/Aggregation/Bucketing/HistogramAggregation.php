@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,14 +17,14 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
 /**
  * Class representing Histogram aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html
  */
 class HistogramAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    const DIRECTION_ASC = 'asc';
-    const DIRECTION_DESC = 'desc';
+    public const DIRECTION_ASC = 'asc';
+    public const DIRECTION_DESC = 'desc';
 
     /**
      * @var int
@@ -61,13 +61,13 @@ class HistogramAggregation extends AbstractAggregation
      *
      * @param string $name
      * @param string $field
-     * @param int    $interval
-     * @param int    $minDocCount
+     * @param int $interval
+     * @param int $minDocCount
      * @param string $orderMode
      * @param string $orderDirection
-     * @param int    $extendedBoundsMin
-     * @param int    $extendedBoundsMax
-     * @param bool   $keyed
+     * @param int $extendedBoundsMin
+     * @param int $extendedBoundsMax
+     * @param bool $keyed
      */
     public function __construct(
         $name,
@@ -135,9 +135,9 @@ class HistogramAggregation extends AbstractAggregation
     {
         if ($this->orderMode && $this->orderDirection) {
             return [$this->orderMode => $this->orderDirection];
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -233,7 +233,7 @@ class HistogramAggregation extends AbstractAggregation
                 'order' => $this->getOrder(),
             ],
             function ($val) {
-                return ($val || is_numeric($val));
+                return $val || is_numeric($val);
             }
         );
         $this->checkRequiredParameters($out, ['field', 'interval']);
@@ -249,7 +249,7 @@ class HistogramAggregation extends AbstractAggregation
      *
      * @throws \LogicException
      */
-    protected function checkRequiredParameters($data, $required)
+    protected function checkRequiredParameters($data, $required): void
     {
         if (count(array_intersect_key(array_flip($required), $data)) !== count($required)) {
             throw new \LogicException('Histogram aggregation must have field and interval set.');

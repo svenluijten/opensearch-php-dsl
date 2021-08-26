@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,13 +17,15 @@ use ONGR\ElasticsearchDSL\Query\Span\SpanTermQuery;
 
 /**
  * Unit test for FieldMaskingSpanQuery.
+ *
+ * @internal
  */
 class FieldMaskingSpanQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests for toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $spanTermQuery = new SpanTermQuery('text', 'quick brown');
 
@@ -40,14 +42,14 @@ class FieldMaskingSpanQueryTest extends \PHPUnit\Framework\TestCase
             'span_near' => [
                 'clauses' => [
                     [
-                        'span_term' => [ 'text' => 'quick brown']
+                        'span_term' => ['text' => 'quick brown'],
                     ],
                     [
                         'field_masking_span' => [
-                            'query' => [ 'span_term' => [ 'text.stems' => 'fox' ] ],
+                            'query' => ['span_term' => ['text.stems' => 'fox']],
                             'field' => 'text',
-                        ]
-                    ]
+                        ],
+                    ],
                 ],
                 'slop' => 5,
                 'in_order' => false,

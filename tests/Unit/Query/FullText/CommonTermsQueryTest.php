@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\FullText;
 
 use ONGR\ElasticsearchDSL\Query\FullText\CommonTermsQuery;
 
+/**
+ * @internal
+ */
 class CommonTermsQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new CommonTermsQuery('body', 'this is bonsai cool', ['cutoff_frequency' => 0.01]);
         $expected = [

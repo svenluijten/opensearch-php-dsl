@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
 /**
  * Class representing geo distance aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html
  */
 class GeoDistanceAggregation extends AbstractAggregation
 {
@@ -48,8 +48,8 @@ class GeoDistanceAggregation extends AbstractAggregation
      *
      * @param string $name
      * @param string $field
-     * @param mixed  $origin
-     * @param array  $ranges
+     * @param mixed $origin
+     * @param array $ranges
      * @param string $unit
      * @param string $distanceType
      */
@@ -60,8 +60,8 @@ class GeoDistanceAggregation extends AbstractAggregation
         $this->setField($field);
         $this->setOrigin($origin);
         foreach ($ranges as $range) {
-            $from = isset($range['from']) ? $range['from'] : null;
-            $to = isset($range['to']) ? $range['to'] : null;
+            $from = $range['from'] ?? null;
+            $to = $range['to'] ?? null;
             $this->addRange($from, $to);
         }
         $this->setUnit($unit);
@@ -146,7 +146,7 @@ class GeoDistanceAggregation extends AbstractAggregation
                 'to' => $to,
             ],
             function ($v) {
-                return !is_null($v);
+                return null !== $v;
             }
         );
 

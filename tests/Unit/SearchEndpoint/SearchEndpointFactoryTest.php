@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,13 +17,15 @@ use ONGR\ElasticsearchDSL\SearchEndpoint\SearchEndpointInterface;
 
 /**
  * Unit test class for search endpoint factory.
+ *
+ * @internal
  */
 class SearchEndpointFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests get method exception.
      */
-    public function testGet()
+    public function testGet(): void
     {
         $this->expectException(\RuntimeException::class);
         SearchEndpointFactory::get('foo');
@@ -32,7 +34,7 @@ class SearchEndpointFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if factory can create endpoint.
      */
-    public function testFactory()
+    public function testFactory(): void
     {
         $endpoint = SearchEndpointFactory::get(AggregationsEndpoint::NAME);
         $this->assertInstanceOf(SearchEndpointInterface::class, $endpoint);

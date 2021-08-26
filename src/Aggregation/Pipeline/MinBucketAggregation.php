@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,7 +14,7 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 /**
  * Class representing Min Bucket Pipeline Aggregation.
  *
- * @link https://goo.gl/5oo4XH
+ * @see https://goo.gl/5oo4XH
  */
 class MinBucketAggregation extends AbstractPipelineAggregation
 {

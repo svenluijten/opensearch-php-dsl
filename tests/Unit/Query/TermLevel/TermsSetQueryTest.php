@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\TermLevel;
 
 use ONGR\ElasticsearchDSL\Query\TermLevel\TermsSetQuery;
 
+/**
+ * @internal
+ */
 class TermsSetQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $terms = ['php', 'c++', 'java'];
         $parameters = ['minimum_should_match_field' => 'required_matches'];
@@ -28,16 +31,16 @@ class TermsSetQueryTest extends \PHPUnit\Framework\TestCase
                 'programming_languages' => [
                     'terms' => ['php', 'c++', 'java'],
                     'minimum_should_match_field' => 'required_matches',
-                ]
+                ],
             ],
         ];
 
         $this->assertEquals($expected, $query->toArray());
     }
 
-    public function testItThrowsAaExceptionWhenMinimumShouldMatchFieldOrMinimumShouldMatchScriptIsNotGiven()
+    public function testItThrowsAaExceptionWhenMinimumShouldMatchFieldOrMinimumShouldMatchScriptIsNotGiven(): void
     {
-        $message = "Either minimum_should_match_field or minimum_should_match_script must be set.";
+        $message = 'Either minimum_should_match_field or minimum_should_match_script must be set.';
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage($message);
 

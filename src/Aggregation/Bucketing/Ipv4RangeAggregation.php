@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
 /**
  * Class representing ip range aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html
  */
 class Ipv4RangeAggregation extends AbstractAggregation
 {
@@ -33,7 +33,7 @@ class Ipv4RangeAggregation extends AbstractAggregation
      *
      * @param string $name
      * @param string $field
-     * @param array  $ranges
+     * @param array $ranges
      */
     public function __construct($name, $field = null, $ranges = [])
     {
@@ -42,8 +42,8 @@ class Ipv4RangeAggregation extends AbstractAggregation
         $this->setField($field);
         foreach ($ranges as $range) {
             if (is_array($range)) {
-                $from = isset($range['from']) ? $range['from'] : null;
-                $to = isset($range['to']) ? $range['to'] : null;
+                $from = $range['from'] ?? null;
+                $to = $range['to'] ?? null;
                 $this->addRange($from, $to);
             } else {
                 $this->addMask($range);
@@ -67,7 +67,7 @@ class Ipv4RangeAggregation extends AbstractAggregation
                 'to' => $to,
             ],
             function ($v) {
-                return !is_null($v);
+                return null !== $v;
             }
         );
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "wildcard" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
  */
 class WildcardQuery implements BuilderInterface
 {
@@ -36,7 +36,6 @@ class WildcardQuery implements BuilderInterface
     /**
      * @param string $field
      * @param string $value
-     * @param array  $parameters
      */
     public function __construct($field, $value, array $parameters = [])
     {

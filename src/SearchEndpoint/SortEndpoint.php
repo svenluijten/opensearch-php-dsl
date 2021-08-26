@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -21,12 +21,12 @@ class SortEndpoint extends AbstractSearchEndpoint
     /**
      * Endpoint name
      */
-    const NAME = 'sort';
+    public const NAME = 'sort';
 
     /**
      * {@inheritdoc}
      */
-    public function normalize(NormalizerInterface $normalizer, string $format = null, array $context = [])
+    public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
     {
         $output = [];
 

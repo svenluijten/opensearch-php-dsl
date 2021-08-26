@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,13 +17,15 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * Class HighlightEndpointTest.
+ *
+ * @internal
  */
 class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests constructor.
      */
-    public function testItCanBeInstantiated()
+    public function testItCanBeInstantiated(): void
     {
         $this->assertInstanceOf(HighlightEndpoint::class, new HighlightEndpoint());
     }
@@ -31,7 +33,7 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests adding builder.
      */
-    public function testNormalization()
+    public function testNormalization(): void
     {
         $instance = new HighlightEndpoint();
         $normalizerInterface = $this->getMockForAbstractClass(
@@ -53,7 +55,7 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if endpoint returns builders.
      */
-    public function testEndpointGetter()
+    public function testEndpointGetter(): void
     {
         $highlightName = 'acme_highlight';
         $highlight = new Highlight();

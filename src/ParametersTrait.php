@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -37,6 +37,7 @@ trait ParametersTrait
      * Removes parameter.
      *
      * @param string $name
+     *
      * @return $this
      */
     public function removeParameter($name)
@@ -71,8 +72,9 @@ trait ParametersTrait
     }
 
     /**
-     * @param string                 $name
+     * @param string $name
      * @param array|string|int|float|bool|\stdClass $value
+     *
      * @return $this
      */
     public function addParameter($name, $value)
@@ -83,8 +85,6 @@ trait ParametersTrait
     }
 
     /**
-     * @param array $parameters
-     *
      * @return $this
      */
     public function setParameters(array $parameters)
@@ -96,8 +96,6 @@ trait ParametersTrait
 
     /**
      * Returns given array merged with parameters.
-     *
-     * @param array $array
      *
      * @return array
      */

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,6 +13,9 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Specialized;
 
 use ONGR\ElasticsearchDSL\Query\Specialized\ScriptQuery;
 
+/**
+ * @internal
+ */
 class ScriptQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -39,13 +42,13 @@ class ScriptQueryTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for toArray().
      *
-     * @param string $script     Script
-     * @param array  $parameters Optional parameters
-     * @param array  $expected   Expected values
+     * @param string $script Script
+     * @param array $parameters Optional parameters
+     * @param array $expected Expected values
      *
      * @dataProvider getArrayDataProvider
      */
-    public function testToArray($script, $parameters, $expected)
+    public function testToArray($script, $parameters, $expected): void
     {
         $filter = new ScriptQuery($script, $parameters);
         $result = $filter->toArray();

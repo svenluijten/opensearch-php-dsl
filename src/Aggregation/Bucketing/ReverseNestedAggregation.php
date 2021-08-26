@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
 /**
  * Class representing ReverseNestedAggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html
  */
 class ReverseNestedAggregation extends AbstractAggregation
 {

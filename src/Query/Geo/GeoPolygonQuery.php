@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "geo_polygon" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-query.html
  */
 class GeoPolygonQuery implements BuilderInterface
 {
@@ -35,8 +35,6 @@ class GeoPolygonQuery implements BuilderInterface
 
     /**
      * @param string $field
-     * @param array  $points
-     * @param array  $parameters
      */
     public function __construct($field, array $points = [], array $parameters = [])
     {

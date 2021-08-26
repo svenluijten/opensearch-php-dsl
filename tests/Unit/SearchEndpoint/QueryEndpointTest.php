@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,13 +16,15 @@ use ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint;
 
 /**
  * Unit test class for the QueryEndpoint.
+ *
+ * @internal
  */
 class QueryEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests constructor.
      */
-    public function testItCanBeInstantiated()
+    public function testItCanBeInstantiated(): void
     {
         $this->assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint', new QueryEndpoint());
     }
@@ -30,7 +32,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if correct order is returned. Query must be executed after filter and post filter.
      */
-    public function testGetOrder()
+    public function testGetOrder(): void
     {
         $instance = new QueryEndpoint();
         $this->assertEquals(2, $instance->getOrder());
@@ -39,7 +41,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if endpoint return correct normalized data.
      */
-    public function testEndpoint()
+    public function testEndpoint(): void
     {
         $instance = new QueryEndpoint();
         $normalizerInterface = $this->getMockForAbstractClass(
@@ -60,7 +62,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if endpoint returns builders.
      */
-    public function testEndpointGetter()
+    public function testEndpointGetter(): void
     {
         $queryName = 'acme_query';
         $query = new MatchAllQuery();

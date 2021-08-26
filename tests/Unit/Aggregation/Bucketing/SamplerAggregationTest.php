@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,13 +16,15 @@ use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 
 /**
  * Unit test for children aggregation.
+ *
+ * @internal
  */
 class SamplerAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests getType method.
      */
-    public function testGetType()
+    public function testGetType(): void
     {
         $aggregation = new SamplerAggregation('foo');
         $result = $aggregation->getType();
@@ -32,7 +34,7 @@ class SamplerAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests toArray method.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $termAggregation = new TermsAggregation('acme');
 
@@ -56,7 +58,7 @@ class SamplerAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests getArray method without provided shard size.
      */
-    public function testGetArrayNoShardSize()
+    public function testGetArrayNoShardSize(): void
     {
         $aggregation = new SamplerAggregation('foo', 'bar');
         $this->assertEquals(['field' => 'bar'], $aggregation->getArray());

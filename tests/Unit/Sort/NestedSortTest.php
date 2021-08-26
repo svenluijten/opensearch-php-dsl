@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,21 +14,24 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Sort;
 use ONGR\ElasticsearchDSL\Query\TermLevel\TermQuery;
 use ONGR\ElasticsearchDSL\Sort\NestedSort;
 
+/**
+ * @internal
+ */
 class NestedSortTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test for single nested.
      */
-    public function testSingle()
+    public function testSingle(): void
     {
         $query = new NestedSort('somePath', new TermQuery('somePath.id', 10));
         $expected = [
-            'path'   => 'somePath',
+            'path' => 'somePath',
             'filter' => [
                 'term' => [
                     'somePath.id' => 10,
-                ]
-            ]
+                ],
+            ],
         ];
         $result = $query->toArray();
         $this->assertEquals($expected, $result);
@@ -37,11 +40,11 @@ class NestedSortTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for single nested, no filter.
      */
-    public function testNoFilter()
+    public function testNoFilter(): void
     {
         $query = new NestedSort('somePath');
         $expected = [
-            'path'   => 'somePath',
+            'path' => 'somePath',
         ];
         $result = $query->toArray();
         $this->assertEquals($expected, $result);
@@ -50,7 +53,7 @@ class NestedSortTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for single nested.
      */
-    public function testMultipleNesting()
+    public function testMultipleNesting(): void
     {
         $query = new NestedSort('somePath', new TermQuery('somePath.id', 10));
         $nestedFilter1 = new NestedSort('secondPath', new TermQuery('secondPath.foo', 'bar'));
@@ -58,28 +61,28 @@ class NestedSortTest extends \PHPUnit\Framework\TestCase
         $nestedFilter1->setNestedFilter($nestedFilter2);
         $query->setNestedFilter($nestedFilter1);
         $expected = [
-            'path'   => 'somePath',
+            'path' => 'somePath',
             'filter' => [
                 'term' => [
                     'somePath.id' => 10,
-                ]
+                ],
             ],
             'nested' => [
-                'path'   => 'secondPath',
+                'path' => 'secondPath',
                 'filter' => [
                     'term' => [
                         'secondPath.foo' => 'bar',
-                    ]
+                    ],
                 ],
                 'nested' => [
-                    'path'   => 'thirdPath',
+                    'path' => 'thirdPath',
                     'filter' => [
                         'term' => [
                             'thirdPath.x' => 'y',
-                        ]
+                        ],
                     ],
-                ]
-            ]
+                ],
+            ],
         ];
         $result = $query->toArray();
         $this->assertEquals($expected, $result);

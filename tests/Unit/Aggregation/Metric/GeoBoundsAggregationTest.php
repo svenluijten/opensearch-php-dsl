@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\Aggregation\Metric\GeoBoundsAggregation;
 
 /**
  * Unit test for geo bounds aggregation.
+ *
+ * @internal
  */
 class GeoBoundsAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test if exception is thrown.
      */
-    public function testGeoBoundsAggregationException()
+    public function testGeoBoundsAggregationException(): void
     {
         $this->expectException(\LogicException::class);
         $agg = new GeoBoundsAggregation('test_agg');
@@ -31,7 +33,7 @@ class GeoBoundsAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests getType method.
      */
-    public function testGeoBoundsAggregationGetType()
+    public function testGeoBoundsAggregationGetType(): void
     {
         $agg = new GeoBoundsAggregation('foo');
         $result = $agg->getType();
@@ -41,7 +43,7 @@ class GeoBoundsAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests getArray method.
      */
-    public function testGeoBoundsAggregationGetArray()
+    public function testGeoBoundsAggregationGetArray(): void
     {
         $agg = new GeoBoundsAggregation('foo');
         $agg->setField('bar');

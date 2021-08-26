@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,14 +17,14 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "match_all" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html
  */
 class MatchAllQuery implements BuilderInterface
 {
     use ParametersTrait;
 
     /**
-     * @param array $parameters Additional parameters.
+     * @param array $parameters additional parameters
      */
     public function __construct(array $parameters = [])
     {
@@ -45,6 +45,7 @@ class MatchAllQuery implements BuilderInterface
     public function toArray()
     {
         $params = $this->getParameters();
+
         return [$this->getType() => !empty($params) ? $params : new \stdClass()];
     }
 }

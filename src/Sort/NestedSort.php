@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "nested" sort filter.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/filter-dsl-nested-filter.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/filter-dsl-nested-filter.html
  */
 class NestedSort implements BuilderInterface
 {
@@ -41,11 +41,10 @@ class NestedSort implements BuilderInterface
     /**
      * @param string $path
      * @param BuilderInterface $filter
-     * @param array $parameters
      */
     public function __construct(
         $path,
-        BuilderInterface $filter = null,
+        ?BuilderInterface $filter = null,
         array $parameters = []
     ) {
         $this->path = $path;
@@ -67,7 +66,7 @@ class NestedSort implements BuilderInterface
     public function toArray()
     {
         $output = [
-            'path'   => $this->path,
+            'path' => $this->path,
         ];
 
         if ($this->filter) {
@@ -110,8 +109,6 @@ class NestedSort implements BuilderInterface
     }
 
     /**
-     * @param BuilderInterface $nestedFilter
-     *
      * @return $this
      */
     public function setNestedFilter(BuilderInterface $nestedFilter)

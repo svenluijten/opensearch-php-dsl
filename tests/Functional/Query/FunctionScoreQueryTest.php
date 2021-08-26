@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,6 +16,9 @@ use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
 use ONGR\ElasticsearchDSL\Search;
 use ONGR\ElasticsearchDSL\Tests\Functional\AbstractElasticsearchTestCase;
 
+/**
+ * @internal
+ */
 class FunctionScoreQueryTest extends AbstractElasticsearchTestCase
 {
     /**
@@ -37,14 +40,14 @@ class FunctionScoreQueryTest extends AbstractElasticsearchTestCase
                     'title' => 'bar',
                     'price' => 10,
                 ],
-            ]
+            ],
         ];
     }
 
     /**
      * Match all test
      */
-    public function testRandomScore()
+    public function testRandomScore(): void
     {
         $fquery = new FunctionScoreQuery(new MatchAllQuery());
         $fquery->addRandomFunction();
@@ -57,14 +60,14 @@ class FunctionScoreQueryTest extends AbstractElasticsearchTestCase
         $this->assertEquals(count($this->getDataArray()['product']), count($results));
     }
 
-    public function testScriptScore()
+    public function testScriptScore(): void
     {
         $fquery = new FunctionScoreQuery(new MatchAllQuery());
         $fquery->addScriptScoreFunction(
             "
-            if (doc['price'].value < params.target) 
+            if (doc['price'].value < params.target)
              {
-               return doc['price'].value * params.charge; 
+               return doc['price'].value * params.charge;
              }
              return doc['price'].value;
              ",

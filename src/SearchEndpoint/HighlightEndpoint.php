@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -22,7 +22,7 @@ class HighlightEndpoint extends AbstractSearchEndpoint
     /**
      * Endpoint name
      */
-    const NAME = 'highlight';
+    public const NAME = 'highlight';
 
     /**
      * @var BuilderInterface
@@ -30,14 +30,14 @@ class HighlightEndpoint extends AbstractSearchEndpoint
     private $highlight;
 
     /**
-     * @var string Key for highlight storing.
+     * @var string key for highlight storing
      */
     private $key;
 
     /**
      * {@inheritdoc}
      */
-    public function normalize(NormalizerInterface $normalizer, string $format = null, array $context = [])
+    public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
     {
         if ($this->highlight) {
             return $this->highlight->toArray();
@@ -49,7 +49,7 @@ class HighlightEndpoint extends AbstractSearchEndpoint
     /**
      * {@inheritdoc}
      */
-    public function add(BuilderInterface $builder, $key = null)
+    public function add(BuilderInterface $builder, $key = null): void
     {
         if ($this->highlight) {
             throw new \OverflowException('Only one highlight can be set');

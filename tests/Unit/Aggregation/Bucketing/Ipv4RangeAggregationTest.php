@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Bucketing;
 
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\Ipv4RangeAggregation;
 
+/**
+ * @internal
+ */
 class Ipv4RangeAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test exception when field and range are not set.
      */
-    public function testIfExceptionIsThrownWhenFieldAndRangeAreNotSet()
+    public function testIfExceptionIsThrownWhenFieldAndRangeAreNotSet(): void
     {
         $this->expectException(\LogicException::class);
         $agg = new Ipv4RangeAggregation('foo');
@@ -28,7 +31,7 @@ class Ipv4RangeAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if field and range  can be passed to constructor.
      */
-    public function testConstructorFilter()
+    public function testConstructorFilter(): void
     {
         $aggregation = new Ipv4RangeAggregation('test', 'fieldName', [['from' => 'fromValue']]);
         $this->assertSame(

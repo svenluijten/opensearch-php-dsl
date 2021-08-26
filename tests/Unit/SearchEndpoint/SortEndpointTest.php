@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,13 +16,15 @@ use ONGR\ElasticsearchDSL\Sort\FieldSort;
 
 /**
  * Class SortEndpointTest.
+ *
+ * @internal
  */
 class SortEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests constructor.
      */
-    public function testItCanBeInstantiated()
+    public function testItCanBeInstantiated(): void
     {
         $this->assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\SortEndpoint', new SortEndpoint());
     }
@@ -30,7 +32,7 @@ class SortEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests endpoint normalization.
      */
-    public function testNormalize()
+    public function testNormalize(): void
     {
         $instance = new SortEndpoint();
 
@@ -50,7 +52,7 @@ class SortEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if endpoint returns builders.
      */
-    public function testEndpointGetter()
+    public function testEndpointGetter(): void
     {
         $sortName = 'acme_sort';
         $sort = new FieldSort('acme');

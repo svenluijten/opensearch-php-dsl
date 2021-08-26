@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,11 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Bucketing;
 
 use ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
-use ONGR\ElasticsearchDSL\BuilderInterface;
 
 /**
  * Class representing AutoDateHistogramAggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-autodatehistogram-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-autodatehistogram-aggregation.html
  */
 class AutoDateHistogramAggregation extends AbstractAggregation
 {
@@ -29,7 +28,7 @@ class AutoDateHistogramAggregation extends AbstractAggregation
      *
      * @param string $name
      * @param string $field
-     * @param int    $buckets
+     * @param int $buckets
      * @param string $format
      */
     public function __construct($name, $field, $buckets = null, $format = null)
@@ -52,13 +51,11 @@ class AutoDateHistogramAggregation extends AbstractAggregation
      */
     public function getArray()
     {
-        $data = array_filter(
+        return array_filter(
             [
                 'field' => $this->getField(),
             ]
         );
-
-        return $data;
     }
 
     /**

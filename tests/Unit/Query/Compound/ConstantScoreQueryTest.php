@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,24 +13,28 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Compound;
 
 use ONGR\ElasticsearchDSL\Query\Compound\ConstantScoreQuery;
 
+/**
+ * @internal
+ */
 class ConstantScoreQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
         $mock
             ->expects($this->any())
             ->method('toArray')
-            ->willReturn(['term' => ['foo' => 'bar']]);
+            ->willReturn(['term' => ['foo' => 'bar']])
+        ;
 
         $query = new ConstantScoreQuery($mock, ['boost' => 1.2]);
         $expected = [
             'constant_score' => [
                 'filter' => [
-                    'term' => ['foo' => 'bar']
+                    'term' => ['foo' => 'bar'],
                 ],
                 'boost' => 1.2,
             ],

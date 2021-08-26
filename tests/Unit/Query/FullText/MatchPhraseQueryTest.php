@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -12,14 +12,16 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\FullText;
 
 use ONGR\ElasticsearchDSL\Query\FullText\MatchPhraseQuery;
-use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class MatchPhraseQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new MatchPhraseQuery('message', 'this is a test');
         $expected = [

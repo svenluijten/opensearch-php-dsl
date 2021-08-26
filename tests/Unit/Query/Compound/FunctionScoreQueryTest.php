@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,6 +16,8 @@ use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
 
 /**
  * Tests for FunctionScoreQuery.
+ *
+ * @internal
  */
 class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
 {
@@ -46,7 +48,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
                     'query' => null,
                     'functions' => [
                         [
-                            'random_score' => [ 'seed' => 'someSeed'],
+                            'random_score' => ['seed' => 'someSeed'],
                         ],
                     ],
                 ],
@@ -62,7 +64,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
      *
      * @dataProvider addRandomFunctionProvider
      */
-    public function testAddRandomFunction($seed, $expectedArray)
+    public function testAddRandomFunction($seed, $expectedArray): void
     {
         $matchAllQuery = $this->getMockBuilder(MatchAllQuery::class)->getMock();
 
@@ -75,7 +77,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests default argument values.
      */
-    public function testAddFieldValueFactorFunction()
+    public function testAddFieldValueFactorFunction(): void
     {
         $builderInterface = $this->getMockForAbstractClass('ONGR\ElasticsearchDSL\BuilderInterface');
         $functionScoreQuery = new FunctionScoreQuery($builderInterface);

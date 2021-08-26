@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -20,9 +20,8 @@ use ONGR\ElasticsearchDSL\Serializer\Normalizer\AbstractNormalizable;
  */
 abstract class AbstractSearchEndpoint extends AbstractNormalizable implements SearchEndpointInterface
 {
-    public const NAME = 'search';
-
     use ParametersTrait;
+    public const NAME = 'search';
 
     /**
      * @var BuilderInterface[]
@@ -70,7 +69,7 @@ abstract class AbstractSearchEndpoint extends AbstractNormalizable implements Se
     /**
      * Checks if builder with specific key exists.
      *
-     * @param string $key Key to check if it exists in container.
+     * @param string $key key to check if it exists in container
      *
      * @return bool
      */

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\Aggregation\Pipeline\MaxBucketAggregation;
 
 /**
  * Unit test for max bucket aggregation.
+ *
+ * @internal
  */
 class MaxBucketAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray method.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $aggregation = new MaxBucketAggregation('acme', 'test');
 

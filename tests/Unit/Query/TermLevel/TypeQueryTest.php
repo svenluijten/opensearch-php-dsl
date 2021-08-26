@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,16 +13,19 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\TermLevel;
 
 use ONGR\ElasticsearchDSL\Query\TermLevel\TypeQuery;
 
+/**
+ * @internal
+ */
 class TypeQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test for query toArray() method.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new TypeQuery('foo');
         $expectedResult = [
-            'type' => ['value' => 'foo']
+            'type' => ['value' => 'foo'],
         ];
 
         $this->assertEquals($expectedResult, $query->toArray());

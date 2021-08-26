@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\SearchEndpoint\InnerHitsEndpoint;
 
 /**
  * Class AggregationsEndpointTest.
+ *
+ * @internal
  */
 class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests constructor.
      */
-    public function testItCanBeInstantiated()
+    public function testItCanBeInstantiated(): void
     {
         $this->assertInstanceOf(
             'ONGR\ElasticsearchDSL\SearchEndpoint\InnerHitsEndpoint',
@@ -32,7 +34,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if endpoint returns builders.
      */
-    public function testEndpointGetter()
+    public function testEndpointGetter(): void
     {
         $hitName = 'foo';
         $innerHit = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
@@ -47,16 +49,18 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests normalize method
      */
-    public function testNormalization()
+    public function testNormalization(): void
     {
         $normalizer = $this
             ->getMockBuilder('Symfony\Component\Serializer\Normalizer\NormalizerInterface')
-            ->getMock();
+            ->getMock()
+        ;
         $innerHit = $this
             ->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')
             ->onlyMethods(['toArray', 'getType'])
             ->addMethods(['getName'])
-            ->getMock();
+            ->getMock()
+        ;
         $innerHit->expects($this->any())->method('getName')->willReturn('foo');
         $innerHit->expects($this->any())->method('toArray')->willReturn(['foo' => 'bar']);
 
@@ -64,8 +68,8 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
         $endpoint->add($innerHit, 'foo');
         $expected = [
             'foo' => [
-                'foo' => 'bar'
-            ]
+                'foo' => 'bar',
+            ],
         ];
 
         $this->assertEquals(

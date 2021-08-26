@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -47,7 +47,7 @@ class OrderedSerializer extends Serializer
     /**
      * Orders objects if can be done.
      *
-     * @param array $data Data to order.
+     * @param array $data data to order
      *
      * @return array
      */
@@ -72,7 +72,7 @@ class OrderedSerializer extends Serializer
     /**
      * Filters out data which can be ordered.
      *
-     * @param array $array Data to filter out.
+     * @param array $array data to filter out
      *
      * @return array
      */

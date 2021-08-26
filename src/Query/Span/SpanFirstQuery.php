@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,7 +16,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Elasticsearch span first query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
  */
 class SpanFirstQuery implements SpanQueryInterface
 {
@@ -33,9 +33,7 @@ class SpanFirstQuery implements SpanQueryInterface
     private $end;
 
     /**
-     * @param SpanQueryInterface $query
-     * @param int                $end
-     * @param array              $parameters
+     * @param int $end
      *
      * @throws \LogicException
      */

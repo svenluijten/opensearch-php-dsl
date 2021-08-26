@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,12 +14,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Bucketing;
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\NestedAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 
+/**
+ * @internal
+ */
 class NestedAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test for nested aggregation toArray() method exception.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $termAggregation = new TermsAggregation('acme');
 

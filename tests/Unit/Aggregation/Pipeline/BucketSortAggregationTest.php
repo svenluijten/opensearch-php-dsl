@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -12,18 +12,19 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Pipeline;
 
 use ONGR\ElasticsearchDSL\Aggregation\Pipeline\BucketSortAggregation;
-use ONGR\ElasticsearchDSL\Aggregation\Pipeline\MovingFunctionAggregation;
 use ONGR\ElasticsearchDSL\Sort\FieldSort;
 
 /**
  * Unit test for the bucket sort aggregation.
+ *
+ * @internal
  */
 class BucketSortAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray method.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $aggregation = new BucketSortAggregation('acme', 'test');
 
@@ -52,8 +53,8 @@ class BucketSortAggregationTest extends \PHPUnit\Framework\TestCase
                 'sort' => [
                     [
                         'test_field' => ['order' => 'asc'],
-                    ]
-                ]
+                    ],
+                ],
             ],
         ];
 

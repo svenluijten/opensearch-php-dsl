@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\TermLevel;
 
 use ONGR\ElasticsearchDSL\Query\TermLevel\RangeQuery;
 
+/**
+ * @internal
+ */
 class RangeQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new RangeQuery('age', ['gte' => 10, 'lte' => 20]);
         $expected = [
@@ -27,7 +30,7 @@ class RangeQueryTest extends \PHPUnit\Framework\TestCase
                     'gte' => 10,
                     'lte' => 20,
                 ],
-            ]
+            ],
         ];
 
         $this->assertEquals($expected, $query->toArray());

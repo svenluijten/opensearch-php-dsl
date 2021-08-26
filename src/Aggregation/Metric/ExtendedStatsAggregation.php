@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,7 +18,7 @@ use ONGR\ElasticsearchDSL\ScriptAwareTrait;
 /**
  * Class representing Extended stats aggregation.
  *
- * @link http://goo.gl/E0PpDv
+ * @see http://goo.gl/E0PpDv
  */
 class ExtendedStatsAggregation extends AbstractAggregation
 {
@@ -30,7 +30,7 @@ class ExtendedStatsAggregation extends AbstractAggregation
      *
      * @param string $name
      * @param string $field
-     * @param int    $sigma
+     * @param int $sigma
      * @param string $script
      */
     public function __construct($name, $field = null, $sigma = null, $script = null)
@@ -80,17 +80,15 @@ class ExtendedStatsAggregation extends AbstractAggregation
      */
     public function getArray()
     {
-        $out = array_filter(
+        return array_filter(
             [
                 'field' => $this->getField(),
                 'script' => $this->getScript(),
                 'sigma' => $this->getSigma(),
             ],
             function ($val) {
-                return ($val || is_numeric($val));
+                return $val || is_numeric($val);
             }
         );
-
-        return $out;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,7 +18,7 @@ use ONGR\ElasticsearchDSL\ScriptAwareTrait;
 /**
  * Difference values counter.
  *
- * @link http://goo.gl/tG7ciG
+ * @see http://goo.gl/tG7ciG
  */
 class CardinalityAggregation extends AbstractAggregation
 {
@@ -48,7 +48,7 @@ class CardinalityAggregation extends AbstractAggregation
                 'rehash' => $this->isRehash(),
             ],
             function ($val) {
-                return ($val || is_bool($val));
+                return $val || is_bool($val);
             }
         );
 
@@ -112,7 +112,7 @@ class CardinalityAggregation extends AbstractAggregation
      *
      * @throws \LogicException
      */
-    private function checkRequiredFields($fields)
+    private function checkRequiredFields($fields): void
     {
         if (!array_key_exists('field', $fields) && !array_key_exists('script', $fields)) {
             throw new \LogicException('Cardinality aggregation must have field or script set.');

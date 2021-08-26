@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,7 +14,7 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 /**
  * Class representing Percentiles Bucket Pipeline Aggregation.
  *
- * @link https://goo.gl/bqi7m5
+ * @see https://goo.gl/bqi7m5
  */
 class PercentilesBucketAggregation extends AbstractPipelineAggregation
 {
@@ -40,8 +40,6 @@ class PercentilesBucketAggregation extends AbstractPipelineAggregation
     }
 
     /**
-     * @param array $percents
-     *
      * @return $this
      */
     public function setPercents(array $percents)

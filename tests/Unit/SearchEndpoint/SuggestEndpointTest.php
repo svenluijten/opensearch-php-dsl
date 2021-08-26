@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,12 +14,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
 use ONGR\ElasticsearchDSL\SearchEndpoint\SuggestEndpoint;
 use ONGR\ElasticsearchDSL\Suggest\Suggest;
 
+/**
+ * @internal
+ */
 class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests constructor.
      */
-    public function testItCanBeInstantiated()
+    public function testItCanBeInstantiated(): void
     {
         $this->assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\SuggestEndpoint', new SuggestEndpoint());
     }
@@ -27,7 +30,7 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if endpoint returns builders.
      */
-    public function testEndpointGetter()
+    public function testEndpointGetter(): void
     {
         $suggestName = 'acme_suggest';
         $text = 'foo';
@@ -43,7 +46,7 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests endpoint normalization.
      */
-    public function testNormalize()
+    public function testNormalize(): void
     {
         $instance = new SuggestEndpoint();
 

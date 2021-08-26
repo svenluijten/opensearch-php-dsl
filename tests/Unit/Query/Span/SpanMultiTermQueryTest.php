@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,19 +15,22 @@ use ONGR\ElasticsearchDSL\Query\Span\SpanMultiTermQuery;
 
 /**
  * Unit test for SpanMultiTermQuery.
+ *
+ * @internal
  */
 class SpanMultiTermQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test for toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
         $mock
             ->expects($this->once())
             ->method('toArray')
-            ->willReturn(['prefix' => ['user' => ['value' => 'ki']]]);
+            ->willReturn(['prefix' => ['user' => ['value' => 'ki']]])
+        ;
 
         $query = new SpanMultiTermQuery($mock);
         $expected = [

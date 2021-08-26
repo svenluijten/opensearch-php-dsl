@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ namespace ONGR\ElasticsearchDSL\SearchEndpoint;
 class SearchEndpointFactory
 {
     /**
-     * @var array Holds namespaces for endpoints.
+     * @var array holds namespaces for endpoints
      */
     private static $endpoints = [
         'query' => 'ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint',
@@ -32,11 +32,11 @@ class SearchEndpointFactory
     /**
      * Returns a search endpoint instance.
      *
-     * @param string $type Type of endpoint.
+     * @param string $type type of endpoint
+     *
+     * @throws \RuntimeException endpoint does not exist
      *
      * @return SearchEndpointInterface
-     *
-     * @throws \RuntimeException Endpoint does not exist.
      */
     public static function get($type)
     {

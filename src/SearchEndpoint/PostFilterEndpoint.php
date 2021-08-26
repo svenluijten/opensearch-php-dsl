@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -21,12 +21,12 @@ class PostFilterEndpoint extends QueryEndpoint
     /**
      * Endpoint name
      */
-    const NAME = 'post_filter';
+    public const NAME = 'post_filter';
 
     /**
      * {@inheritdoc}
      */
-    public function normalize(NormalizerInterface $normalizer, string $format = null, array $context = [])
+    public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
     {
         if (!$this->getBool()) {
             return null;

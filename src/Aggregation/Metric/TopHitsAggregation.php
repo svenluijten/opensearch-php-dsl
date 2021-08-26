@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,34 +18,34 @@ use ONGR\ElasticsearchDSL\BuilderInterface;
 /**
  * Top hits aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
  */
 class TopHitsAggregation extends AbstractAggregation
 {
     use MetricTrait;
 
     /**
-     * @var int Number of top matching hits to return per bucket.
+     * @var int number of top matching hits to return per bucket
      */
     private $size;
 
     /**
-     * @var int The offset from the first result you want to fetch.
+     * @var int the offset from the first result you want to fetch
      */
     private $from;
 
     /**
-     * @var BuilderInterface[] How the top matching hits should be sorted.
+     * @var BuilderInterface[] how the top matching hits should be sorted
      */
     private $sorts = [];
 
     /**
      * Constructor for top hits.
      *
-     * @param string                $name Aggregation name.
-     * @param null|int              $size Number of top matching hits to return per bucket.
-     * @param null|int              $from The offset from the first result you want to fetch.
-     * @param null|BuilderInterface $sort How the top matching hits should be sorted.
+     * @param string $name aggregation name
+     * @param int|null $size number of top matching hits to return per bucket
+     * @param int|null $from the offset from the first result you want to fetch
+     * @param BuilderInterface|null $sort how the top matching hits should be sorted
      */
     public function __construct($name, $size = null, $from = null, $sort = null)
     {
@@ -102,7 +102,7 @@ class TopHitsAggregation extends AbstractAggregation
      *
      * @param BuilderInterface $sort
      */
-    public function addSort($sort)
+    public function addSort($sort): void
     {
         $this->sorts[] = $sort;
     }
@@ -159,7 +159,7 @@ class TopHitsAggregation extends AbstractAggregation
                 'from' => $this->getFrom(),
             ],
             function ($val) {
-                return (($val || is_array($val) || ($val || is_numeric($val))));
+                return $val || is_array($val) || ($val || is_numeric($val));
             }
         );
 

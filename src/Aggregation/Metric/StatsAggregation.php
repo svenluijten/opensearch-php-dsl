@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,7 +18,7 @@ use ONGR\ElasticsearchDSL\ScriptAwareTrait;
 /**
  * Class representing StatsAggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html
  */
 class StatsAggregation extends AbstractAggregation
 {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "prefix" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
  */
 class PrefixQuery implements BuilderInterface
 {
@@ -34,9 +34,9 @@ class PrefixQuery implements BuilderInterface
     protected $value;
 
     /**
-     * @param string $field      Field name.
-     * @param string $value      Value.
-     * @param array  $parameters Optional parameters.
+     * @param string $field field name
+     * @param string $value value
+     * @param array $parameters optional parameters
      */
     public function __construct($field, $value, array $parameters = [])
     {

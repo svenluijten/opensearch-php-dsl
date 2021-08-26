@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\Aggregation\Bucketing\ChildrenAggregation;
 
 /**
  * Unit test for children aggregation.
+ *
+ * @internal
  */
 class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests if ChildrenAggregation#getArray throws exception when expected.
      */
-    public function testGetArrayException()
+    public function testGetArrayException(): void
     {
         $this->expectException(\LogicException::class);
         $aggregation = new ChildrenAggregation('foo');
@@ -31,7 +33,7 @@ class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests getType method.
      */
-    public function testChildrenAggregationGetType()
+    public function testChildrenAggregationGetType(): void
     {
         $aggregation = new ChildrenAggregation('foo');
         $result = $aggregation->getType();
@@ -41,11 +43,12 @@ class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests getArray method.
      */
-    public function testChildrenAggregationGetArray()
+    public function testChildrenAggregationGetArray(): void
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation')
             ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+            ->getMockForAbstractClass()
+        ;
         $aggregation = new ChildrenAggregation('foo');
         $aggregation->addAggregation($mock);
         $aggregation->setChildren('question');

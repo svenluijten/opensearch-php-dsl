@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,6 +13,9 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Bucketing;
 
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\GlobalAggregation;
 
+/**
+ * @internal
+ */
 class GlobalAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -60,11 +63,11 @@ class GlobalAggregationTest extends \PHPUnit\Framework\TestCase
      * Test for global aggregation toArray() method.
      *
      * @param GlobalAggregation $aggregation
-     * @param array             $expectedResult
+     * @param array $expectedResult
      *
      * @dataProvider getToArrayData
      */
-    public function testToArray($aggregation, $expectedResult)
+    public function testToArray($aggregation, $expectedResult): void
     {
         $this->assertEquals(
             json_encode($expectedResult),
@@ -75,7 +78,7 @@ class GlobalAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for setField method on global aggregation.
      */
-    public function testSetField()
+    public function testSetField(): void
     {
         $this->expectException(\LogicException::class);
         $aggregation = new GlobalAggregation('test_agg');

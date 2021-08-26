@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -23,22 +23,22 @@ interface SearchEndpointInterface extends NormalizableInterface
     /**
      * Adds builder to search endpoint.
      *
-     * @param BuilderInterface $builder Builder to add.
-     * @param array            $key     Additional parameters relevant to builder.
+     * @param BuilderInterface $builder builder to add
+     * @param array $key additional parameters relevant to builder
      *
-     * @return string Key of added builder.
+     * @return string key of added builder
      */
     public function add(BuilderInterface $builder, $key = null);
 
     /**
      * Adds builder to search endpoint's specific bool type container.
      *
-     * @param BuilderInterface $builder  Builder to add.
-     * @param array            $boolType Bool type for query or filter. If bool type is left null
-     *                                       it will be treated as MUST.
-     * @param array            $key      Additional parameters relevant to builder.
+     * @param BuilderInterface $builder builder to add
+     * @param array $boolType Bool type for query or filter. If bool type is left null
+     *                        it will be treated as MUST.
+     * @param array $key additional parameters relevant to builder
      *
-     * @return string Key of added builder.
+     * @return string key of added builder
      */
     public function addToBool(BuilderInterface $builder, $boolType = null, $key = null);
 
@@ -63,7 +63,7 @@ interface SearchEndpointInterface extends NormalizableInterface
     /**
      * Returns contained builder or null if Builder is not found.
      *
-     * @param string|null $boolType If bool type is left null it will return all builders from container.
+     * @param string|null $boolType if bool type is left null it will return all builders from container
      *
      * @return array
      */

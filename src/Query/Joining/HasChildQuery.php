@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "has_child" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
  */
 class HasChildQuery implements BuilderInterface
 {
@@ -34,9 +34,7 @@ class HasChildQuery implements BuilderInterface
     private $query;
 
     /**
-     * @param string           $type
-     * @param BuilderInterface $query
-     * @param array            $parameters
+     * @param string $type
      */
     public function __construct($type, BuilderInterface $query, array $parameters = [])
     {

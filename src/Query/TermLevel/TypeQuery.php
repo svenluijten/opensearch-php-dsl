@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,7 +16,7 @@ use ONGR\ElasticsearchDSL\BuilderInterface;
 /**
  * Represents Elasticsearch "type" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-query.html
  */
 class TypeQuery implements BuilderInterface
 {

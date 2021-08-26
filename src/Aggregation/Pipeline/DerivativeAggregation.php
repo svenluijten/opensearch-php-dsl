@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,7 +14,7 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 /**
  * Class representing Derivative Pipeline Aggregation.
  *
- * @link https://goo.gl/Tt2MIR
+ * @see https://goo.gl/Tt2MIR
  */
 class DerivativeAggregation extends AbstractPipelineAggregation
 {

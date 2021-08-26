@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,7 +16,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Elasticsearch span containing query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-containing-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-containing-query.html
  */
 class SpanContainingQuery implements SpanQueryInterface
 {
@@ -32,10 +32,6 @@ class SpanContainingQuery implements SpanQueryInterface
      */
     private $big;
 
-    /**
-     * @param SpanQueryInterface $little
-     * @param SpanQueryInterface $big
-     */
     public function __construct(SpanQueryInterface $little, SpanQueryInterface $big)
     {
         $this->setLittle($little);
@@ -51,8 +47,6 @@ class SpanContainingQuery implements SpanQueryInterface
     }
 
     /**
-     * @param SpanQueryInterface $little
-     *
      * @return $this
      */
     public function setLittle(SpanQueryInterface $little)
@@ -71,8 +65,6 @@ class SpanContainingQuery implements SpanQueryInterface
     }
 
     /**
-     * @param SpanQueryInterface $big
-     *
      * @return $this
      */
     public function setBig(SpanQueryInterface $big)

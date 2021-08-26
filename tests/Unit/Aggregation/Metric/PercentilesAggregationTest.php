@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Metric;
 
 use ONGR\ElasticsearchDSL\Aggregation\Metric\PercentilesAggregation;
 
+/**
+ * @internal
+ */
 class PercentilesAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests if PercentilesAggregation#getArray throws exception when expected.
      */
-    public function testPercentilesAggregationGetArrayException()
+    public function testPercentilesAggregationGetArrayException(): void
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('Percentiles aggregation must have field or script set.');
@@ -29,7 +32,7 @@ class PercentilesAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Test getType method.
      */
-    public function testGetType()
+    public function testGetType(): void
     {
         $aggregation = new PercentilesAggregation('bar');
         $this->assertEquals('percentiles', $aggregation->getType());
@@ -38,7 +41,7 @@ class PercentilesAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Test getArray method.
      */
-    public function testGetArray()
+    public function testGetArray(): void
     {
         $aggregation = new PercentilesAggregation('bar', 'fieldValue', ['percentsValue']);
         $this->assertSame(

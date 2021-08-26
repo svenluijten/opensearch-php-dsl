@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -21,8 +21,8 @@ class FieldSort implements BuilderInterface
 {
     use ParametersTrait;
 
-    const ASC = 'asc';
-    const DESC = 'desc';
+    public const ASC = 'asc';
+    public const DESC = 'desc';
 
     /**
      * @var string
@@ -40,9 +40,9 @@ class FieldSort implements BuilderInterface
     private $nestedFilter;
 
     /**
-     * @param string $field  Field name.
-     * @param string $order  Order direction.
-     * @param array  $params Params that can be set to field sort.
+     * @param string $field field name
+     * @param string $order order direction
+     * @param array $params params that can be set to field sort
      */
     public function __construct($field, $order = null, $params = [])
     {
@@ -100,8 +100,6 @@ class FieldSort implements BuilderInterface
     }
 
     /**
-     * @param BuilderInterface $nestedFilter
-     *
      * @return $this
      */
     public function setNestedFilter(BuilderInterface $nestedFilter)
@@ -134,10 +132,8 @@ class FieldSort implements BuilderInterface
             $this->addParameter('nested', $this->nestedFilter->toArray());
         }
 
-        $output = [
+        return [
             $this->field => !$this->getParameters() ? new \stdClass() : $this->getParameters(),
         ];
-
-        return $output;
     }
 }

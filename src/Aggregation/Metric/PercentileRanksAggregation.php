@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,7 +18,7 @@ use ONGR\ElasticsearchDSL\ScriptAwareTrait;
 /**
  * Class representing Percentile Ranks Aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-rank-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-rank-aggregation.html
  */
 class PercentileRanksAggregation extends AbstractAggregation
 {
@@ -40,9 +40,9 @@ class PercentileRanksAggregation extends AbstractAggregation
      *
      * @param string $name
      * @param string $field
-     * @param array  $values
+     * @param array $values
      * @param string $script
-     * @param int    $compression
+     * @param int $compression
      */
     public function __construct($name, $field = null, $values = null, $script = null, $compression = null)
     {
@@ -115,7 +115,7 @@ class PercentileRanksAggregation extends AbstractAggregation
                 'compression' => $this->getCompression(),
             ],
             function ($val) {
-                return ($val || is_numeric($val));
+                return $val || is_numeric($val);
             }
         );
 
@@ -127,8 +127,9 @@ class PercentileRanksAggregation extends AbstractAggregation
     /**
      * @param array $a
      *
-     * @return bool
      * @throws \LogicException
+     *
+     * @return bool
      */
     private function isRequiredParametersSet($a)
     {

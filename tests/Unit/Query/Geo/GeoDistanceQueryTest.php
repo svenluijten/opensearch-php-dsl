@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,6 +13,9 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Geo;
 
 use ONGR\ElasticsearchDSL\Query\Geo\GeoDistanceQuery;
 
+/**
+ * @internal
+ */
 class GeoDistanceQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -45,15 +48,15 @@ class GeoDistanceQueryTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests toArray() method.
      *
-     * @param string $field      Field name.
-     * @param string $distance   Distance.
-     * @param array  $location   Location.
-     * @param array  $parameters Optional parameters.
-     * @param array  $expected   Expected result.
+     * @param string $field field name
+     * @param string $distance distance
+     * @param array $location location
+     * @param array $parameters optional parameters
+     * @param array $expected expected result
      *
      * @dataProvider getArrayDataProvider
      */
-    public function testToArray($field, $distance, $location, $parameters, $expected)
+    public function testToArray($field, $distance, $location, $parameters, $expected): void
     {
         $query = new GeoDistanceQuery($field, $distance, $location, $parameters);
         $result = $query->toArray();

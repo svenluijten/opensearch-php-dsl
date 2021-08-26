@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\Aggregation\Metric\CardinalityAggregation;
 
 /**
  * Unit test for cardinality aggregation.
+ *
+ * @internal
  */
 class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests getArray method.
      */
-    public function testGetArray()
+    public function testGetArray(): void
     {
         $aggregation = new CardinalityAggregation('bar');
 
@@ -47,13 +49,13 @@ class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
         $result = $aggregation->getArray();
 
         $this->assertArrayHasKey('rehash', $result, 'key=rehash when rehash is set');
-        $this->assertEquals(true, $result['rehash'], 'rehash=true when rehash is set to true');
+        $this->assertTrue($result['rehash'], 'rehash=true when rehash is set to true');
     }
 
     /**
      * Tests if CardinalityAggregation#getArray throws exception when expected.
      */
-    public function testGetArrayException()
+    public function testGetArrayException(): void
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('Cardinality aggregation must have field or script set.');
@@ -64,7 +66,7 @@ class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests getType method.
      */
-    public function testCardinallyAggregationGetType()
+    public function testCardinallyAggregationGetType(): void
     {
         $aggregation = new CardinalityAggregation('foo');
         $result = $aggregation->getType();

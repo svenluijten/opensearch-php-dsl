@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,6 +13,9 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Geo;
 
 use ONGR\ElasticsearchDSL\Query\Geo\GeoPolygonQuery;
 
+/**
+ * @internal
+ */
 class GeoPolygonQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -72,14 +75,14 @@ class GeoPolygonQueryTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests toArray method.
      *
-     * @param string $field      Field name.
-     * @param array  $points     Polygon's points.
-     * @param array  $parameters Optional parameters.
-     * @param array  $expected   Expected result.
+     * @param string $field field name
+     * @param array $points polygon's points
+     * @param array $parameters optional parameters
+     * @param array $expected expected result
      *
      * @dataProvider getArrayDataProvider
      */
-    public function testToArray($field, $points, $parameters, $expected)
+    public function testToArray($field, $points, $parameters, $expected): void
     {
         $filter = new GeoPolygonQuery($field, $points, $parameters);
         $result = $filter->toArray();

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
 /**
  * Class representing ChildrenAggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html
  */
 class ChildrenAggregation extends AbstractAggregation
 {
@@ -74,7 +74,7 @@ class ChildrenAggregation extends AbstractAggregation
      */
     public function getArray()
     {
-        if (count($this->getAggregations()) == 0) {
+        if (count($this->getAggregations()) === 0) {
             throw new \LogicException("Children aggregation `{$this->getName()}` has no aggregations added");
         }
 

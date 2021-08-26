@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,7 +16,7 @@ use ONGR\ElasticsearchDSL\BuilderInterface;
 /**
  * Represents Elasticsearch "boosting" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
  */
 class BoostingQuery implements BuilderInterface
 {
@@ -36,9 +36,7 @@ class BoostingQuery implements BuilderInterface
     private $negativeBoost;
 
     /**
-     * @param BuilderInterface $positive
-     * @param BuilderInterface $negative
-     * @param int|float        $negativeBoost
+     * @param int|float $negativeBoost
      */
     public function __construct(BuilderInterface $positive, BuilderInterface $negative, $negativeBoost)
     {

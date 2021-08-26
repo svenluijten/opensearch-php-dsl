@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "geo_bounding_box" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-query.html
  */
 class GeoBoundingBoxQuery implements BuilderInterface
 {
@@ -35,8 +35,7 @@ class GeoBoundingBoxQuery implements BuilderInterface
 
     /**
      * @param string $field
-     * @param array  $values
-     * @param array  $parameters
+     * @param array $values
      */
     public function __construct($field, $values, array $parameters = [])
     {
@@ -59,14 +58,14 @@ class GeoBoundingBoxQuery implements BuilderInterface
     public function toArray()
     {
         return [
-            $this->getType() => $this->processArray([$this->field => $this->points()])
+            $this->getType() => $this->processArray([$this->field => $this->points()]),
         ];
     }
 
     /**
-     * @return array
-     *
      * @throws \LogicException
+     *
+     * @return array
      */
     private function points()
     {
@@ -75,7 +74,8 @@ class GeoBoundingBoxQuery implements BuilderInterface
                 'top_left' => $this->values[0] ?? $this->values['top_left'],
                 'bottom_right' => $this->values[1] ?? $this->values['bottom_right'],
             ];
-        } elseif (count($this->values) === 4) {
+        }
+        if (count($this->values) === 4) {
             return [
                 'top' => $this->values[0] ?? $this->values['top'],
                 'left' => $this->values[1] ?? $this->values['left'],

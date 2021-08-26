@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -21,8 +21,8 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
  */
 abstract class AbstractAggregation implements NamedBuilderInterface
 {
-    use ParametersTrait;
     use NameAwareTrait;
+    use ParametersTrait;
 
     /**
      * @var string
@@ -79,18 +79,16 @@ abstract class AbstractAggregation implements NamedBuilderInterface
     /**
      * Adds a sub-aggregation.
      *
-     * @param AbstractAggregation $abstractAggregation
-     *
      * @return $this
      */
-    public function addAggregation(AbstractAggregation $abstractAggregation)
+    public function addAggregation(self $abstractAggregation)
     {
         if (!$this->aggregations) {
             $this->aggregations = $this->createBuilderBag();
         }
 
         $this->aggregations->add($abstractAggregation);
-        
+
         return $this;
     }
 
@@ -103,14 +101,15 @@ abstract class AbstractAggregation implements NamedBuilderInterface
     {
         if ($this->aggregations) {
             return $this->aggregations->all();
-        } else {
-            return [];
         }
+
+        return [];
     }
 
     /**
      * Returns sub aggregation.
-     * @param string $name Aggregation name to return.
+     *
+     * @param string $name aggregation name to return
      *
      * @return AbstractAggregation|NamedBuilderInterface|null
      */
@@ -118,9 +117,9 @@ abstract class AbstractAggregation implements NamedBuilderInterface
     {
         if ($this->aggregations && $this->aggregations->has($name)) {
             return $this->aggregations->get($name);
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
 /**
  * Class representing Histogram aggregation.
  *
- * @link https://goo.gl/hGCdDd
+ * @see https://goo.gl/hGCdDd
  */
 class DateHistogramAggregation extends AbstractAggregation
 {
@@ -39,6 +39,7 @@ class DateHistogramAggregation extends AbstractAggregation
      * @param string $name
      * @param string $field
      * @param string $interval
+     * @param mixed|null $format
      */
     public function __construct($name, $field = null, $interval = null, $format = null)
     {

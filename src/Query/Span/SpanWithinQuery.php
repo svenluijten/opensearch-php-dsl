@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,7 +14,7 @@ namespace ONGR\ElasticsearchDSL\Query\Span;
 /**
  * Elasticsearch span within query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-within-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-within-query.html
  */
 class SpanWithinQuery extends SpanContainingQuery
 {

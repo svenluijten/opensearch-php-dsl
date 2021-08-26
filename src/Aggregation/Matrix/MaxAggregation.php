@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,19 +17,19 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\MetricTrait;
 /**
  * Class representing Max Aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html
  */
 class MaxAggregation extends AbstractAggregation
 {
     use MetricTrait;
 
     /**
-     * @var string Used for multi value aggregation fields to pick a value.
+     * @var string used for multi value aggregation fields to pick a value
      */
     private $mode;
 
     /**
-     * @var array Defines how documents that are missing a value should be treated.
+     * @var array defines how documents that are missing a value should be treated
      */
     private $missing;
 
@@ -37,7 +37,7 @@ class MaxAggregation extends AbstractAggregation
      * Inner aggregations container init.
      *
      * @param string $name
-     * @param string|array $field Fields list to aggregate.
+     * @param string|array $field fields list to aggregate
      * @param array $missing
      * @param string $mode
      */
@@ -108,7 +108,6 @@ class MaxAggregation extends AbstractAggregation
         if ($this->getMode()) {
             $out['mode'] = $this->getMode();
         }
-
 
         if ($this->getMissing()) {
             $out['missing'] = $this->getMissing();

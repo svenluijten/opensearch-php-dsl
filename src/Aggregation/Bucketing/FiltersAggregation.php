@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,7 +18,7 @@ use ONGR\ElasticsearchDSL\BuilderInterface;
 /**
  * Class representing filters aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
  */
 class FiltersAggregation extends AbstractAggregation
 {
@@ -37,9 +37,9 @@ class FiltersAggregation extends AbstractAggregation
     /**
      * Inner aggregations container init.
      *
-     * @param string             $name
+     * @param string $name
      * @param BuilderInterface[] $filters
-     * @param bool               $anonymous
+     * @param bool $anonymous
      */
     public function __construct($name, $filters = [], $anonymous = false)
     {
@@ -68,8 +68,7 @@ class FiltersAggregation extends AbstractAggregation
     }
 
     /**
-     * @param BuilderInterface $filter
-     * @param string           $name
+     * @param string $name
      *
      * @throws \LogicException
      *
@@ -79,7 +78,8 @@ class FiltersAggregation extends AbstractAggregation
     {
         if ($this->anonymous === false && empty($name)) {
             throw new \LogicException('In not anonymous filters filter name must be set.');
-        } elseif ($this->anonymous === false && !empty($name)) {
+        }
+        if ($this->anonymous === false && !empty($name)) {
             $this->filters['filters'][$name] = $filter->toArray();
         } else {
             $this->filters['filters'][] = $filter->toArray();

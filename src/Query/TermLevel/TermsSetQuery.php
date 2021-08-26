@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,14 +17,14 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "terms_set" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-set-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-set-query.html
  */
 class TermsSetQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    const MINIMUM_SHOULD_MATCH_TYPE_FIELD = 'minimum_should_match_field';
-    const MINIMUM_SHOULD_MATCH_TYPE_SCRIPT = 'minimum_should_match_script';
+    public const MINIMUM_SHOULD_MATCH_TYPE_FIELD = 'minimum_should_match_field';
+    public const MINIMUM_SHOULD_MATCH_TYPE_SCRIPT = 'minimum_should_match_script';
 
     /**
      * @var string
@@ -39,9 +39,9 @@ class TermsSetQuery implements BuilderInterface
     /**
      * Constructor.
      *
-     * @param string $field      Field name
-     * @param array  $terms      An array of terms
-     * @param array  $parameters Parameters
+     * @param string $field Field name
+     * @param array $terms An array of terms
+     * @param array $parameters Parameters
      */
     public function __construct($field, $terms, array $parameters)
     {
@@ -73,12 +73,12 @@ class TermsSetQuery implements BuilderInterface
         ]];
     }
 
-    private function validateParameters(array $parameters)
+    private function validateParameters(array $parameters): void
     {
-        if (!isset($parameters[self::MINIMUM_SHOULD_MATCH_TYPE_FIELD]) &&
-            !isset($parameters[self::MINIMUM_SHOULD_MATCH_TYPE_SCRIPT])
+        if (!isset($parameters[self::MINIMUM_SHOULD_MATCH_TYPE_FIELD])
+            && !isset($parameters[self::MINIMUM_SHOULD_MATCH_TYPE_SCRIPT])
         ) {
-            $message = "Either minimum_should_match_field or minimum_should_match_script must be set.";
+            $message = 'Either minimum_should_match_field or minimum_should_match_script must be set.';
             throw new \InvalidArgumentException($message);
         }
     }

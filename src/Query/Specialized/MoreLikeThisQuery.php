@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,20 +17,19 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "more_like_this" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
  */
 class MoreLikeThisQuery implements BuilderInterface
 {
     use ParametersTrait;
 
     /**
-     * @var string The text to find documents like it, required if ids or docs are not specified.
+     * @var string the text to find documents like it, required if ids or docs are not specified
      */
     private $like;
 
     /**
      * @param string $like
-     * @param array  $parameters
      */
     public function __construct($like, array $parameters = [])
     {

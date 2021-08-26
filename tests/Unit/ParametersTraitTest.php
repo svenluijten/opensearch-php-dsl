@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -11,11 +11,12 @@
 
 namespace ONGR\ElasticsearchDSL\Tests\Unit;
 
-use ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation;
 use ONGR\ElasticsearchDSL\ParametersTrait;
 
 /**
  * Test for ParametersTrait.
+ *
+ * @internal
  */
 class ParametersTraitTest extends \PHPUnit\Framework\TestCase
 {
@@ -27,7 +28,7 @@ class ParametersTraitTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->parametersTraitMock = $this->getMockForTrait('ONGR\ElasticsearchDSL\ParametersTrait');
     }
@@ -35,7 +36,7 @@ class ParametersTraitTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests addParameter method.
      */
-    public function testGetAndAddParameter()
+    public function testGetAndAddParameter(): void
     {
         $this->assertTrue(is_object($this->parametersTraitMock->addParameter('acme', 123)));
         $this->assertEquals(123, $this->parametersTraitMock->getParameter('acme'));

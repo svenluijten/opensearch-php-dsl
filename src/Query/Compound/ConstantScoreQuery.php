@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "constant_score" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
  */
 class ConstantScoreQuery implements BuilderInterface
 {
@@ -28,10 +28,6 @@ class ConstantScoreQuery implements BuilderInterface
      */
     private $query;
 
-    /**
-     * @param BuilderInterface $query
-     * @param array            $parameters
-     */
     public function __construct(BuilderInterface $query, array $parameters = [])
     {
         $this->query = $query;

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -34,8 +34,6 @@ class BuilderBag
     /**
      * Adds a builder.
      *
-     * @param BuilderInterface $builder
-     *
      * @return string
      */
     public function add(BuilderInterface $builder)
@@ -54,7 +52,7 @@ class BuilderBag
     /**
      * Checks if builder exists by a specific name.
      *
-     * @param string $name Builder name.
+     * @param string $name builder name
      *
      * @return bool
      */
@@ -66,9 +64,9 @@ class BuilderBag
     /**
      * Removes a builder by name.
      *
-     * @param string $name Builder name.
+     * @param string $name builder name
      */
-    public function remove($name)
+    public function remove($name): void
     {
         unset($this->bag[$name]);
     }
@@ -76,7 +74,7 @@ class BuilderBag
     /**
      * Clears contained builders.
      */
-    public function clear()
+    public function clear(): void
     {
         $this->bag = [];
     }
@@ -84,7 +82,7 @@ class BuilderBag
     /**
      * Returns a builder by name.
      *
-     * @param string $name Builder name.
+     * @param string $name builder name
      *
      * @return BuilderInterface
      */
@@ -96,7 +94,7 @@ class BuilderBag
     /**
      * Returns all builders contained.
      *
-     * @param string|null $type Builder type.
+     * @param string|null $type builder type
      *
      * @return BuilderInterface[]
      */
@@ -106,14 +104,11 @@ class BuilderBag
             $this->bag,
             /** @var BuilderInterface $builder */
             function (BuilderInterface $builder) use ($type) {
-                return $type === null || $builder->getType() == $type;
+                return $type === null || $builder->getType() === $type;
             }
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray()
     {
         $output = [];

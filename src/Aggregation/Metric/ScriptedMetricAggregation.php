@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,11 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Metric;
 
 use ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Type\MetricTrait;
-use ONGR\ElasticsearchDSL\ScriptAwareTrait;
 
 /**
  * Class representing StatsAggregation.
  *
- * @link http://goo.gl/JbQsI3
+ * @see http://goo.gl/JbQsI3
  */
 class ScriptedMetricAggregation extends AbstractAggregation
 {
@@ -43,8 +42,10 @@ class ScriptedMetricAggregation extends AbstractAggregation
      * @var mixed
      */
     private $reduceScript;
+
     /**
      * ScriptedMetricAggregation constructor.
+     *
      * @param string $name
      * @param mixed $initScript
      * @param mixed $mapScript
@@ -58,7 +59,6 @@ class ScriptedMetricAggregation extends AbstractAggregation
         $combineScript = null,
         $reduceScript = null
     ) {
-    
         parent::__construct($name);
 
         $this->setInitScript($initScript);
@@ -160,7 +160,7 @@ class ScriptedMetricAggregation extends AbstractAggregation
      */
     public function getArray()
     {
-        $out = array_filter(
+        return array_filter(
             [
                 'init_script' => $this->getInitScript(),
                 'map_script' => $this->getMapScript(),
@@ -168,7 +168,5 @@ class ScriptedMetricAggregation extends AbstractAggregation
                 'reduce_script' => $this->getReduceScript(),
             ]
         );
-
-        return $out;
     }
 }

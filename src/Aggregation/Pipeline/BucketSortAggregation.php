@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -11,13 +11,12 @@
 
 namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 
-use ONGR\ElasticsearchDSL\BuilderInterface;
 use ONGR\ElasticsearchDSL\Sort\FieldSort;
 
 /**
  * Class representing Bucket Script Pipeline Aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-sort-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-sort-aggregation.html
  */
 class BucketSortAggregation extends AbstractPipelineAggregation
 {
@@ -28,7 +27,7 @@ class BucketSortAggregation extends AbstractPipelineAggregation
 
     /**
      * @param string $name
-     * @param string  $bucketsPath
+     * @param string $bucketsPath
      */
     public function __construct($name, $bucketsPath = null)
     {
@@ -78,13 +77,11 @@ class BucketSortAggregation extends AbstractPipelineAggregation
      */
     public function getArray()
     {
-        $out = array_filter(
+        return array_filter(
             [
-            'buckets_path' => $this->getBucketsPath(),
-            'sort' => $this->getSort(),
+                'buckets_path' => $this->getBucketsPath(),
+                'sort' => $this->getSort(),
             ]
         );
-
-        return $out;
     }
 }

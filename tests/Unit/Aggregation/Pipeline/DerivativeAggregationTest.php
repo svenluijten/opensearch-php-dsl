@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\Aggregation\Pipeline\DerivativeAggregation;
 
 /**
  * Unit test for derivative aggregation.
+ *
+ * @internal
  */
 class DerivativeAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray method.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $aggregation = new DerivativeAggregation('foo', 'foo>bar');
         $aggregation->addParameter('gap_policy', 'skip');
@@ -29,8 +31,8 @@ class DerivativeAggregationTest extends \PHPUnit\Framework\TestCase
         $expected = [
             'derivative' => [
                 'buckets_path' => 'foo>bar',
-                'gap_policy' => 'skip'
-            ]
+                'gap_policy' => 'skip',
+            ],
         ];
 
         $this->assertEquals($expected, $aggregation->toArray());

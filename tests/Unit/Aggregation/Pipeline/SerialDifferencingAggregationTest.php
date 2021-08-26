@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\Aggregation\Pipeline\SerialDifferencingAggregation;
 
 /**
  * Unit test for serial differencing aggregation.
+ *
+ * @internal
  */
 class SerialDifferencingAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray method.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $aggregation = new SerialDifferencingAggregation('acme', 'test');
         $aggregation->addParameter('lag', '7');
@@ -29,7 +31,7 @@ class SerialDifferencingAggregationTest extends \PHPUnit\Framework\TestCase
         $expected = [
             'serial_diff' => [
                 'buckets_path' => 'test',
-                'lag' => '7'
+                'lag' => '7',
             ],
         ];
 

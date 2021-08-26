@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -24,10 +24,10 @@ use ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint;
 use ONGR\ElasticsearchDSL\SearchEndpoint\SearchEndpointFactory;
 use ONGR\ElasticsearchDSL\SearchEndpoint\SearchEndpointInterface;
 use ONGR\ElasticsearchDSL\SearchEndpoint\SortEndpoint;
+use ONGR\ElasticsearchDSL\SearchEndpoint\SuggestEndpoint;
 use ONGR\ElasticsearchDSL\Serializer\Normalizer\CustomReferencedNormalizer;
 use ONGR\ElasticsearchDSL\Serializer\OrderedSerializer;
 use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
-use ONGR\ElasticsearchDSL\SearchEndpoint\SuggestEndpoint;
 
 /**
  * Search object that can be executed by a manager.
@@ -143,7 +143,7 @@ class Search
     /**
      * URI parameters alongside Request body search.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html
      *
      * @var array
      */
@@ -181,7 +181,7 @@ class Search
     /**
      * Wakeup method to initialize static properties
      */
-    public function __wakeup()
+    public function __wakeup(): void
     {
         $this->initializeSerializer();
     }
@@ -189,7 +189,7 @@ class Search
     /**
      * Initializes the serializer
      */
-    private function initializeSerializer()
+    private function initializeSerializer(): void
     {
         if (static::$serializer === null) {
             static::$serializer = new OrderedSerializer(
@@ -204,9 +204,9 @@ class Search
     /**
      * Destroys search endpoint.
      *
-     * @param string $type Endpoint type.
+     * @param string $type endpoint type
      */
-    public function destroyEndpoint($type)
+    public function destroyEndpoint($type): void
     {
         unset($this->endpoints[$type]);
     }
@@ -214,9 +214,8 @@ class Search
     /**
      * Adds query to the search.
      *
-     * @param BuilderInterface $query
-     * @param string           $boolType
-     * @param string           $key
+     * @param string $boolType
+     * @param string $key
      *
      * @return $this
      */
@@ -231,7 +230,7 @@ class Search
     /**
      * Returns endpoint instance.
      *
-     * @param string $type Endpoint type.
+     * @param string $type endpoint type
      *
      * @return SearchEndpointInterface
      */
@@ -259,8 +258,6 @@ class Search
     /**
      * Sets query endpoint parameters.
      *
-     * @param array $parameters
-     *
      * @return $this
      */
     public function setQueryParameters(array $parameters)
@@ -274,7 +271,6 @@ class Search
      * Sets parameters to the endpoint.
      *
      * @param string $endpointName
-     * @param array  $parameters
      *
      * @return $this
      */
@@ -290,20 +286,21 @@ class Search
     /**
      * Adds a post filter to search.
      *
-     * @param BuilderInterface $filter   Filter.
-     * @param string           $boolType Example boolType values:
-     *                                   - must
-     *                                   - must_not
-     *                                   - should.
-     * @param string           $key
+     * @param BuilderInterface $filter filter
+     * @param string $boolType example boolType values:
+     *                         - must
+     *                         - must_not
+     *                         - should
+     * @param string $key
      *
-     * @return $this.
+     * @return $this
      */
     public function addPostFilter(BuilderInterface $filter, $boolType = BoolQuery::MUST, $key = null)
     {
         $this
             ->getEndpoint(PostFilterEndpoint::NAME)
-            ->addToBool($filter, $boolType, $key);
+            ->addToBool($filter, $boolType, $key)
+        ;
 
         return $this;
     }
@@ -323,8 +320,6 @@ class Search
     /**
      * Sets post filter endpoint parameters.
      *
-     * @param array $parameters
-     *
      * @return $this
      */
     public function setPostFilterParameters(array $parameters)
@@ -336,8 +331,6 @@ class Search
 
     /**
      * Adds aggregation into search.
-     *
-     * @param AbstractAggregation $aggregation
      *
      * @return $this
      */
@@ -361,8 +354,6 @@ class Search
     /**
      * Adds inner hit into search.
      *
-     * @param NestedInnerHit $innerHit
-     *
      * @return $this
      */
     public function addInnerHit(NestedInnerHit $innerHit)
@@ -384,8 +375,6 @@ class Search
 
     /**
      * Adds sort to search.
-     *
-     * @param BuilderInterface $sort
      *
      * @return $this
      */
@@ -411,7 +400,7 @@ class Search
      *
      * @param Highlight $highlight
      *
-     * @return $this.
+     * @return $this
      */
     public function addHighlight($highlight)
     {
@@ -434,12 +423,12 @@ class Search
     }
 
     /**
-    * Adds suggest into search.
-    *
-    * @param BuilderInterface $suggest
-    *
-    * @return $this
-    */
+     * Adds suggest into search.
+     *
+     * @param BuilderInterface $suggest
+     *
+     * @return $this
+     */
     public function addSuggest(NamedBuilderInterface $suggest)
     {
         $this->getEndpoint(SuggestEndpoint::NAME)->add($suggest, $suggest->getName());
@@ -448,17 +437,17 @@ class Search
     }
 
     /**
-    * Returns all suggests.
-    *
-    * @return BuilderInterface[]
-    */
+     * Returns all suggests.
+     *
+     * @return BuilderInterface[]
+     */
     public function getSuggests()
     {
         return $this->getEndpoint(SuggestEndpoint::NAME)->getAll();
     }
 
     /**
-     * @return null|int
+     * @return int|null
      */
     public function getFrom()
     {
@@ -466,7 +455,7 @@ class Search
     }
 
     /**
-     * @param null|int $from
+     * @param int|null $from
      *
      * @return $this
      */
@@ -486,8 +475,6 @@ class Search
     }
 
     /**
-     * @param bool $trackTotalHits
-     *
      * @return $this
      */
     public function setTrackTotalHits(bool $trackTotalHits)
@@ -498,7 +485,7 @@ class Search
     }
 
     /**
-     * @return null|int
+     * @return int|null
      */
     public function getSize()
     {
@@ -506,7 +493,7 @@ class Search
     }
 
     /**
-     * @param null|int $size
+     * @param int|null $size
      *
      * @return $this
      */
@@ -752,7 +739,7 @@ class Search
             'typed_keys',
             'pre_filter_shard_size',
             'ignore_unavailable',
-        ])) {
+        ], true)) {
             $this->uriParams[$name] = $value;
         } else {
             throw new \InvalidArgumentException(sprintf('Parameter %s is not supported.', $value));
@@ -771,9 +758,6 @@ class Search
         return $this->uriParams;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray()
     {
         $output = array_filter(static::$serializer->normalize($this->endpoints));
@@ -794,8 +778,8 @@ class Search
         ];
 
         foreach ($params as $field => $param) {
-            if ($this->$field !== null) {
-                $output[$param] = $this->$field;
+            if ($this->{$field} !== null) {
+                $output[$param] = $this->{$field};
             }
         }
 

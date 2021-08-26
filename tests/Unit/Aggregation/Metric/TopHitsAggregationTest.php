@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,13 +16,15 @@ use ONGR\ElasticsearchDSL\Sort\FieldSort;
 
 /**
  * Unit tests for top hits aggregation.
+ *
+ * @internal
  */
 class TopHitsAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Check if aggregation returns the expected array.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $sort = new FieldSort('acme', FieldSort::ASC);
         $aggregation = new TopHitsAggregation('acme', 1, 1, $sort);
@@ -43,7 +45,7 @@ class TopHitsAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Check if parameters can be set to agg.
      */
-    public function testParametersAddition()
+    public function testParametersAddition(): void
     {
         $aggregation = new TopHitsAggregation('acme', 0, 1);
         $aggregation->addParameter('_source', ['include' => ['title']]);

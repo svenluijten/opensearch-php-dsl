@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,7 +16,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Elasticsearch Span not query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html
  */
 class SpanNotQuery implements SpanQueryInterface
 {
@@ -32,11 +32,6 @@ class SpanNotQuery implements SpanQueryInterface
      */
     private $exclude;
 
-    /**
-     * @param SpanQueryInterface $include
-     * @param SpanQueryInterface $exclude
-     * @param array              $parameters
-     */
     public function __construct(SpanQueryInterface $include, SpanQueryInterface $exclude, array $parameters = [])
     {
         $this->include = $include;

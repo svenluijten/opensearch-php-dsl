@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,6 +15,9 @@ use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
 use ONGR\ElasticsearchDSL\Search;
 use ONGR\ElasticsearchDSL\Tests\Functional\AbstractElasticsearchTestCase;
 
+/**
+ * @internal
+ */
 class MatchAllQueryTest extends AbstractElasticsearchTestCase
 {
     /**
@@ -30,14 +33,14 @@ class MatchAllQueryTest extends AbstractElasticsearchTestCase
                 [
                     'title' => 'foo',
                 ],
-            ]
+            ],
         ];
     }
 
     /**
      * Match all test
      */
-    public function testMatchAll()
+    public function testMatchAll(): void
     {
         $search = new Search();
         $matchAll = new MatchAllQuery();

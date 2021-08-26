@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\MetricTrait;
 /**
  * Class representing geo bounds aggregation.
  *
- * @link http://goo.gl/aGqw7Y
+ * @see http://goo.gl/aGqw7Y
  */
 class GeoBoundsAggregation extends AbstractAggregation
 {
@@ -33,7 +33,7 @@ class GeoBoundsAggregation extends AbstractAggregation
      *
      * @param string $name
      * @param string $field
-     * @param bool   $wrapLongitude
+     * @param bool $wrapLongitude
      */
     public function __construct($name, $field = null, $wrapLongitude = true)
     {

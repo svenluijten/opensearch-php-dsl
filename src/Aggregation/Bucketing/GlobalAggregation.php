@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
 /**
  * Class representing GlobalAggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html
  */
 class GlobalAggregation extends AbstractAggregation
 {
@@ -26,7 +26,7 @@ class GlobalAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function setField($field)
+    public function setField($field): void
     {
         throw new \LogicException("Global aggregation, doesn't support `field` parameter");
     }

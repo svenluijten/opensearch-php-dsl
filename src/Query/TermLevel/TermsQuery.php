@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "terms" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
  */
 class TermsQuery implements BuilderInterface
 {
@@ -36,9 +36,9 @@ class TermsQuery implements BuilderInterface
     /**
      * Constructor.
      *
-     * @param string $field      Field name
-     * @param array  $terms      An array of terms
-     * @param array  $parameters Optional parameters
+     * @param string $field Field name
+     * @param array $terms An array of terms
+     * @param array $parameters Optional parameters
      */
     public function __construct($field, $terms, array $parameters = [])
     {

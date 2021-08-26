@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,13 +16,15 @@ use ONGR\ElasticsearchDSL\SearchEndpoint\AggregationsEndpoint;
 
 /**
  * Class AggregationsEndpointTest.
+ *
+ * @internal
  */
 class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests constructor.
      */
-    public function testItCanBeInstantiated()
+    public function testItCanBeInstantiated(): void
     {
         $this->assertInstanceOf(
             'ONGR\ElasticsearchDSL\SearchEndpoint\AggregationsEndpoint',
@@ -33,7 +35,7 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if endpoint returns builders.
      */
-    public function testEndpointGetter()
+    public function testEndpointGetter(): void
     {
         $aggName = 'acme_agg';
         $agg = new MissingAggregation('acme');

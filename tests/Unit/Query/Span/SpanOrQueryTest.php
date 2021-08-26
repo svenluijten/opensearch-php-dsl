@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,19 +15,22 @@ use ONGR\ElasticsearchDSL\Query\Span\SpanOrQuery;
 
 /**
  * Unit test for SpanOrQuery.
+ *
+ * @internal
  */
 class SpanOrQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests for toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Query\Span\SpanQueryInterface')->getMock();
         $mock
             ->expects($this->once())
             ->method('toArray')
-            ->willReturn(['span_term' => ['key' => 'value']]);
+            ->willReturn(['span_term' => ['key' => 'value']])
+        ;
 
         $query = new SpanOrQuery();
         $query->addQuery($mock);

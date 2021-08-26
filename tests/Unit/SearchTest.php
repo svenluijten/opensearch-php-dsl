@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -11,26 +11,24 @@
 
 namespace ONGR\ElasticsearchDSL\Tests\Unit;
 
-use ONGR\ElasticsearchDSL\Query\TermLevel\ExistsQuery;
-use ONGR\ElasticsearchDSL\Query\TermLevel\TermQuery;
 use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchDSL\Sort\FieldSort;
-use ONGR\ElasticsearchDSL\Suggest\Suggest;
 
 /**
  * Test for Search.
+ *
+ * @internal
  */
 class SearchTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests Search constructor.
      */
-    public function testItCanBeInstantiated()
+    public function testItCanBeInstantiated(): void
     {
         $this->assertInstanceOf('ONGR\ElasticsearchDSL\Search', new Search());
     }
 
-    public function testScrollUriParameter()
+    public function testScrollUriParameter(): void
     {
         $search = new Search();
         $search->setScroll('5m');

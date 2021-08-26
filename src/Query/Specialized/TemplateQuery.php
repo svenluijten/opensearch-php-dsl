@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "template" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-template-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-template-query.html
  */
 class TemplateQuery implements BuilderInterface
 {
@@ -41,7 +41,7 @@ class TemplateQuery implements BuilderInterface
     /**
      * @param string $file A template of the query
      * @param string $inline A template of the query
-     * @param array  $params Parameters to insert into template
+     * @param array $params Parameters to insert into template
      */
     public function __construct($file = null, $inline = null, array $params = [])
     {

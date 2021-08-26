@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "ids" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html
  */
 class IdsQuery implements BuilderInterface
 {
@@ -28,10 +28,6 @@ class IdsQuery implements BuilderInterface
      */
     private $values;
 
-    /**
-     * @param array $values
-     * @param array $parameters
-     */
     public function __construct(array $values, array $parameters = [])
     {
         $this->values = $values;

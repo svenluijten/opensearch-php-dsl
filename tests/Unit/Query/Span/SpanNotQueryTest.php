@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,19 +15,22 @@ use ONGR\ElasticsearchDSL\Query\Span\SpanNotQuery;
 
 /**
  * Unit test for SpanNotQuery.
+ *
+ * @internal
  */
 class SpanNotQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests for toArray().
      */
-    public function testSpanNotQueryToArray()
+    public function testSpanNotQueryToArray(): void
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Query\Span\SpanQueryInterface')->getMock();
         $mock
             ->expects($this->exactly(2))
             ->method('toArray')
-            ->willReturn(['span_term' => ['key' => 'value']]);
+            ->willReturn(['span_term' => ['key' => 'value']])
+        ;
 
         $query = new SpanNotQuery($mock, $mock);
         $result = [

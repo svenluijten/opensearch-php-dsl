@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,13 +16,15 @@ use ONGR\ElasticsearchDSL\SearchEndpoint\PostFilterEndpoint;
 
 /**
  * Class PostFilterEndpointTest.
+ *
+ * @internal
  */
 class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests constructor.
      */
-    public function testItCanBeInstantiated()
+    public function testItCanBeInstantiated(): void
     {
         $this->assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\PostFilterEndpoint', new PostFilterEndpoint());
     }
@@ -30,7 +32,7 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if correct order is returned. It's very important that filters must be executed second.
      */
-    public function testGetOrder()
+    public function testGetOrder(): void
     {
         $instance = new PostFilterEndpoint();
         $this->assertEquals(1, $instance->getOrder());
@@ -39,7 +41,7 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Test normalization.
      */
-    public function testNormalization()
+    public function testNormalization(): void
     {
         $instance = new PostFilterEndpoint();
         $normalizerInterface = $this->getMockForAbstractClass(
@@ -59,7 +61,7 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests if endpoint returns builders.
      */
-    public function testEndpointGetter()
+    public function testEndpointGetter(): void
     {
         $filterName = 'acme_post_filter';
         $filter = new MatchAllQuery();

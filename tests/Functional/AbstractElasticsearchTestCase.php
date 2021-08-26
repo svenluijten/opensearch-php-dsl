@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -21,7 +21,7 @@ abstract class AbstractElasticsearchTestCase extends TestCase
     /**
      * Test index name in the elasticsearch.
      */
-    const INDEX_NAME = 'elasticsaerch-dsl-test';
+    public const INDEX_NAME = 'elasticsaerch-dsl-test';
 
     /**
      * @var Client
@@ -42,7 +42,7 @@ abstract class AbstractElasticsearchTestCase extends TestCase
             array_filter(
                 [
                     'index' => self::INDEX_NAME,
-                    'mapping' => $this->getMapping()
+                    'mapping' => $this->getMapping(),
                 ]
             )
         );
@@ -52,11 +52,11 @@ abstract class AbstractElasticsearchTestCase extends TestCase
         foreach ($this->getDataArray() as $type => $documents) {
             foreach ($documents as $id => $document) {
                 $bulkBody[] = [
-                   'index' => [
+                    'index' => [
                         '_index' => self::INDEX_NAME,
                         '_type' => $type,
                         '_id' => $id,
-                    ]
+                    ],
                 ];
                 $bulkBody[] = $document;
             }
@@ -64,7 +64,7 @@ abstract class AbstractElasticsearchTestCase extends TestCase
 
         $this->client->bulk(
             [
-                'body' => $bulkBody
+                'body' => $bulkBody,
             ]
         );
         $this->client->indices()->refresh();
@@ -118,9 +118,10 @@ abstract class AbstractElasticsearchTestCase extends TestCase
     /**
      * Execute search to the elasticsearch and handle results.
      *
-     * @param Search $search Search object.
+     * @param Search $search search object
      * @param null $type Types to search. Can be several types split by comma.
-     * @param bool $returnRaw Return raw response from the client.
+     * @param bool $returnRaw return raw response from the client
+     *
      * @return array
      */
     protected function executeSearch(Search $search, $type = null, $returnRaw = false)
@@ -153,7 +154,7 @@ abstract class AbstractElasticsearchTestCase extends TestCase
     /**
      * Deletes index from elasticsearch.
      */
-    private function deleteIndex()
+    private function deleteIndex(): void
     {
         try {
             $this->client->indices()->delete(['index' => self::INDEX_NAME]);

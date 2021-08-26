@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "fuzzy" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
  */
 class FuzzyQuery implements BuilderInterface
 {
@@ -36,7 +36,6 @@ class FuzzyQuery implements BuilderInterface
     /**
      * @param string $field
      * @param string $value
-     * @param array  $parameters
      */
     public function __construct($field, $value, array $parameters = [])
     {

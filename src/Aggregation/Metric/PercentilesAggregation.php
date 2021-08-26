@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,7 +18,7 @@ use ONGR\ElasticsearchDSL\ScriptAwareTrait;
 /**
  * Class representing PercentilesAggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
  */
 class PercentilesAggregation extends AbstractAggregation
 {
@@ -40,9 +40,9 @@ class PercentilesAggregation extends AbstractAggregation
      *
      * @param string $name
      * @param string $field
-     * @param array  $percents
+     * @param array $percents
      * @param string $script
-     * @param int    $compression
+     * @param int $compression
      */
     public function __construct($name, $field = null, $percents = null, $script = null, $compression = null)
     {
@@ -115,7 +115,7 @@ class PercentilesAggregation extends AbstractAggregation
                 'script' => $this->getScript(),
             ],
             function ($val) {
-                return ($val || is_numeric($val));
+                return $val || is_numeric($val);
             }
         );
 
@@ -129,7 +129,7 @@ class PercentilesAggregation extends AbstractAggregation
      *
      * @throws \LogicException
      */
-    private function isRequiredParametersSet($a)
+    private function isRequiredParametersSet($a): void
     {
         if (!array_key_exists('field', $a) && !array_key_exists('script', $a)) {
             throw new \LogicException('Percentiles aggregation must have field or script set.');

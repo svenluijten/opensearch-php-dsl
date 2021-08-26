@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,7 +13,6 @@ namespace ONGR\ElasticsearchDSL\Suggest;
 
 use ONGR\ElasticsearchDSL\NamedBuilderInterface;
 use ONGR\ElasticsearchDSL\ParametersTrait;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 
 class Suggest implements NamedBuilderInterface
 {
@@ -41,6 +40,7 @@ class Suggest implements NamedBuilderInterface
 
     /**
      * TermSuggest constructor.
+     *
      * @param string $name
      * @param string $type
      * @param string $text
@@ -145,13 +145,11 @@ class Suggest implements NamedBuilderInterface
      */
     public function toArray()
     {
-        $output = [
+        return [
             $this->getName() => [
                 'text' => $this->getText(),
                 $this->getType() => $this->processArray(['field' => $this->getField()]),
-            ]
+            ],
         ];
-
-        return $output;
     }
 }

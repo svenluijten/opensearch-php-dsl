@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -26,7 +26,7 @@ class CustomReferencedNormalizer extends CustomNormalizer
     /**
      * {@inheritdoc}
      */
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, ?string $format = null, array $context = [])
     {
         $object->setReferences($this->references);
         $data = parent::normalize($object, $format, $context);

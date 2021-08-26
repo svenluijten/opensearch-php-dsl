@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -12,14 +12,16 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Bucketing;
 
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\AutoDateHistogramAggregation;
-use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 
+/**
+ * @internal
+ */
 class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests agg.
      */
-    public function testAutoDateHistogramAggregationSetField()
+    public function testAutoDateHistogramAggregationSetField(): void
     {
         // Case #0 terms aggregation.
         $aggregation = new AutoDateHistogramAggregation('test_agg', 'test_field');
@@ -34,7 +36,7 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests setSize method.
      */
-    public function testAutoDateHistogramAggregationFormat()
+    public function testAutoDateHistogramAggregationFormat(): void
     {
         $date = '2020-12-25';
         // Case #1
@@ -45,7 +47,6 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
             'auto_date_histogram' => [
                 'field' => 'test_field',
                 'format' => $date,
-
             ],
         ];
 
@@ -67,7 +68,7 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests buckets.
      */
-    public function testAutoDateHistogramAggregationBuckets()
+    public function testAutoDateHistogramAggregationBuckets(): void
     {
         // Case #1
         $aggregation = new AutoDateHistogramAggregation('test_agg', 'wrong_field');
@@ -101,7 +102,7 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests getType method.
      */
-    public function testAutoDateHistogramAggregationGetType()
+    public function testAutoDateHistogramAggregationGetType(): void
     {
         $aggregation = new AutoDateHistogramAggregation('foo', 'bar');
         $result = $aggregation->getType();

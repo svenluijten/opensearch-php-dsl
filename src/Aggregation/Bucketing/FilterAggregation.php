@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,7 +18,7 @@ use ONGR\ElasticsearchDSL\BuilderInterface;
 /**
  * Class representing FilterAggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
  */
 class FilterAggregation extends AbstractAggregation
 {
@@ -32,10 +32,10 @@ class FilterAggregation extends AbstractAggregation
     /**
      * Inner aggregations container init.
      *
-     * @param string           $name
+     * @param string $name
      * @param BuilderInterface $filter
      */
-    public function __construct($name, BuilderInterface $filter = null)
+    public function __construct($name, ?BuilderInterface $filter = null)
     {
         parent::__construct($name);
 
@@ -45,8 +45,6 @@ class FilterAggregation extends AbstractAggregation
     }
 
     /**
-     * @param BuilderInterface $filter
-     *
      * @return $this
      */
     public function setFilter(BuilderInterface $filter)
@@ -69,7 +67,7 @@ class FilterAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function setField($field)
+    public function setField($field): void
     {
         throw new \LogicException("Filter aggregation, doesn't support `field` parameter");
     }

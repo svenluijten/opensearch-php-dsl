@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "common" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
  */
 class CommonTermsQuery implements BuilderInterface
 {
@@ -36,7 +36,6 @@ class CommonTermsQuery implements BuilderInterface
     /**
      * @param string $field
      * @param string $query
-     * @param array  $parameters
      */
     public function __construct($field, $query, array $parameters = [])
     {

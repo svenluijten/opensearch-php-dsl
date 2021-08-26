@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\FullText;
 
 use ONGR\ElasticsearchDSL\Query\FullText\SimpleQueryStringQuery;
 
+/**
+ * @internal
+ */
 class SimpleQueryStringQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new SimpleQueryStringQuery('"fried eggs" +(eggplant | potato) -frittata');
         $expected = [

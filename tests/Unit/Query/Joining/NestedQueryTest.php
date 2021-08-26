@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,6 +14,9 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Joining;
 use ONGR\ElasticsearchDSL\Query\Joining\NestedQuery;
 use ONGR\ElasticsearchDSL\Query\TermLevel\TermsQuery;
 
+/**
+ * @internal
+ */
 class NestedQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -52,12 +55,12 @@ class NestedQueryTest extends \PHPUnit\Framework\TestCase
      * Test for query toArray() method.
      *
      * @param string $path
-     * @param array  $parameters
-     * @param array  $expected
+     * @param array $parameters
+     * @param array $expected
      *
      * @dataProvider getArrayDataProvider
      */
-    public function testToArray($path, $parameters, $expected)
+    public function testToArray($path, $parameters, $expected): void
     {
         $query = new TermsQuery('foo', 'bar');
         $query = new NestedQuery($path, $query, $parameters);

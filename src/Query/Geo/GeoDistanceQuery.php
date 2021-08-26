@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "geo_distance" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html
  */
 class GeoDistanceQuery implements BuilderInterface
 {
@@ -41,8 +41,7 @@ class GeoDistanceQuery implements BuilderInterface
     /**
      * @param string $field
      * @param string $distance
-     * @param mixed  $location
-     * @param array  $parameters
+     * @param mixed $location
      */
     public function __construct($field, $distance, $location, array $parameters = [])
     {

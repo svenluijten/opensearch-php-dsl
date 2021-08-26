@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace ONGR\ElasticsearchDSL\Tests\Unit\InnerHit;
 
@@ -7,6 +7,9 @@ use ONGR\ElasticsearchDSL\Query\FullText\MatchQuery;
 use ONGR\ElasticsearchDSL\Query\Joining\NestedQuery;
 use ONGR\ElasticsearchDSL\Search;
 
+/**
+ * @internal
+ */
 class NestedInnerHitTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -74,7 +77,7 @@ class NestedInnerHitTest extends \PHPUnit\Framework\TestCase
                                         'query' => $matchQuery->toArray(),
                                     ],
                                 ],
-                            ]
+                            ],
                         ],
                     ],
                 ],
@@ -84,25 +87,23 @@ class NestedInnerHitTest extends \PHPUnit\Framework\TestCase
         return $out;
     }
 
-
     /**
      * Tests toArray() method.
      *
      * @param NestedInnerHit $innerHit
-     * @param array          $expected
+     * @param array $expected
      *
      * @dataProvider getTestToArrayData
      */
-    public function testToArray($innerHit, $expected)
+    public function testToArray($innerHit, $expected): void
     {
         $this->assertEquals($expected, $innerHit->toArray());
     }
 
-
     /**
      * Tests getters and setters for $name, $path and $query
      */
-    public function testGettersAndSetters()
+    public function testGettersAndSetters(): void
     {
         $query = new MatchQuery('acme', 'test');
         $search = new Search();

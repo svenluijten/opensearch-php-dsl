@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,16 +17,16 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Represents Elasticsearch "bool" query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
  */
 class BoolQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    const MUST = 'must';
-    const MUST_NOT = 'must_not';
-    const SHOULD = 'should';
-    const FILTER = 'filter';
+    public const MUST = 'must';
+    public const MUST_NOT = 'must_not';
+    public const SHOULD = 'should';
+    public const FILTER = 'filter';
 
     /**
      * @var array
@@ -35,15 +35,13 @@ class BoolQuery implements BuilderInterface
 
     /**
      * Constructor to prepare container.
-     *
-     * @param array $container
      */
     public function __construct(array $container = [])
     {
         foreach ($container as $type => $queries) {
             $queries = is_array($queries) ? $queries : [$queries];
 
-            array_walk($queries, function ($query) use ($type) {
+            array_walk($queries, function ($query) use ($type): void {
                 $this->add($query, $type);
             });
         }
@@ -52,7 +50,7 @@ class BoolQuery implements BuilderInterface
     /**
      * Returns the query instances (by bool type).
      *
-     * @param  string|null $boolType
+     * @param string|null $boolType
      *
      * @return array
      */
@@ -78,17 +76,17 @@ class BoolQuery implements BuilderInterface
     /**
      * Add BuilderInterface object to bool operator.
      *
-     * @param BuilderInterface $query Query add to the bool.
-     * @param string           $type  Bool type. Example: must, must_not, should.
-     * @param string           $key   Key that indicates a builder id.
-     *
-     * @return string Key of added builder.
+     * @param BuilderInterface $query query add to the bool
+     * @param string $type Bool type. Example: must, must_not, should.
+     * @param string $key key that indicates a builder id
      *
      * @throws \UnexpectedValueException
+     *
+     * @return string key of added builder
      */
     public function add(BuilderInterface $query, $type = self::MUST, $key = null)
     {
-        if (!in_array($type, [self::MUST, self::MUST_NOT, self::SHOULD, self::FILTER])) {
+        if (!in_array($type, [self::MUST, self::MUST_NOT, self::SHOULD, self::FILTER], true)) {
             throw new \UnexpectedValueException(sprintf('The bool operator %s is not supported', $type));
         }
 

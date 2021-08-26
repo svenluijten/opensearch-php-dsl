@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Highlight;
 
 use ONGR\ElasticsearchDSL\Highlight\Highlight;
 
+/**
+ * @internal
+ */
 class HighlightTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests GetType method, it should return 'highlight'.
      */
-    public function testGetType()
+    public function testGetType(): void
     {
         $highlight = new Highlight();
         $result = $highlight->getType();
@@ -28,7 +31,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests ParametersTrait hasParameter method.
      */
-    public function testTraitHasParameter()
+    public function testTraitHasParameter(): void
     {
         $highlight = new Highlight();
         $highlight->addParameter('_source', ['include' => ['title']]);
@@ -39,7 +42,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests ParametersTrait removeParameter method.
      */
-    public function testTraitRemoveParameter()
+    public function testTraitRemoveParameter(): void
     {
         $highlight = new Highlight();
         $highlight->addParameter('_source', ['include' => ['title']]);
@@ -51,7 +54,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests ParametersTrait getParameter method.
      */
-    public function testTraitGetParameter()
+    public function testTraitGetParameter(): void
     {
         $highlight = new Highlight();
         $highlight->addParameter('_source', ['include' => 'title']);
@@ -62,7 +65,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests ParametersTrait getParameters and setParameters methods.
      */
-    public function testTraitSetGetParameters()
+    public function testTraitSetGetParameters(): void
     {
         $highlight = new Highlight();
         $highlight->setParameters(
@@ -85,7 +88,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
     /**
      * Test toArray method.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $highlight = new Highlight();
         $highlight->addField('ok');
@@ -94,7 +97,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
         $result = $highlight->toArray();
         $expectedResult = [
             'fields' => [
-                'ok' => new \StdClass,
+                'ok' => new \StdClass(),
             ],
             '_source' => [
                 'include' => [

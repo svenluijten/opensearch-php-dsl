@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,7 +16,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Elasticsearch span or query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html
  */
 class SpanOrQuery implements SpanQueryInterface
 {
@@ -27,9 +27,6 @@ class SpanOrQuery implements SpanQueryInterface
      */
     private $queries = [];
 
-    /**
-     * @param array $parameters
-     */
     public function __construct(array $parameters = [])
     {
         $this->setParameters($parameters);
@@ -37,8 +34,6 @@ class SpanOrQuery implements SpanQueryInterface
 
     /**
      * Add span query.
-     *
-     * @param SpanQueryInterface $query
      *
      * @return $this
      */

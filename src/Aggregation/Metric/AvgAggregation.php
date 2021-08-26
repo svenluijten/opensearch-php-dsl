@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,7 +14,7 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Metric;
 /**
  * Class representing Avg Aggregation.
  *
- * @link http://goo.gl/7KOIwo
+ * @see http://goo.gl/7KOIwo
  */
 class AvgAggregation extends StatsAggregation
 {

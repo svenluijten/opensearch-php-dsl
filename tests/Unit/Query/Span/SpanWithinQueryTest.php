@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,13 +16,15 @@ use PHPUnit\Framework\MockObject\MockBuilder;
 
 /**
  * Unit test for SpanWithinQuery.
+ *
+ * @internal
  */
 class SpanWithinQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests for toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new SpanWithinQuery(
             $this->getSpanQueryMock('foo'),
@@ -52,7 +54,9 @@ class SpanWithinQueryTest extends \PHPUnit\Framework\TestCase
         $mock
             ->expects($this->once())
             ->method('toArray')
-            ->willReturn(['span_term' => ['user' => $value]]);
+            ->willReturn(['span_term' => ['user' => $value]])
+        ;
+
         return $mock;
     }
 }

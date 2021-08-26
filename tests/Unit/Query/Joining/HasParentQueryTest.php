@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,12 +13,15 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Joining;
 
 use ONGR\ElasticsearchDSL\Query\Joining\HasParentQuery;
 
+/**
+ * @internal
+ */
 class HasParentQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests whether __constructor calls setParameters method.
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $parentQuery = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
         $query = new HasParentQuery('test_type', $parentQuery, ['test_parameter1']);

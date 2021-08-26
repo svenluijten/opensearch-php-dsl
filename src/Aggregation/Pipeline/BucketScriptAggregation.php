@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -14,7 +14,7 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 /**
  * Class representing Bucket Script Pipeline Aggregation.
  *
- * @link https://goo.gl/miVxcx
+ * @see https://goo.gl/miVxcx
  */
 class BucketScriptAggregation extends AbstractPipelineAggregation
 {
@@ -25,7 +25,7 @@ class BucketScriptAggregation extends AbstractPipelineAggregation
 
     /**
      * @param string $name
-     * @param array  $bucketsPath
+     * @param array $bucketsPath
      * @param string $script
      */
     public function __construct($name, $bucketsPath, $script = null)
@@ -76,11 +76,9 @@ class BucketScriptAggregation extends AbstractPipelineAggregation
             );
         }
 
-        $out = [
+        return [
             'buckets_path' => $this->getBucketsPath(),
             'script' => $this->getScript(),
         ];
-
-        return $out;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\Aggregation\Pipeline\AvgBucketAggregation;
 
 /**
  * Unit test for avg_bucket aggregation.
+ *
+ * @internal
  */
 class AvgBucketAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests getArray method.
      */
-    public function testGetArray()
+    public function testGetArray(): void
     {
         $aggregation = new AvgBucketAggregation('foo', 'foo>bar');
 
@@ -31,7 +33,7 @@ class AvgBucketAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests getType method.
      */
-    public function testAvgBucketAggregationGetType()
+    public function testAvgBucketAggregationGetType(): void
     {
         $aggregation = new AvgBucketAggregation('foo', 'foo>bar');
         $this->assertEquals('avg_bucket', $aggregation->getType());

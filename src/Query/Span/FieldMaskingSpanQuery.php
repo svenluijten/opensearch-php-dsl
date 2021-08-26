@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -16,7 +16,7 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 /**
  * Elasticsearch span within query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-field-masking-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-field-masking-query.html
  */
 class FieldMaskingSpanQuery implements SpanQueryInterface
 {
@@ -33,8 +33,7 @@ class FieldMaskingSpanQuery implements SpanQueryInterface
     private $field;
 
     /**
-     * @param string             $field
-     * @param SpanQueryInterface $query
+     * @param string $field
      */
     public function __construct($field, SpanQueryInterface $query)
     {

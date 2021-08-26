@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -24,7 +24,7 @@ class QueryEndpoint extends AbstractSearchEndpoint implements OrderedNormalizerI
     /**
      * Endpoint name
      */
-    const NAME = 'query';
+    public const NAME = 'query';
 
     /**
      * @var BoolQuery
@@ -39,7 +39,7 @@ class QueryEndpoint extends AbstractSearchEndpoint implements OrderedNormalizerI
     /**
      * {@inheritdoc}
      */
-    public function normalize(NormalizerInterface $normalizer, string $format = null, array $context = [])
+    public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
     {
         if (!$this->filtersSet && $this->hasReference('filter_query')) {
             /** @var BuilderInterface $filter */

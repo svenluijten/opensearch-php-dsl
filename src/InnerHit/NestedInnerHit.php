@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -19,12 +19,12 @@ use ONGR\ElasticsearchDSL\Search;
 /**
  * Represents Elasticsearch top level nested inner hits.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-inner-hits.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-inner-hits.html
  */
 class NestedInnerHit implements NamedBuilderInterface
 {
-    use ParametersTrait;
     use NameAwareTrait;
+    use ParametersTrait;
 
     /**
      * @var string
@@ -43,7 +43,7 @@ class NestedInnerHit implements NamedBuilderInterface
      * @param string $path
      * @param Search $search
      */
-    public function __construct($name, $path, Search $search = null)
+    public function __construct($name, $path, ?Search $search = null)
     {
         $this->setName($name);
         $this->setPath($path);
@@ -81,8 +81,6 @@ class NestedInnerHit implements NamedBuilderInterface
     }
 
     /**
-     * @param Search $search
-     *
      * @return $this
      */
     public function setSearch(Search $search)
@@ -107,19 +105,17 @@ class NestedInnerHit implements NamedBuilderInterface
     {
         $out = $this->getSearch() ? $this->getSearch()->toArray() : new \stdClass();
 
-        $out = [
+        return [
             $this->getPathType() => [
-                $this->getPath() => $out ,
+                $this->getPath() => $out,
             ],
         ];
-
-        return $out;
     }
 
     /**
      * Returns 'path' for nested and 'type' for parent inner hits
      *
-     * @return null|string
+     * @return string|null
      */
     private function getPathType()
     {
@@ -133,6 +129,7 @@ class NestedInnerHit implements NamedBuilderInterface
             default:
                 $type = null;
         }
+
         return $type;
     }
 }

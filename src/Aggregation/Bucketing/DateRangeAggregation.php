@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
 /**
  * Class representing date range aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html
  */
 class DateRangeAggregation extends AbstractAggregation
 {
@@ -42,8 +42,7 @@ class DateRangeAggregation extends AbstractAggregation
      * @param string $name
      * @param string $field
      * @param string $format
-     * @param array  $ranges
-     * @param bool   $keyed
+     * @param bool $keyed
      */
     public function __construct($name, $field = null, $format = null, array $ranges = [], $keyed = false)
     {
@@ -53,9 +52,9 @@ class DateRangeAggregation extends AbstractAggregation
         $this->setFormat($format);
         $this->setKeyed($keyed);
         foreach ($ranges as $range) {
-            $from = isset($range['from']) ? $range['from'] : null;
-            $to = isset($range['to']) ? $range['to'] : null;
-            $key = isset($range['key']) ? $range['key'] : null;
+            $from = $range['from'] ?? null;
+            $to = $range['to'] ?? null;
+            $key = $range['key'] ?? null;
             $this->addRange($from, $to, $key);
         }
     }
@@ -85,7 +84,7 @@ class DateRangeAggregation extends AbstractAggregation
     /**
      * @param string $format
      */
-    public function setFormat($format)
+    public function setFormat($format): void
     {
         $this->format = $format;
     }
@@ -97,9 +96,9 @@ class DateRangeAggregation extends AbstractAggregation
      * @param string|null $to
      * @param string|null $key
      *
-     * @return $this
-     *
      * @throws \LogicException
+     *
+     * @return $this
      */
     public function addRange($from = null, $to = null, $key = null)
     {
@@ -110,7 +109,7 @@ class DateRangeAggregation extends AbstractAggregation
                 'key' => $key,
             ],
             function ($v) {
-                return !is_null($v);
+                return null !== $v;
             }
         );
 

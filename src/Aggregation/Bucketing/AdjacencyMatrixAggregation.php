@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,25 +18,24 @@ use ONGR\ElasticsearchDSL\BuilderInterface;
 /**
  * Class representing adjacency matrix aggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-adjacency-matrix-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-adjacency-matrix-aggregation.html
  */
 class AdjacencyMatrixAggregation extends AbstractAggregation
 {
-    const FILTERS = 'filters';
-
     use BucketingTrait;
+    public const FILTERS = 'filters';
 
     /**
      * @var BuilderInterface[]
      */
     private $filters = [
-        self::FILTERS => []
+        self::FILTERS => [],
     ];
 
     /**
      * Inner aggregations container init.
      *
-     * @param string             $name
+     * @param string $name
      * @param BuilderInterface[] $filters
      */
     public function __construct($name, $filters = [])
@@ -49,8 +48,7 @@ class AdjacencyMatrixAggregation extends AbstractAggregation
     }
 
     /**
-     * @param string           $name
-     * @param BuilderInterface $filter
+     * @param string $name
      *
      * @throws \LogicException
      *

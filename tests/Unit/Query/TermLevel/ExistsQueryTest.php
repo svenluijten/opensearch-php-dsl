@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\Query\TermLevel\ExistsQuery;
 
 /**
  * Unit test for ExistsQuery.
+ *
+ * @internal
  */
 class ExistsQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray() method.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new ExistsQuery('bar');
         $this->assertEquals(['exists' => ['field' => 'bar']], $query->toArray());

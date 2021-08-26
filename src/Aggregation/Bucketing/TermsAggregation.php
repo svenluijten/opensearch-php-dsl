@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -18,7 +18,7 @@ use ONGR\ElasticsearchDSL\ScriptAwareTrait;
 /**
  * Class representing TermsAggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
  */
 class TermsAggregation extends AbstractAggregation
 {
@@ -53,13 +53,11 @@ class TermsAggregation extends AbstractAggregation
      */
     public function getArray()
     {
-        $data = array_filter(
+        return array_filter(
             [
                 'field' => $this->getField(),
                 'script' => $this->getScript(),
             ]
         );
-
-        return $data;
     }
 }

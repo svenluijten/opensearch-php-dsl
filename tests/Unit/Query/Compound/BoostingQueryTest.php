@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -13,18 +13,22 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Compound;
 
 use ONGR\ElasticsearchDSL\Query\Compound\BoostingQuery;
 
+/**
+ * @internal
+ */
 class BoostingQueryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests toArray().
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
         $mock
             ->expects($this->any())
             ->method('toArray')
-            ->willReturn(['term' => ['foo' => 'bar']]);
+            ->willReturn(['term' => ['foo' => 'bar']])
+        ;
 
         $query = new BoostingQuery($mock, $mock, 0.2);
         $expected = [

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,13 +15,15 @@ use ONGR\ElasticsearchDSL\Aggregation\Bucketing\SignificantTextAggregation;
 
 /**
  * Unit test for children aggregation.
+ *
+ * @internal
  */
 class SignificantTextAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests getType method.
      */
-    public function testSignificantTextAggregationGetType()
+    public function testSignificantTextAggregationGetType(): void
     {
         $aggregation = new SignificantTextAggregation('foo');
         $result = $aggregation->getType();
@@ -31,11 +33,12 @@ class SignificantTextAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests getArray method.
      */
-    public function testSignificantTermsAggregationGetArray()
+    public function testSignificantTermsAggregationGetArray(): void
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation')
             ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+            ->getMockForAbstractClass()
+        ;
         $aggregation = new SignificantTextAggregation('foo', 'title');
         $aggregation->addAggregation($mock);
         $result = $aggregation->getArray();

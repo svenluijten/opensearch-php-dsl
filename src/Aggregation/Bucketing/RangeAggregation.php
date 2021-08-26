@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
 /**
  * Class representing RangeAggregation.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html
  */
 class RangeAggregation extends AbstractAggregation
 {
@@ -38,8 +38,8 @@ class RangeAggregation extends AbstractAggregation
      *
      * @param string $name
      * @param string $field
-     * @param array  $ranges
-     * @param bool   $keyed
+     * @param array $ranges
+     * @param bool $keyed
      */
     public function __construct($name, $field = null, $ranges = [], $keyed = false)
     {
@@ -48,9 +48,9 @@ class RangeAggregation extends AbstractAggregation
         $this->setField($field);
         $this->setKeyed($keyed);
         foreach ($ranges as $range) {
-            $from = isset($range['from']) ? $range['from'] : null;
-            $to = isset($range['to']) ? $range['to'] : null;
-            $key = isset($range['key']) ? $range['key'] : null;
+            $from = $range['from'] ?? null;
+            $to = $range['to'] ?? null;
+            $key = $range['key'] ?? null;
             $this->addRange($from, $to, $key);
         }
     }
@@ -74,7 +74,7 @@ class RangeAggregation extends AbstractAggregation
      *
      * @param int|float|null $from
      * @param int|float|null $to
-     * @param string         $key
+     * @param string $key
      *
      * @return RangeAggregation
      */
@@ -86,7 +86,7 @@ class RangeAggregation extends AbstractAggregation
                 'to' => $to,
             ],
             function ($v) {
-                return !is_null($v);
+                return null !== $v;
             }
         );
 
@@ -123,7 +123,7 @@ class RangeAggregation extends AbstractAggregation
     /**
      * Removes range by key.
      *
-     * @param string $key Range key.
+     * @param string $key range key
      *
      * @return bool
      */

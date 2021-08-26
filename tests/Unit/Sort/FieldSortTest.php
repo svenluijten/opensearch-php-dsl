@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -15,12 +15,15 @@ use ONGR\ElasticsearchDSL\Query\TermLevel\TermQuery;
 use ONGR\ElasticsearchDSL\Sort\FieldSort;
 use ONGR\ElasticsearchDSL\Sort\NestedSort;
 
+/**
+ * @internal
+ */
 class FieldSortTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test for toArray() method.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $nestedFilter = new NestedSort('somePath', new TermQuery('somePath.id', 10));
         $sort = new FieldSort('someField', 'asc');
@@ -29,14 +32,14 @@ class FieldSortTest extends \PHPUnit\Framework\TestCase
         $expected = [
             'someField' => [
                 'nested' => [
-                    'path'   => 'somePath',
+                    'path' => 'somePath',
                     'filter' => [
                         'term' => [
                             'somePath.id' => 10,
-                        ]
-                    ]
+                        ],
+                    ],
                 ],
-                'order'  => 'asc'
+                'order' => 'asc',
             ],
         ];
         $result = $sort->toArray();

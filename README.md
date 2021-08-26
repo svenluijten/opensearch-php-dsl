@@ -8,9 +8,9 @@ If you need any help, [Github discussion](https://github.com/shyim/opensearch-ds
 is the preferred and recommended way to ask support questions.
 
 [![Test](https://github.com/shyim/opensearch-dsl/actions/workflows/test.yml/badge.svg)](https://github.com/shyim/opensearch-dsl/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/shyim/opensearch-dsl/branch/master/graph/badge.svg)](https://codecov.io/gh/ongr-io/ElasticsearchDSL)
-[![Latest Stable Version](https://poser.pugx.org/ongr/elasticsearch-dsl/v/stable)](https://packagist.org/packages/ongr/elasticsearch-dsl)
-[![Total Downloads](https://poser.pugx.org/ongr/elasticsearch-dsl/downloads)](https://packagist.org/packages/ongr/elasticsearch-dsl)
+[![codecov](https://codecov.io/gh/shyim/opensearch-dsl/branch/7.2/graph/badge.svg)](https://codecov.io/gh/shyim/opensearch-dsl)
+[![Latest Stable Version](https://poser.pugx.org/shyim/opensearch-dsl/v/stable)](https://packagist.org/packages/shyim/opensearch-dsl)
+[![Total Downloads](https://poser.pugx.org/shyim/opensearch-dsl/downloads)](https://packagist.org/packages/shyim/opensearch-dsl)
 
 
 ## Version matrix

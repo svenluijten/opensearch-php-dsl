@@ -1,10 +1,14 @@
 {
-    "name": "ongr/elasticsearch-dsl",
-    "description": "Elasticsearch DSL library",
+    "name": "shyim/opensearch-dsl",
+    "description": "OpenSearch/Elasticsearch DSL library",
     "type": "library",
-    "homepage": "http://ongr.io",
+    "homepage": "https://github.com/shyim/opensearch-dsl",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Soner Sayakci",
+            "homepage": "https://github.com/shyim"
+        },
         {
             "name": "ONGR team",
             "homepage": "http://www.ongr.io"

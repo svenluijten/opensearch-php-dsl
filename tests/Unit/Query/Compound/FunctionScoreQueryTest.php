@@ -33,7 +33,9 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             [
                 'seed' => null,
                 'expectedArray' => [
-                    'query' => null,
+                    'query' => [
+                        'match_all' => new \stdClass()
+                    ],
                     'functions' => [
                         [
                             'random_score' => new \stdClass(),
@@ -45,7 +47,9 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             [
                 'seed' => 'someSeed',
                 'expectedArray' => [
-                    'query' => null,
+                    'query' => [
+                        'match_all' => new \stdClass()
+                    ],
                     'functions' => [
                         [
                             'random_score' => ['seed' => 'someSeed'],
@@ -66,9 +70,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddRandomFunction($seed, $expectedArray): void
     {
-        $matchAllQuery = $this->getMockBuilder(MatchAllQuery::class)->getMock();
-
-        $functionScoreQuery = new FunctionScoreQuery($matchAllQuery);
+        $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
         $functionScoreQuery->addRandomFunction($seed);
 
         $this->assertEquals(['function_score' => $expectedArray], $functionScoreQuery->toArray());
@@ -79,14 +81,15 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddFieldValueFactorFunction(): void
     {
-        $builderInterface = $this->getMockForAbstractClass('ONGR\ElasticsearchDSL\BuilderInterface');
-        $functionScoreQuery = new FunctionScoreQuery($builderInterface);
+        $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
         $functionScoreQuery->addFieldValueFactorFunction('field1', 2);
         $functionScoreQuery->addFieldValueFactorFunction('field2', 1.5, 'ln');
 
         $this->assertEquals(
             [
-                'query' => null,
+                'query' => [
+                    'match_all' => new \stdClass()
+                ],
                 'functions' => [
                     [
                         'field_value_factor' => [

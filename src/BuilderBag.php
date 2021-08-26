@@ -19,24 +19,19 @@ class BuilderBag
     /**
      * @var BuilderInterface[]
      */
-    private $bag = [];
+    private array $bag = [];
 
     /**
      * @param BuilderInterface[] $builders
      */
-    public function __construct($builders = [])
+    public function __construct(array $builders = [])
     {
         foreach ($builders as $builder) {
             $this->add($builder);
         }
     }
 
-    /**
-     * Adds a builder.
-     *
-     * @return string
-     */
-    public function add(BuilderInterface $builder)
+    public function add(BuilderInterface $builder): string
     {
         if (method_exists($builder, 'getName')) {
             $name = $builder->getName();
@@ -49,56 +44,34 @@ class BuilderBag
         return $name;
     }
 
-    /**
-     * Checks if builder exists by a specific name.
-     *
-     * @param string $name builder name
-     *
-     * @return bool
-     */
-    public function has($name)
+    public function has(string $name): bool
     {
         return isset($this->bag[$name]);
     }
 
-    /**
-     * Removes a builder by name.
-     *
-     * @param string $name builder name
-     */
-    public function remove($name): void
+    public function remove(string $name): void
     {
         unset($this->bag[$name]);
     }
 
-    /**
-     * Clears contained builders.
-     */
     public function clear(): void
     {
         $this->bag = [];
     }
 
-    /**
-     * Returns a builder by name.
-     *
-     * @param string $name builder name
-     *
-     * @return BuilderInterface
-     */
-    public function get($name)
+    public function get(string $name): BuilderInterface
     {
+        if (!isset($this->bag[$name])) {
+            throw new \OutOfBoundsException(sprintf('The key %s does not exists', $name));
+        }
+
         return $this->bag[$name];
     }
 
     /**
-     * Returns all builders contained.
-     *
-     * @param string|null $type builder type
-     *
      * @return BuilderInterface[]
      */
-    public function all($type = null)
+    public function all(?string $type = null): array
     {
         return array_filter(
             $this->bag,
@@ -109,7 +82,7 @@ class BuilderBag
         );
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $output = [];
         foreach ($this->all() as $builder) {

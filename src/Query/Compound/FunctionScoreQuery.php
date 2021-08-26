@@ -222,7 +222,7 @@ class FunctionScoreQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'query' => $this->query->toArray(),
@@ -237,7 +237,7 @@ class FunctionScoreQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'function_score';
     }

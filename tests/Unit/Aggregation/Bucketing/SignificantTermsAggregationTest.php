@@ -35,12 +35,7 @@ class SignificantTermsAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testSignificantTermsAggregationGetArray(): void
     {
-        $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation')
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass()
-        ;
         $aggregation = new SignificantTermsAggregation('foo', 'title');
-        $aggregation->addAggregation($mock);
         $result = $aggregation->getArray();
         $expected = ['field' => 'title'];
         $this->assertEquals($expected, $result);

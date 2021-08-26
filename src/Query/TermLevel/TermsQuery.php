@@ -50,7 +50,7 @@ class TermsQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'terms';
     }
@@ -58,7 +58,7 @@ class TermsQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             $this->field => $this->terms,

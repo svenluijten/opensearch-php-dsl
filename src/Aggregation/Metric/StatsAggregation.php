@@ -43,7 +43,7 @@ class StatsAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'stats';
     }

@@ -54,7 +54,7 @@ class GeoCentroidAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'geo_centroid';
     }

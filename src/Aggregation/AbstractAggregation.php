@@ -125,7 +125,7 @@ abstract class AbstractAggregation implements NamedBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = $this->getArray();
         $result = [

@@ -47,7 +47,7 @@ class MatchQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'match';
     }
@@ -55,7 +55,7 @@ class MatchQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'query' => $this->query,

@@ -47,7 +47,7 @@ class SpanFirstQuery implements SpanQueryInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'span_first';
     }
@@ -55,7 +55,7 @@ class SpanFirstQuery implements SpanQueryInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [];
         $query['match'] = $this->query->toArray();

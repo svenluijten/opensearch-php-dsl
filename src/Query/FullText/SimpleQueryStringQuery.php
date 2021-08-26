@@ -40,7 +40,7 @@ class SimpleQueryStringQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'simple_query_string';
     }
@@ -48,7 +48,7 @@ class SimpleQueryStringQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'query' => $this->query,

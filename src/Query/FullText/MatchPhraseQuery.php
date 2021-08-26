@@ -23,7 +23,7 @@ class MatchPhraseQuery extends MatchQuery
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'match_phrase';
     }

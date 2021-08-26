@@ -46,7 +46,7 @@ class NestedQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'nested';
     }
@@ -54,7 +54,7 @@ class NestedQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             $this->getType() => $this->processArray(

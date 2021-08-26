@@ -45,12 +45,7 @@ class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testChildrenAggregationGetArray(): void
     {
-        $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation')
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass()
-        ;
         $aggregation = new DateHistogramAggregation('foo');
-        $aggregation->addAggregation($mock);
         $aggregation->setField('date');
         $aggregation->setInterval('month');
         $result = $aggregation->getArray();

@@ -46,7 +46,7 @@ class HasChildQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'has_child';
     }
@@ -54,7 +54,7 @@ class HasChildQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'type' => $this->type,

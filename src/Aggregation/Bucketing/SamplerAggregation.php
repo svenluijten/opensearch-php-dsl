@@ -68,7 +68,7 @@ class SamplerAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'sampler';
     }

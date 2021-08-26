@@ -42,7 +42,7 @@ class SpanNotQuery implements SpanQueryInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'span_not';
     }
@@ -50,7 +50,7 @@ class SpanNotQuery implements SpanQueryInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'include' => $this->include->toArray(),

@@ -97,7 +97,7 @@ class PercentileRanksAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'percentile_ranks';
     }

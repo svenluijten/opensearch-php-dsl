@@ -47,7 +47,7 @@ class TermQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'term';
     }
@@ -55,7 +55,7 @@ class TermQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = $this->processArray();
 

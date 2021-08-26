@@ -11,17 +11,14 @@
 
 namespace ONGR\ElasticsearchDSL\Suggest;
 
+use ONGR\ElasticsearchDSL\NameAwareTrait;
 use ONGR\ElasticsearchDSL\NamedBuilderInterface;
 use ONGR\ElasticsearchDSL\ParametersTrait;
 
 class Suggest implements NamedBuilderInterface
 {
     use ParametersTrait;
-
-    /**
-     * @var string
-     */
-    private $name;
+    use NameAwareTrait;
 
     /**
      * @var string
@@ -57,33 +54,11 @@ class Suggest implements NamedBuilderInterface
     }
 
     /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Returns suggest name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * Returns element type.
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -143,7 +118,7 @@ class Suggest implements NamedBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             $this->getName() => [

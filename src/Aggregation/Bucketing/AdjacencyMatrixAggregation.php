@@ -72,7 +72,7 @@ class AdjacencyMatrixAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'adjacency_matrix';
     }

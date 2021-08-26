@@ -114,7 +114,7 @@ class FieldSort implements BuilderInterface
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return 'sort';
     }
@@ -122,7 +122,7 @@ class FieldSort implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         if ($this->order) {
             $this->addParameter('order', $this->order);

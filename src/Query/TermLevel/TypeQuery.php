@@ -38,7 +38,7 @@ class TypeQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'type';
     }
@@ -46,7 +46,7 @@ class TypeQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             $this->getType() => [

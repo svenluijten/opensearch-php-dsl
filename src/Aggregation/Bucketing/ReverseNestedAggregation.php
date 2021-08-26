@@ -66,7 +66,7 @@ class ReverseNestedAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'reverse_nested';
     }

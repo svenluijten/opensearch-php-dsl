@@ -113,8 +113,8 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
             [
                 'adjacency_matrix' => [
                     'filters' => [
-                        'filter1' => null,
-                        'filter2' => null,
+                        'filter1' => [],
+                        'filter2' => [],
                     ],
                 ],
             ],

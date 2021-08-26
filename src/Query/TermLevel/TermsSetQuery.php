@@ -54,7 +54,7 @@ class TermsSetQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'terms_set';
     }
@@ -62,7 +62,7 @@ class TermsSetQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'terms' => $this->terms,

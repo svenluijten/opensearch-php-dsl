@@ -47,7 +47,7 @@ class GeoBoundingBoxQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'geo_bounding_box';
     }
@@ -55,7 +55,7 @@ class GeoBoundingBoxQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             $this->getType() => $this->processArray([$this->field => $this->points()]),

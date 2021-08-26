@@ -55,7 +55,7 @@ class NestedSort implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'nested';
     }
@@ -63,7 +63,7 @@ class NestedSort implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $output = [
             'path' => $this->path,

@@ -48,7 +48,7 @@ class BoostingQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'boosting';
     }
@@ -56,7 +56,7 @@ class BoostingQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'positive' => $this->positive->toArray(),

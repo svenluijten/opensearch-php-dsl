@@ -162,7 +162,7 @@ class RangeAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'range';
     }

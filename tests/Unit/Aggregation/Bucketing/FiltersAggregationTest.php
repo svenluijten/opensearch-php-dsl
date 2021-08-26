@@ -108,12 +108,12 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
             ]
         );
 
-        $this->assertSame(
+        $this->assertEquals(
             [
                 'filters' => [
                     'filters' => [
-                        'filter1' => null,
-                        'filter2' => null,
+                        'filter1' => [],
+                        'filter2' => [],
                     ],
                 ],
             ],
@@ -129,12 +129,12 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
             true
         );
 
-        $this->assertSame(
+        $this->assertEquals(
             [
                 'filters' => [
                     'filters' => [
-                        null,
-                        null,
+                        [],
+                        [],
                     ],
                 ],
             ],

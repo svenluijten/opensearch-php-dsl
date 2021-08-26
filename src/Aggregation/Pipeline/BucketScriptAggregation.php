@@ -57,7 +57,7 @@ class BucketScriptAggregation extends AbstractPipelineAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'bucket_script';
     }

@@ -77,7 +77,7 @@ class SpanContainingQuery implements SpanQueryInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'span_containing';
     }
@@ -85,7 +85,7 @@ class SpanContainingQuery implements SpanQueryInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $output = [
             'little' => $this->getLittle()->toArray(),

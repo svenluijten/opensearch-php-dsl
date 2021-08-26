@@ -61,7 +61,7 @@ class AutoDateHistogramAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'auto_date_histogram';
     }

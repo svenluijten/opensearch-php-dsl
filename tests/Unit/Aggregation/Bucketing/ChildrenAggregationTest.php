@@ -12,6 +12,7 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Bucketing;
 
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\ChildrenAggregation;
+use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 
 /**
  * Unit test for children aggregation.
@@ -45,13 +46,9 @@ class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testChildrenAggregationGetArray(): void
     {
-        $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation')
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass()
-        ;
         $aggregation = new ChildrenAggregation('foo');
-        $aggregation->addAggregation($mock);
         $aggregation->setChildren('question');
+        $aggregation->addAggregation(new TermsAggregation('test'));
         $result = $aggregation->getArray();
         $expected = ['type' => 'question'];
         $this->assertEquals($expected, $result);

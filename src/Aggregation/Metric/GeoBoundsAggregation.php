@@ -83,7 +83,7 @@ class GeoBoundsAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'geo_bounds';
     }

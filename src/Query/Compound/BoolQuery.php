@@ -102,7 +102,7 @@ class BoolQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         if (count($this->container) === 1 && isset($this->container[self::MUST])
                 && count($this->container[self::MUST]) === 1) {
@@ -132,7 +132,7 @@ class BoolQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'bool';
     }

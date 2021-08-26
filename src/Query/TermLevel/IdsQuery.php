@@ -37,7 +37,7 @@ class IdsQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'ids';
     }
@@ -45,7 +45,7 @@ class IdsQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'values' => $this->values,

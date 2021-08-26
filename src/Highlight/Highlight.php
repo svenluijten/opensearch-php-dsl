@@ -59,7 +59,7 @@ class Highlight implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'highlight';
     }
@@ -67,7 +67,7 @@ class Highlight implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $output = [];
 

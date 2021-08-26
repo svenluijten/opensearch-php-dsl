@@ -99,7 +99,7 @@ class FiltersAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'filters';
     }

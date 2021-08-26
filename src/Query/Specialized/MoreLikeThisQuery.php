@@ -40,7 +40,7 @@ class MoreLikeThisQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'more_like_this';
     }
@@ -48,7 +48,7 @@ class MoreLikeThisQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [];
 

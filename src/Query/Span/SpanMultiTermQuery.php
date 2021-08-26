@@ -40,7 +40,7 @@ class SpanMultiTermQuery implements SpanQueryInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'span_multi';
     }
@@ -50,7 +50,7 @@ class SpanMultiTermQuery implements SpanQueryInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [];
         $query['match'] = $this->query->toArray();

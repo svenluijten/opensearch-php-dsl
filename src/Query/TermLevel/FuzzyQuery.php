@@ -47,7 +47,7 @@ class FuzzyQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'fuzzy';
     }
@@ -55,7 +55,7 @@ class FuzzyQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'value' => $this->value,

@@ -48,7 +48,7 @@ class PrefixQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType(): string
     {
         return 'prefix';
     }
@@ -56,7 +56,7 @@ class PrefixQuery implements BuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $query = [
             'value' => $this->value,

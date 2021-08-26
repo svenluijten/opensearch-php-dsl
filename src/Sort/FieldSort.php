@@ -111,8 +111,6 @@ class FieldSort implements BuilderInterface
 
     /**
      * Returns element type.
-     *
-     * @return string
      */
     public function getType(): string
     {

@@ -23,21 +23,9 @@ class DiversifiedSamplerAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    /**
-     * Defines how many results will be received from each shard
-     *
-     * @param int $shardSize
-     */
-    private $shardSize;
+    private ?int $shardSize;
 
-    /**
-     * DiversifiedSamplerAggregation constructor.
-     *
-     * @param string $name Aggregation name
-     * @param string $field Elasticsearch field name
-     * @param int $shardSize Shard size, by default it's 100
-     */
-    public function __construct($name, $field = null, $shardSize = null)
+    public function __construct(string $name, string $field, ?int $shardSize = null)
     {
         parent::__construct($name);
 
@@ -45,20 +33,12 @@ class DiversifiedSamplerAggregation extends AbstractAggregation
         $this->setShardSize($shardSize);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getShardSize()
+    public function getShardSize(): ?int
     {
         return $this->shardSize;
     }
 
-    /**
-     * @param mixed $shardSize
-     *
-     * @return $this
-     */
-    public function setShardSize($shardSize)
+    public function setShardSize(int $shardSize): self
     {
         $this->shardSize = $shardSize;
 
@@ -76,7 +56,7 @@ class DiversifiedSamplerAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    protected function getArray()
+    protected function getArray(): array
     {
         return array_filter(
             [

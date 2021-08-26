@@ -17,8 +17,8 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 
 class Suggest implements NamedBuilderInterface
 {
-    use ParametersTrait;
     use NameAwareTrait;
+    use ParametersTrait;
 
     /**
      * @var string
@@ -55,8 +55,6 @@ class Suggest implements NamedBuilderInterface
 
     /**
      * Returns element type.
-     *
-     * @return string
      */
     public function getType(): string
     {

@@ -26,7 +26,7 @@ class NestedAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $termAggregation = new TermsAggregation('acme');
 
-        $aggregation = new NestedAggregation('test_nested_agg');
+        $aggregation = new NestedAggregation('test_nested_agg', '');
         $aggregation->setPath('test_path');
         $aggregation->addAggregation($termAggregation);
 

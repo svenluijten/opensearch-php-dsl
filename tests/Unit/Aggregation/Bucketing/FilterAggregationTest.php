@@ -33,7 +33,7 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
         $out = [];
 
         // Case #0 filter aggregation.
-        $aggregation = new FilterAggregation('test_agg');
+        $aggregation = new FilterAggregation('test_agg', new MatchAllQuery());
         $filter = new MatchAllQuery();
 
         $aggregation->setFilter($filter);
@@ -48,7 +48,7 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
         ];
 
         // Case #1 nested filter aggregation.
-        $aggregation = new FilterAggregation('test_agg');
+        $aggregation = new FilterAggregation('test_agg', new MatchAllQuery());
         $aggregation->setFilter($filter);
 
         $histogramAgg = new HistogramAggregation('acme', 'bar', 10);
@@ -67,7 +67,7 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
         ];
 
         // Case #2 testing bool filter.
-        $aggregation = new FilterAggregation('test_agg');
+        $aggregation = new FilterAggregation('test_agg', new MatchAllQuery());
         $matchAllFilter = new MatchAllQuery();
         $termFilter = new TermQuery('acme', 'foo');
         $boolFilter = new BoolQuery();
@@ -108,30 +108,8 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('doesn\'t support `field` parameter');
-        $aggregation = new FilterAggregation('test_agg');
+        $aggregation = new FilterAggregation('test_agg', new MatchAllQuery());
         $aggregation->setField('test_field');
-    }
-
-    /**
-     * Test for toArray() without setting a filter.
-     */
-    public function testToArrayNoFilter(): void
-    {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('has no filter added');
-        $aggregation = new FilterAggregation('test_agg');
-        $result = $aggregation->toArray();
-
-        $this->assertEquals(
-            [
-                'aggregation' => [
-                    'test_agg' => [
-                        'filter' => [],
-                    ],
-                ],
-            ],
-            $result
-        );
     }
 
     /**
@@ -139,7 +117,7 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArrayWithFilter(): void
     {
-        $aggregation = new FilterAggregation('test_agg');
+        $aggregation = new FilterAggregation('test_agg', new MatchAllQuery());
         $aggregation->setFilter(new ExistsQuery('test'));
         $result = $aggregation->toArray();
 

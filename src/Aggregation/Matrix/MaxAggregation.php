@@ -23,67 +23,51 @@ class MaxAggregation extends AbstractAggregation
 {
     use MetricTrait;
 
-    /**
-     * @var string used for multi value aggregation fields to pick a value
-     */
-    private $mode;
+    private array $fields;
 
-    /**
-     * @var array defines how documents that are missing a value should be treated
-     */
-    private $missing;
+    private ?string $mode = null;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string|array $field fields list to aggregate
-     * @param array $missing
-     * @param string $mode
-     */
-    public function __construct($name, $field, $missing = null, $mode = null)
+    private ?array $missing = null;
+
+    public function __construct(string $name, $field, ?array $missing = null, ?string $mode = null)
     {
         parent::__construct($name);
 
-        $this->setField($field);
+        $this->setFields(is_string($field) ? [$field] : $field);
         $this->setMode($mode);
-        $this->missing = $missing;
+        $this->setMissing($missing);
     }
 
-    /**
-     * @return string
-     */
-    public function getMode()
+    public function getFields(): array
+    {
+        return $this->fields;
+    }
+
+    public function setFields(array $fields): self
+    {
+        $this->fields = $fields;
+
+        return $this;
+    }
+
+    public function getMode(): ?string
     {
         return $this->mode;
     }
 
-    /**
-     * @param string $mode
-     *
-     * @return $this
-     */
-    public function setMode($mode)
+    public function setMode(string $mode): self
     {
         $this->mode = $mode;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getMissing()
+    public function getMissing(): ?array
     {
         return $this->missing;
     }
 
-    /**
-     * @param array $missing
-     *
-     * @return $this
-     */
-    public function setMissing($missing)
+    public function setMissing(array $missing): self
     {
         $this->missing = $missing;
 
@@ -98,12 +82,11 @@ class MaxAggregation extends AbstractAggregation
         return 'matrix_stats';
     }
 
-    protected function getArray()
+    protected function getArray(): array
     {
-        $out = [];
-        if ($this->getField()) {
-            $out['fields'] = $this->getField();
-        }
+        $out = [
+            'fields' => $this->getField(),
+        ];
 
         if ($this->getMode()) {
             $out['mode'] = $this->getMode();

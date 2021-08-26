@@ -21,21 +21,11 @@ use ONGR\ElasticsearchDSL\Aggregation\Bucketing\DateHistogramAggregation;
 class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Tests if ChildrenAggregation#getArray throws exception when expected.
-     */
-    public function testGetArrayException(): void
-    {
-        $this->expectException(\LogicException::class);
-        $aggregation = new DateHistogramAggregation('foo');
-        $aggregation->getArray();
-    }
-
-    /**
      * Tests getType method.
      */
     public function testDateHistogramAggregationGetType(): void
     {
-        $aggregation = new DateHistogramAggregation('foo');
+        $aggregation = new DateHistogramAggregation('foo', 'test');
         $result = $aggregation->getType();
         $this->assertEquals('date_histogram', $result);
     }
@@ -45,11 +35,11 @@ class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testChildrenAggregationGetArray(): void
     {
-        $aggregation = new DateHistogramAggregation('foo');
+        $aggregation = new DateHistogramAggregation('foo', 'test');
         $aggregation->setField('date');
-        $aggregation->setInterval('month');
+        $aggregation->setCalendarInterval('month');
         $result = $aggregation->getArray();
-        $expected = ['field' => 'date', 'interval' => 'month'];
+        $expected = ['field' => 'date', 'calender_interval' => 'month'];
         $this->assertEquals($expected, $result);
     }
 }

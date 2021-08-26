@@ -34,7 +34,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
                 'seed' => null,
                 'expectedArray' => [
                     'query' => [
-                        'match_all' => new \stdClass()
+                        'match_all' => new \stdClass(),
                     ],
                     'functions' => [
                         [
@@ -48,7 +48,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
                 'seed' => 'someSeed',
                 'expectedArray' => [
                     'query' => [
-                        'match_all' => new \stdClass()
+                        'match_all' => new \stdClass(),
                     ],
                     'functions' => [
                         [
@@ -88,7 +88,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             [
                 'query' => [
-                    'match_all' => new \stdClass()
+                    'match_all' => new \stdClass(),
                 ],
                 'functions' => [
                     [

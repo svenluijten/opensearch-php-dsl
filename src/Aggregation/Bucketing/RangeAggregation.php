@@ -23,25 +23,11 @@ class RangeAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    /**
-     * @var array
-     */
-    private $ranges = [];
+    private array $ranges = [];
 
-    /**
-     * @var bool
-     */
-    private $keyed = false;
+    private bool $keyed = false;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     * @param array $ranges
-     * @param bool $keyed
-     */
-    public function __construct($name, $field = null, $ranges = [], $keyed = false)
+    public function __construct($name, ?string $field = null, array $ranges = [], bool $keyed = false)
     {
         parent::__construct($name);
 
@@ -55,37 +41,21 @@ class RangeAggregation extends AbstractAggregation
         }
     }
 
-    /**
-     * Sets if result buckets should be keyed.
-     *
-     * @param bool $keyed
-     *
-     * @return $this
-     */
-    public function setKeyed($keyed)
+    public function setKeyed(bool $keyed): self
     {
         $this->keyed = $keyed;
 
         return $this;
     }
 
-    /**
-     * Add range to aggregation.
-     *
-     * @param int|float|null $from
-     * @param int|float|null $to
-     * @param string $key
-     *
-     * @return RangeAggregation
-     */
-    public function addRange($from = null, $to = null, $key = '')
+    public function addRange(?float $from = null, ?float $to = null, ?string $key = ''): self
     {
         $range = array_filter(
             [
                 'from' => $from,
                 'to' => $to,
             ],
-            function ($v) {
+            static function ($v) {
                 return null !== $v;
             }
         );
@@ -99,15 +69,7 @@ class RangeAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * Remove range from aggregation. Returns true on success.
-     *
-     * @param int|float|null $from
-     * @param int|float|null $to
-     *
-     * @return bool
-     */
-    public function removeRange($from, $to)
+    public function removeRange(?float $from, ?float $to): bool
     {
         foreach ($this->ranges as $key => $range) {
             if (array_diff_assoc(array_filter(['from' => $from, 'to' => $to]), $range) === []) {
@@ -120,14 +82,7 @@ class RangeAggregation extends AbstractAggregation
         return false;
     }
 
-    /**
-     * Removes range by key.
-     *
-     * @param string $key range key
-     *
-     * @return bool
-     */
-    public function removeRangeByKey($key)
+    public function removeRangeByKey(string $key): bool
     {
         if ($this->keyed) {
             foreach ($this->ranges as $rangeKey => $range) {
@@ -145,7 +100,7 @@ class RangeAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
         $data = [
             'keyed' => $this->keyed,

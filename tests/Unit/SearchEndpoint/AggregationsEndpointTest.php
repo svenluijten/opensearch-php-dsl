@@ -38,7 +38,7 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
     public function testEndpointGetter(): void
     {
         $aggName = 'acme_agg';
-        $agg = new MissingAggregation('acme');
+        $agg = new MissingAggregation('acme', '');
         $endpoint = new AggregationsEndpoint();
         $endpoint->add($agg, $aggName);
         $builders = $endpoint->getAll();

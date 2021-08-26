@@ -23,19 +23,9 @@ class Ipv4RangeAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    /**
-     * @var array
-     */
-    private $ranges = [];
+    private array $ranges = [];
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     * @param array $ranges
-     */
-    public function __construct($name, $field = null, $ranges = [])
+    public function __construct($name, string $field, array $ranges = [])
     {
         parent::__construct($name);
 
@@ -51,22 +41,14 @@ class Ipv4RangeAggregation extends AbstractAggregation
         }
     }
 
-    /**
-     * Add range to aggregation.
-     *
-     * @param string|null $from
-     * @param string|null $to
-     *
-     * @return Ipv4RangeAggregation
-     */
-    public function addRange($from = null, $to = null)
+    public function addRange(?string $from = null, ?string $to = null): self
     {
         $range = array_filter(
             [
                 'from' => $from,
                 'to' => $to,
             ],
-            function ($v) {
+            static function ($v) {
                 return null !== $v;
             }
         );
@@ -76,14 +58,7 @@ class Ipv4RangeAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * Add ip mask to aggregation.
-     *
-     * @param string $mask
-     *
-     * @return Ipv4RangeAggregation
-     */
-    public function addMask($mask)
+    public function addMask(string $mask): self
     {
         $this->ranges[] = ['mask' => $mask];
 
@@ -101,14 +76,15 @@ class Ipv4RangeAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
-        if ($this->getField() && !empty($this->ranges)) {
-            return [
-                'field' => $this->getField(),
-                'ranges' => array_values($this->ranges),
-            ];
+        if (empty($this->ranges)) {
+            throw new \LogicException('Ip range aggregation must have field set and range added.');
         }
-        throw new \LogicException('Ip range aggregation must have field set and range added.');
+
+        return [
+            'field' => $this->getField(),
+            'ranges' => array_values($this->ranges),
+        ];
     }
 }

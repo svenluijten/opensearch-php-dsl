@@ -23,47 +23,27 @@ class ChildrenAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    /**
-     * @var string
-     */
-    private $children;
+    private string $children;
 
-    /**
-     * Return children.
-     *
-     * @return string
-     */
-    public function getChildren()
+    public function getChildren(): string
     {
         return $this->children;
     }
 
-    /**
-     * @param string $name
-     * @param string $children
-     */
-    public function __construct($name, $children = null)
+    public function __construct(string $name, string $children)
     {
         parent::__construct($name);
 
         $this->setChildren($children);
     }
 
-    /**
-     * @param string $children
-     *
-     * @return $this
-     */
-    public function setChildren($children)
+    public function setChildren($children): self
     {
         $this->children = $children;
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'children';

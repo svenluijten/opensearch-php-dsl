@@ -19,22 +19,11 @@ use ONGR\ElasticsearchDSL\Aggregation\Bucketing\MissingAggregation;
 class MissingAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Test if exception is thrown when field is not set.
-     */
-    public function testIfExceptionIsThrown(): void
-    {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Missing aggregation must have a field set.');
-        $agg = new MissingAggregation('test_agg');
-        $agg->getArray();
-    }
-
-    /**
      * Test getArray method.
      */
     public function testMissingAggregationGetArray(): void
     {
-        $aggregation = new MissingAggregation('foo');
+        $aggregation = new MissingAggregation('foo', '');
         $aggregation->setField('bar');
         $result = $aggregation->getArray();
         $this->assertEquals('bar', $result['field']);
@@ -45,7 +34,7 @@ class MissingAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testMissingAggregationGetType(): void
     {
-        $aggregation = new MissingAggregation('bar');
+        $aggregation = new MissingAggregation('bar', '');
         $result = $aggregation->getType();
         $this->assertEquals('missing', $result);
     }

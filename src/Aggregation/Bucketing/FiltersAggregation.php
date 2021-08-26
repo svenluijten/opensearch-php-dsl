@@ -27,54 +27,32 @@ class FiltersAggregation extends AbstractAggregation
     /**
      * @var BuilderInterface[]
      */
-    private $filters = [];
+    private array $filters = [];
 
-    /**
-     * @var bool
-     */
-    private $anonymous = false;
+    private bool $anonymous = false;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param BuilderInterface[] $filters
-     * @param bool $anonymous
-     */
-    public function __construct($name, $filters = [], $anonymous = false)
+    public function __construct(string $name, array $filters = [], bool $anonymous = false)
     {
         parent::__construct($name);
 
         $this->setAnonymous($anonymous);
-        foreach ($filters as $name => $filter) {
+        foreach ($filters as $filterName => $filter) {
             if ($anonymous) {
                 $this->addFilter($filter);
             } else {
-                $this->addFilter($filter, $name);
+                $this->addFilter($filter, $filterName);
             }
         }
     }
 
-    /**
-     * @param bool $anonymous
-     *
-     * @return $this
-     */
-    public function setAnonymous($anonymous)
+    public function setAnonymous(bool $anonymous): self
     {
         $this->anonymous = $anonymous;
 
         return $this;
     }
 
-    /**
-     * @param string $name
-     *
-     * @throws \LogicException
-     *
-     * @return FiltersAggregation
-     */
-    public function addFilter(BuilderInterface $filter, $name = '')
+    public function addFilter(BuilderInterface $filter, string $name = ''): self
     {
         if ($this->anonymous === false && empty($name)) {
             throw new \LogicException('In not anonymous filters filter name must be set.');
@@ -91,7 +69,7 @@ class FiltersAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
         return $this->filters;
     }

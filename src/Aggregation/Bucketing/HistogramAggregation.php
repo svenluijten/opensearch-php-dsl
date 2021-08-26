@@ -26,59 +26,28 @@ class HistogramAggregation extends AbstractAggregation
     public const DIRECTION_ASC = 'asc';
     public const DIRECTION_DESC = 'desc';
 
-    /**
-     * @var int
-     */
-    protected $interval;
+    protected int $interval;
 
-    /**
-     * @var int
-     */
-    protected $minDocCount;
+    protected ?int $minDocCount;
 
-    /**
-     * @var array
-     */
-    protected $extendedBounds;
+    protected ?array $extendedBounds;
 
-    /**
-     * @var string
-     */
-    protected $orderMode;
+    protected ?string $orderMode;
 
-    /**
-     * @var string
-     */
-    protected $orderDirection;
+    protected ?string $orderDirection;
 
-    /**
-     * @var bool
-     */
-    protected $keyed;
+    protected ?bool $keyed;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     * @param int $interval
-     * @param int $minDocCount
-     * @param string $orderMode
-     * @param string $orderDirection
-     * @param int $extendedBoundsMin
-     * @param int $extendedBoundsMax
-     * @param bool $keyed
-     */
     public function __construct(
         $name,
-        $field = null,
-        $interval = null,
-        $minDocCount = null,
-        $orderMode = null,
-        $orderDirection = self::DIRECTION_ASC,
-        $extendedBoundsMin = null,
-        $extendedBoundsMax = null,
-        $keyed = null
+        string $field,
+        ?int $interval = null,
+        ?int $minDocCount = null,
+        ?string $orderMode = null,
+        ?string $orderDirection = self::DIRECTION_ASC,
+        ?int $extendedBoundsMin = null,
+        ?int $extendedBoundsMax = null,
+        ?bool $keyed = null
     ) {
         parent::__construct($name);
 
@@ -90,37 +59,19 @@ class HistogramAggregation extends AbstractAggregation
         $this->setKeyed($keyed);
     }
 
-    /**
-     * @return bool
-     */
-    public function isKeyed()
+    public function isKeyed(): ?bool
     {
         return $this->keyed;
     }
 
-    /**
-     * Get response as a hash instead keyed by the buckets keys.
-     *
-     * @param bool $keyed
-     *
-     * @return $this
-     */
-    public function setKeyed($keyed)
+    public function setKeyed(?bool $keyed): self
     {
         $this->keyed = $keyed;
 
         return $this;
     }
 
-    /**
-     * Sets buckets ordering.
-     *
-     * @param string $mode
-     * @param string $direction
-     *
-     * @return $this
-     */
-    public function setOrder($mode, $direction = self::DIRECTION_ASC)
+    public function setOrder(?string $mode, ?string $direction = self::DIRECTION_ASC): self
     {
         $this->orderMode = $mode;
         $this->orderDirection = $direction;
@@ -128,10 +79,7 @@ class HistogramAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getOrder()
+    public function getOrder(): ?array
     {
         if ($this->orderMode && $this->orderDirection) {
             return [$this->orderMode => $this->orderDirection];
@@ -140,63 +88,36 @@ class HistogramAggregation extends AbstractAggregation
         return null;
     }
 
-    /**
-     * @return int
-     */
-    public function getInterval()
+    public function getInterval(): int
     {
         return $this->interval;
     }
 
-    /**
-     * @param int $interval
-     *
-     * @return $this
-     */
-    public function setInterval($interval)
+    public function setInterval(int $interval): self
     {
         $this->interval = $interval;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getMinDocCount()
+    public function getMinDocCount(): ?int
     {
         return $this->minDocCount;
     }
 
-    /**
-     * Set limit for document count buckets should have.
-     *
-     * @param int $minDocCount
-     *
-     * @return $this
-     */
-    public function setMinDocCount($minDocCount)
+    public function setMinDocCount(?int $minDocCount): self
     {
         $this->minDocCount = $minDocCount;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getExtendedBounds()
+    public function getExtendedBounds(): array
     {
         return $this->extendedBounds;
     }
 
-    /**
-     * @param int $min
-     * @param int $max
-     *
-     * @return $this
-     */
-    public function setExtendedBounds($min = null, $max = null)
+    public function setExtendedBounds(?int $min = null, ?int $max = null): self
     {
         $bounds = array_filter(
             [
@@ -221,9 +142,9 @@ class HistogramAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
-        $out = array_filter(
+        return array_filter(
             [
                 'field' => $this->getField(),
                 'interval' => $this->getInterval(),
@@ -232,27 +153,9 @@ class HistogramAggregation extends AbstractAggregation
                 'keyed' => $this->isKeyed(),
                 'order' => $this->getOrder(),
             ],
-            function ($val) {
+            static function ($val) {
                 return $val || is_numeric($val);
             }
         );
-        $this->checkRequiredParameters($out, ['field', 'interval']);
-
-        return $out;
-    }
-
-    /**
-     * Checks if all required parameters are set.
-     *
-     * @param array $data
-     * @param array $required
-     *
-     * @throws \LogicException
-     */
-    protected function checkRequiredParameters($data, $required): void
-    {
-        if (count(array_intersect_key(array_flip($required), $data)) !== count($required)) {
-            throw new \LogicException('Histogram aggregation must have field and interval set.');
-        }
     }
 }

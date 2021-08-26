@@ -24,42 +24,23 @@ class FilterAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    /**
-     * @var BuilderInterface
-     */
-    protected $filter;
+    protected BuilderInterface $filter;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param BuilderInterface $filter
-     */
-    public function __construct($name, ?BuilderInterface $filter = null)
+    public function __construct(string $name, BuilderInterface $filter)
     {
         parent::__construct($name);
 
-        if ($filter !== null) {
-            $this->setFilter($filter);
-        }
+        $this->setFilter($filter);
     }
 
-    /**
-     * @return $this
-     */
-    public function setFilter(BuilderInterface $filter)
+    public function setFilter(BuilderInterface $filter): self
     {
         $this->filter = $filter;
 
         return $this;
     }
 
-    /**
-     * Returns a filter.
-     *
-     * @return BuilderInterface
-     */
-    public function getFilter()
+    public function getFilter(): BuilderInterface
     {
         return $this->filter;
     }
@@ -75,12 +56,8 @@ class FilterAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
-        if (!$this->filter) {
-            throw new \LogicException("Filter aggregation `{$this->getName()}` has no filter added");
-        }
-
         return $this->getFilter()->toArray();
     }
 

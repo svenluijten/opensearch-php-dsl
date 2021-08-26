@@ -50,6 +50,7 @@ trait ParametersTrait
 
     /**
      * @param array|string|int|float|bool|\stdClass $value
+     *
      * @return static
      */
     public function addParameter(string $name, $value)

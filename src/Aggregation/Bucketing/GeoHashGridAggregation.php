@@ -23,31 +23,13 @@ class GeoHashGridAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    /**
-     * @var int
-     */
-    private $precision;
+    private ?int $precision;
 
-    /**
-     * @var int
-     */
-    private $size;
+    private ?int $size;
 
-    /**
-     * @var int
-     */
-    private $shardSize;
+    private ?int $shardSize;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     * @param int $precision
-     * @param int $size
-     * @param int $shardSize
-     */
-    public function __construct($name, $field = null, $precision = null, $size = null, $shardSize = null)
+    public function __construct($name, string $field, ?int $precision = null, ?int $size = null, ?int $shardSize = null)
     {
         parent::__construct($name);
 
@@ -57,60 +39,36 @@ class GeoHashGridAggregation extends AbstractAggregation
         $this->setShardSize($shardSize);
     }
 
-    /**
-     * @return int
-     */
-    public function getPrecision()
+    public function getPrecision(): ?int
     {
         return $this->precision;
     }
 
-    /**
-     * @param int $precision
-     *
-     * @return $this
-     */
-    public function setPrecision($precision)
+    public function setPrecision(?int $precision): self
     {
         $this->precision = $precision;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getSize()
+    public function getSize(): ?int
     {
         return $this->size;
     }
 
-    /**
-     * @param int $size
-     *
-     * @return $this
-     */
-    public function setSize($size)
+    public function setSize(?int $size): self
     {
         $this->size = $size;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getShardSize()
+    public function getShardSize(): ?int
     {
         return $this->shardSize;
     }
 
-    /**
-     * @param int $shardSize
-     *
-     * @return $this
-     */
-    public function setShardSize($shardSize)
+    public function setShardSize(?int $shardSize): self
     {
         $this->shardSize = $shardSize;
 
@@ -120,15 +78,11 @@ class GeoHashGridAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
-        $data = [];
-
-        if ($this->getField()) {
-            $data['field'] = $this->getField();
-        } else {
-            throw new \LogicException('Geo bounds aggregation must have a field set.');
-        }
+        $data = [
+            'field' => $this->getField(),
+        ];
 
         if ($this->getPrecision()) {
             $data['precision'] = $this->getPrecision();

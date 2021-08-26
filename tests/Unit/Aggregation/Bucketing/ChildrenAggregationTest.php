@@ -22,21 +22,11 @@ use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Tests if ChildrenAggregation#getArray throws exception when expected.
-     */
-    public function testGetArrayException(): void
-    {
-        $this->expectException(\LogicException::class);
-        $aggregation = new ChildrenAggregation('foo');
-        $aggregation->getArray();
-    }
-
-    /**
      * Tests getType method.
      */
     public function testChildrenAggregationGetType(): void
     {
-        $aggregation = new ChildrenAggregation('foo');
+        $aggregation = new ChildrenAggregation('foo', '');
         $result = $aggregation->getType();
         $this->assertEquals('children', $result);
     }
@@ -46,7 +36,7 @@ class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testChildrenAggregationGetArray(): void
     {
-        $aggregation = new ChildrenAggregation('foo');
+        $aggregation = new ChildrenAggregation('foo', '');
         $aggregation->setChildren('question');
         $aggregation->addAggregation(new TermsAggregation('test'));
         $result = $aggregation->getArray();

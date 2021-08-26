@@ -19,41 +19,6 @@ use ONGR\ElasticsearchDSL\Aggregation\Bucketing\GeoDistanceAggregation;
 class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Test if exception is thrown when field is not set.
-     */
-    public function testGeoDistanceAggregationExceptionWhenFieldIsNotSet(): void
-    {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Geo distance aggregation must have a field set.');
-        $agg = new GeoDistanceAggregation('test_agg');
-        $agg->setOrigin('50, 70');
-        $agg->getArray();
-    }
-
-    /**
-     * Test if exception is thrown when origin is not set.
-     */
-    public function testGeoDistanceAggregationExceptionWhenOriginIsNotSet(): void
-    {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Geo distance aggregation must have an origin set.');
-        $agg = new GeoDistanceAggregation('test_agg');
-        $agg->setField('location');
-        $agg->getArray();
-    }
-
-    /**
-     * Test if exception is thrown when field is not set.
-     */
-    public function testGeoDistanceAggregationAddRangeException(): void
-    {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Either from or to must be set. Both cannot be null.');
-        $agg = new GeoDistanceAggregation('test_agg');
-        $agg->addRange();
-    }
-
-    /**
      * Data provider for testGeoDistanceAggregationGetArray().
      *
      * @return array
@@ -92,7 +57,7 @@ class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGeoDistanceAggregationGetArray($filterData, $expected): void
     {
-        $aggregation = new GeoDistanceAggregation('foo');
+        $aggregation = new GeoDistanceAggregation('foo', '', '');
         $aggregation->setOrigin($filterData['origin']);
         $aggregation->setField($filterData['field']);
         $aggregation->setUnit($filterData['unit']);
@@ -108,7 +73,7 @@ class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGeoDistanceAggregationGetType(): void
     {
-        $aggregation = new GeoDistanceAggregation('foo');
+        $aggregation = new GeoDistanceAggregation('foo', '', '');
         $result = $aggregation->getType();
         $this->assertEquals('geo_distance', $result);
     }
@@ -123,9 +88,9 @@ class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
             'fieldName',
             'originValue',
             [
-                ['from' => 'value'],
-                ['to' => 'value'],
-                ['from' => 'value', 'to' => 'value2'],
+                ['from' => 20],
+                ['to' => 20],
+                ['from' => 20, 'to' => 30],
             ],
             'unitValue',
             'distanceTypeValue'
@@ -139,9 +104,9 @@ class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
                     'unit' => 'unitValue',
                     'distance_type' => 'distanceTypeValue',
                     'ranges' => [
-                        ['from' => 'value'],
-                        ['to' => 'value'],
-                        ['from' => 'value', 'to' => 'value2'],
+                        ['from' => 20.0],
+                        ['to' => 20.0],
+                        ['from' => 20.0, 'to' => 30.0],
                     ],
                 ],
             ],

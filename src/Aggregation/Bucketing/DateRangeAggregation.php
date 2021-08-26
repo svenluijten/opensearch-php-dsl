@@ -23,28 +23,16 @@ class DateRangeAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    /**
-     * @var string
-     */
-    private $format;
+    private ?string $format;
+
+    private array $ranges = [];
+
+    private bool $keyed = false;
 
     /**
-     * @var array
-     */
-    private $ranges = [];
-
-    /**
-     * @var bool
-     */
-    private $keyed = false;
-
-    /**
-     * @param string $name
-     * @param string $field
      * @param string $format
-     * @param bool $keyed
      */
-    public function __construct($name, $field = null, $format = null, array $ranges = [], $keyed = false)
+    public function __construct(string $name, string $field, ?string $format = null, array $ranges = [], bool $keyed = false)
     {
         parent::__construct($name);
 
@@ -59,48 +47,26 @@ class DateRangeAggregation extends AbstractAggregation
         }
     }
 
-    /**
-     * Sets if result buckets should be keyed.
-     *
-     * @param bool $keyed
-     *
-     * @return DateRangeAggregation
-     */
-    public function setKeyed($keyed)
+    public function setKeyed(bool $keyed): self
     {
         $this->keyed = $keyed;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFormat()
+    public function getFormat(): ?string
     {
         return $this->format;
     }
 
-    /**
-     * @param string $format
-     */
-    public function setFormat($format): void
+    public function setFormat(?string $format): self
     {
         $this->format = $format;
+
+        return $this;
     }
 
-    /**
-     * Add range to aggregation.
-     *
-     * @param string|null $from
-     * @param string|null $to
-     * @param string|null $key
-     *
-     * @throws \LogicException
-     *
-     * @return $this
-     */
-    public function addRange($from = null, $to = null, $key = null)
+    public function addRange(?string $from = null, ?string $to = null, ?string $key = null)
     {
         $range = array_filter(
             [
@@ -108,7 +74,7 @@ class DateRangeAggregation extends AbstractAggregation
                 'to' => $to,
                 'key' => $key,
             ],
-            function ($v) {
+            static function ($v) {
                 return null !== $v;
             }
         );
@@ -139,6 +105,7 @@ class DateRangeAggregation extends AbstractAggregation
 
             return $data;
         }
+
         throw new \LogicException('Date range aggregation must have field and range added.');
     }
 

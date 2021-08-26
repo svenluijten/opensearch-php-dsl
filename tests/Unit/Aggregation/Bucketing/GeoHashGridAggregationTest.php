@@ -21,16 +21,6 @@ use ONGR\ElasticsearchDSL\Aggregation\Bucketing\GeoHashGridAggregation;
 class GeoHashGridAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Test if exception is thrown.
-     */
-    public function testGeoHashGridAggregationException(): void
-    {
-        $this->expectException(\LogicException::class);
-        $agg = new GeoHashGridAggregation('test_agg');
-        $agg->getArray();
-    }
-
-    /**
      * Data provider for testGeoHashGridAggregationGetArray().
      *
      * @return array
@@ -68,7 +58,7 @@ class GeoHashGridAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGeoHashGridAggregationGetArray($filterData, $expected): void
     {
-        $aggregation = new GeoHashGridAggregation('foo');
+        $aggregation = new GeoHashGridAggregation('foo', '');
         $aggregation->setPrecision($filterData['precision']);
         $aggregation->setSize($filterData['size']);
         $aggregation->setShardSize($filterData['shard_size']);
@@ -83,7 +73,7 @@ class GeoHashGridAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGeoHashGridAggregationGetType(): void
     {
-        $aggregation = new GeoHashGridAggregation('foo');
+        $aggregation = new GeoHashGridAggregation('foo', '');
         $result = $aggregation->getType();
         $this->assertEquals('geohash_grid', $result);
     }

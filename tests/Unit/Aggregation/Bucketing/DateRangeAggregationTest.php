@@ -19,24 +19,13 @@ use ONGR\ElasticsearchDSL\Aggregation\Bucketing\DateRangeAggregation;
 class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Test if exception is thrown.
-     */
-    public function testIfExceptionIsThrownWhenNoParametersAreSet(): void
-    {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Date range aggregation must have field and range added.');
-        $agg = new DateRangeAggregation('test_agg');
-        $agg->getArray();
-    }
-
-    /**
      * Test if exception is thrown when both range parameters are null.
      */
     public function testIfExceptionIsThrownWhenBothRangesAreNull(): void
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('Either from or to must be set. Both cannot be null.');
-        $agg = new DateRangeAggregation('test_agg');
+        $agg = new DateRangeAggregation('test_agg', 'test');
         $agg->addRange(null, null);
     }
 
@@ -46,7 +35,7 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
     public function testDateRangeAggregationGetArray(): void
     {
         $agg = new DateRangeAggregation('foo', 'baz');
-        $agg->addRange(10, 20);
+        $agg->addRange('10', '20');
         $agg->setFormat('bar');
         $agg->setKeyed(true);
         $result = $agg->getArray();
@@ -64,17 +53,12 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testDateRangeAggregationGetType(): void
     {
-        $aggregation = new DateRangeAggregation('foo');
+        $aggregation = new DateRangeAggregation('foo', 'test');
         $result = $aggregation->getType();
         $this->assertEquals('date_range', $result);
     }
 
-    /**
-     * Data provider for testDateRangeAggregationConstructor.
-     *
-     * @return array
-     */
-    public function getDateRangeAggregationConstructorProvider()
+    public function getDateRangeAggregationConstructorProvider(): array
     {
         return [
             // Case #0. Minimum arguments.
@@ -137,7 +121,7 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
                 $aggregation->__construct('mock', $field);
             }
         } else {
-            $aggregation->__construct('mock');
+            $aggregation->__construct('mock', '');
         }
     }
 }

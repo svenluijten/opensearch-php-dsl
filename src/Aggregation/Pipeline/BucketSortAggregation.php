@@ -49,6 +49,8 @@ class BucketSortAggregation extends AbstractPipelineAggregation
     public function addSort(FieldSort $sort)
     {
         $this->sort[] = $sort->toArray();
+
+        return $this;
     }
 
     /**

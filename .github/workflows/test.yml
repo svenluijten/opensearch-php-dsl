@@ -1,4 +1,4 @@
-name: PHPUnit
+name: Test
 
 on:
   push:
@@ -7,6 +7,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+
+        php-version:
+        - "7.4"
+        - "8.0"
+        - "8.1"
+        dependencies:
+        - lowest
+        - highest
+        exclude:
+          # ringphp does not support PHP 8.1
+          - php-version: '8.1'
+            dependencies: 'lowest'
     services:
       elasticsearch:
         image: elastic/elasticsearch:7.4.0
@@ -14,15 +29,6 @@ jobs:
           - 9200:9200
         env:
           discovery.type: single-node
-    strategy:
-      matrix:
-        php-version:
-          - "7.4"
-          - "8.0"
-          - "8.1"
-        dependencies:
-          - lowest
-          - highest
     steps:
     - uses: actions/checkout@v2
   
@@ -37,7 +43,7 @@ jobs:
       run: composer validate
 
     - name: Set composer platform version
-      if: matrix.php-verison == '8.1'
+      if: matrix.php-version == '8.1'
       run: composer config platform.php 8.0.9
 
     - name: Install lowest dependencies with composer
@@ -53,11 +59,9 @@ jobs:
 
     - name: Run PHPUnit
       run: vendor/bin/phpunit --coverage-clover=coverage.xml
-
-    - name: Run PHP-CS-Fixer
-      run: vendor/bin/php-cs-fixer --dry-run
     
     - name: Upload Codecov
+      if: matrix.php-version == '7.4' && matrix.dependencies == 'highest'
       uses: codecov/codecov-action@v1
       with:
         file: ./coverage.xml

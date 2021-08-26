@@ -1,7 +1,6 @@
 <?php
 
 use Elasticsearch\ClientBuilder;
-use Elasticsearch\Common\Exceptions\NoNodesAvailableException;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -14,7 +13,7 @@ while (true) {
         $client->ping();
         echo 'Is up and running' . PHP_EOL;
         exit(0);
-    } catch (NoNodesAvailableException $e) {
+    } catch (Throwable $e) {
         if ($retries === $maxRetries) {
             echo 'Cannot reach elasticsearch server' . PHP_EOL;
             exit(1);

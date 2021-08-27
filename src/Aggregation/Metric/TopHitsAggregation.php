@@ -30,7 +30,7 @@ class TopHitsAggregation extends AbstractAggregation
 
     private array $sorts = [];
 
-    public function __construct(string $name, ?int $size = null, ?int$from = null, ?BuilderInterface $sort = null)
+    public function __construct(string $name, ?int $size = null, ?int $from = null, ?BuilderInterface $sort = null)
     {
         parent::__construct($name);
         $this->setFrom($from);

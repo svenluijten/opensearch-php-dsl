@@ -36,7 +36,7 @@ class GeoCentroidAggregation extends AbstractAggregation
     public function getArray(): array
     {
         return [
-            'field' => $this->getField()
+            'field' => $this->getField(),
         ];
     }
 

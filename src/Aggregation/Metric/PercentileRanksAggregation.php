@@ -25,9 +25,6 @@ class PercentileRanksAggregation extends AbstractAggregation
     use MetricTrait;
     use ScriptAwareTrait;
 
-    /**
-     * @var array
-     */
     private array $values;
 
     public function __construct($name, ?string $field, array $values = [], ?string $script = null)

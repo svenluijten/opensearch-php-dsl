@@ -27,9 +27,6 @@ class BucketSortAggregation extends AbstractPipelineAggregation
         parent::__construct($name, $bucketsPath);
     }
 
-    /**
-     * @return array
-     */
     public function getSort(): array
     {
         return $this->sort;

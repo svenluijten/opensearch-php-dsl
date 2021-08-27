@@ -12,6 +12,7 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Query;
 
 use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
+use ONGR\ElasticsearchDSL\Search;
 
 /**
  * @internal
@@ -35,5 +36,22 @@ class MatchAllQueryTest extends \PHPUnit\Framework\TestCase
         $params = ['boost' => 5];
         $query = new MatchAllQuery($params);
         $this->assertEquals(['match_all' => $params], $query->toArray());
+    }
+
+    /**
+     * Match all test
+     */
+    public function testMatchAll(): void
+    {
+        $search = new Search();
+        $matchAll = new MatchAllQuery();
+
+        $search->addQuery($matchAll);
+
+        static::assertEquals([
+            'query' => [
+                'match_all' => [],
+            ],
+        ], json_decode(json_encode($search->toArray()), true));
     }
 }

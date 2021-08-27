@@ -13,6 +13,7 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Compound;
 
 use ONGR\ElasticsearchDSL\Query\Compound\FunctionScoreQuery;
 use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
+use ONGR\ElasticsearchDSL\Search;
 
 /**
  * Tests for FunctionScoreQuery.
@@ -109,5 +110,89 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             ],
             $functionScoreQuery->toArray()['function_score']
         );
+    }
+
+    /**
+     * Match all test
+     */
+    public function testRandomScore(): void
+    {
+        $fquery = new FunctionScoreQuery(new MatchAllQuery());
+        $fquery->addRandomFunction();
+        $fquery->addParameter('boost_mode', 'multiply');
+
+        $search = new Search();
+        $search->addQuery($fquery);
+
+        $expected = [
+            'query' => [
+                'function_score' => [
+                    'query' => [
+                        'match_all' => [],
+                    ],
+                    'functions' => [
+                        0 => [
+                            'random_score' => [],
+                        ],
+                    ],
+                    'boost_mode' => 'multiply',
+                ],
+            ],
+        ];
+
+        static::assertEquals($expected, json_decode(json_encode($search->toArray()), true));
+    }
+
+    public function testScriptScore(): void
+    {
+        $fquery = new FunctionScoreQuery(new MatchAllQuery());
+        $fquery->addScriptScoreFunction(
+            "
+            if (doc['price'].value < params.target)
+             {
+               return doc['price'].value * params.charge;
+             }
+             return doc['price'].value;
+             ",
+            [
+                'target' => 10,
+                'charge' => 0.9,
+            ]
+        );
+
+        $search = new Search();
+        $search->addQuery($fquery);
+
+        $expected = [
+            'query' => [
+                'function_score' => [
+                    'query' => [
+                        'match_all' => [],
+                    ],
+                    'functions' => [
+                        0 => [
+                            'script_score' => [
+                                'script' => [
+                                    'lang' => 'painless',
+                                    'source' => '
+            if (doc[\'price\'].value < params.target)
+             {
+               return doc[\'price\'].value * params.charge;
+             }
+             return doc[\'price\'].value;
+             ',
+                                    'params' => [
+                                        'target' => 10,
+                                        'charge' => 0.9,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        static::assertEquals($expected, json_decode(json_encode($search->toArray()), true));
     }
 }

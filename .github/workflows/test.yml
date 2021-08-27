@@ -22,13 +22,6 @@ jobs:
           # ringphp does not support PHP 8.1
           - php-version: '8.1'
             dependencies: 'lowest'
-    services:
-      elasticsearch:
-        image: elastic/elasticsearch:7.4.0
-        ports:
-          - 9200:9200
-        env:
-          discovery.type: single-node
     steps:
     - uses: actions/checkout@v2
   
@@ -54,9 +47,6 @@ jobs:
       if: matrix.dependencies == 'highest'
       run: composer update --no-ansi --no-interaction --no-progress
 
-    - name: Wait for Elasticsearch
-      run: php ./.github/wait_for_es.php
-
     - name: Run PHPUnit
       run: vendor/bin/phpunit --coverage-clover=coverage.xml
     
@@ -65,3 +55,23 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         file: ./coverage.xml
+  static-analyse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run PHP-CS-Fixer
+        run: vendor/bin/php-cs-fixer fix --dry-run
+
+      - name: Run PHP-CS-Fixer
+        run: vendor/bin/phpstan

@@ -15,11 +15,11 @@ class ScriptedMetricAggregationTest extends TestCase
         $a = new ScriptedMetricAggregation('test', 'init', 'map', 'combine', 'reduce');
         static::assertSame([
             'scripted_metric' => [
-                    'init_script' => 'init',
-                    'map_script' => 'map',
-                    'combine_script' => 'combine',
-                    'reduce_script' => 'reduce',
-                ],
+                'init_script' => 'init',
+                'map_script' => 'map',
+                'combine_script' => 'combine',
+                'reduce_script' => 'reduce',
+            ],
         ], $a->toArray());
     }
 }

@@ -2,7 +2,6 @@
 
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Metric;
 
-use ONGR\ElasticsearchDSL\Aggregation\Metric\MaxAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Metric\SumAggregation;
 use PHPUnit\Framework\TestCase;
 

@@ -15,10 +15,10 @@ class ExtendedStatsAggregationTest extends TestCase
         $a = new ExtendedStatsAggregation('test', 'test', 5, 'script');
         static::assertSame([
             'extended_stats' => [
-                    'field' => 'test',
-                    'script' => 'script',
-                    'sigma' => 5,
-                ],
+                'field' => 'test',
+                'script' => 'script',
+                'sigma' => 5,
+            ],
         ], $a->toArray());
     }
 }

@@ -33,15 +33,15 @@ class GeoShapeQuery implements BuilderInterface
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html#input-structure
      */
-    const SHAPE_TYPE_POINT = 'point';
-    const SHAPE_TYPE_LINESTRING = 'linestring';
-    const SHAPE_TYPE_POLYGON = 'polygon';
-    const SHAPE_TYPE_MULTIPOINT = 'multipoint';
-    const SHAPE_TYPE_MULTILINESTRING = 'multilinestring';
-    const SHAPE_TYPE_MULTIPOLYGON = 'multipolygon';
-    const SHAPE_TYPE_GEOMETRYCOLLECTION = 'geometrycollection';
-    const SHAPE_TYPE_ENVELOPE = 'envelope';
-    const SHAPE_TYPE_CIRCLE = 'circle';
+    public const SHAPE_TYPE_POINT = 'point';
+    public const SHAPE_TYPE_LINESTRING = 'linestring';
+    public const SHAPE_TYPE_POLYGON = 'polygon';
+    public const SHAPE_TYPE_MULTIPOINT = 'multipoint';
+    public const SHAPE_TYPE_MULTILINESTRING = 'multilinestring';
+    public const SHAPE_TYPE_MULTIPOLYGON = 'multipolygon';
+    public const SHAPE_TYPE_GEOMETRYCOLLECTION = 'geometrycollection';
+    public const SHAPE_TYPE_ENVELOPE = 'envelope';
+    public const SHAPE_TYPE_CIRCLE = 'circle';
 
     /**
      * @var array
@@ -70,15 +70,8 @@ class GeoShapeQuery implements BuilderInterface
      * @param string $relation spatial relation
      * @param array $parameters additional parameters
      */
-    public function addShape($field, $type, array $coordinates, $relation = self::INTERSECTS, array $parameters = []): void
+    public function addShape($field, $type, array $coordinates, string $relation = self::INTERSECTS, array $parameters = []): void
     {
-        // TODO: remove this in the next major version
-        if (is_array($relation)) {
-            $parameters = $relation;
-            $relation = self::INTERSECTS;
-            @trigger_error('$parameters as parameter 4 in addShape is deprecated', \E_USER_DEPRECATED);
-        }
-
         $filter = array_merge(
             $parameters,
             [
@@ -110,16 +103,9 @@ class GeoShapeQuery implements BuilderInterface
         $type,
         $index,
         $path,
-        $relation = self::INTERSECTS,
+        string $relation = self::INTERSECTS,
         array $parameters = []
     ): void {
-        // TODO: remove this in the next major version
-        if (is_array($relation)) {
-            $parameters = $relation;
-            $relation = self::INTERSECTS;
-            @trigger_error('$parameters as parameter 6 in addShape is deprecated', \E_USER_DEPRECATED);
-        }
-
         $filter = array_merge(
             $parameters,
             [

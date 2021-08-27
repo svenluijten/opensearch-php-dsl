@@ -11,6 +11,7 @@
 
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Metric;
 
+use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Metric\TopHitsAggregation;
 use ONGR\ElasticsearchDSL\Sort\FieldSort;
 
@@ -61,5 +62,15 @@ class TopHitsAggregationTest extends \PHPUnit\Framework\TestCase
         ];
 
         $this->assertSame($expected, $aggregation->toArray());
+    }
+
+    public function testSort(): void
+    {
+        $aggregation = new TopHitsAggregation('acme', 0, 1);
+
+        $sorts = [new TermsAggregation('test', 'test')];
+
+        $aggregation->setSorts($sorts);
+        static::assertSame($sorts, $aggregation->getSorts());
     }
 }

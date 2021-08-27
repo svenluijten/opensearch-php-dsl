@@ -58,6 +58,14 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('date_range', $result);
     }
 
+    public function testDateRangeNeedsRanges(): void
+    {
+        static::expectException(\LogicException::class);
+
+        $aggregation = new DateRangeAggregation('foo', 'test');
+        $aggregation->toArray();
+    }
+
     public function getDateRangeAggregationConstructorProvider(): array
     {
         return [

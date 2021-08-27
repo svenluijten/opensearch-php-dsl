@@ -108,19 +108,10 @@ class GeoDistanceAggregation extends AbstractAggregation
      */
     public function getArray(): array
     {
-        $data = [];
-
-        if ($this->getField()) {
-            $data['field'] = $this->getField();
-        } else {
-            throw new \LogicException('Geo distance aggregation must have a field set.');
-        }
-
-        if ($this->getOrigin()) {
-            $data['origin'] = $this->getOrigin();
-        } else {
-            throw new \LogicException('Geo distance aggregation must have an origin set.');
-        }
+        $data = [
+            'field' => $this->getField(),
+            'origin' => $this->getOrigin(),
+        ];
 
         if ($this->getUnit()) {
             $data['unit'] = $this->getUnit();

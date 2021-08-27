@@ -45,4 +45,20 @@ class FieldSortTest extends \PHPUnit\Framework\TestCase
         $result = $sort->toArray();
         $this->assertEquals($expected, $result);
     }
+
+    public function testFieldSortingSetters(): void
+    {
+        $sort = new FieldSort('test', FieldSort::ASC);
+        static::assertSame('test', $sort->getField());
+        $sort->setField('bla');
+        static::assertSame('bla', $sort->getField());
+
+        static::assertSame(FieldSort::ASC, $sort->getOrder());
+        $sort->setOrder(FieldSort::DESC);
+        static::assertSame(FieldSort::DESC, $sort->getOrder());
+
+        static::assertSame('sort', $sort->getType());
+
+        static::assertNull($sort->getNestedFilter());
+    }
 }

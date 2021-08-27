@@ -227,14 +227,7 @@ class Search
         return $this;
     }
 
-    /**
-     * Returns endpoint instance.
-     *
-     * @param string $type endpoint type
-     *
-     * @return SearchEndpointInterface
-     */
-    private function getEndpoint($type)
+    private function getEndpoint(string $type): SearchEndpointInterface
     {
         if (!array_key_exists($type, $this->endpoints)) {
             $this->endpoints[$type] = SearchEndpointFactory::get($type);
@@ -253,34 +246,6 @@ class Search
         $endpoint = $this->getEndpoint(QueryEndpoint::NAME);
 
         return $endpoint->getBool();
-    }
-
-    /**
-     * Sets query endpoint parameters.
-     *
-     * @return $this
-     */
-    public function setQueryParameters(array $parameters)
-    {
-        $this->setEndpointParameters(QueryEndpoint::NAME, $parameters);
-
-        return $this;
-    }
-
-    /**
-     * Sets parameters to the endpoint.
-     *
-     * @param string $endpointName
-     *
-     * @return $this
-     */
-    public function setEndpointParameters($endpointName, array $parameters)
-    {
-        /** @var AbstractSearchEndpoint $endpoint */
-        $endpoint = $this->getEndpoint($endpointName);
-        $endpoint->setParameters($parameters);
-
-        return $this;
     }
 
     /**
@@ -315,18 +280,6 @@ class Search
         $endpoint = $this->getEndpoint(PostFilterEndpoint::NAME);
 
         return $endpoint->getBool();
-    }
-
-    /**
-     * Sets post filter endpoint parameters.
-     *
-     * @return $this
-     */
-    public function setPostFilterParameters(array $parameters)
-    {
-        $this->setEndpointParameters(PostFilterEndpoint::NAME, $parameters);
-
-        return $this;
     }
 
     /**

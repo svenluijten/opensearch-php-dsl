@@ -87,4 +87,12 @@ class NestedSortTest extends \PHPUnit\Framework\TestCase
         $result = $query->toArray();
         $this->assertEquals($expected, $result);
     }
+
+    public function testSetters(): void
+    {
+        $sort = new NestedSort('secondPath', new TermQuery('secondPath.foo', 'bar'));
+        static::assertInstanceOf(TermQuery::class, $sort->getFilter());
+        static::assertNull($sort->getNestedFilter());
+        static::assertSame('secondPath', $sort->getPath());
+    }
 }

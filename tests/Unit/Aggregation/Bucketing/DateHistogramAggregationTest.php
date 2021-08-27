@@ -42,4 +42,29 @@ class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
         $expected = ['field' => 'date', 'calender_interval' => 'month'];
         $this->assertEquals($expected, $result);
     }
+
+    public function testWithoutInterval(): void
+    {
+        static::expectException(\LogicException::class);
+        (new DateHistogramAggregation('foo', 'test'))->toArray();
+    }
+
+    public function testTimeZoneWillBePassed(): void
+    {
+        $aggregation = new DateHistogramAggregation('foo', 'test');
+        $aggregation->setTimeZone('Europe/Berlin');
+        $aggregation->setCalendarInterval('1m');
+        $aggregation->setFixedInterval('1m');
+        $aggregation->setFormat('YYYY-mm-dd');
+
+        static::assertSame([
+            'date_histogram' => [
+                'field' => 'test',
+                'calender_interval' => '1m',
+                'fixed_interval' => '1m',
+                'time_zone' => 'Europe/Berlin',
+                'format' => 'YYYY-mm-dd',
+            ],
+        ], $aggregation->toArray());
+    }
 }

@@ -45,4 +45,11 @@ class Ipv4RangeAggregationTest extends \PHPUnit\Framework\TestCase
             $aggregation->toArray()
         );
     }
+
+    public function testWithoutRanges(): void
+    {
+        static::expectException(\LogicException::class);
+        $aggregation = new Ipv4RangeAggregation('test', 'fieldName');
+        $aggregation->toArray();
+    }
 }

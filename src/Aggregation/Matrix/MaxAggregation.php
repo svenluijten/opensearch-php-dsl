@@ -67,7 +67,7 @@ class MaxAggregation extends AbstractAggregation
         return $this->missing;
     }
 
-    public function setMissing(array $missing): self
+    public function setMissing(?array $missing): self
     {
         $this->missing = $missing;
 

@@ -166,4 +166,23 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals($expectedResult, $compositeAgg->toArray());
     }
+
+    public function testConstructorSourcesWorks(): void
+    {
+        $compositeAgg = new CompositeAggregation('composite_with_order', [new TermsAggregation('test', 'test')]);
+        static::assertCount(1, $compositeAgg->getSources());
+
+        static::assertSame([
+            [
+                'test' => [
+                    'terms' => [
+                        'field' => 'test',
+                    ],
+                ],
+            ],
+        ], $compositeAgg->getSources());
+
+        $compositeAgg->setSources([]);
+        static::assertCount(0, $compositeAgg->getSources());
+    }
 }

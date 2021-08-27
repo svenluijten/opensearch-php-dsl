@@ -108,4 +108,30 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
 
         return $friendlyBuilderMock;
     }
+
+    public function testAddWithoutName(): void
+    {
+        $bag = new BuilderBag();
+        $bag->add(new class() implements BuilderInterface {
+            public function toArray(): array
+            {
+                return [];
+            }
+
+            public function getType(): string
+            {
+                return '';
+            }
+        });
+
+        static::assertSame([], $bag->toArray());
+    }
+
+    public function testGetOutOfBounds(): void
+    {
+        static::expectException(\OutOfBoundsException::class);
+
+        $bag = new BuilderBag();
+        $bag->get('test');
+    }
 }

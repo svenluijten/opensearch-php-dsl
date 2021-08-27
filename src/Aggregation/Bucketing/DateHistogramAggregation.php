@@ -103,7 +103,7 @@ class DateHistogramAggregation extends AbstractAggregation
      */
     public function getArray()
     {
-        if (!$this->getField() || ($this->getCalendarInterval() === null && $this->getFixedInterval() === null)) {
+        if ($this->getCalendarInterval() === null && $this->getFixedInterval() === null) {
             throw new \LogicException('Date histogram aggregation must have field and calender_interval or fixed_interval set.');
         }
 

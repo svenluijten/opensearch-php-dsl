@@ -113,4 +113,20 @@ class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
             $aggregation->toArray()
         );
     }
+
+    public function testWithoutDistance(): void
+    {
+        static::expectException(\LogicException::class);
+        new GeoDistanceAggregation(
+            'test',
+            'fieldName',
+            'originValue',
+            [
+                [
+                    'from' => null,
+                    'to' => null,
+                ],
+            ]
+        );
+    }
 }

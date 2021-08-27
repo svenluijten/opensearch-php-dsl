@@ -43,4 +43,13 @@ class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
         $expected = ['type' => 'question'];
         $this->assertEquals($expected, $result);
     }
+
+    public function testChildrenThrowsErrorWithoutAgg(): void
+    {
+        static::expectException(\LogicException::class);
+
+        $aggregation = new ChildrenAggregation('foo', '');
+        $aggregation->setChildren('question');
+        $aggregation->toArray();
+    }
 }

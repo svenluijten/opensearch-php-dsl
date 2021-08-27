@@ -60,4 +60,11 @@ class BucketSortAggregationTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals($expected, $aggregation->toArray());
     }
+
+    public function testSetSort(): void
+    {
+        $aggregation = new BucketSortAggregation('acme', 'test');
+        $aggregation->setSort(['test']);
+        static::assertSame(['test'], $aggregation->getSort());
+    }
 }

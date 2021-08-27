@@ -63,9 +63,9 @@ class Search
      * operations return the contents of the _source field unless you have used the
      * stored_fields parameter or if the _source field is disabled.
      *
-     * @var bool
+     * @var bool|string|array
      */
-    private $source;
+    private $source = '';
 
     /**
      * Allows to selectively load specific stored fields for each document represented by a search hit.
@@ -509,11 +509,19 @@ class Search
      */
     public function isSource()
     {
+        return $this->source !== false && $this->source !== '';
+    }
+
+    /**
+     * @return bool|string|array
+     */
+    public function getSource()
+    {
         return $this->source;
     }
 
     /**
-     * @param bool $source
+     * @param bool|string|array $source
      *
      * @return $this
      */

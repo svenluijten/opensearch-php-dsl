@@ -23,10 +23,7 @@ class ConstantScoreQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var BuilderInterface
-     */
-    private $query;
+    private BuilderInterface $query;
 
     public function __construct(BuilderInterface $query, array $parameters = [])
     {
@@ -34,17 +31,6 @@ class ConstantScoreQuery implements BuilderInterface
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'constant_score';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
@@ -54,5 +40,10 @@ class ConstantScoreQuery implements BuilderInterface
         $output = $this->processArray($query);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'constant_score';
     }
 }

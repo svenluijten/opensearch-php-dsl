@@ -31,8 +31,14 @@ class DateHistogramAggregation extends AbstractAggregation
 
     protected ?string $format = null;
 
-    public function __construct(string $name, string $field, ?string $calendarInterval = null, ?string $fixedInterval = null, ?string $format = null, ?string $timeZone = null)
-    {
+    public function __construct(
+        string $name,
+        string $field,
+        ?string $calendarInterval = null,
+        ?string $fixedInterval = null,
+        ?string $format = null,
+        ?string $timeZone = null
+    ) {
         parent::__construct($name);
 
         $this->setField($field);
@@ -93,14 +99,6 @@ class DateHistogramAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'date_histogram';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         if ($this->getCalendarInterval() === null && $this->getFixedInterval() === null) {
@@ -111,22 +109,27 @@ class DateHistogramAggregation extends AbstractAggregation
             'field' => $this->getField(),
         ];
 
-        if ($this->getCalendarInterval() !== null) {
+        if ($this->getCalendarInterval()) {
             $out['calender_interval'] = $this->getCalendarInterval();
         }
 
-        if ($this->getFixedInterval() !== null) {
+        if ($this->getFixedInterval()) {
             $out['fixed_interval'] = $this->getFixedInterval();
         }
 
-        if ($this->getTimeZone() !== null) {
+        if ($this->getTimeZone()) {
             $out['time_zone'] = $this->getTimeZone();
         }
 
-        if ($this->getFormat() !== null) {
+        if ($this->getFormat()) {
             $out['format'] = $this->getFormat();
         }
 
         return $out;
+    }
+
+    public function getType(): string
+    {
+        return 'date_histogram';
     }
 }

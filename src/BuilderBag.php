@@ -33,11 +33,7 @@ class BuilderBag
 
     public function add(BuilderInterface $builder): string
     {
-        if (method_exists($builder, 'getName')) {
-            $name = $builder->getName();
-        } else {
-            $name = bin2hex(random_bytes(30));
-        }
+        $name = ($builder instanceof NamedBuilderInterface) ? $builder->getName() : bin2hex(random_bytes(30));
 
         $this->bag[$name] = $builder;
 
@@ -75,7 +71,6 @@ class BuilderBag
     {
         return array_filter(
             $this->bag,
-            /** @var BuilderInterface $builder */
             function (BuilderInterface $builder) use ($type) {
                 return $type === null || $builder->getType() === $type;
             }

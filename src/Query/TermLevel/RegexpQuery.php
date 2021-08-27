@@ -23,20 +23,10 @@ class RegexpQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var string field to be queried
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * @var string the actual regexp value to be used
-     */
-    private $regexpValue;
+    private string $regexpValue;
 
-    /**
-     * @param string $field
-     * @param string $regexpValue
-     */
     public function __construct($field, $regexpValue, array $parameters = [])
     {
         $this->field = $field;
@@ -44,17 +34,6 @@ class RegexpQuery implements BuilderInterface
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'regexp';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
@@ -66,5 +45,10 @@ class RegexpQuery implements BuilderInterface
         ];
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'regexp';
     }
 }

@@ -20,32 +20,13 @@ use ONGR\ElasticsearchDSL\BuilderInterface;
  */
 class ExistsQuery implements BuilderInterface
 {
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * Constructor.
-     *
-     * @param string $field Field value
-     */
-    public function __construct($field)
+    public function __construct(string $field)
     {
         $this->field = $field;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'exists';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         return [
@@ -53,5 +34,10 @@ class ExistsQuery implements BuilderInterface
                 'field' => $this->field,
             ],
         ];
+    }
+
+    public function getType(): string
+    {
+        return 'exists';
     }
 }

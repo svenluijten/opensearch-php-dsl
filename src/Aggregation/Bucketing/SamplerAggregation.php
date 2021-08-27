@@ -48,21 +48,18 @@ class SamplerAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'sampler';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
-        return array_filter(
+        return \array_filter(
             [
                 'field' => $this->getField(),
                 'shard_size' => $this->getShardSize(),
             ]
         );
+    }
+
+    public function getType(): string
+    {
+        return 'sampler';
     }
 }

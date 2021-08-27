@@ -27,7 +27,7 @@ class PercentileRanksAggregation extends AbstractAggregation
 
     private array $values;
 
-    public function __construct($name, ?string $field, array $values = [], ?string $script = null)
+    public function __construct(string $name, ?string $field, array $values = [], ?string $script = null)
     {
         parent::__construct($name);
 
@@ -41,7 +41,7 @@ class PercentileRanksAggregation extends AbstractAggregation
         return $this->values;
     }
 
-    public function setValues(array $values)
+    public function setValues(array $values): self
     {
         $this->values = $values;
 
@@ -51,24 +51,16 @@ class PercentileRanksAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'percentile_ranks';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
-        $out = array_filter(
+        $out = \array_filter(
             [
                 'field' => $this->getField(),
                 'script' => $this->getScript(),
                 'values' => $this->getValues(),
             ],
             static function ($val) {
-                return $val || is_numeric($val);
+                return $val || \is_numeric($val);
             }
         );
 
@@ -77,20 +69,23 @@ class PercentileRanksAggregation extends AbstractAggregation
         return $out;
     }
 
-    /**
-     * @param array $a
-     *
-     * @throws \LogicException
-     *
-     * @return bool
-     */
-    private function isRequiredParametersSet($a)
+    public function getType(): string
     {
-        if ((array_key_exists('field', $a) && array_key_exists('values', $a))
-            || (array_key_exists('script', $a) && array_key_exists('values', $a))
-        ) {
-            return true;
+        return 'percentile_ranks';
+    }
+
+    private function isRequiredParametersSet(array $out): void
+    {
+        if (\array_key_exists('values', $out)) {
+            if (\array_key_exists('field', $out)) {
+                return;
+            }
+
+            if (\array_key_exists('script', $out)) {
+                return;
+            }
         }
+
         throw new \LogicException('Percentile ranks aggregation must have field and values or script and values set.');
     }
 }

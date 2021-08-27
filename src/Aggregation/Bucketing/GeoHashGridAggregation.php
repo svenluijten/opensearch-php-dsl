@@ -99,9 +99,6 @@ class GeoHashGridAggregation extends AbstractAggregation
         return $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'geohash_grid';

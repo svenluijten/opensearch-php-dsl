@@ -22,7 +22,7 @@ class BucketSortAggregation extends AbstractPipelineAggregation
 {
     private array $sort = [];
 
-    public function __construct($name, ?string $bucketsPath = null)
+    public function __construct(string $name, ?string $bucketsPath = null)
     {
         parent::__construct($name, $bucketsPath);
     }
@@ -32,13 +32,6 @@ class BucketSortAggregation extends AbstractPipelineAggregation
         return $this->sort;
     }
 
-    public function addSort(FieldSort $sort): self
-    {
-        $this->sort[] = $sort->toArray();
-
-        return $this;
-    }
-
     public function setSort(array $sort): self
     {
         $this->sort = $sort;
@@ -46,12 +39,11 @@ class BucketSortAggregation extends AbstractPipelineAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
+    public function addSort(FieldSort $sort): self
     {
-        return 'bucket_sort';
+        $this->sort[] = $sort->toArray();
+
+        return $this;
     }
 
     /**
@@ -59,11 +51,16 @@ class BucketSortAggregation extends AbstractPipelineAggregation
      */
     public function getArray()
     {
-        return array_filter(
+        return \array_filter(
             [
                 'buckets_path' => $this->getBucketsPath(),
                 'sort' => $this->getSort(),
             ]
         );
+    }
+
+    public function getType(): string
+    {
+        return 'bucket_sort';
     }
 }

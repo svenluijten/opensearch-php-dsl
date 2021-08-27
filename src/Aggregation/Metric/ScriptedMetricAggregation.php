@@ -15,9 +15,9 @@ use ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Type\MetricTrait;
 
 /**
- * Class representing StatsAggregation.
+ * Class representing ScriptedMetricAggregation.
  *
- * @see http://goo.gl/JbQsI3
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html
  */
 class ScriptedMetricAggregation extends AbstractAggregation
 {
@@ -44,14 +44,6 @@ class ScriptedMetricAggregation extends AbstractAggregation
         $this->setMapScript($mapScript);
         $this->setCombineScript($combineScript);
         $this->setReduceScript($reduceScript);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'scripted_metric';
     }
 
     public function getInitScript(): ?string
@@ -95,11 +87,6 @@ class ScriptedMetricAggregation extends AbstractAggregation
         return $this->reduceScript;
     }
 
-    /**
-     * @param mixed $reduceScript
-     *
-     * @return $this
-     */
     public function setReduceScript(?string $reduceScript): self
     {
         $this->reduceScript = $reduceScript;
@@ -120,5 +107,10 @@ class ScriptedMetricAggregation extends AbstractAggregation
                 'reduce_script' => $this->getReduceScript(),
             ]
         );
+    }
+
+    public function getType(): string
+    {
+        return 'scripted_metric';
     }
 }

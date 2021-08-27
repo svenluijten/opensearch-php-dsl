@@ -38,7 +38,7 @@ class DiversifiedSamplerAggregation extends AbstractAggregation
         return $this->shardSize;
     }
 
-    public function setShardSize(int $shardSize): self
+    public function setShardSize(?int $shardSize): self
     {
         $this->shardSize = $shardSize;
 
@@ -48,21 +48,18 @@ class DiversifiedSamplerAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'diversified_sampler';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getArray(): array
     {
-        return array_filter(
+        return \array_filter(
             [
                 'field' => $this->getField(),
                 'shard_size' => $this->getShardSize(),
             ]
         );
+    }
+
+    public function getType(): string
+    {
+        return 'diversified_sampler';
     }
 }

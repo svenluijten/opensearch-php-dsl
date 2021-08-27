@@ -32,8 +32,7 @@ class SpanOrQueryTest extends \PHPUnit\Framework\TestCase
             ->willReturn(['span_term' => ['key' => 'value']])
         ;
 
-        $query = new SpanOrQuery();
-        $query->addQuery($mock);
+        $query = new SpanOrQuery([$mock]);
         $result = [
             'span_or' => [
                 'clauses' => [

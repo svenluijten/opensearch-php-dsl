@@ -23,46 +23,46 @@ class NestedSort implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var string
-     */
-    private $path;
+    private string $path;
 
-    /**
-     * @var BuilderInterface
-     */
-    private $filter;
+    private ?BuilderInterface $filter;
 
-    /**
-     * @var BuilderInterface
-     */
-    private $nestedFilter;
+    private ?BuilderInterface $nestedFilter;
 
-    /**
-     * @param string $path
-     * @param BuilderInterface $filter
-     */
     public function __construct(
-        $path,
+        string $path,
         ?BuilderInterface $filter = null,
+        ?BuilderInterface $nestedFilter = null,
         array $parameters = []
     ) {
         $this->path = $path;
         $this->filter = $filter;
+        $this->nestedFilter = $nestedFilter;
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
+    public function getPath(): string
     {
-        return 'nested';
+        return $this->path;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function getFilter(): ?BuilderInterface
+    {
+        return $this->filter;
+    }
+
+    public function getNestedFilter(): ?BuilderInterface
+    {
+        return $this->nestedFilter;
+    }
+
+    public function setNestedFilter(?BuilderInterface $nestedFilter): self
+    {
+        $this->nestedFilter = $nestedFilter;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         $output = [
@@ -80,41 +80,8 @@ class NestedSort implements BuilderInterface
         return $this->processArray($output);
     }
 
-    /**
-     * Returns nested filter object.
-     *
-     * @return BuilderInterface
-     */
-    public function getFilter()
+    public function getType(): string
     {
-        return $this->filter;
-    }
-
-    /**
-     * Returns path this filter is set for.
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @return BuilderInterface
-     */
-    public function getNestedFilter()
-    {
-        return $this->nestedFilter;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setNestedFilter(BuilderInterface $nestedFilter)
-    {
-        $this->nestedFilter = $nestedFilter;
-
-        return $this;
+        return 'nested';
     }
 }

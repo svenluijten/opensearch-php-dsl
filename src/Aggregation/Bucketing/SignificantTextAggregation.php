@@ -14,13 +14,10 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Bucketing;
 /**
  * Class representing TermsAggregation.
  *
- * @see https://goo.gl/xI7zoa
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
  */
 class SignificantTextAggregation extends TermsAggregation
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'significant_text';

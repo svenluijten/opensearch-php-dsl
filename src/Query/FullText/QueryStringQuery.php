@@ -23,31 +23,14 @@ class QueryStringQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var string the actual query to be parsed
-     */
-    private $query;
+    private string $query;
 
-    /**
-     * @param string $query
-     */
-    public function __construct($query, array $parameters = [])
+    public function __construct(string $query, array $parameters = [])
     {
         $this->query = $query;
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'query_string';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
@@ -57,5 +40,10 @@ class QueryStringQuery implements BuilderInterface
         $output = $this->processArray($query);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'query_string';
     }
 }

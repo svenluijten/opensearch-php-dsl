@@ -30,20 +30,23 @@ class Ipv4RangeAggregation extends AbstractAggregation
         parent::__construct($name);
 
         $this->setField($field);
+
         foreach ($ranges as $range) {
-            if (is_array($range)) {
+            if (\is_array($range)) {
                 $from = $range['from'] ?? null;
                 $to = $range['to'] ?? null;
+
                 $this->addRange($from, $to);
-            } else {
-                $this->addMask($range);
+                continue;
             }
+
+            $this->addMask($range);
         }
     }
 
     public function addRange(?string $from = null, ?string $to = null): self
     {
-        $range = array_filter(
+        $range = \array_filter(
             [
                 'from' => $from,
                 'to' => $to,
@@ -68,14 +71,6 @@ class Ipv4RangeAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'ip_range';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         if (empty($this->ranges)) {
@@ -84,7 +79,12 @@ class Ipv4RangeAggregation extends AbstractAggregation
 
         return [
             'field' => $this->getField(),
-            'ranges' => array_values($this->ranges),
+            'ranges' => \array_values($this->ranges),
         ];
+    }
+
+    public function getType(): string
+    {
+        return 'ip_range';
     }
 }

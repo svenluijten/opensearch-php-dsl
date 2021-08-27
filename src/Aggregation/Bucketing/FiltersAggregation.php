@@ -36,12 +36,9 @@ class FiltersAggregation extends AbstractAggregation
         parent::__construct($name);
 
         $this->setAnonymous($anonymous);
+
         foreach ($filters as $filterName => $filter) {
-            if ($anonymous) {
-                $this->addFilter($filter);
-            } else {
-                $this->addFilter($filter, $filterName);
-            }
+            $anonymous ? $this->addFilter($filter) : $this->addFilter($filter, $filterName);
         }
     }
 
@@ -54,10 +51,11 @@ class FiltersAggregation extends AbstractAggregation
 
     public function addFilter(BuilderInterface $filter, string $name = ''): self
     {
-        if ($this->anonymous === false && empty($name)) {
-            throw new \LogicException('In not anonymous filters filter name must be set.');
+        if (!$this->anonymous && !$name) {
+            throw new \LogicException('In not anonymous filters, filter name must be set.');
         }
-        if ($this->anonymous === false && !empty($name)) {
+
+        if (!$this->anonymous && $name) {
             $this->filters['filters'][$name] = $filter->toArray();
         } else {
             $this->filters['filters'][] = $filter->toArray();
@@ -74,9 +72,6 @@ class FiltersAggregation extends AbstractAggregation
         return $this->filters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'filters';

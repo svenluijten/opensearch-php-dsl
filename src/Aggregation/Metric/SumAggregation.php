@@ -18,9 +18,6 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Metric;
  */
 class SumAggregation extends StatsAggregation
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'sum';

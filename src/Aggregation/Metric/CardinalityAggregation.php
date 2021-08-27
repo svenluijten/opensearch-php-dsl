@@ -18,7 +18,7 @@ use ONGR\ElasticsearchDSL\ScriptAwareTrait;
 /**
  * Difference values counter.
  *
- * @see http://goo.gl/tG7ciG
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html
  */
 class CardinalityAggregation extends AbstractAggregation
 {
@@ -34,7 +34,7 @@ class CardinalityAggregation extends AbstractAggregation
      */
     public function getArray()
     {
-        $out = array_filter(
+        return \array_filter(
             [
                 'field' => $this->getField(),
                 'script' => $this->getScript(),
@@ -42,28 +42,21 @@ class CardinalityAggregation extends AbstractAggregation
                 'rehash' => $this->isRehash(),
             ],
             static function ($val) {
-                return $val || is_bool($val);
+                return $val || \is_bool($val);
             }
         );
-
-        return $out;
-    }
-
-    /**
-     * @param int $precision
-     *
-     * @return $this
-     */
-    public function setPrecisionThreshold($precision)
-    {
-        $this->precisionThreshold = $precision;
-
-        return $this;
     }
 
     public function getPrecisionThreshold(): ?int
     {
         return $this->precisionThreshold;
+    }
+
+    public function setPrecisionThreshold(?int $precision): self
+    {
+        $this->precisionThreshold = $precision;
+
+        return $this;
     }
 
     public function isRehash(): ?bool
@@ -78,9 +71,6 @@ class CardinalityAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'cardinality';

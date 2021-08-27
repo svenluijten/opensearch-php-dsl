@@ -26,24 +26,11 @@ class TermsSetQuery implements BuilderInterface
     public const MINIMUM_SHOULD_MATCH_TYPE_FIELD = 'minimum_should_match_field';
     public const MINIMUM_SHOULD_MATCH_TYPE_SCRIPT = 'minimum_should_match_script';
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * @var array
-     */
-    private $terms;
+    private array $terms;
 
-    /**
-     * Constructor.
-     *
-     * @param string $field Field name
-     * @param array $terms An array of terms
-     * @param array $parameters Parameters
-     */
-    public function __construct($field, $terms, array $parameters)
+    public function __construct(string $field, array $terms, array $parameters)
     {
         $this->field = $field;
         $this->terms = $terms;
@@ -51,17 +38,6 @@ class TermsSetQuery implements BuilderInterface
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'terms_set';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
@@ -71,6 +47,11 @@ class TermsSetQuery implements BuilderInterface
         return [$this->getType() => [
             $this->field => $this->processArray($query),
         ]];
+    }
+
+    public function getType(): string
+    {
+        return 'terms_set';
     }
 
     private function validateParameters(array $parameters): void

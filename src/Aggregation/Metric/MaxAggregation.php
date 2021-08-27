@@ -18,9 +18,6 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Metric;
  */
 class MaxAggregation extends StatsAggregation
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'max';

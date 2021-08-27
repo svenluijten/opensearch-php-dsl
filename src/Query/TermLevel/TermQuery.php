@@ -23,38 +23,23 @@ class TermQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
     /**
-     * @var string
+     * @var mixed
      */
     private $value;
 
     /**
-     * @param string $field
      * @param string|int|float|bool $value
      */
-    public function __construct($field, $value, array $parameters = [])
+    public function __construct(string $field, $value, array $parameters = [])
     {
         $this->field = $field;
         $this->value = $value;
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'term';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = $this->processArray();
@@ -70,5 +55,10 @@ class TermQuery implements BuilderInterface
         ];
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'term';
     }
 }

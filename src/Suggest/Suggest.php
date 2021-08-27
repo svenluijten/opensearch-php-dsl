@@ -20,31 +20,13 @@ class Suggest implements NamedBuilderInterface
     use NameAwareTrait;
     use ParametersTrait;
 
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
-    /**
-     * @var string
-     */
-    private $text;
+    private string $text;
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * Suggest constructor.
-     *
-     * @param string $name
-     * @param string $type
-     * @param string $text
-     * @param string $field
-     * @param array $parameters
-     */
-    public function __construct($name, $type, $text, $field, $parameters = [])
+    public function __construct(string $name, string $type, string $text, string $field, array $parameters = [])
     {
         $this->setName($name);
         $this->setType($type);
@@ -53,69 +35,42 @@ class Suggest implements NamedBuilderInterface
         $this->setParameters($parameters);
     }
 
-    /**
-     * Returns element type.
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     *
-     * @return $this
-     */
-    public function setType($type)
+    public function setType(string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getText()
+    public function getText(): string
     {
         return $this->text;
     }
 
-    /**
-     * @param string $text
-     *
-     * @return $this
-     */
-    public function setText($text)
+    public function setText(string $text): self
     {
         $this->text = $text;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getField()
+    public function getField(): string
     {
         return $this->field;
     }
 
-    /**
-     * @param string $field
-     *
-     * @return $this
-     */
-    public function setField($field)
+    public function setField(string $field): self
     {
         $this->field = $field;
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         return [

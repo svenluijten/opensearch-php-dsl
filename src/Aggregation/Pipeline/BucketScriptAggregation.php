@@ -16,24 +16,17 @@ use ONGR\ElasticsearchDSL\ScriptAwareTrait;
 /**
  * Class representing Bucket Script Pipeline Aggregation.
  *
- * @see https://goo.gl/miVxcx
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
  */
 class BucketScriptAggregation extends AbstractPipelineAggregation
 {
     use ScriptAwareTrait;
 
-    public function __construct($name, array $bucketsPath, ?string $script = null)
+    public function __construct(string $name, array $bucketsPath, ?string $script = null)
     {
         parent::__construct($name, $bucketsPath);
-        $this->setScript($script);
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'bucket_script';
+        $this->setScript($script);
     }
 
     /**
@@ -54,5 +47,10 @@ class BucketScriptAggregation extends AbstractPipelineAggregation
             'buckets_path' => $this->getBucketsPath(),
             'script' => $this->getScript(),
         ];
+    }
+
+    public function getType(): string
+    {
+        return 'bucket_script';
     }
 }

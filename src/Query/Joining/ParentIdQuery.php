@@ -12,37 +12,17 @@ class ParentIdQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var string
-     */
-    private $childType;
+    private string $childType;
 
-    /**
-     * @var string
-     */
-    private $parentId;
+    private string $parentId;
 
-    /**
-     * @param string $parentId
-     */
-    public function __construct($parentId, string $childType, array $parameters = [])
+    public function __construct(string $parentId, string $childType, array $parameters = [])
     {
         $this->childType = $childType;
         $this->parentId = $parentId;
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'parent_id';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
@@ -52,5 +32,10 @@ class ParentIdQuery implements BuilderInterface
         $output = $this->processArray($query);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'parent_id';
     }
 }

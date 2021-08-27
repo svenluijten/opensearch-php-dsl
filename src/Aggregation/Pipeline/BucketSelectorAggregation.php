@@ -14,13 +14,10 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 /**
  * Class representing Bucket Selector Pipeline Aggregation.
  *
- * @see https://goo.gl/IQbyyM
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-selector-aggregation.html
  */
 class BucketSelectorAggregation extends BucketScriptAggregation
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'bucket_selector';

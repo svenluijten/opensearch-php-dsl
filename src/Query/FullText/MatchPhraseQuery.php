@@ -20,9 +20,6 @@ namespace ONGR\ElasticsearchDSL\Query\FullText;
  */
 class MatchPhraseQuery extends MatchQuery
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'match_phrase';

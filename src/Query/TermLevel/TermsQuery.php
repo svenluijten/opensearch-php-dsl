@@ -23,41 +23,17 @@ class TermsQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * @var array
-     */
-    private $terms;
+    private array $terms;
 
-    /**
-     * Constructor.
-     *
-     * @param string $field Field name
-     * @param array $terms An array of terms
-     * @param array $parameters Optional parameters
-     */
-    public function __construct($field, $terms, array $parameters = [])
+    public function __construct(string $field, array $terms, array $parameters = [])
     {
         $this->field = $field;
         $this->terms = $terms;
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'terms';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
@@ -67,5 +43,10 @@ class TermsQuery implements BuilderInterface
         $output = $this->processArray($query);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'terms';
     }
 }

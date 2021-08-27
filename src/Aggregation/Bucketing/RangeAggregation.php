@@ -27,16 +27,18 @@ class RangeAggregation extends AbstractAggregation
 
     private bool $keyed = false;
 
-    public function __construct($name, ?string $field = null, array $ranges = [], bool $keyed = false)
+    public function __construct(string $name, ?string $field = null, array $ranges = [], bool $keyed = false)
     {
         parent::__construct($name);
 
         $this->setField($field);
         $this->setKeyed($keyed);
+
         foreach ($ranges as $range) {
             $from = $range['from'] ?? null;
             $to = $range['to'] ?? null;
             $key = $range['key'] ?? null;
+
             $this->addRange($from, $to, $key);
         }
     }
@@ -60,7 +62,7 @@ class RangeAggregation extends AbstractAggregation
             }
         );
 
-        if (!empty($key)) {
+        if ($key) {
             $range['key'] = $key;
         }
 
@@ -72,7 +74,7 @@ class RangeAggregation extends AbstractAggregation
     public function removeRange(?float $from, ?float $to): bool
     {
         foreach ($this->ranges as $key => $range) {
-            if (array_diff_assoc(array_filter(['from' => $from, 'to' => $to]), $range) === []) {
+            if (\array_diff_assoc(\array_filter(['from' => $from, 'to' => $to]), $range) === []) {
                 unset($this->ranges[$key]);
 
                 return true;
@@ -86,7 +88,7 @@ class RangeAggregation extends AbstractAggregation
     {
         if ($this->keyed) {
             foreach ($this->ranges as $rangeKey => $range) {
-                if (array_key_exists('key', $range) && $range['key'] === $key) {
+                if (\array_key_exists('key', $range) && $range['key'] === $key) {
                     unset($this->ranges[$rangeKey]);
 
                     return true;
@@ -104,7 +106,7 @@ class RangeAggregation extends AbstractAggregation
     {
         $data = [
             'keyed' => $this->keyed,
-            'ranges' => array_values($this->ranges),
+            'ranges' => \array_values($this->ranges),
         ];
 
         if ($this->getField()) {
@@ -114,9 +116,6 @@ class RangeAggregation extends AbstractAggregation
         return $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'range';

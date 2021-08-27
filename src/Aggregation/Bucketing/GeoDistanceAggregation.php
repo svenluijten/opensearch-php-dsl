@@ -31,17 +31,25 @@ class GeoDistanceAggregation extends AbstractAggregation
 
     private array $ranges = [];
 
-    public function __construct(string $name, string $field, string $origin, array $ranges = [], ?string $unit = null, ?string $distanceType = null)
-    {
+    public function __construct(
+        string $name,
+        string $field,
+        string $origin,
+        array $ranges = [],
+        ?string $unit = null,
+        ?string $distanceType = null
+    ) {
         parent::__construct($name);
 
         $this->setField($field);
         $this->setOrigin($origin);
+
         foreach ($ranges as $range) {
             $from = $range['from'] ?? null;
             $to = $range['to'] ?? null;
             $this->addRange($from, $to);
         }
+
         $this->setUnit($unit);
         $this->setDistanceType($distanceType);
     }
@@ -126,9 +134,6 @@ class GeoDistanceAggregation extends AbstractAggregation
         return $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'geo_distance';

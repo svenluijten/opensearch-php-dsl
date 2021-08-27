@@ -12,6 +12,7 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Geo;
 
 use ONGR\ElasticsearchDSL\Query\Geo\GeoDistanceQuery;
+use ONGR\ElasticsearchDSL\Type\Location;
 
 /**
  * @internal
@@ -58,7 +59,7 @@ class GeoDistanceQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray($field, $distance, $location, $parameters, $expected): void
     {
-        $query = new GeoDistanceQuery($field, $distance, $location, $parameters);
+        $query = new GeoDistanceQuery($field, $distance, new Location($location['lat'], $location['lon']), $parameters);
         $result = $query->toArray();
         $this->assertEquals(['geo_distance' => $expected], $result);
     }

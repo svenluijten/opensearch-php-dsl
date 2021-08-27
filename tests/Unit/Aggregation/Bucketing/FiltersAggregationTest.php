@@ -26,7 +26,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
     public function testIfExceptionIsThrown(): void
     {
         $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('In not anonymous filters filter name must be set.');
+        $this->expectExceptionMessage('In not anonymous filters, filter name must be set.');
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
         $aggregation = new FiltersAggregation('test_agg');
         $aggregation->addFilter($mock);

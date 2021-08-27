@@ -45,9 +45,6 @@ class FilterAggregation extends AbstractAggregation
         return $this->filter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setField(?string $field): self
     {
         throw new \LogicException("Filter aggregation, doesn't support `field` parameter");
@@ -61,9 +58,6 @@ class FilterAggregation extends AbstractAggregation
         return $this->getFilter()->toArray();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'filter';

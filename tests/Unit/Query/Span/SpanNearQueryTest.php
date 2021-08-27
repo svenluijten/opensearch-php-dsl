@@ -32,9 +32,8 @@ class SpanNearQueryTest extends \PHPUnit\Framework\TestCase
             ->willReturn(['span_term' => ['key' => 'value']])
         ;
 
-        $query = new SpanNearQuery(['in_order' => false]);
-        $query->setSlop(5);
-        $query->addQuery($mock);
+        $query = new SpanNearQuery(5, [$mock], ['in_order' => false]);
+
         $result = [
             'span_near' => [
                 'clauses' => [
@@ -48,6 +47,7 @@ class SpanNearQueryTest extends \PHPUnit\Framework\TestCase
                 'in_order' => false,
             ],
         ];
+
         $this->assertEquals($result, $query->toArray());
     }
 }

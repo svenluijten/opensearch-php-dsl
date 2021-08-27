@@ -20,9 +20,6 @@ use ONGR\ElasticsearchDSL\Query\TermLevel\TermQuery;
  */
 class SpanTermQuery extends TermQuery implements SpanQueryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'span_term';

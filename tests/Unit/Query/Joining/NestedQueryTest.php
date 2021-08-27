@@ -28,7 +28,7 @@ class NestedQueryTest extends \PHPUnit\Framework\TestCase
     {
         $query = [
             'terms' => [
-                'foo' => 'bar',
+                'foo' => ['bar'],
             ],
         ];
 
@@ -62,7 +62,7 @@ class NestedQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray($path, $parameters, $expected): void
     {
-        $query = new TermsQuery('foo', 'bar');
+        $query = new TermsQuery('foo', ['bar']);
         $query = new NestedQuery($path, $query, $parameters);
         $result = $query->toArray();
         $this->assertEquals(['nested' => $expected], $result);

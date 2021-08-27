@@ -18,51 +18,45 @@ namespace ONGR\ElasticsearchDSL\Query\Span;
  */
 class SpanNearQuery extends SpanOrQuery implements SpanQueryInterface
 {
-    /**
-     * @var int
-     */
-    private $slop;
+    private ?int $slop;
 
-    /**
-     * @return int
-     */
-    public function getSlop()
+    public function __construct(?int $slop = null, array $queries = [], array $parameters = [])
+    {
+        $this->slop = $slop;
+        parent::__construct($queries, $parameters);
+    }
+
+    public function getSlop(): ?int
     {
         return $this->slop;
     }
 
-    /**
-     * @param int $slop
-     *
-     * @return $this
-     */
-    public function setSlop($slop)
+    public function setSlop(?int $slop): self
     {
         $this->slop = $slop;
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'span_near';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [];
+
         foreach ($this->getQueries() as $type) {
             $query['clauses'][] = $type->toArray();
         }
-        $query['slop'] = $this->getSlop();
+
+        if ($this->getSlop()) {
+            $query['slop'] = $this->getSlop();
+        }
+
         $output = $this->processArray($query);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'span_near';
     }
 }

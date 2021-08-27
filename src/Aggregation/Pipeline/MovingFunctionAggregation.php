@@ -18,9 +18,6 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
  */
 class MovingFunctionAggregation extends AbstractPipelineAggregation
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'moving_fn';

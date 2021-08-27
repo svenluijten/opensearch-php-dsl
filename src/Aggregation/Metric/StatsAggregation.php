@@ -36,24 +36,23 @@ class StatsAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'stats';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         $out = [];
+
         if ($this->getField()) {
             $out['field'] = $this->getField();
         }
+
         if ($this->getScript()) {
             $out['script'] = $this->getScript();
         }
 
         return $out;
+    }
+
+    public function getType(): string
+    {
+        return 'stats';
     }
 }

@@ -38,9 +38,6 @@ class MissingAggregation extends AbstractAggregation
         return ['field' => $this->getField()];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'missing';

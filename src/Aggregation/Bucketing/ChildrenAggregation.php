@@ -25,11 +25,6 @@ class ChildrenAggregation extends AbstractAggregation
 
     private string $children;
 
-    public function getChildren(): string
-    {
-        return $this->children;
-    }
-
     public function __construct(string $name, string $children)
     {
         parent::__construct($name);
@@ -37,16 +32,16 @@ class ChildrenAggregation extends AbstractAggregation
         $this->setChildren($children);
     }
 
+    public function getChildren(): string
+    {
+        return $this->children;
+    }
+
     public function setChildren($children): self
     {
         $this->children = $children;
 
         return $this;
-    }
-
-    public function getType(): string
-    {
-        return 'children';
     }
 
     /**
@@ -59,5 +54,10 @@ class ChildrenAggregation extends AbstractAggregation
         }
 
         return ['type' => $this->getChildren()];
+    }
+
+    public function getType(): string
+    {
+        return 'children';
     }
 }

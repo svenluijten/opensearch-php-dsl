@@ -20,32 +20,13 @@ use ONGR\ElasticsearchDSL\BuilderInterface;
  */
 class TypeQuery implements BuilderInterface
 {
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
-    /**
-     * Constructor.
-     *
-     * @param string $type Type name
-     */
-    public function __construct($type)
+    public function __construct(string $type)
     {
         $this->type = $type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'type';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         return [
@@ -53,5 +34,10 @@ class TypeQuery implements BuilderInterface
                 'value' => $this->type,
             ],
         ];
+    }
+
+    public function getType(): string
+    {
+        return 'type';
     }
 }

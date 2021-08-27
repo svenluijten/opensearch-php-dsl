@@ -22,15 +22,9 @@ class SpanNotQuery implements SpanQueryInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var SpanQueryInterface
-     */
-    private $include;
+    private SpanQueryInterface $include;
 
-    /**
-     * @var SpanQueryInterface
-     */
-    private $exclude;
+    private SpanQueryInterface $exclude;
 
     public function __construct(SpanQueryInterface $include, SpanQueryInterface $exclude, array $parameters = [])
     {
@@ -39,17 +33,6 @@ class SpanNotQuery implements SpanQueryInterface
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'span_not';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
@@ -58,5 +41,10 @@ class SpanNotQuery implements SpanQueryInterface
         ];
 
         return [$this->getType() => $this->processArray($query)];
+    }
+
+    public function getType(): string
+    {
+        return 'span_not';
     }
 }

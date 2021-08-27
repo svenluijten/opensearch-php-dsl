@@ -23,37 +23,27 @@ class NestedQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var string
-     */
-    private $path;
+    private string $path;
 
-    /**
-     * @var BuilderInterface
-     */
-    private $query;
+    private BuilderInterface $query;
 
-    /**
-     * @param string $path
-     */
-    public function __construct($path, BuilderInterface $query, array $parameters = [])
+    public function __construct(string $path, BuilderInterface $query, array $parameters = [])
     {
         $this->path = $path;
         $this->query = $query;
         $this->parameters = $parameters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
+    public function getQuery(): BuilderInterface
     {
-        return 'nested';
+        return $this->query;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
     public function toArray(): array
     {
         return [
@@ -66,23 +56,8 @@ class NestedQuery implements BuilderInterface
         ];
     }
 
-    /**
-     * Returns nested query object.
-     *
-     * @return BuilderInterface
-     */
-    public function getQuery()
+    public function getType(): string
     {
-        return $this->query;
-    }
-
-    /**
-     * Returns path this query is set for.
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
+        return 'nested';
     }
 }

@@ -17,7 +17,7 @@ use ONGR\ElasticsearchDSL\Aggregation\Type\MetricTrait;
 /**
  * Class representing geo bounds aggregation.
  *
- * @see http://goo.gl/aGqw7Y
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html
  */
 class GeoBoundsAggregation extends AbstractAggregation
 {
@@ -25,7 +25,7 @@ class GeoBoundsAggregation extends AbstractAggregation
 
     private bool $wrapLongitude = true;
 
-    public function __construct($name, string $field, bool $wrapLongitude = true)
+    public function __construct(string $name, string $field, bool $wrapLongitude = true)
     {
         parent::__construct($name);
 
@@ -58,9 +58,6 @@ class GeoBoundsAggregation extends AbstractAggregation
         return $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'geo_bounds';

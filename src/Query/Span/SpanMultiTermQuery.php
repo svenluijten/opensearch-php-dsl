@@ -23,33 +23,14 @@ class SpanMultiTermQuery implements SpanQueryInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var BuilderInterface
-     */
-    private $query;
+    private BuilderInterface $query;
 
-    /**
-     * Accepts one of fuzzy, prefix, term range, wildcard, regexp query.
-     */
     public function __construct(BuilderInterface $query, array $parameters = [])
     {
         $this->query = $query;
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'span_multi';
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \InvalidArgumentException
-     */
     public function toArray(): array
     {
         $query = [];
@@ -57,5 +38,10 @@ class SpanMultiTermQuery implements SpanQueryInterface
         $output = $this->processArray($query);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'span_multi';
     }
 }

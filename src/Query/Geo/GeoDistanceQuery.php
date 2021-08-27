@@ -13,6 +13,7 @@ namespace ONGR\ElasticsearchDSL\Query\Geo;
 
 use ONGR\ElasticsearchDSL\BuilderInterface;
 use ONGR\ElasticsearchDSL\ParametersTrait;
+use ONGR\ElasticsearchDSL\Type\Location;
 
 /**
  * Represents Elasticsearch "geo_distance" query.
@@ -23,27 +24,13 @@ class GeoDistanceQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * @var string
-     */
-    private $distance;
+    private string $distance;
 
-    /**
-     * @var mixed
-     */
-    private $location;
+    private Location $location;
 
-    /**
-     * @param string $field
-     * @param string $distance
-     * @param mixed $location
-     */
-    public function __construct($field, $distance, $location, array $parameters = [])
+    public function __construct(string $field, string $distance, Location $location, array $parameters = [])
     {
         $this->field = $field;
         $this->distance = $distance;
@@ -52,25 +39,19 @@ class GeoDistanceQuery implements BuilderInterface
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'geo_distance';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
             'distance' => $this->distance,
-            $this->field => $this->location,
+            $this->field => $this->location->toArray(),
         ];
         $output = $this->processArray($query);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'geo_distance';
     }
 }

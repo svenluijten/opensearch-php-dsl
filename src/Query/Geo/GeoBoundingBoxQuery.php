@@ -23,38 +23,17 @@ class GeoBoundingBoxQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var array
-     */
-    private $values;
+    private array $values;
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * @param string $field
-     * @param array $values
-     */
-    public function __construct($field, $values, array $parameters = [])
+    public function __construct(string $field, array $values, array $parameters = [])
     {
         $this->field = $field;
         $this->values = $values;
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'geo_bounding_box';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         return [
@@ -62,12 +41,12 @@ class GeoBoundingBoxQuery implements BuilderInterface
         ];
     }
 
-    /**
-     * @throws \LogicException
-     *
-     * @return array
-     */
-    private function points()
+    public function getType(): string
+    {
+        return 'geo_bounding_box';
+    }
+
+    private function points(): array
     {
         if (count($this->values) === 2) {
             return [

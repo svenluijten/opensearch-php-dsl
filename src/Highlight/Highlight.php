@@ -21,34 +21,18 @@ class Highlight implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var array holds fields for highlight
-     */
-    private $fields = [];
+    private array $fields = [];
 
-    /**
-     * @var array
-     */
-    private $tags;
+    private array $tags = [];
 
-    /**
-     * @param string $name field name to highlight
-     *
-     * @return $this
-     */
-    public function addField($name, array $params = [])
+    public function addField(string $name, array $params = []): self
     {
         $this->fields[$name] = $params;
 
         return $this;
     }
 
-    /**
-     * Sets html tag and its class used in highlighting.
-     *
-     * @return $this
-     */
-    public function setTags(array $preTags, array $postTags)
+    public function setTags(array $preTags, array $postTags): self
     {
         $this->tags['pre_tags'] = $preTags;
         $this->tags['post_tags'] = $postTags;
@@ -56,17 +40,11 @@ class Highlight implements BuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'highlight';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $output = [];

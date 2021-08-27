@@ -24,15 +24,16 @@ class TopHitsAggregation extends AbstractAggregation
 {
     use MetricTrait;
 
-    private ?int $size = null;
+    private ?int $size;
 
-    private ?int $from = null;
+    private ?int $from;
 
     private array $sorts = [];
 
     public function __construct(string $name, ?int $size = null, ?int $from = null, ?BuilderInterface $sort = null)
     {
         parent::__construct($name);
+
         $this->setFrom($from);
         $this->setSize($size);
 
@@ -91,37 +92,35 @@ class TopHitsAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'top_hits';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
-        $sortsOutput = [];
-        $addedSorts = array_filter($this->getSorts());
+        $sortsOutput = null;
+        $addedSorts = \array_filter($this->getSorts());
+
         if ($addedSorts) {
+            $sortsOutput = [];
+
             foreach ($addedSorts as $sort) {
                 $sortsOutput[] = $sort->toArray();
             }
-        } else {
-            $sortsOutput = null;
         }
 
-        $output = array_filter(
+        $output = \array_filter(
             [
                 'sort' => $sortsOutput,
                 'size' => $this->getSize(),
                 'from' => $this->getFrom(),
             ],
             function ($val) {
-                return $val || is_array($val) || ($val || is_numeric($val));
+                return $val || \is_array($val) || ($val || \is_numeric($val));
             }
         );
 
-        return empty($output) ? new \stdClass() : $output;
+        return $output ?? new \stdClass();
+    }
+
+    public function getType(): string
+    {
+        return 'top_hits';
     }
 }

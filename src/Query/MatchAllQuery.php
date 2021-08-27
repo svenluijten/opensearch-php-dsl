@@ -23,29 +23,20 @@ class MatchAllQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @param array $parameters additional parameters
-     */
     public function __construct(array $parameters = [])
     {
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'match_all';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $params = $this->getParameters();
 
         return [$this->getType() => !empty($params) ? $params : new \stdClass()];
+    }
+
+    public function getType(): string
+    {
+        return 'match_all';
     }
 }

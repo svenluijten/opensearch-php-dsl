@@ -43,22 +43,11 @@ class GeoShapeQuery implements BuilderInterface
     public const SHAPE_TYPE_ENVELOPE = 'envelope';
     public const SHAPE_TYPE_CIRCLE = 'circle';
 
-    /**
-     * @var array
-     */
-    private $fields = [];
+    private array $fields = [];
 
     public function __construct(array $parameters = [])
     {
         $this->setParameters($parameters);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'geo_shape';
     }
 
     /**
@@ -70,8 +59,13 @@ class GeoShapeQuery implements BuilderInterface
      * @param string $relation spatial relation
      * @param array $parameters additional parameters
      */
-    public function addShape($field, $type, array $coordinates, string $relation = self::INTERSECTS, array $parameters = []): void
-    {
+    public function addShape(
+        string $field,
+        string $type,
+        array $coordinates,
+        string $relation = self::INTERSECTS,
+        array $parameters = []
+    ): void {
         $filter = array_merge(
             $parameters,
             [
@@ -86,23 +80,12 @@ class GeoShapeQuery implements BuilderInterface
         ];
     }
 
-    /**
-     * Add geo-shape pre-indexed filter.
-     *
-     * @param string $field field name
-     * @param string $id the ID of the document that containing the pre-indexed shape
-     * @param string $type name of the index where the pre-indexed shape is
-     * @param string $index index type where the pre-indexed shape is
-     * @param string $relation spatial relation
-     * @param string $path the field specified as path containing the pre-indexed shape
-     * @param array $parameters additional parameters
-     */
     public function addPreIndexedShape(
-        $field,
-        $id,
-        $type,
-        $index,
-        $path,
+        string $field,
+        string $id,
+        string $type,
+        string $index,
+        string $path,
         string $relation = self::INTERSECTS,
         array $parameters = []
     ): void {
@@ -122,13 +105,15 @@ class GeoShapeQuery implements BuilderInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $output = $this->processArray($this->fields);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'geo_shape';
     }
 }

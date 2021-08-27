@@ -23,15 +23,9 @@ class FunctionScoreQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var BuilderInterface
-     */
-    private $query;
+    private BuilderInterface $query;
 
-    /**
-     * @var array[]
-     */
-    private $functions;
+    private array $functions = [];
 
     public function __construct(BuilderInterface $query, array $parameters = [])
     {
@@ -39,34 +33,21 @@ class FunctionScoreQuery implements BuilderInterface
         $this->setParameters($parameters);
     }
 
-    /**
-     * Returns the query instance.
-     *
-     * @return BuilderInterface object
-     */
-    public function getQuery()
+    public function getQuery(): BuilderInterface
     {
         return $this->query;
     }
 
     /**
-     * Creates field_value_factor function.
-     *
-     * @param string $field
-     * @param float $factor
-     * @param string $modifier
-     * @param BuilderInterface $query
-     * @param mixed $missing
-     *
-     * @return $this
+     * @param mixed|null $missing
      */
     public function addFieldValueFactorFunction(
-        $field,
-        $factor,
-        $modifier = 'none',
+        string $field,
+        float $factor,
+        string $modifier = 'none',
         ?BuilderInterface $query = null,
         $missing = null
-    ) {
+    ): self {
         $function = [
             'field_value_factor' => array_filter([
                 'field' => $field,
@@ -76,42 +57,22 @@ class FunctionScoreQuery implements BuilderInterface
             ]),
         ];
 
-        $this->applyFilter($function, $query);
+        if ($query) {
+            $function['filter'] = $query->toArray();
+        }
 
         $this->functions[] = $function;
 
         return $this;
     }
 
-    /**
-     * Modifier to apply filter to the function score function.
-     *
-     * @param BuilderInterface $query
-     */
-    private function applyFilter(array &$function, ?BuilderInterface $query = null): void
-    {
-        if ($query) {
-            $function['filter'] = $query->toArray();
-        }
-    }
-
-    /**
-     * Add decay function to function score. Weight and query are optional.
-     *
-     * @param string $type
-     * @param string $field
-     * @param BuilderInterface $query
-     * @param int $weight
-     *
-     * @return $this
-     */
     public function addDecayFunction(
-        $type,
-        $field,
+        string $type,
+        string $field,
         array $function,
         array $options = [],
         ?BuilderInterface $query = null,
-        $weight = null
+        ?int $weight = null
     ) {
         $function = array_filter(
             [
@@ -123,69 +84,51 @@ class FunctionScoreQuery implements BuilderInterface
             ]
         );
 
-        $this->applyFilter($function, $query);
+        if ($query) {
+            $function['filter'] = $query->toArray();
+        }
 
         $this->functions[] = $function;
 
         return $this;
     }
 
-    /**
-     * Adds function to function score without decay function. Influence search score only for specific query.
-     *
-     * @param float $weight
-     * @param BuilderInterface $query
-     *
-     * @return $this
-     */
-    public function addWeightFunction($weight, ?BuilderInterface $query = null)
+    public function addWeightFunction(float $weight, ?BuilderInterface $query = null): self
     {
         $function = [
             'weight' => $weight,
         ];
 
-        $this->applyFilter($function, $query);
+        if ($query) {
+            $function['filter'] = $query->toArray();
+        }
 
         $this->functions[] = $function;
 
         return $this;
     }
 
-    /**
-     * Adds random score function. Seed is optional.
-     *
-     * @param mixed $seed
-     * @param BuilderInterface $query
-     *
-     * @return $this
-     */
-    public function addRandomFunction($seed = null, ?BuilderInterface $query = null)
+    public function addRandomFunction($seed = null, ?BuilderInterface $query = null): self
     {
         $function = [
             'random_score' => $seed ? ['seed' => $seed] : new \stdClass(),
         ];
 
-        $this->applyFilter($function, $query);
+        if ($query) {
+            $function['filter'] = $query->toArray();
+        }
 
         $this->functions[] = $function;
 
         return $this;
     }
 
-    /**
-     * Adds script score function.
-     *
-     * @param string $source
-     * @param BuilderInterface $query
-     *
-     * @return $this
-     */
     public function addScriptScoreFunction(
-        $source,
+        string $source,
         array $params = [],
         array $options = [],
         ?BuilderInterface $query = null
-    ) {
+    ): self {
         $function = [
             'script_score' => [
                 'script' => array_filter(
@@ -201,27 +144,22 @@ class FunctionScoreQuery implements BuilderInterface
             ],
         ];
 
-        $this->applyFilter($function, $query);
+        if ($query) {
+            $function['filter'] = $query->toArray();
+        }
+
         $this->functions[] = $function;
 
         return $this;
     }
 
-    /**
-     * Adds custom simple function. You can add to the array whatever you want.
-     *
-     * @return $this
-     */
-    public function addSimpleFunction(array $function)
+    public function addSimpleFunction(array $function): self
     {
         $this->functions[] = $function;
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
@@ -234,9 +172,6 @@ class FunctionScoreQuery implements BuilderInterface
         return [$this->getType() => $output];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'function_score';

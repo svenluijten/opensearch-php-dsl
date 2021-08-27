@@ -12,6 +12,7 @@
 namespace ONGR\ElasticsearchDSL\Aggregation;
 
 use ONGR\ElasticsearchDSL\BuilderBag;
+use ONGR\ElasticsearchDSL\BuilderInterface;
 use ONGR\ElasticsearchDSL\NameAwareTrait;
 use ONGR\ElasticsearchDSL\NamedBuilderInterface;
 use ONGR\ElasticsearchDSL\ParametersTrait;
@@ -24,31 +25,18 @@ abstract class AbstractAggregation implements NamedBuilderInterface
     use NameAwareTrait;
     use ParametersTrait;
 
-    /**
-     * @var string
-     */
-    private $field;
+    private ?string $field = null;
 
     private ?BuilderBag $aggregations = null;
 
-    /**
-     * Abstract supportsNesting method.
-     *
-     * @return bool
-     */
-    abstract protected function supportsNesting();
+    abstract protected function supportsNesting(): bool;
 
     /**
      * @return array|\stdClass
      */
     abstract protected function getArray();
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->setName($name);
     }
@@ -77,9 +65,7 @@ abstract class AbstractAggregation implements NamedBuilderInterface
     }
 
     /**
-     * Returns all sub aggregations.
-     *
-     * @return BuilderBag[]|NamedBuilderInterface[]
+     * @return BuilderInterface[]
      */
     public function getAggregations()
     {
@@ -90,14 +76,7 @@ abstract class AbstractAggregation implements NamedBuilderInterface
         return [];
     }
 
-    /**
-     * Returns sub aggregation.
-     *
-     * @param string $name aggregation name to return
-     *
-     * @return AbstractAggregation|NamedBuilderInterface|null
-     */
-    public function getAggregation(string $name)
+    public function getAggregation(string $name): ?BuilderInterface
     {
         if ($this->aggregations && $this->aggregations->has($name)) {
             return $this->aggregations->get($name);
@@ -106,14 +85,11 @@ abstract class AbstractAggregation implements NamedBuilderInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $array = $this->getArray();
         $result = [
-            $this->getType() => is_array($array) ? $this->processArray($array) : $array,
+            $this->getType() => \is_array($array) ? $this->processArray($array) : $array,
         ];
 
         if ($this->supportsNesting()) {
@@ -127,14 +103,10 @@ abstract class AbstractAggregation implements NamedBuilderInterface
         return $result;
     }
 
-    /**
-     * Process all nested aggregations.
-     *
-     * @return array
-     */
-    protected function collectNestedAggregations()
+    protected function collectNestedAggregations(): array
     {
         $result = [];
+
         /** @var AbstractAggregation $aggregation */
         foreach ($this->getAggregations() as $aggregation) {
             $result[$aggregation->getName()] = $aggregation->toArray();
@@ -143,12 +115,7 @@ abstract class AbstractAggregation implements NamedBuilderInterface
         return $result;
     }
 
-    /**
-     * Creates BuilderBag new instance.
-     *
-     * @return BuilderBag
-     */
-    private function createBuilderBag()
+    private function createBuilderBag(): BuilderBag
     {
         return new BuilderBag();
     }

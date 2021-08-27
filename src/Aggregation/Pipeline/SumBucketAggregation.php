@@ -14,13 +14,10 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 /**
  * Class representing Max Bucket Pipeline Aggregation.
  *
- * @see https://goo.gl/8gIfok
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
  */
 class SumBucketAggregation extends AbstractPipelineAggregation
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'sum_bucket';

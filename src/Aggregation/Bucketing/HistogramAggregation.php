@@ -39,7 +39,7 @@ class HistogramAggregation extends AbstractAggregation
     protected ?bool $keyed;
 
     public function __construct(
-        $name,
+        string $name,
         string $field,
         ?int $interval = null,
         ?int $minDocCount = null,
@@ -119,7 +119,7 @@ class HistogramAggregation extends AbstractAggregation
 
     public function setExtendedBounds(?int $min = null, ?int $max = null): self
     {
-        $bounds = array_filter(
+        $bounds = \array_filter(
             [
                 'min' => $min,
                 'max' => $max,
@@ -134,17 +134,9 @@ class HistogramAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'histogram';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
-        return array_filter(
+        return \array_filter(
             [
                 'field' => $this->getField(),
                 'interval' => $this->getInterval(),
@@ -154,8 +146,13 @@ class HistogramAggregation extends AbstractAggregation
                 'order' => $this->getOrder(),
             ],
             static function ($val) {
-                return $val || is_numeric($val);
+                return $val || \is_numeric($val);
             }
         );
+    }
+
+    public function getType(): string
+    {
+        return 'histogram';
     }
 }

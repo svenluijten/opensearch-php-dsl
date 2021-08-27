@@ -26,8 +26,7 @@ class FieldSortTest extends \PHPUnit\Framework\TestCase
     public function testToArray(): void
     {
         $nestedFilter = new NestedSort('somePath', new TermQuery('somePath.id', 10));
-        $sort = new FieldSort('someField', 'asc');
-        $sort->setNestedFilter($nestedFilter);
+        $sort = new FieldSort('someField', 'asc', $nestedFilter);
 
         $expected = [
             'someField' => [

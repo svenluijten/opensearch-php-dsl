@@ -23,104 +23,55 @@ class TemplateQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var string
-     */
-    private $file;
+    private ?string $file;
 
-    /**
-     * @var string
-     */
-    private $inline;
+    private ?string $inline;
 
-    /**
-     * @var array
-     */
-    private $params;
+    private array $params;
 
-    /**
-     * @param string $file A template of the query
-     * @param string $inline A template of the query
-     * @param array $params Parameters to insert into template
-     */
-    public function __construct($file = null, $inline = null, array $params = [])
+    public function __construct(?string $file = null, ?string $inline = null, array $params = [])
     {
         $this->setFile($file);
         $this->setInline($inline);
         $this->setParams($params);
     }
 
-    /**
-     * @return string
-     */
-    public function getFile()
+    public function getFile(): ?string
     {
         return $this->file;
     }
 
-    /**
-     * @param string $file
-     *
-     * @return $this;
-     */
-    public function setFile($file)
+    public function setFile(?string $file): self
     {
         $this->file = $file;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getInline()
+    public function getInline(): ?string
     {
         return $this->inline;
     }
 
-    /**
-     * @param string $inline
-     *
-     * @return $this
-     */
-    public function setInline($inline)
+    public function setInline(?string $inline): self
     {
         $this->inline = $inline;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getParams()
+    public function getParams(): array
     {
         return $this->params;
     }
 
-    /**
-     * @param array $params
-     *
-     * @return $this
-     */
-    public function setParams($params)
+    public function setParams(array $params): self
     {
         $this->params = $params;
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'template';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $output = array_filter(
@@ -140,5 +91,10 @@ class TemplateQuery implements BuilderInterface
         $output = $this->processArray($output);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'template';
     }
 }

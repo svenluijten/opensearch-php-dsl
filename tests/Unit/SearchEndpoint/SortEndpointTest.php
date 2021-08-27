@@ -40,7 +40,7 @@ class SortEndpointTest extends \PHPUnit\Framework\TestCase
             'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
         );
 
-        $sort = new FieldSort('acme', ['order' => FieldSort::ASC]);
+        $sort = new FieldSort('acme', FieldSort::ASC);
         $instance->add($sort);
 
         $this->assertEquals(

@@ -29,6 +29,9 @@ class MaxAggregation extends AbstractAggregation
 
     private ?array $missing = null;
 
+    /**
+     * @param array|string $field
+     */
     public function __construct(string $name, $field, ?array $missing = null, ?string $mode = null)
     {
         parent::__construct($name);
@@ -74,14 +77,6 @@ class MaxAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'matrix_stats';
-    }
-
     protected function getArray(): array
     {
         $out = [
@@ -97,5 +92,10 @@ class MaxAggregation extends AbstractAggregation
         }
 
         return $out;
+    }
+
+    public function getType(): string
+    {
+        return 'matrix_stats';
     }
 }

@@ -23,9 +23,6 @@ class GlobalAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setField(?string $field): self
     {
         throw new \LogicException("Global aggregation, doesn't support `field` parameter");
@@ -34,16 +31,13 @@ class GlobalAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'global';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         return new \stdClass();
+    }
+
+    public function getType(): string
+    {
+        return 'global';
     }
 }

@@ -23,6 +23,7 @@ use ONGR\ElasticsearchDSL\BuilderInterface;
 class AdjacencyMatrixAggregation extends AbstractAggregation
 {
     use BucketingTrait;
+
     public const FILTERS = 'filters';
 
     /**
@@ -48,17 +49,11 @@ class AdjacencyMatrixAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         return $this->filters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'adjacency_matrix';

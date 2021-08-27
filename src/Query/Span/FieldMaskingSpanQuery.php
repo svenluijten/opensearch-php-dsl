@@ -22,68 +22,40 @@ class FieldMaskingSpanQuery implements SpanQueryInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var SpanQueryInterface
-     */
-    private $query;
+    private SpanQueryInterface $query;
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * @param string $field
-     */
-    public function __construct($field, SpanQueryInterface $query)
+    public function __construct(string $field, SpanQueryInterface $query)
     {
         $this->setQuery($query);
         $this->setField($field);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getQuery()
+    public function getQuery(): SpanQueryInterface
     {
         return $this->query;
     }
 
-    /**
-     * @param mixed $query
-     *
-     * @return $this
-     */
-    public function setQuery($query)
+    public function setQuery(SpanQueryInterface $query): self
     {
         $this->query = $query;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getField()
+    public function getField(): string
     {
         return $this->field;
     }
 
-    /**
-     * @param string $field
-     *
-     * @return $this
-     */
-    public function setField($field)
+    public function setField(string $field): self
     {
         $this->field = $field;
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $output = [
@@ -96,9 +68,6 @@ class FieldMaskingSpanQuery implements SpanQueryInterface
         return [$this->getType() => $output];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'field_masking_span';

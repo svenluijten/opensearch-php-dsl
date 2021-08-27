@@ -22,22 +22,15 @@ class SpanOrQuery implements SpanQueryInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var SpanQueryInterface[]
-     */
-    private $queries = [];
+    private array $queries;
 
-    public function __construct(array $parameters = [])
+    public function __construct(array $queries, array $parameters = [])
     {
+        $this->queries = $queries;
         $this->setParameters($parameters);
     }
 
-    /**
-     * Add span query.
-     *
-     * @return $this
-     */
-    public function addQuery(SpanQueryInterface $query)
+    public function addQuery(SpanQueryInterface $query): self
     {
         $this->queries[] = $query;
 
@@ -47,22 +40,11 @@ class SpanOrQuery implements SpanQueryInterface
     /**
      * @return SpanQueryInterface[]
      */
-    public function getQueries()
+    public function getQueries(): array
     {
         return $this->queries;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'span_or';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [];
@@ -72,5 +54,10 @@ class SpanOrQuery implements SpanQueryInterface
         $output = $this->processArray($query);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'span_or';
     }
 }

@@ -14,13 +14,10 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 /**
  * Class representing Serial Differencing Pipeline Aggregation.
  *
- * @see https://goo.gl/46ZR4v
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
  */
 class SerialDifferencingAggregation extends AbstractPipelineAggregation
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'serial_diff';

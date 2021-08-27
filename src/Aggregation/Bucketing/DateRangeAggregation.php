@@ -29,20 +29,24 @@ class DateRangeAggregation extends AbstractAggregation
 
     private bool $keyed = false;
 
-    /**
-     * @param string $format
-     */
-    public function __construct(string $name, string $field, ?string $format = null, array $ranges = [], bool $keyed = false)
-    {
+    public function __construct(
+        string $name,
+        string $field,
+        ?string $format = null,
+        array $ranges = [],
+        bool $keyed = false
+    ) {
         parent::__construct($name);
 
         $this->setField($field);
         $this->setFormat($format);
         $this->setKeyed($keyed);
+
         foreach ($ranges as $range) {
             $from = $range['from'] ?? null;
             $to = $range['to'] ?? null;
             $key = $range['key'] ?? null;
+
             $this->addRange($from, $to, $key);
         }
     }
@@ -66,7 +70,7 @@ class DateRangeAggregation extends AbstractAggregation
         return $this;
     }
 
-    public function addRange(?string $from = null, ?string $to = null, ?string $key = null)
+    public function addRange(?string $from = null, ?string $to = null, ?string $key = null): self
     {
         $range = array_filter(
             [
@@ -109,9 +113,6 @@ class DateRangeAggregation extends AbstractAggregation
         return $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'date_range';

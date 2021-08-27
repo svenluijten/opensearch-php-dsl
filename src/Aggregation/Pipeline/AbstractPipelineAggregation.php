@@ -10,22 +10,19 @@ abstract class AbstractPipelineAggregation extends AbstractAggregation
     use MetricTrait;
 
     /**
-     * @var string
+     * @var array|string
      */
     private $bucketsPath;
 
-    /**
-     * @param string $name
-     * @param $bucketsPath
-     */
-    public function __construct($name, $bucketsPath = null)
+    public function __construct(string $name, $bucketsPath)
     {
         parent::__construct($name);
+
         $this->setBucketsPath($bucketsPath);
     }
 
     /**
-     * @return string
+     * @return array|string
      */
     public function getBucketsPath()
     {
@@ -33,11 +30,9 @@ abstract class AbstractPipelineAggregation extends AbstractAggregation
     }
 
     /**
-     * @param string $bucketsPath
-     *
-     * @return $this
+     * @param $bucketsPath
      */
-    public function setBucketsPath($bucketsPath)
+    public function setBucketsPath($bucketsPath): self
     {
         $this->bucketsPath = $bucketsPath;
 

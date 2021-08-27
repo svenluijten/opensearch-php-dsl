@@ -31,40 +31,23 @@ class RangeQuery implements BuilderInterface
     public const LTE = 'lte';
     public const GTE = 'gte';
 
-    /**
-     * @var string field name
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * @param string $field
-     */
-    public function __construct($field, array $parameters = [])
+    public function __construct(string $field, array $parameters = [])
     {
         $this->setParameters($parameters);
 
         if ($this->hasParameter(self::GTE) && $this->hasParameter(self::GT)) {
-            unset($this->parameters[self::GT]);
+            throw new \LogicException('Range query cannot have "gte" and "gt" parameters');
         }
 
         if ($this->hasParameter(self::LTE) && $this->hasParameter(self::LT)) {
-            unset($this->parameters[self::LT]);
+            throw new \LogicException('Range query cannot have "lte" and "lt" parameters');
         }
 
         $this->field = $field;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'range';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $output = [
@@ -72,5 +55,10 @@ class RangeQuery implements BuilderInterface
         ];
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'range';
     }
 }

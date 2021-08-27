@@ -70,34 +70,6 @@ class CompositeAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getArray(): array
-    {
-        $array = [
-            'sources' => $this->sources,
-        ];
-
-        if ($this->size !== null) {
-            $array['size'] = $this->size;
-        }
-
-        if (!empty($this->after)) {
-            $array['after'] = $this->after;
-        }
-
-        return $array;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'composite';
-    }
-
     public function setSize(?int $size): self
     {
         $this->size = $size;
@@ -120,5 +92,30 @@ class CompositeAggregation extends AbstractAggregation
     public function getAfter(): array
     {
         return $this->after;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getArray(): array
+    {
+        $array = [
+            'sources' => $this->sources,
+        ];
+
+        if ($this->size !== null) {
+            $array['size'] = $this->size;
+        }
+
+        if (!empty($this->after)) {
+            $array['after'] = $this->after;
+        }
+
+        return $array;
+    }
+
+    public function getType(): string
+    {
+        return 'composite';
     }
 }

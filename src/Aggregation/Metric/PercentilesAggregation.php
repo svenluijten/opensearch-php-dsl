@@ -51,24 +51,16 @@ class PercentilesAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'percentiles';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
-        $out = array_filter(
+        $out = \array_filter(
             [
                 'percents' => $this->getPercents(),
                 'field' => $this->getField(),
                 'script' => $this->getScript(),
             ],
             function ($val) {
-                return $val || is_numeric($val);
+                return $val || \is_numeric($val);
             }
         );
 
@@ -77,15 +69,17 @@ class PercentilesAggregation extends AbstractAggregation
         return $out;
     }
 
-    /**
-     * @param array $a
-     *
-     * @throws \LogicException
-     */
-    private function isRequiredParametersSet($a): void
+    public function getType(): string
     {
-        if (!array_key_exists('field', $a) && !array_key_exists('script', $a)) {
-            throw new \LogicException('Percentiles aggregation must have field or script set.');
+        return 'percentiles';
+    }
+
+    private function isRequiredParametersSet(array $out): void
+    {
+        if (\array_key_exists('field', $out) || \array_key_exists('script', $out)) {
+            return;
         }
+
+        throw new \LogicException('Percentiles aggregation must have field or script set.');
     }
 }

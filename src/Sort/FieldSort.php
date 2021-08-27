@@ -16,6 +16,8 @@ use ONGR\ElasticsearchDSL\ParametersTrait;
 
 /**
  * Holds all the values required for basic sorting.
+ *
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-search-results.html
  */
 class FieldSort implements BuilderInterface
 {
@@ -24,102 +26,60 @@ class FieldSort implements BuilderInterface
     public const ASC = 'asc';
     public const DESC = 'desc';
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
-    /**
-     * @var string
-     */
-    private $order;
+    private ?string $order;
 
-    /**
-     * @var BuilderInterface
-     */
-    private $nestedFilter;
+    private ?BuilderInterface $nestedFilter;
 
-    /**
-     * @param string $field field name
-     * @param string $order order direction
-     * @param array $params params that can be set to field sort
-     */
-    public function __construct($field, $order = null, $params = [])
-    {
+    public function __construct(
+        string $field,
+        ?string $order = null,
+        ?BuilderInterface $nestedFilter = null,
+        array $parameters = []
+    ) {
         $this->field = $field;
         $this->order = $order;
-        $this->setParameters($params);
+        $this->nestedFilter = $nestedFilter;
+        $this->setParameters($parameters);
     }
 
-    /**
-     * @return string
-     */
-    public function getField()
+    public function getField(): string
     {
         return $this->field;
     }
 
-    /**
-     * @param string $field
-     *
-     * @return $this
-     */
-    public function setField($field)
+    public function setField(string $field): self
     {
         $this->field = $field;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getOrder()
+    public function getOrder(): ?string
     {
         return $this->order;
     }
 
-    /**
-     * @param string $order
-     *
-     * @return $this
-     */
-    public function setOrder($order)
+    public function setOrder(?string $order): self
     {
         $this->order = $order;
 
         return $this;
     }
 
-    /**
-     * @return BuilderInterface
-     */
-    public function getNestedFilter()
+    public function getNestedFilter(): ?BuilderInterface
     {
         return $this->nestedFilter;
     }
 
-    /**
-     * @return $this
-     */
-    public function setNestedFilter(BuilderInterface $nestedFilter)
+    public function setNestedFilter(?BuilderInterface $nestedFilter): self
     {
         $this->nestedFilter = $nestedFilter;
 
         return $this;
     }
 
-    /**
-     * Returns element type.
-     */
-    public function getType(): string
-    {
-        return 'sort';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         if ($this->order) {
@@ -131,7 +91,12 @@ class FieldSort implements BuilderInterface
         }
 
         return [
-            $this->field => !$this->getParameters() ? new \stdClass() : $this->getParameters(),
+            $this->field => $this->getParameters() ?? new \stdClass(),
         ];
+    }
+
+    public function getType(): string
+    {
+        return 'sort';
     }
 }

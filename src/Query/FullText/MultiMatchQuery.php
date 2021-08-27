@@ -29,37 +29,17 @@ class MultiMatchQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    /**
-     * @var array
-     */
     private $fields = [];
 
-    /**
-     * @var string
-     */
-    private $query;
+    private string $query;
 
-    /**
-     * @param string $query
-     */
-    public function __construct(array $fields, $query, array $parameters = [])
+    public function __construct(array $fields, string $query, array $parameters = [])
     {
         $this->fields = $fields;
         $this->query = $query;
         $this->setParameters($parameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'multi_match';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $query = [
@@ -72,5 +52,10 @@ class MultiMatchQuery implements BuilderInterface
         $output = $this->processArray($query);
 
         return [$this->getType() => $output];
+    }
+
+    public function getType(): string
+    {
+        return 'multi_match';
     }
 }

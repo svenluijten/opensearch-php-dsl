@@ -14,26 +14,18 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
 /**
  * Class representing Percentiles Bucket Pipeline Aggregation.
  *
- * @see https://goo.gl/bqi7m5
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-percentiles-bucket-aggregation.html
  */
 class PercentilesBucketAggregation extends AbstractPipelineAggregation
 {
-    private ?array $percents = null;
+    private array $percents = [];
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getType(): string
-    {
-        return 'percentiles_bucket';
-    }
-
-    public function getPercents(): ?array
+    public function getPercents(): array
     {
         return $this->percents;
     }
 
-    public function setPercents(?array $percents): self
+    public function setPercents(array $percents): self
     {
         $this->percents = $percents;
 
@@ -52,5 +44,10 @@ class PercentilesBucketAggregation extends AbstractPipelineAggregation
         }
 
         return $data;
+    }
+
+    public function getType(): string
+    {
+        return 'percentiles_bucket';
     }
 }

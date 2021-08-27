@@ -47,21 +47,19 @@ class ReverseNestedAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'reverse_nested';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         $output = new \stdClass();
+
         if ($this->getPath()) {
             $output = ['path' => $this->getPath()];
         }
 
         return $output;
+    }
+
+    public function getType(): string
+    {
+        return 'reverse_nested';
     }
 }

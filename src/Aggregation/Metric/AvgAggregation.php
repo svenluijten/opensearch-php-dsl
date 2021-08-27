@@ -14,13 +14,10 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Metric;
 /**
  * Class representing Avg Aggregation.
  *
- * @see http://goo.gl/7KOIwo
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html
  */
 class AvgAggregation extends StatsAggregation
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return 'avg';

@@ -36,21 +36,18 @@ class TermsAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getType(): string
-    {
-        return 'terms';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
-        return array_filter(
+        return \array_filter(
             [
                 'field' => $this->getField(),
                 'script' => $this->getScript(),
             ]
         );
+    }
+
+    public function getType(): string
+    {
+        return 'terms';
     }
 }

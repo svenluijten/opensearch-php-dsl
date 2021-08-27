@@ -25,14 +25,7 @@ class StatsAggregation extends AbstractAggregation
     use MetricTrait;
     use ScriptAwareTrait;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     * @param string $script
-     */
-    public function __construct($name, $field = null, $script = null)
+    public function __construct($name, ?string $field = null, ?string $script = null)
     {
         parent::__construct($name);
 
@@ -51,7 +44,7 @@ class StatsAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
         $out = [];
         if ($this->getField()) {

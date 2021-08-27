@@ -30,16 +30,7 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $this->agg = new PercentileRanksAggregation('foo');
-    }
-
-    /**
-     * Tests if exception is thrown when required parameters not set.
-     */
-    public function testIfPercentileRanksAggregationThrowsAnException(): void
-    {
-        $this->expectException(\LogicException::class);
-        $this->agg->toArray();
+        $this->agg = new PercentileRanksAggregation('foo', '');
     }
 
     /**

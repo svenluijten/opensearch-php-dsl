@@ -28,68 +28,25 @@ class PercentileRanksAggregation extends AbstractAggregation
     /**
      * @var array
      */
-    private $values;
+    private array $values;
 
-    /**
-     * @var int
-     */
-    private $compression;
-
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     * @param array $values
-     * @param string $script
-     * @param int $compression
-     */
-    public function __construct($name, $field = null, $values = null, $script = null, $compression = null)
+    public function __construct($name, ?string $field, array $values = [], ?string $script = null)
     {
         parent::__construct($name);
 
         $this->setField($field);
         $this->setValues($values);
         $this->setScript($script);
-        $this->setCompression($compression);
     }
 
-    /**
-     * @return array
-     */
-    public function getValues()
+    public function getValues(): array
     {
         return $this->values;
     }
 
-    /**
-     * @param array $values
-     *
-     * @return $this
-     */
-    public function setValues($values)
+    public function setValues(array $values)
     {
         $this->values = $values;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCompression()
-    {
-        return $this->compression;
-    }
-
-    /**
-     * @param int $compression
-     *
-     * @return $this
-     */
-    public function setCompression($compression)
-    {
-        $this->compression = $compression;
 
         return $this;
     }
@@ -105,16 +62,15 @@ class PercentileRanksAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
         $out = array_filter(
             [
                 'field' => $this->getField(),
                 'script' => $this->getScript(),
                 'values' => $this->getValues(),
-                'compression' => $this->getCompression(),
             ],
-            function ($val) {
+            static function ($val) {
                 return $val || is_numeric($val);
             }
         );
@@ -133,7 +89,7 @@ class PercentileRanksAggregation extends AbstractAggregation
      */
     private function isRequiredParametersSet($a)
     {
-        if (array_key_exists('field', $a) && array_key_exists('values', $a)
+        if ((array_key_exists('field', $a) && array_key_exists('values', $a))
             || (array_key_exists('script', $a) && array_key_exists('values', $a))
         ) {
             return true;

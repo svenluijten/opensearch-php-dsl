@@ -18,10 +18,7 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
  */
 class PercentilesBucketAggregation extends AbstractPipelineAggregation
 {
-    /**
-     * @var array
-     */
-    private $percents;
+    private ?array $percents = null;
 
     /**
      * {@inheritdoc}
@@ -31,18 +28,12 @@ class PercentilesBucketAggregation extends AbstractPipelineAggregation
         return 'percentiles_bucket';
     }
 
-    /**
-     * @return array
-     */
-    public function getPercents()
+    public function getPercents(): ?array
     {
         return $this->percents;
     }
 
-    /**
-     * @return $this
-     */
-    public function setPercents(array $percents)
+    public function setPercents(?array $percents): self
     {
         $this->percents = $percents;
 
@@ -52,7 +43,7 @@ class PercentilesBucketAggregation extends AbstractPipelineAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
         $data = ['buckets_path' => $this->getBucketsPath()];
 

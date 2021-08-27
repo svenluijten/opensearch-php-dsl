@@ -23,41 +23,20 @@ class ScriptedMetricAggregation extends AbstractAggregation
 {
     use MetricTrait;
 
-    /**
-     * @var mixed
-     */
-    private $initScript;
+    private ?string $initScript;
 
-    /**
-     * @var mixed
-     */
-    private $mapScript;
+    private ?string $mapScript;
 
-    /**
-     * @var mixed
-     */
-    private $combineScript;
+    private ?string $combineScript;
 
-    /**
-     * @var mixed
-     */
-    private $reduceScript;
+    private ?string $reduceScript;
 
-    /**
-     * ScriptedMetricAggregation constructor.
-     *
-     * @param string $name
-     * @param mixed $initScript
-     * @param mixed $mapScript
-     * @param mixed $combineScript
-     * @param mixed $reduceScript
-     */
     public function __construct(
-        $name,
-        $initScript = null,
-        $mapScript = null,
-        $combineScript = null,
-        $reduceScript = null
+        string $name,
+        ?string $initScript = null,
+        ?string $mapScript = null,
+        ?string $combineScript = null,
+        ?string $reduceScript = null
     ) {
         parent::__construct($name);
 
@@ -75,70 +54,43 @@ class ScriptedMetricAggregation extends AbstractAggregation
         return 'scripted_metric';
     }
 
-    /**
-     * @return mixed
-     */
-    public function getInitScript()
+    public function getInitScript(): ?string
     {
         return $this->initScript;
     }
 
-    /**
-     * @param mixed $initScript
-     *
-     * @return $this
-     */
-    public function setInitScript($initScript)
+    public function setInitScript(?string $initScript): self
     {
         $this->initScript = $initScript;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMapScript()
+    public function getMapScript(): ?string
     {
         return $this->mapScript;
     }
 
-    /**
-     * @param mixed $mapScript
-     *
-     * @return $this
-     */
-    public function setMapScript($mapScript)
+    public function setMapScript(?string $mapScript): self
     {
         $this->mapScript = $mapScript;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCombineScript()
+    public function getCombineScript(): ?string
     {
         return $this->combineScript;
     }
 
-    /**
-     * @param mixed $combineScript
-     *
-     * @return $this
-     */
-    public function setCombineScript($combineScript)
+    public function setCombineScript(?string $combineScript): self
     {
         $this->combineScript = $combineScript;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getReduceScript()
+    public function getReduceScript(): ?string
     {
         return $this->reduceScript;
     }
@@ -148,7 +100,7 @@ class ScriptedMetricAggregation extends AbstractAggregation
      *
      * @return $this
      */
-    public function setReduceScript($reduceScript)
+    public function setReduceScript(?string $reduceScript): self
     {
         $this->reduceScript = $reduceScript;
 
@@ -158,7 +110,7 @@ class ScriptedMetricAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
         return array_filter(
             [

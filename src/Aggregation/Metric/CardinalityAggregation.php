@@ -25,15 +25,9 @@ class CardinalityAggregation extends AbstractAggregation
     use MetricTrait;
     use ScriptAwareTrait;
 
-    /**
-     * @var int
-     */
-    private $precisionThreshold;
+    private ?int $precisionThreshold = null;
 
-    /**
-     * @var bool
-     */
-    private $rehash;
+    private ?bool $rehash = null;
 
     /**
      * {@inheritdoc}
@@ -47,12 +41,10 @@ class CardinalityAggregation extends AbstractAggregation
                 'precision_threshold' => $this->getPrecisionThreshold(),
                 'rehash' => $this->isRehash(),
             ],
-            function ($val) {
+            static function ($val) {
                 return $val || is_bool($val);
             }
         );
-
-        $this->checkRequiredFields($out);
 
         return $out;
     }
@@ -69,28 +61,17 @@ class CardinalityAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getPrecisionThreshold()
+    public function getPrecisionThreshold(): ?int
     {
         return $this->precisionThreshold;
     }
 
-    /**
-     * @return bool
-     */
-    public function isRehash()
+    public function isRehash(): ?bool
     {
         return $this->rehash;
     }
 
-    /**
-     * @param bool $rehash
-     *
-     * @return $this
-     */
-    public function setRehash($rehash)
+    public function setRehash(?bool $rehash): self
     {
         $this->rehash = $rehash;
 
@@ -103,19 +84,5 @@ class CardinalityAggregation extends AbstractAggregation
     public function getType(): string
     {
         return 'cardinality';
-    }
-
-    /**
-     * Checks if required fields are set.
-     *
-     * @param array $fields
-     *
-     * @throws \LogicException
-     */
-    private function checkRequiredFields($fields): void
-    {
-        if (!array_key_exists('field', $fields) && !array_key_exists('script', $fields)) {
-            throw new \LogicException('Cardinality aggregation must have field or script set.');
-        }
     }
 }

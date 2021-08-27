@@ -29,10 +29,7 @@ abstract class AbstractAggregation implements NamedBuilderInterface
      */
     private $field;
 
-    /**
-     * @var BuilderBag
-     */
-    private $aggregations;
+    private ?BuilderBag $aggregations = null;
 
     /**
      * Abstract supportsNesting method.
@@ -56,32 +53,19 @@ abstract class AbstractAggregation implements NamedBuilderInterface
         $this->setName($name);
     }
 
-    /**
-     * @param string $field
-     *
-     * @return $this
-     */
-    public function setField($field)
+    public function setField(?string $field): self
     {
         $this->field = $field;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getField()
+    public function getField(): ?string
     {
         return $this->field;
     }
 
-    /**
-     * Adds a sub-aggregation.
-     *
-     * @return $this
-     */
-    public function addAggregation(self $abstractAggregation)
+    public function addAggregation(self $abstractAggregation): self
     {
         if (!$this->aggregations) {
             $this->aggregations = $this->createBuilderBag();
@@ -113,7 +97,7 @@ abstract class AbstractAggregation implements NamedBuilderInterface
      *
      * @return AbstractAggregation|NamedBuilderInterface|null
      */
-    public function getAggregation($name)
+    public function getAggregation(string $name)
     {
         if ($this->aggregations && $this->aggregations->has($name)) {
             return $this->aggregations->get($name);

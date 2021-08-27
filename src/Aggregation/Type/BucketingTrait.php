@@ -16,12 +16,7 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Type;
  */
 trait BucketingTrait
 {
-    /**
-     * Bucketing aggregations supports nesting.
-     *
-     * @return bool
-     */
-    protected function supportsNesting()
+    protected function supportsNesting(): bool
     {
         return true;
     }

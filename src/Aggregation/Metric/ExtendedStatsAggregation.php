@@ -25,15 +25,7 @@ class ExtendedStatsAggregation extends AbstractAggregation
     use MetricTrait;
     use ScriptAwareTrait;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     * @param int $sigma
-     * @param string $script
-     */
-    public function __construct($name, $field = null, $sigma = null, $script = null)
+    public function __construct(string $name, ?string $field = null, ?string $sigma = null, ?string $script = null)
     {
         parent::__construct($name);
 
@@ -42,25 +34,14 @@ class ExtendedStatsAggregation extends AbstractAggregation
         $this->setScript($script);
     }
 
-    /**
-     * @var int
-     */
-    private $sigma;
+    private ?int $sigma;
 
-    /**
-     * @return int
-     */
-    public function getSigma()
+    public function getSigma(): ?int
     {
         return $this->sigma;
     }
 
-    /**
-     * @param int $sigma
-     *
-     * @return $this
-     */
-    public function setSigma($sigma)
+    public function setSigma(?int $sigma): self
     {
         $this->sigma = $sigma;
 
@@ -78,7 +59,7 @@ class ExtendedStatsAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
         return array_filter(
             [
@@ -86,7 +67,7 @@ class ExtendedStatsAggregation extends AbstractAggregation
                 'script' => $this->getScript(),
                 'sigma' => $this->getSigma(),
             ],
-            function ($val) {
+            static function ($val) {
                 return $val || is_numeric($val);
             }
         );

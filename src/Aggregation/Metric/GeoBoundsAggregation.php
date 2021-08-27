@@ -23,19 +23,9 @@ class GeoBoundsAggregation extends AbstractAggregation
 {
     use MetricTrait;
 
-    /**
-     * @var bool
-     */
-    private $wrapLongitude = true;
+    private bool $wrapLongitude = true;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     * @param bool $wrapLongitude
-     */
-    public function __construct($name, $field = null, $wrapLongitude = true)
+    public function __construct($name, string $field, bool $wrapLongitude = true)
     {
         parent::__construct($name);
 
@@ -43,20 +33,12 @@ class GeoBoundsAggregation extends AbstractAggregation
         $this->setWrapLongitude($wrapLongitude);
     }
 
-    /**
-     * @return bool
-     */
-    public function isWrapLongitude()
+    public function isWrapLongitude(): bool
     {
         return $this->wrapLongitude;
     }
 
-    /**
-     * @param bool $wrapLongitude
-     *
-     * @return $this
-     */
-    public function setWrapLongitude($wrapLongitude)
+    public function setWrapLongitude(bool $wrapLongitude): self
     {
         $this->wrapLongitude = $wrapLongitude;
 
@@ -66,14 +48,10 @@ class GeoBoundsAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
         $data = [];
-        if ($this->getField()) {
-            $data['field'] = $this->getField();
-        } else {
-            throw new \LogicException('Geo bounds aggregation must have a field set.');
-        }
+        $data['field'] = $this->getField();
 
         $data['wrap_longitude'] = $this->isWrapLongitude();
 

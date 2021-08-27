@@ -23,13 +23,7 @@ class GeoCentroidAggregation extends AbstractAggregation
 {
     use MetricTrait;
 
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     */
-    public function __construct($name, $field = null)
+    public function __construct(string $name, string $field)
     {
         parent::__construct($name);
 
@@ -39,16 +33,11 @@ class GeoCentroidAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
-        $data = [];
-        if ($this->getField()) {
-            $data['field'] = $this->getField();
-        } else {
-            throw new \LogicException('Geo centroid aggregation must have a field set.');
-        }
-
-        return $data;
+        return [
+            'field' => $this->getField()
+        ];
     }
 
     /**

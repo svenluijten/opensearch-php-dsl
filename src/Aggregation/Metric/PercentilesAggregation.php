@@ -25,71 +25,25 @@ class PercentilesAggregation extends AbstractAggregation
     use MetricTrait;
     use ScriptAwareTrait;
 
-    /**
-     * @var array
-     */
-    private $percents;
+    private ?array $percents;
 
-    /**
-     * @var int
-     */
-    private $compression;
-
-    /**
-     * Inner aggregations container init.
-     *
-     * @param string $name
-     * @param string $field
-     * @param array $percents
-     * @param string $script
-     * @param int $compression
-     */
-    public function __construct($name, $field = null, $percents = null, $script = null, $compression = null)
+    public function __construct(string $name, ?string $field = null, ?array $percents = null, ?string $script = null)
     {
         parent::__construct($name);
 
         $this->setField($field);
         $this->setPercents($percents);
         $this->setScript($script);
-        $this->setCompression($compression);
     }
 
-    /**
-     * @return array
-     */
-    public function getPercents()
+    public function getPercents(): ?array
     {
         return $this->percents;
     }
 
-    /**
-     * @param array $percents
-     *
-     * @return $this
-     */
-    public function setPercents($percents)
+    public function setPercents(?array $percents): self
     {
         $this->percents = $percents;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCompression()
-    {
-        return $this->compression;
-    }
-
-    /**
-     * @param int $compression
-     *
-     * @return $this
-     */
-    public function setCompression($compression)
-    {
-        $this->compression = $compression;
 
         return $this;
     }
@@ -105,11 +59,10 @@ class PercentilesAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function getArray()
+    public function getArray(): array
     {
         $out = array_filter(
             [
-                'compression' => $this->getCompression(),
                 'percents' => $this->getPercents(),
                 'field' => $this->getField(),
                 'script' => $this->getScript(),

@@ -21,21 +21,11 @@ use ONGR\ElasticsearchDSL\Aggregation\Metric\GeoBoundsAggregation;
 class GeoBoundsAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Test if exception is thrown.
-     */
-    public function testGeoBoundsAggregationException(): void
-    {
-        $this->expectException(\LogicException::class);
-        $agg = new GeoBoundsAggregation('test_agg');
-        $agg->getArray();
-    }
-
-    /**
      * Tests getType method.
      */
     public function testGeoBoundsAggregationGetType(): void
     {
-        $agg = new GeoBoundsAggregation('foo');
+        $agg = new GeoBoundsAggregation('foo', '');
         $result = $agg->getType();
         $this->assertEquals('geo_bounds', $result);
     }
@@ -45,7 +35,7 @@ class GeoBoundsAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGeoBoundsAggregationGetArray(): void
     {
-        $agg = new GeoBoundsAggregation('foo');
+        $agg = new GeoBoundsAggregation('foo', '');
         $agg->setField('bar');
         $agg->setWrapLongitude(true);
         $result = [

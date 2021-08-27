@@ -21,21 +21,11 @@ use ONGR\ElasticsearchDSL\Aggregation\Metric\GeoCentroidAggregation;
 class GeoCentroidAggregationTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Test if exception is thrown when field is not provided
-     */
-    public function testGetArrayException(): void
-    {
-        $this->expectException(\LogicException::class);
-        $aggregation = new GeoCentroidAggregation('foo');
-        $aggregation->getArray();
-    }
-
-    /**
      * Tests getType method.
      */
     public function testGeoCentroidAggregationGetType(): void
     {
-        $aggregation = new GeoCentroidAggregation('foo');
+        $aggregation = new GeoCentroidAggregation('foo', '');
         $this->assertEquals('geo_centroid', $aggregation->getType());
     }
 

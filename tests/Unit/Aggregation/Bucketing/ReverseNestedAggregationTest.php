@@ -37,7 +37,7 @@ class ReverseNestedAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expectedResult, $aggregation->toArray());
+        static::assertEquals($expectedResult, $aggregation->toArray());
     }
 
     /**
@@ -57,7 +57,7 @@ class ReverseNestedAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals(
+        static::assertEquals(
             json_encode($expectedResult),
             json_encode($aggregation->toArray())
         );

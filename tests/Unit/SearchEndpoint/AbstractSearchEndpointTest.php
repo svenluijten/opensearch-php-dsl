@@ -44,12 +44,12 @@ class AbstractSearchEndpointTest extends TestCase
         $agg = $this->getMockForAbstractClass(AbstractSearchEndpoint::class);
         $agg->add(new MissingAggregation('acme', 'foo'), 'bar');
 
-        $this->assertInstanceOf(MissingAggregation::class, $agg->get('bar'));
-        $this->assertTrue($agg->has('bar'));
+        static::assertInstanceOf(MissingAggregation::class, $agg->get('bar'));
+        static::assertTrue($agg->has('bar'));
 
         $agg->remove('bar');
 
-        $this->assertNull($agg->get('bar'));
-        $this->assertFalse($agg->has('bar'));
+        static::assertNull($agg->get('bar'));
+        static::assertFalse($agg->has('bar'));
     }
 }

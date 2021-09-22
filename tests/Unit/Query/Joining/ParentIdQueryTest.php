@@ -14,7 +14,7 @@ class ParentIdQueryTest extends TestCase
     {
         $query = new ParentIdQuery('parent_id', 'child_type', ['foo' => 'bar']);
 
-        $this->assertSame(
+        static::assertSame(
             [
                 'parent_id' => [
                     'id' => 'parent_id',

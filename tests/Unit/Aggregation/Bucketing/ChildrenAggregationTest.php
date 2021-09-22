@@ -28,7 +28,7 @@ class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new ChildrenAggregation('foo', '');
         $result = $aggregation->getType();
-        $this->assertEquals('children', $result);
+        static::assertEquals('children', $result);
     }
 
     /**
@@ -41,7 +41,7 @@ class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation->addAggregation(new TermsAggregation('test'));
         $result = $aggregation->getArray();
         $expected = ['type' => 'question'];
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 
     public function testChildrenThrowsErrorWithoutAgg(): void

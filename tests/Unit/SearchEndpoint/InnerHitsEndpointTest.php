@@ -25,7 +25,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             'ONGR\ElasticsearchDSL\SearchEndpoint\InnerHitsEndpoint',
             new InnerHitsEndpoint()
         );
@@ -42,8 +42,8 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
         $endpoint->add($innerHit, $hitName);
         $builders = $endpoint->getAll();
 
-        $this->assertCount(1, $builders);
-        $this->assertSame($innerHit, $builders[$hitName]);
+        static::assertCount(1, $builders);
+        static::assertSame($innerHit, $builders[$hitName]);
     }
 
     /**
@@ -61,8 +61,8 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
             ->addMethods(['getName'])
             ->getMock()
         ;
-        $innerHit->expects($this->any())->method('getName')->willReturn('foo');
-        $innerHit->expects($this->any())->method('toArray')->willReturn(['foo' => 'bar']);
+        $innerHit->expects(static::any())->method('getName')->willReturn('foo');
+        $innerHit->expects(static::any())->method('toArray')->willReturn(['foo' => 'bar']);
 
         $endpoint = new InnerHitsEndpoint();
         $endpoint->add($innerHit, 'foo');
@@ -72,7 +72,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals(
+        static::assertEquals(
             $expected,
             $endpoint->normalize($normalizer)
         );

@@ -43,7 +43,7 @@ class FieldSortTest extends \PHPUnit\Framework\TestCase
             ],
         ];
         $result = $sort->toArray();
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 
     public function testFieldSortingSetters(): void

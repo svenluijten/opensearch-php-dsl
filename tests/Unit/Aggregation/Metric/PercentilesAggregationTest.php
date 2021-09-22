@@ -35,7 +35,7 @@ class PercentilesAggregationTest extends \PHPUnit\Framework\TestCase
     public function testGetType(): void
     {
         $aggregation = new PercentilesAggregation('bar');
-        $this->assertEquals('percentiles', $aggregation->getType());
+        static::assertEquals('percentiles', $aggregation->getType());
     }
 
     /**
@@ -44,7 +44,7 @@ class PercentilesAggregationTest extends \PHPUnit\Framework\TestCase
     public function testGetArray(): void
     {
         $aggregation = new PercentilesAggregation('bar', 'fieldValue', ['percentsValue']);
-        $this->assertSame(
+        static::assertSame(
             [
                 'percents' => ['percentsValue'],
                 'field' => 'fieldValue',

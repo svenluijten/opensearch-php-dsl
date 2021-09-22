@@ -27,7 +27,7 @@ class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new DateHistogramAggregation('foo', 'test');
         $result = $aggregation->getType();
-        $this->assertEquals('date_histogram', $result);
+        static::assertEquals('date_histogram', $result);
     }
 
     /**
@@ -40,7 +40,7 @@ class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation->setCalendarInterval('month');
         $result = $aggregation->getArray();
         $expected = ['field' => 'date', 'calender_interval' => 'month'];
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 
     public function testWithoutInterval(): void

@@ -26,7 +26,7 @@ class MissingAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation = new MissingAggregation('foo', '');
         $aggregation->setField('bar');
         $result = $aggregation->getArray();
-        $this->assertEquals('bar', $result['field']);
+        static::assertEquals('bar', $result['field']);
     }
 
     /**
@@ -36,6 +36,6 @@ class MissingAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new MissingAggregation('bar', '');
         $result = $aggregation->getType();
-        $this->assertEquals('missing', $result);
+        static::assertEquals('missing', $result);
     }
 }

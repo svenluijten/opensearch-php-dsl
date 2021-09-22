@@ -69,7 +69,7 @@ class GlobalAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray($aggregation, $expectedResult): void
     {
-        $this->assertEquals(
+        static::assertEquals(
             json_encode($expectedResult),
             json_encode($aggregation->toArray())
         );

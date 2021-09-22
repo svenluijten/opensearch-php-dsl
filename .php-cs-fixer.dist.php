@@ -46,7 +46,8 @@ return (new PhpCsFixer\Config())
         'yoda_style' => false,
         // Currently waiting for https://github.com/FriendsOfPHP/PHP-CS-Fixer/pull/5572 to be implemented to ignore @var (needed for LSP)
         'phpdoc_to_comment' => false,
-        'php_unit_test_class_requires_covers' => false
+        'php_unit_test_class_requires_covers' => false,
+        'php_unit_test_case_static_method_calls' => true,
     ])
     ->setFinder(PhpCsFixer\Finder::create()
         ->exclude('vendor')

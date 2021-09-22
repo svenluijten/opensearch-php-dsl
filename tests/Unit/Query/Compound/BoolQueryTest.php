@@ -77,7 +77,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
                 ],
             ],
         ];
-        $this->assertEquals($expected, $bool->toArray());
+        static::assertEquals($expected, $bool->toArray());
     }
 
     /**
@@ -126,7 +126,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
                 ],
             ],
         ];
-        $this->assertEquals($expected, $bool->toArray());
+        static::assertEquals($expected, $bool->toArray());
     }
 
     /**
@@ -136,7 +136,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
     {
         $bool = new BoolQuery();
 
-        $this->assertEquals(['bool' => new \stdClass()], $bool->toArray());
+        static::assertEquals(['bool' => new \stdClass()], $bool->toArray());
     }
 
     /**
@@ -165,7 +165,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
                 ],
             ],
         ];
-        $this->assertEquals($expected, $bool->toArray());
+        static::assertEquals($expected, $bool->toArray());
     }
 
     /**
@@ -180,7 +180,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
                 'key2' => 'value2',
             ],
         ];
-        $this->assertEquals($expected, $bool->toArray());
+        static::assertEquals($expected, $bool->toArray());
     }
 
     /**
@@ -190,7 +190,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
     {
         $bool = new BoolQuery();
 
-        $this->assertIsArray($bool->getQueries());
+        static::assertIsArray($bool->getQueries());
     }
 
     /**
@@ -205,7 +205,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
         $bool->add($query, BoolQuery::MUST, 'query');
         $bool->add($query2, BoolQuery::SHOULD, 'query2');
 
-        $this->assertSame(['query' => $query, 'query2' => $query2], $bool->getQueries());
+        static::assertSame(['query' => $query, 'query2' => $query2], $bool->getQueries());
     }
 
     /**
@@ -215,7 +215,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
     {
         $bool = new BoolQuery();
 
-        $this->assertIsArray($bool->getQueries(BoolQuery::MUST));
+        static::assertIsArray($bool->getQueries(BoolQuery::MUST));
     }
 
     /**
@@ -230,6 +230,6 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
         $bool->add($query, BoolQuery::MUST, 'query');
         $bool->add($query2, BoolQuery::SHOULD, 'query2');
 
-        $this->assertSame(['query' => $query], $bool->getQueries(BoolQuery::MUST));
+        static::assertSame(['query' => $query], $bool->getQueries(BoolQuery::MUST));
     }
 }

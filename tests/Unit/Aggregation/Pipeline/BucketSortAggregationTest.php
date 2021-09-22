@@ -34,7 +34,7 @@ class BucketSortAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $aggregation->toArray());
+        static::assertEquals($expected, $aggregation->toArray());
 
         $aggregation = new BucketSortAggregation('acme');
 
@@ -42,7 +42,7 @@ class BucketSortAggregationTest extends \PHPUnit\Framework\TestCase
             'bucket_sort' => [],
         ];
 
-        $this->assertEquals($expected, $aggregation->toArray());
+        static::assertEquals($expected, $aggregation->toArray());
 
         $aggregation = new BucketSortAggregation('acme');
         $sort = new FieldSort('test_field', FieldSort::ASC);
@@ -58,7 +58,7 @@ class BucketSortAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $aggregation->toArray());
+        static::assertEquals($expected, $aggregation->toArray());
     }
 
     public function testSetSort(): void

@@ -28,12 +28,12 @@ class OrderedSerializerTest extends TestCase
         $search->addQuery(new MatchAllQuery());
         $search->addPostFilter(new TermsQuery('foo', ['bar']));
 
-        $this->assertEquals(
+        static::assertEquals(
             [
                 [
                     'terms' => [
-                            'foo' => ['bar'],
-                        ],
+                        'foo' => ['bar'],
+                    ],
                 ],
                 [
                     'match_all' => new \stdClass(),

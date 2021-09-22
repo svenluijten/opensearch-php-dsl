@@ -44,7 +44,7 @@ class GeoShapeQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $filter->toArray());
+        static::assertEquals($expected, $filter->toArray());
     }
 
     /**
@@ -70,6 +70,6 @@ class GeoShapeQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $filter->toArray());
+        static::assertEquals($expected, $filter->toArray());
     }
 }

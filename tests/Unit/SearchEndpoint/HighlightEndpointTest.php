@@ -27,7 +27,7 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        $this->assertInstanceOf(HighlightEndpoint::class, new HighlightEndpoint());
+        static::assertInstanceOf(HighlightEndpoint::class, new HighlightEndpoint());
     }
 
     /**
@@ -40,13 +40,13 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
             NormalizerInterface::class
         );
 
-        $this->assertNull($instance->normalize($normalizerInterface));
+        static::assertNull($instance->normalize($normalizerInterface));
 
         $highlight = new Highlight();
         $highlight->addField('acme');
         $instance->add($highlight);
 
-        $this->assertEquals(
+        static::assertEquals(
             json_encode($highlight->toArray()),
             json_encode($instance->normalize($normalizerInterface))
         );
@@ -65,8 +65,8 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
         $endpoint->add($highlight, $highlightName);
         $builders = $endpoint->getAll();
 
-        $this->assertCount(1, $builders);
-        $this->assertSame($highlight, $builders[$highlightName]);
+        static::assertCount(1, $builders);
+        static::assertSame($highlight, $builders[$highlightName]);
     }
 
     public function testItThrowsExceptionOnDuplicateHighlights(): void

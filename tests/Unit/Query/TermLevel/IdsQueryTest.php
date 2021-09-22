@@ -30,6 +30,6 @@ class IdsQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $query->toArray());
+        static::assertEquals($expected, $query->toArray());
     }
 }

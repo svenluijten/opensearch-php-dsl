@@ -37,6 +37,6 @@ class SearchEndpointFactoryTest extends \PHPUnit\Framework\TestCase
     public function testFactory(): void
     {
         $endpoint = SearchEndpointFactory::get(AggregationsEndpoint::NAME);
-        $this->assertInstanceOf(SearchEndpointInterface::class, $endpoint);
+        static::assertInstanceOf(SearchEndpointInterface::class, $endpoint);
     }
 }

@@ -27,7 +27,7 @@ class SpanNotQueryTest extends \PHPUnit\Framework\TestCase
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Query\Span\SpanQueryInterface')->getMock();
         $mock
-            ->expects($this->exactly(2))
+            ->expects(static::exactly(2))
             ->method('toArray')
             ->willReturn(['span_term' => ['key' => 'value']])
         ;
@@ -43,6 +43,6 @@ class SpanNotQueryTest extends \PHPUnit\Framework\TestCase
                 ],
             ],
         ];
-        $this->assertEquals($result, $query->toArray());
+        static::assertEquals($result, $query->toArray());
     }
 }

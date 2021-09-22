@@ -86,6 +86,6 @@ class GeoPolygonQueryTest extends \PHPUnit\Framework\TestCase
     {
         $filter = new GeoPolygonQuery($field, $points, $parameters);
         $result = $filter->toArray();
-        $this->assertEquals(['geo_polygon' => $expected], $result);
+        static::assertEquals(['geo_polygon' => $expected], $result);
     }
 }

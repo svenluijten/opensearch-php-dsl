@@ -27,7 +27,7 @@ class SignificantTextAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new SignificantTextAggregation('foo');
         $result = $aggregation->getType();
-        $this->assertEquals('significant_text', $result);
+        static::assertEquals('significant_text', $result);
     }
 
     /**
@@ -39,6 +39,6 @@ class SignificantTextAggregationTest extends \PHPUnit\Framework\TestCase
 
         $result = $aggregation->getArray();
         $expected = ['field' => 'title'];
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 }

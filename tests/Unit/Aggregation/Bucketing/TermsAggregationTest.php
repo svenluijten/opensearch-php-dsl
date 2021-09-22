@@ -31,7 +31,7 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
             'terms' => ['field' => 'test_field'],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -51,7 +51,7 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
 
         // Case #2 terms aggregation with zero size.
         $aggregation = new TermsAggregation('test_agg');
@@ -65,7 +65,7 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -87,7 +87,7 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -109,7 +109,7 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -149,7 +149,7 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -169,7 +169,7 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -189,7 +189,7 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -199,6 +199,6 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new TermsAggregation('foo');
         $result = $aggregation->getType();
-        $this->assertEquals('terms', $result);
+        static::assertEquals('terms', $result);
     }
 }

@@ -30,7 +30,7 @@ class StatsAggregationTest extends \PHPUnit\Framework\TestCase
             'stats' => ['field' => 'test_field'],
         ];
 
-        $this->assertEquals($expectedResult, $aggregation->toArray());
+        static::assertEquals($expectedResult, $aggregation->toArray());
     }
 
     /**
@@ -39,7 +39,7 @@ class StatsAggregationTest extends \PHPUnit\Framework\TestCase
     public function testConstructor(): void
     {
         $aggregation = new StatsAggregation('foo', 'fieldValue', 'scriptValue');
-        $this->assertSame(
+        static::assertSame(
             [
                 'stats' => [
                     'field' => 'fieldValue',

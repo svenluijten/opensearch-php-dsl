@@ -25,7 +25,7 @@ class MatchAllQueryTest extends \PHPUnit\Framework\TestCase
     public function testToArrayWhenThereAreNoParams(): void
     {
         $query = new MatchAllQuery();
-        $this->assertEquals(['match_all' => new \stdClass()], $query->toArray());
+        static::assertEquals(['match_all' => new \stdClass()], $query->toArray());
     }
 
     /**
@@ -35,7 +35,7 @@ class MatchAllQueryTest extends \PHPUnit\Framework\TestCase
     {
         $params = ['boost' => 5];
         $query = new MatchAllQuery($params);
-        $this->assertEquals(['match_all' => $params], $query->toArray());
+        static::assertEquals(['match_all' => $params], $query->toArray());
     }
 
     /**

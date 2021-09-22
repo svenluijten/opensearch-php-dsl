@@ -56,6 +56,6 @@ class FieldMaskingSpanQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($result, $spanNearQuery->toArray());
+        static::assertEquals($result, $spanNearQuery->toArray());
     }
 }

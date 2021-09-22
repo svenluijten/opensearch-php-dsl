@@ -30,7 +30,7 @@ class SpanTermQueryTest extends \PHPUnit\Framework\TestCase
             'span_term' => ['user' => 'bob'],
         ];
 
-        $this->assertEquals($expected, $query->toArray());
+        static::assertEquals($expected, $query->toArray());
     }
 
     /**
@@ -43,6 +43,6 @@ class SpanTermQueryTest extends \PHPUnit\Framework\TestCase
             'span_term' => ['user' => ['value' => 'bob', 'boost' => 2]],
         ];
 
-        $this->assertEquals($expected, $query->toArray());
+        static::assertEquals($expected, $query->toArray());
     }
 }

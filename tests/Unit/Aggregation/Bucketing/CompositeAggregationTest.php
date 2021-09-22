@@ -38,7 +38,7 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expectedResult, $compositeAgg->toArray());
+        static::assertEquals($expectedResult, $compositeAgg->toArray());
     }
 
     /**
@@ -64,7 +64,7 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expectedResult, $compositeAgg->toArray());
+        static::assertEquals($expectedResult, $compositeAgg->toArray());
     }
 
     /**
@@ -75,7 +75,7 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
         $compositeAgg = new CompositeAggregation('composite_test_agg');
         $compositeAgg->setSize(5);
 
-        $this->assertEquals(5, $compositeAgg->getSize());
+        static::assertEquals(5, $compositeAgg->getSize());
     }
 
     /**
@@ -86,7 +86,7 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
         $compositeAgg = new CompositeAggregation('composite_test_agg');
         $compositeAgg->setAfter(['test_term_agg' => 'test']);
 
-        $this->assertEquals(['test_term_agg' => 'test'], $compositeAgg->getAfter());
+        static::assertEquals(['test_term_agg' => 'test'], $compositeAgg->getAfter());
     }
 
     /**
@@ -96,7 +96,7 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new CompositeAggregation('foo');
         $result = $aggregation->getType();
-        $this->assertEquals('composite', $result);
+        static::assertEquals('composite', $result);
     }
 
     public function testTermsSourceWithOrderParameter(): void
@@ -116,7 +116,7 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expectedResult, $compositeAgg->toArray());
+        static::assertEquals($expectedResult, $compositeAgg->toArray());
     }
 
     public function testTermsSourceWithDescOrderParameter(): void
@@ -136,7 +136,7 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expectedResult, $compositeAgg->toArray());
+        static::assertEquals($expectedResult, $compositeAgg->toArray());
     }
 
     public function testMultipleSourcesWithDifferentOrders(): void
@@ -164,7 +164,7 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expectedResult, $compositeAgg->toArray());
+        static::assertEquals($expectedResult, $compositeAgg->toArray());
     }
 
     public function testConstructorSourcesWorks(): void

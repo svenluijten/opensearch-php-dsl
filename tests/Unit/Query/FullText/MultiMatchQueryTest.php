@@ -31,7 +31,7 @@ class MultiMatchQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $query->toArray());
+        static::assertEquals($expected, $query->toArray());
     }
 
     /**
@@ -46,6 +46,6 @@ class MultiMatchQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $query->toArray());
+        static::assertEquals($expected, $query->toArray());
     }
 }

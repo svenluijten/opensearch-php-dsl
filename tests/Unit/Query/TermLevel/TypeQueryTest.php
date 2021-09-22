@@ -28,6 +28,6 @@ class TypeQueryTest extends \PHPUnit\Framework\TestCase
             'type' => ['value' => 'foo'],
         ];
 
-        $this->assertEquals($expectedResult, $query->toArray());
+        static::assertEquals($expectedResult, $query->toArray());
     }
 }

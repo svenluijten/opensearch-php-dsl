@@ -26,7 +26,7 @@ class GeoCentroidAggregationTest extends \PHPUnit\Framework\TestCase
     public function testGeoCentroidAggregationGetType(): void
     {
         $aggregation = new GeoCentroidAggregation('foo', '');
-        $this->assertEquals('geo_centroid', $aggregation->getType());
+        static::assertEquals('geo_centroid', $aggregation->getType());
     }
 
     /**
@@ -35,6 +35,6 @@ class GeoCentroidAggregationTest extends \PHPUnit\Framework\TestCase
     public function testGeoCentroidAggregationGetArray(): void
     {
         $aggregation = new GeoCentroidAggregation('foo', 'location');
-        $this->assertEquals(['field' => 'location'], $aggregation->getArray());
+        static::assertEquals(['field' => 'location'], $aggregation->getArray());
     }
 }

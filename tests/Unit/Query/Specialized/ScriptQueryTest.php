@@ -52,6 +52,6 @@ class ScriptQueryTest extends \PHPUnit\Framework\TestCase
     {
         $filter = new ScriptQuery($script, $parameters);
         $result = $filter->toArray();
-        $this->assertEquals(['script' => $expected], $result);
+        static::assertEquals(['script' => $expected], $result);
     }
 }

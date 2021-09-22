@@ -22,7 +22,7 @@ class AbstractAggregationTest extends TestCase
 
         $agg->addAggregation($subAgg);
 
-        $this->assertSame($subAgg, $agg->getAggregation('foo_bar'));
+        static::assertSame($subAgg, $agg->getAggregation('foo_bar'));
     }
 
     public function testGetUnavailableAggregation(): void
@@ -36,7 +36,7 @@ class AbstractAggregationTest extends TestCase
 
         $agg->addAggregation($subAgg);
 
-        $this->assertNull($agg->getAggregation('invalid'));
+        static::assertNull($agg->getAggregation('invalid'));
     }
 }
 

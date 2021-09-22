@@ -24,7 +24,7 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        $this->assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\SuggestEndpoint', new SuggestEndpoint());
+        static::assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\SuggestEndpoint', new SuggestEndpoint());
     }
 
     /**
@@ -39,8 +39,8 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
         $endpoint->add($suggest, $suggestName);
         $builders = $endpoint->getAll();
 
-        $this->assertCount(1, $builders);
-        $this->assertSame($suggest, $builders[$suggestName]);
+        static::assertCount(1, $builders);
+        static::assertSame($suggest, $builders[$suggestName]);
     }
 
     /**
@@ -57,7 +57,7 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
         $suggest = new Suggest('foo', 'bar', 'acme', 'foo');
         $instance->add($suggest);
 
-        $this->assertEquals(
+        static::assertEquals(
             $suggest->toArray(),
             $instance->normalize($normalizerInterface)
         );

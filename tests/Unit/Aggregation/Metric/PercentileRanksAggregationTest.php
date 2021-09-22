@@ -58,7 +58,7 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetType(): void
     {
-        $this->assertEquals('percentile_ranks', $this->agg->getType());
+        static::assertEquals('percentile_ranks', $this->agg->getType());
     }
 
     /**
@@ -68,7 +68,7 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $this->agg->setField('bar');
         $this->agg->setValues(['bar']);
-        $this->assertSame(
+        static::assertSame(
             [
                 'percentile_ranks' => [
                     'field' => 'bar',
@@ -86,7 +86,7 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $this->agg->setScript('bar');
         $this->agg->setValues(['bar']);
-        $this->assertSame(
+        static::assertSame(
             [
                 'percentile_ranks' => [
                     'script' => 'bar',

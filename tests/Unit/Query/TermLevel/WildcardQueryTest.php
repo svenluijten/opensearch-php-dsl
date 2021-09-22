@@ -32,6 +32,6 @@ class WildcardQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expectedResult, $query->toArray());
+        static::assertEquals($expectedResult, $query->toArray());
     }
 }

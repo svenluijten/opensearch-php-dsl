@@ -30,6 +30,6 @@ class QueryStringQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $query->toArray());
+        static::assertEquals($expected, $query->toArray());
     }
 }

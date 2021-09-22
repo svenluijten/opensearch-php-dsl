@@ -27,7 +27,7 @@ class SignificantTermsAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new SignificantTermsAggregation('foo');
         $result = $aggregation->getType();
-        $this->assertEquals('significant_terms', $result);
+        static::assertEquals('significant_terms', $result);
     }
 
     /**
@@ -38,6 +38,6 @@ class SignificantTermsAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation = new SignificantTermsAggregation('foo', 'title');
         $result = $aggregation->getArray();
         $expected = ['field' => 'title'];
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 }

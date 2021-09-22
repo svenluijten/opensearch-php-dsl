@@ -65,7 +65,7 @@ class GeoHashGridAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation->setField($filterData['field']);
 
         $result = $aggregation->getArray();
-        $this->assertEquals($result, $expected);
+        static::assertEquals($result, $expected);
     }
 
     /**
@@ -75,6 +75,6 @@ class GeoHashGridAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new GeoHashGridAggregation('foo', '');
         $result = $aggregation->getType();
-        $this->assertEquals('geohash_grid', $result);
+        static::assertEquals('geohash_grid', $result);
     }
 }

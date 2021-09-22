@@ -24,7 +24,7 @@ class SuggestTest extends \PHPUnit\Framework\TestCase
     public function testSuggestGetType(): void
     {
         $suggest = new Suggest('foo', 'term', 'acme', 'bar');
-        $this->assertEquals('term', $suggest->getType());
+        static::assertEquals('term', $suggest->getType());
     }
 
     /**
@@ -116,6 +116,6 @@ class SuggestTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(Suggest $suggest, array $expected): void
     {
-        $this->assertEquals($expected, $suggest->toArray());
+        static::assertEquals($expected, $suggest->toArray());
     }
 }

@@ -35,6 +35,6 @@ class PercentilesBucketAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $aggregation->toArray());
+        static::assertEquals($expected, $aggregation->toArray());
     }
 }

@@ -27,7 +27,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        $this->assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint', new QueryEndpoint());
+        static::assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint', new QueryEndpoint());
     }
 
     /**
@@ -36,7 +36,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
     public function testGetOrder(): void
     {
         $instance = new QueryEndpoint();
-        $this->assertEquals(2, $instance->getOrder());
+        static::assertEquals(2, $instance->getOrder());
     }
 
     /**
@@ -49,12 +49,12 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
             'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
         );
 
-        $this->assertNull($instance->normalize($normalizerInterface));
+        static::assertNull($instance->normalize($normalizerInterface));
 
         $matchAll = new MatchAllQuery();
         $instance->add($matchAll);
 
-        $this->assertEquals(
+        static::assertEquals(
             $matchAll->toArray(),
             $instance->normalize($normalizerInterface)
         );
@@ -71,8 +71,8 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
         $endpoint->add($query, $queryName);
         $builders = $endpoint->getAll();
 
-        $this->assertCount(1, $builders);
-        $this->assertSame($query, $builders[$queryName]);
+        static::assertCount(1, $builders);
+        static::assertSame($query, $builders[$queryName]);
     }
 
     public function testSearchForFilterQueryReference(): void
@@ -84,7 +84,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
 
         $instance->addReference('filter_query', new TermsQuery('foo', ['bar']));
 
-        $this->assertSame(
+        static::assertSame(
             [
                 'bool' => [
                     'filter' => [

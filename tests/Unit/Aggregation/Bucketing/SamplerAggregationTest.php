@@ -28,7 +28,7 @@ class SamplerAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new SamplerAggregation('foo');
         $result = $aggregation->getType();
-        $this->assertEquals('sampler', $result);
+        static::assertEquals('sampler', $result);
     }
 
     /**
@@ -52,7 +52,7 @@ class SamplerAggregationTest extends \PHPUnit\Framework\TestCase
                 $termAggregation->getName() => $termAggregation->toArray(),
             ],
         ];
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 
     /**
@@ -61,6 +61,6 @@ class SamplerAggregationTest extends \PHPUnit\Framework\TestCase
     public function testGetArrayNoShardSize(): void
     {
         $aggregation = new SamplerAggregation('foo', 'bar');
-        $this->assertEquals(['field' => 'bar'], $aggregation->getArray());
+        static::assertEquals(['field' => 'bar'], $aggregation->getArray());
     }
 }

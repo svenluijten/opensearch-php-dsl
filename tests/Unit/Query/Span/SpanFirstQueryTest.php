@@ -27,7 +27,7 @@ class SpanFirstQueryTest extends \PHPUnit\Framework\TestCase
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Query\Span\SpanQueryInterface')->getMock();
         $mock
-            ->expects($this->once())
+            ->expects(static::once())
             ->method('toArray')
             ->willReturn(['span_term' => ['user' => 'bob']])
         ;
@@ -41,6 +41,6 @@ class SpanFirstQueryTest extends \PHPUnit\Framework\TestCase
                 'end' => 5,
             ],
         ];
-        $this->assertEquals($result, $query->toArray());
+        static::assertEquals($result, $query->toArray());
     }
 }

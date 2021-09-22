@@ -25,7 +25,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
     {
         $highlight = new Highlight();
         $result = $highlight->getType();
-        $this->assertEquals('highlight', $result);
+        static::assertEquals('highlight', $result);
     }
 
     /**
@@ -36,7 +36,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
         $highlight = new Highlight();
         $highlight->addParameter('_source', ['include' => ['title']]);
         $result = $highlight->hasParameter('_source');
-        $this->assertTrue($result);
+        static::assertTrue($result);
     }
 
     /**
@@ -48,7 +48,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
         $highlight->addParameter('_source', ['include' => ['title']]);
         $highlight->removeParameter('_source');
         $result = $highlight->hasParameter('_source');
-        $this->assertFalse($result);
+        static::assertFalse($result);
     }
 
     /**
@@ -59,7 +59,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
         $highlight = new Highlight();
         $highlight->addParameter('_source', ['include' => 'title']);
         $expectedResult = ['include' => 'title'];
-        $this->assertEquals($expectedResult, $highlight->getParameter('_source'));
+        static::assertEquals($expectedResult, $highlight->getParameter('_source'));
     }
 
     /**
@@ -82,7 +82,7 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
             'content',
             ['force_source' => true],
         ];
-        $this->assertEquals($expectedResult, $highlight->getParameters());
+        static::assertEquals($expectedResult, $highlight->getParameters());
     }
 
     /**
@@ -111,6 +111,6 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
                 '</tag>',
             ],
         ];
-        $this->assertEquals($expectedResult, $result);
+        static::assertEquals($expectedResult, $result);
     }
 }

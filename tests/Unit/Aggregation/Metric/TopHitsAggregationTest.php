@@ -40,7 +40,7 @@ class TopHitsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertSame($expected, $aggregation->toArray());
+        static::assertSame($expected, $aggregation->toArray());
     }
 
     /**
@@ -61,7 +61,7 @@ class TopHitsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertSame($expected, $aggregation->toArray());
+        static::assertSame($expected, $aggregation->toArray());
     }
 
     public function testSort(): void

@@ -42,7 +42,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation->setAnonymous(true);
         $aggregation->addFilter($mock, 'name');
         $result = $aggregation->getArray();
-        $this->assertArrayHasKey('filters', $result);
+        static::assertArrayHasKey('filters', $result);
     }
 
     /**
@@ -52,7 +52,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new FiltersAggregation('foo');
         $result = $aggregation->getType();
-        $this->assertEquals('filters', $result);
+        static::assertEquals('filters', $result);
     }
 
     /**
@@ -65,7 +65,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
             ->onlyMethods(['toArray', 'getType'])
             ->getMockForAbstractClass()
         ;
-        $filter->expects($this->any())
+        $filter->expects(static::any())
             ->method('toArray')
             ->willReturn(['test_field' => ['test_value' => 'test']])
         ;
@@ -89,7 +89,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
                 ],
             ],
         ];
-        $this->assertEquals($expected, $results);
+        static::assertEquals($expected, $results);
     }
 
     /**
@@ -108,7 +108,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
             ]
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             [
                 'filters' => [
                     'filters' => [
@@ -129,7 +129,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
             true
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             [
                 'filters' => [
                     'filters' => [

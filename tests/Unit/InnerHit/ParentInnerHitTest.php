@@ -25,6 +25,6 @@ class ParentInnerHitTest extends \PHPUnit\Framework\TestCase
                 ],
             ],
         ];
-        $this->assertEquals($expected, $hit->toArray());
+        static::assertEquals($expected, $hit->toArray());
     }
 }

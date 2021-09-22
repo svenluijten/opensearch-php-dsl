@@ -26,7 +26,7 @@ class HasParentQueryTest extends \PHPUnit\Framework\TestCase
     {
         $parentQuery = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
         $query = new HasParentQuery('test_type', $parentQuery, ['test_parameter1']);
-        $this->assertEquals(['test_parameter1'], $query->getParameters());
+        static::assertEquals(['test_parameter1'], $query->getParameters());
     }
 
     public function testToArray(): void
@@ -34,7 +34,7 @@ class HasParentQueryTest extends \PHPUnit\Framework\TestCase
         $query = new TermsQuery('foo', ['bar']);
         $parentQuery = new HasParentQuery('parent_type', $query, ['foo' => 'bar']);
 
-        $this->assertSame(
+        static::assertSame(
             [
                 'has_parent' => [
                     'parent_type' => 'parent_type',

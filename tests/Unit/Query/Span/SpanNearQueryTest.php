@@ -27,7 +27,7 @@ class SpanNearQueryTest extends \PHPUnit\Framework\TestCase
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Query\Span\SpanQueryInterface')->getMock();
         $mock
-            ->expects($this->once())
+            ->expects(static::once())
             ->method('toArray')
             ->willReturn(['span_term' => ['key' => 'value']])
         ;
@@ -48,6 +48,6 @@ class SpanNearQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($result, $query->toArray());
+        static::assertEquals($result, $query->toArray());
     }
 }

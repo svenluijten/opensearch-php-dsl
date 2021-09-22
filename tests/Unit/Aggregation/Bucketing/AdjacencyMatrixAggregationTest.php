@@ -42,7 +42,7 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation = new AdjacencyMatrixAggregation('test_agg');
         $aggregation->addFilter('name', $mock);
         $result = $aggregation->getArray();
-        $this->assertArrayHasKey('filters', $result);
+        static::assertArrayHasKey('filters', $result);
     }
 
     /**
@@ -52,7 +52,7 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new AdjacencyMatrixAggregation('foo');
         $result = $aggregation->getType();
-        $this->assertEquals('adjacency_matrix', $result);
+        static::assertEquals('adjacency_matrix', $result);
     }
 
     /**
@@ -65,7 +65,7 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
             ->onlyMethods(['toArray', 'getType'])
             ->getMockForAbstractClass()
         ;
-        $filter->expects($this->any())
+        $filter->expects(static::any())
             ->method('toArray')
             ->willReturn(['test_field' => ['test_value' => 'test']])
         ;
@@ -90,7 +90,7 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
                 ],
             ],
         ];
-        $this->assertEquals($expected, $results);
+        static::assertEquals($expected, $results);
     }
 
     /**
@@ -109,7 +109,7 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
             ]
         );
 
-        $this->assertSame(
+        static::assertSame(
             [
                 'adjacency_matrix' => [
                     'filters' => [
@@ -123,7 +123,7 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
 
         $aggregation = new AdjacencyMatrixAggregation('test');
 
-        $this->assertSame(
+        static::assertSame(
             [
                 'adjacency_matrix' => [
                     'filters' => [],

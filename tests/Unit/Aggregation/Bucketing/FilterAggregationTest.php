@@ -98,7 +98,7 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray($aggregation, $expectedResult): void
     {
-        $this->assertEquals($expectedResult, $aggregation->toArray());
+        static::assertEquals($expectedResult, $aggregation->toArray());
     }
 
     /**
@@ -121,7 +121,7 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation->setFilter(new ExistsQuery('test'));
         $result = $aggregation->toArray();
 
-        $this->assertEquals(
+        static::assertEquals(
             [
                 'filter' => [
                     'exists' => [
@@ -140,7 +140,7 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $matchAllFilter = new MatchAllQuery();
         $aggregation = new FilterAggregation('test', $matchAllFilter);
-        $this->assertEquals(
+        static::assertEquals(
             [
                 'filter' => $matchAllFilter->toArray(),
             ],

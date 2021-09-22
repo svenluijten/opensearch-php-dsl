@@ -97,7 +97,7 @@ class NestedInnerHitTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray($innerHit, $expected): void
     {
-        $this->assertEquals($expected, $innerHit->toArray());
+        static::assertEquals($expected, $innerHit->toArray());
     }
 
     /**
@@ -114,8 +114,8 @@ class NestedInnerHitTest extends \PHPUnit\Framework\TestCase
         $hit->setPath('bar');
         $hit->setSearch($search);
 
-        $this->assertEquals('foo', $hit->getName());
-        $this->assertEquals('bar', $hit->getPath());
-        $this->assertEquals($search, $hit->getSearch());
+        static::assertEquals('foo', $hit->getName());
+        static::assertEquals('bar', $hit->getPath());
+        static::assertEquals($search, $hit->getSearch());
     }
 }

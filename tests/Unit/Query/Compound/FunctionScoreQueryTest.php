@@ -75,7 +75,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
         $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
         $functionScoreQuery->addRandomFunction($seed);
 
-        $this->assertEquals(['function_score' => $expectedArray], $functionScoreQuery->toArray());
+        static::assertEquals(['function_score' => $expectedArray], $functionScoreQuery->toArray());
     }
 
     /**
@@ -93,7 +93,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             new TermsQuery('foo', ['bar']),
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             [
                 'query' => [
                     'match_all' => new \stdClass(),
@@ -148,7 +148,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             5
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             [
                 'query' => [
                     'match_all' => new \stdClass(),
@@ -182,7 +182,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
         $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
         $functionScoreQuery->addWeightFunction(5, new TermsQuery('foo', ['bar']));
 
-        $this->assertEquals(
+        static::assertEquals(
             [
                 'query' => [
                     'match_all' => new \stdClass(),
@@ -310,7 +310,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             ]
         );
 
-        $this->assertEquals(
+        static::assertEquals(
             [
                 'query' => [
                     'match_all' => new \stdClass(),

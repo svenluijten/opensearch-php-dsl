@@ -30,26 +30,26 @@ class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation->setScript('foo');
         $result = $aggregation->getArray();
 
-        $this->assertArrayHasKey('script', $result, 'key=script when script is set');
-        $this->assertEquals('foo', $result['script'], 'script=foo when scripts name=foo');
+        static::assertArrayHasKey('script', $result, 'key=script when script is set');
+        static::assertEquals('foo', $result['script'], 'script=foo when scripts name=foo');
 
         $aggregation->setField('foo');
         $result = $aggregation->getArray();
 
-        $this->assertArrayHasKey('field', $result, 'key=field when field is set');
-        $this->assertEquals('foo', $result['field'], 'field=foo when fields name=foo');
+        static::assertArrayHasKey('field', $result, 'key=field when field is set');
+        static::assertEquals('foo', $result['field'], 'field=foo when fields name=foo');
 
         $aggregation->setPrecisionThreshold(10);
         $result = $aggregation->getArray();
 
-        $this->assertArrayHasKey('precision_threshold', $result, 'key=precision_threshold when is set');
-        $this->assertEquals(10, $result['precision_threshold'], 'precision_threshold=10 when is set');
+        static::assertArrayHasKey('precision_threshold', $result, 'key=precision_threshold when is set');
+        static::assertEquals(10, $result['precision_threshold'], 'precision_threshold=10 when is set');
 
         $aggregation->setRehash(true);
         $result = $aggregation->getArray();
 
-        $this->assertArrayHasKey('rehash', $result, 'key=rehash when rehash is set');
-        $this->assertTrue($result['rehash'], 'rehash=true when rehash is set to true');
+        static::assertArrayHasKey('rehash', $result, 'key=rehash when rehash is set');
+        static::assertTrue($result['rehash'], 'rehash=true when rehash is set to true');
     }
 
     /**
@@ -59,6 +59,6 @@ class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new CardinalityAggregation('foo');
         $result = $aggregation->getType();
-        $this->assertEquals('cardinality', $result);
+        static::assertEquals('cardinality', $result);
     }
 }

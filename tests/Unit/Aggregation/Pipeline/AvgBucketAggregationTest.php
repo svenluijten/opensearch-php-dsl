@@ -27,7 +27,7 @@ class AvgBucketAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new AvgBucketAggregation('foo', 'foo>bar');
 
-        $this->assertEquals(['buckets_path' => 'foo>bar'], $aggregation->getArray());
+        static::assertEquals(['buckets_path' => 'foo>bar'], $aggregation->getArray());
     }
 
     /**
@@ -36,6 +36,6 @@ class AvgBucketAggregationTest extends \PHPUnit\Framework\TestCase
     public function testAvgBucketAggregationGetType(): void
     {
         $aggregation = new AvgBucketAggregation('foo', 'foo>bar');
-        $this->assertEquals('avg_bucket', $aggregation->getType());
+        static::assertEquals('avg_bucket', $aggregation->getType());
     }
 }

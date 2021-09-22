@@ -28,7 +28,7 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
         $bag = new BuilderBag();
         $fooBuilder = $this->getBuilder('foo');
         $builderName = $bag->add($fooBuilder);
-        $this->assertTrue($bag->has($builderName));
+        static::assertTrue($bag->has($builderName));
     }
 
     /**
@@ -44,9 +44,9 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
 
         $bag->remove($fooBuilderName);
 
-        $this->assertFalse($bag->has($fooBuilderName), 'Foo builder should not exist anymore.');
-        $this->assertTrue($bag->has($acmeBuilderName), 'Acme builder should exist.');
-        $this->assertCount(1, $bag->all());
+        static::assertFalse($bag->has($fooBuilderName), 'Foo builder should not exist anymore.');
+        static::assertTrue($bag->has($acmeBuilderName), 'Acme builder should exist.');
+        static::assertCount(1, $bag->all());
     }
 
     /**
@@ -63,7 +63,7 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
 
         $bag->clear();
 
-        $this->assertEmpty($bag->all());
+        static::assertEmpty($bag->all());
     }
 
     /**
@@ -75,7 +75,7 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
         $bazBuilder = $this->getBuilder('baz');
         $builderName = $bag->add($bazBuilder);
 
-        $this->assertNotEmpty($bag->get($builderName));
+        static::assertNotEmpty($bag->get($builderName));
     }
 
     /**
@@ -95,13 +95,13 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
         ;
 
         $friendlyBuilderMock
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('getName')
             ->willReturn($name)
         ;
 
         $friendlyBuilderMock
-            ->expects($this->any())
+            ->expects(static::any())
             ->method('toArray')
             ->willReturn([])
         ;

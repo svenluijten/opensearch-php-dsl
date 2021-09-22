@@ -27,7 +27,7 @@ class SpanMultiTermQueryTest extends \PHPUnit\Framework\TestCase
     {
         $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
         $mock
-            ->expects($this->once())
+            ->expects(static::once())
             ->method('toArray')
             ->willReturn(['prefix' => ['user' => ['value' => 'ki']]])
         ;
@@ -41,6 +41,6 @@ class SpanMultiTermQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $query->toArray());
+        static::assertEquals($expected, $query->toArray());
     }
 }

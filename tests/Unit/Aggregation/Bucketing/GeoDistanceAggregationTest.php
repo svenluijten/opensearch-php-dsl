@@ -65,7 +65,7 @@ class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation->addRange($filterData['ranges'][0], $filterData['ranges'][1]);
 
         $result = $aggregation->getArray();
-        $this->assertEquals($result, $expected);
+        static::assertEquals($result, $expected);
     }
 
     /**
@@ -75,7 +75,7 @@ class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new GeoDistanceAggregation('foo', '', '');
         $result = $aggregation->getType();
-        $this->assertEquals('geo_distance', $result);
+        static::assertEquals('geo_distance', $result);
     }
 
     /**
@@ -96,7 +96,7 @@ class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
             'distanceTypeValue'
         );
 
-        $this->assertSame(
+        static::assertSame(
             [
                 'geo_distance' => [
                     'field' => 'fieldName',

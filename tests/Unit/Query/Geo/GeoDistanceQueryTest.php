@@ -61,6 +61,6 @@ class GeoDistanceQueryTest extends \PHPUnit\Framework\TestCase
     {
         $query = new GeoDistanceQuery($field, $distance, new Location($location['lat'], $location['lon']), $parameters);
         $result = $query->toArray();
-        $this->assertEquals(['geo_distance' => $expected], $result);
+        static::assertEquals(['geo_distance' => $expected], $result);
     }
 }

@@ -37,6 +37,6 @@ class NestedAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($expectedResult, $aggregation->toArray());
+        static::assertEquals($expectedResult, $aggregation->toArray());
     }
 }

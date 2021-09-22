@@ -34,7 +34,7 @@ class TemplateQueryTest extends \PHPUnit\Framework\TestCase
                 'params' => $params,
             ],
         ];
-        $this->assertEquals($expected, $query->toArray());
+        static::assertEquals($expected, $query->toArray());
     }
 
     /**
@@ -53,7 +53,7 @@ class TemplateQueryTest extends \PHPUnit\Framework\TestCase
                 'params' => $params,
             ],
         ];
-        $this->assertEquals($expected, $query->toArray());
+        static::assertEquals($expected, $query->toArray());
     }
 
     /**

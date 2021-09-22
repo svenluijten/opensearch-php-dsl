@@ -26,7 +26,7 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        $this->assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\PostFilterEndpoint', new PostFilterEndpoint());
+        static::assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\PostFilterEndpoint', new PostFilterEndpoint());
     }
 
     /**
@@ -35,7 +35,7 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
     public function testGetOrder(): void
     {
         $instance = new PostFilterEndpoint();
-        $this->assertEquals(1, $instance->getOrder());
+        static::assertEquals(1, $instance->getOrder());
     }
 
     /**
@@ -47,12 +47,12 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
         $normalizerInterface = $this->getMockForAbstractClass(
             'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
         );
-        $this->assertNull($instance->normalize($normalizerInterface));
+        static::assertNull($instance->normalize($normalizerInterface));
 
         $matchAll = new MatchAllQuery();
         $instance->add($matchAll);
 
-        $this->assertEquals(
+        static::assertEquals(
             json_encode($matchAll->toArray()),
             json_encode($instance->normalize($normalizerInterface))
         );
@@ -70,7 +70,7 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
         $endpoint->add($filter, $filterName);
         $builders = $endpoint->getAll();
 
-        $this->assertCount(1, $builders);
-        $this->assertSame($filter, $builders[$filterName]);
+        static::assertCount(1, $builders);
+        static::assertSame($filter, $builders[$filterName]);
     }
 }

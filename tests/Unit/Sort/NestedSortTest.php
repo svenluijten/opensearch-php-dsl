@@ -34,7 +34,7 @@ class NestedSortTest extends \PHPUnit\Framework\TestCase
             ],
         ];
         $result = $query->toArray();
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 
     /**
@@ -47,7 +47,7 @@ class NestedSortTest extends \PHPUnit\Framework\TestCase
             'path' => 'somePath',
         ];
         $result = $query->toArray();
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 
     /**
@@ -85,7 +85,7 @@ class NestedSortTest extends \PHPUnit\Framework\TestCase
             ],
         ];
         $result = $query->toArray();
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 
     public function testSetters(): void

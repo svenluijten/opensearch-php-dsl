@@ -30,7 +30,7 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
             'auto_date_histogram' => ['field' => 'test_field'],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -50,7 +50,7 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
 
         // Case #2
         $aggregation = new AutoDateHistogramAggregation('test_agg', 'test_field', null, $date);
@@ -62,7 +62,7 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -83,7 +83,7 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
 
         // Case #2
         $aggregation = new AutoDateHistogramAggregation('test_agg', 'wrong_field', 5);
@@ -96,7 +96,7 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->toArray(), $result);
     }
 
     /**
@@ -106,6 +106,6 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new AutoDateHistogramAggregation('foo', 'bar');
         $result = $aggregation->getType();
-        $this->assertEquals('auto_date_histogram', $result);
+        static::assertEquals('auto_date_histogram', $result);
     }
 }

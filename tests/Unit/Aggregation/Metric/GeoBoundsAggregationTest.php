@@ -27,7 +27,7 @@ class GeoBoundsAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $agg = new GeoBoundsAggregation('foo', '');
         $result = $agg->getType();
-        $this->assertEquals('geo_bounds', $result);
+        static::assertEquals('geo_bounds', $result);
     }
 
     /**
@@ -44,7 +44,7 @@ class GeoBoundsAggregationTest extends \PHPUnit\Framework\TestCase
                 'wrap_longitude' => true,
             ],
         ];
-        $this->assertEquals($result, $agg->toArray(), 'when wraplongitude is true');
+        static::assertEquals($result, $agg->toArray(), 'when wraplongitude is true');
 
         $agg->setWrapLongitude(false);
         $result = [
@@ -53,6 +53,6 @@ class GeoBoundsAggregationTest extends \PHPUnit\Framework\TestCase
                 'wrap_longitude' => false,
             ],
         ];
-        $this->assertEquals($result, $agg->toArray(), 'when wraplongitude is false');
+        static::assertEquals($result, $agg->toArray(), 'when wraplongitude is false');
     }
 }

@@ -34,7 +34,7 @@ class SearchTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        $this->assertInstanceOf('ONGR\ElasticsearchDSL\Search', new Search());
+        static::assertInstanceOf('ONGR\ElasticsearchDSL\Search', new Search());
     }
 
     public function testScrollUriParameter(): void
@@ -43,7 +43,7 @@ class SearchTest extends \PHPUnit\Framework\TestCase
         $search->setScroll('5m');
         $search->__wakeup();
 
-        $this->assertArrayHasKey('scroll', $search->getUriParams());
+        static::assertArrayHasKey('scroll', $search->getUriParams());
     }
 
     public function testInvalidParameter(): void
@@ -89,7 +89,7 @@ class SearchTest extends \PHPUnit\Framework\TestCase
 
         $search->toArray();
 
-        $this->assertSame(
+        static::assertSame(
             [
                 'size' => 5,
             ],

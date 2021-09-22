@@ -45,7 +45,7 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
             'ranges' => [['from' => 10, 'to' => 20]],
             'keyed' => true,
         ];
-        $this->assertEquals($expected, $result);
+        static::assertEquals($expected, $result);
     }
 
     /**
@@ -55,7 +55,7 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new DateRangeAggregation('foo', 'test');
         $result = $aggregation->getType();
-        $this->assertEquals('date_range', $result);
+        static::assertEquals('date_range', $result);
     }
 
     public function testDateRangeNeedsRanges(): void
@@ -114,9 +114,9 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
             ->disableOriginalConstructor()
             ->getMock()
         ;
-        $aggregation->expects($this->once())->method('setField')->with($field);
-        $aggregation->expects($this->once())->method('setFormat')->with($format);
-        $aggregation->expects($this->exactly(count($ranges ?? [])))->method('addRange');
+        $aggregation->expects(static::once())->method('setField')->with($field);
+        $aggregation->expects(static::once())->method('setFormat')->with($format);
+        $aggregation->expects(static::exactly(count($ranges ?? [])))->method('addRange');
 
         if ($field !== null) {
             if ($format !== null) {

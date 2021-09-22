@@ -26,6 +26,6 @@ class ExistsQueryTest extends \PHPUnit\Framework\TestCase
     public function testToArray(): void
     {
         $query = new ExistsQuery('bar');
-        $this->assertEquals(['exists' => ['field' => 'bar']], $query->toArray());
+        static::assertEquals(['exists' => ['field' => 'bar']], $query->toArray());
     }
 }

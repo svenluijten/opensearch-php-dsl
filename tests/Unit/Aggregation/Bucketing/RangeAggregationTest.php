@@ -40,7 +40,7 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($result, $aggregation->toArray());
+        static::assertEquals($result, $aggregation->toArray());
     }
 
     /**
@@ -71,7 +71,7 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($result, $aggregation->toArray());
+        static::assertEquals($result, $aggregation->toArray());
     }
 
     /**
@@ -114,7 +114,7 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        $this->assertEquals($result, $aggregation->toArray());
+        static::assertEquals($result, $aggregation->toArray());
     }
 
     /**
@@ -124,7 +124,7 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $agg = new RangeAggregation('foo');
         $result = $agg->getType();
-        $this->assertEquals('range', $result);
+        static::assertEquals('range', $result);
     }
 
     /**
@@ -150,21 +150,21 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
         ];
 
         $result = $aggregation->getArray();
-        $this->assertEquals($result, $expected, 'get array of ranges when keyed=true');
+        static::assertEquals($result, $expected, 'get array of ranges when keyed=true');
 
         $result = $aggregation->removeRangeByKey('name');
-        $this->assertTrue($result, 'returns true when removed valid range name');
+        static::assertTrue($result, 'returns true when removed valid range name');
 
         $result = $aggregation->removeRangeByKey('not_existing_key');
-        $this->assertFalse($result, 'should not allow remove not existing key if keyed=true');
+        static::assertFalse($result, 'should not allow remove not existing key if keyed=true');
 
         $aggregation->setKeyed(false);
         $result = $aggregation->removeRangeByKey('not_existing_key');
-        $this->assertFalse($result, 'should not allow remove not existing key if keyed=false');
+        static::assertFalse($result, 'should not allow remove not existing key if keyed=false');
 
         $aggregation->addRange(100, 300, 'name');
         $result = $aggregation->removeRangeByKey('name');
-        $this->assertFalse($result, 'can not remove any existing range if keyed=false');
+        static::assertFalse($result, 'can not remove any existing range if keyed=false');
     }
 
     /**
@@ -192,9 +192,9 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
 
         $aggregation->removeRange(500, 700);
         $result = $aggregation->getArray();
-        $this->assertEquals($result, $expected, 'get expected array of ranges');
+        static::assertEquals($result, $expected, 'get expected array of ranges');
         $result = $aggregation->removeRange(500, 700);
-        $this->assertFalse($result, 'returns false after removing not-existing range');
+        static::assertFalse($result, 'returns false after removing not-existing range');
     }
 
     /**
@@ -203,7 +203,7 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
     public function testConstructor(): void
     {
         $aggregation = new RangeAggregation('foo', 'fieldValue', [['from' => 10, 'key' => '20']], true);
-        $this->assertSame(
+        static::assertSame(
             [
                 'range' => [
                     'keyed' => true,

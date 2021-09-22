@@ -27,7 +27,7 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             'ONGR\ElasticsearchDSL\SearchEndpoint\AggregationsEndpoint',
             new AggregationsEndpoint()
         );
@@ -44,8 +44,8 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
         $endpoint->add($agg, $aggName);
         $builders = $endpoint->getAll();
 
-        $this->assertCount(1, $builders);
-        $this->assertSame($agg, $builders[$aggName]);
+        static::assertCount(1, $builders);
+        static::assertSame($agg, $builders[$aggName]);
     }
 
     public function testNormalize(): void
@@ -60,7 +60,7 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
             'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
         );
 
-        $this->assertSame(
+        static::assertSame(
             [
                 'bar' => [
                     'missing' => [

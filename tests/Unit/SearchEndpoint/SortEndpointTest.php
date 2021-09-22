@@ -26,7 +26,7 @@ class SortEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        $this->assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\SortEndpoint', new SortEndpoint());
+        static::assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\SortEndpoint', new SortEndpoint());
     }
 
     /**
@@ -43,7 +43,7 @@ class SortEndpointTest extends \PHPUnit\Framework\TestCase
         $sort = new FieldSort('acme', FieldSort::ASC);
         $instance->add($sort);
 
-        $this->assertEquals(
+        static::assertEquals(
             [$sort->toArray()],
             $instance->normalize($normalizerInterface)
         );
@@ -60,7 +60,7 @@ class SortEndpointTest extends \PHPUnit\Framework\TestCase
         $endpoint->add($sort, $sortName);
         $builders = $endpoint->getAll();
 
-        $this->assertCount(1, $builders);
-        $this->assertSame($sort, $builders[$sortName]);
+        static::assertCount(1, $builders);
+        static::assertSame($sort, $builders[$sortName]);
     }
 }

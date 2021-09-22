@@ -49,8 +49,8 @@ class NestedQuery implements BuilderInterface
         return [
             $this->getType() => $this->processArray(
                 [
-                    'path' => $this->path,
-                    'query' => $this->query->toArray(),
+                    'path' => $this->getPath(),
+                    'query' => $this->getQuery()->toArray(),
                 ]
             ),
         ];

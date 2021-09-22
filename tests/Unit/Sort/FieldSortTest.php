@@ -12,6 +12,7 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Sort;
 
 use ONGR\ElasticsearchDSL\Query\TermLevel\TermQuery;
+use ONGR\ElasticsearchDSL\Query\TermLevel\TermsQuery;
 use ONGR\ElasticsearchDSL\Sort\FieldSort;
 use ONGR\ElasticsearchDSL\Sort\NestedSort;
 
@@ -49,15 +50,23 @@ class FieldSortTest extends \PHPUnit\Framework\TestCase
     {
         $sort = new FieldSort('test', FieldSort::ASC);
         static::assertSame('test', $sort->getField());
+
         $sort->setField('bla');
+
         static::assertSame('bla', $sort->getField());
 
         static::assertSame(FieldSort::ASC, $sort->getOrder());
+
         $sort->setOrder(FieldSort::DESC);
+
         static::assertSame(FieldSort::DESC, $sort->getOrder());
 
         static::assertSame('sort', $sort->getType());
 
         static::assertNull($sort->getNestedFilter());
+
+        $sort->setNestedFilter(new TermsQuery('foo', ['bar']));
+
+        static::assertInstanceOf(TermsQuery::class, $sort->getNestedFilter());
     }
 }

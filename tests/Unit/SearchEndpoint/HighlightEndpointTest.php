@@ -68,4 +68,16 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(1, $builders);
         $this->assertSame($highlight, $builders[$highlightName]);
     }
+
+    public function testItThrowsExceptionOnDuplicateHighlights(): void
+    {
+        $highlight = new Highlight();
+
+        $endpoint = new HighlightEndpoint();
+        $endpoint->add($highlight, 'foo');
+
+        $this->expectException(\OverflowException::class);
+
+        $endpoint->add($highlight, 'bar');
+    }
 }

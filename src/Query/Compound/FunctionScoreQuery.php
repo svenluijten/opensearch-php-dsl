@@ -163,7 +163,7 @@ class FunctionScoreQuery implements BuilderInterface
     public function toArray(): array
     {
         $query = [
-            'query' => $this->query->toArray(),
+            'query' => $this->getQuery()->toArray(),
             'functions' => $this->functions,
         ];
 

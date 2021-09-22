@@ -21,6 +21,7 @@ use ONGR\ElasticsearchDSL\Serializer\Normalizer\AbstractNormalizable;
 abstract class AbstractSearchEndpoint extends AbstractNormalizable implements SearchEndpointInterface
 {
     use ParametersTrait;
+
     public const NAME = 'search';
 
     /**

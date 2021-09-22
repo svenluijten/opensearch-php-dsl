@@ -12,6 +12,7 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
 
 use ONGR\ElasticsearchDSL\Aggregation\Bucketing\MissingAggregation;
+use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 use ONGR\ElasticsearchDSL\SearchEndpoint\AggregationsEndpoint;
 
 /**
@@ -45,5 +46,32 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
 
         $this->assertCount(1, $builders);
         $this->assertSame($agg, $builders[$aggName]);
+    }
+
+    public function testNormalize(): void
+    {
+        $agg1 = new MissingAggregation('bar', '');
+        $agg2 = new TermsAggregation('foo');
+        $endpoint = new AggregationsEndpoint();
+        $endpoint->add($agg1, 'bar');
+        $endpoint->add($agg2, 'foo');
+
+        $normalizerInterface = $this->getMockForAbstractClass(
+            'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
+        );
+
+        $this->assertSame(
+            [
+                'bar' => [
+                    'missing' => [
+                        'field' => '',
+                    ],
+                ],
+                'foo' => [
+                    'terms' => [],
+                ],
+            ],
+            $endpoint->normalize($normalizerInterface)
+        );
     }
 }

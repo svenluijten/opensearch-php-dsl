@@ -64,7 +64,7 @@ class HighlightEndpoint extends AbstractSearchEndpoint
      */
     public function getAll($boolType = null)
     {
-        return [$this->key => $this->highlight];
+        return [$this->key => $this->getHighlight()];
     }
 
     /**

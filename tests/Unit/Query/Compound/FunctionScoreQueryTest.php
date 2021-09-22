@@ -13,6 +13,7 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Compound;
 
 use ONGR\ElasticsearchDSL\Query\Compound\FunctionScoreQuery;
 use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
+use ONGR\ElasticsearchDSL\Query\TermLevel\TermsQuery;
 use ONGR\ElasticsearchDSL\Search;
 
 /**
@@ -85,6 +86,12 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
         $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
         $functionScoreQuery->addFieldValueFactorFunction('field1', 2);
         $functionScoreQuery->addFieldValueFactorFunction('field2', 1.5, 'ln');
+        $functionScoreQuery->addFieldValueFactorFunction(
+            'field3',
+            1.1,
+            'none',
+            new TermsQuery('foo', ['bar']),
+        );
 
         $this->assertEquals(
             [
@@ -106,6 +113,89 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
                             'modifier' => 'ln',
                         ],
                     ],
+                    [
+                        'field_value_factor' => [
+                            'field' => 'field3',
+                            'factor' => 1.1,
+                            'modifier' => 'none',
+                        ],
+                        'filter' => [
+                            'terms' => [
+                                'foo' => ['bar'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            $functionScoreQuery->toArray()['function_score']
+        );
+    }
+
+    public function testAddDecayFunction(): void
+    {
+        $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
+        $functionScoreQuery->addDecayFunction(
+            'linear',
+            'field1',
+            [
+                'origin' => 10,
+                'scale' => 50,
+                'offset' => 0,
+                'decay' => 0.5,
+            ],
+            ['foo' => 'bar'],
+            new TermsQuery('foo', ['bar']),
+            5
+        );
+
+        $this->assertEquals(
+            [
+                'query' => [
+                    'match_all' => new \stdClass(),
+                ],
+                'functions' => [
+                    [
+                        'linear' => [
+                            'field1' => [
+                                'origin' => 10,
+                                'scale' => 50,
+                                'offset' => 0,
+                                'decay' => 0.5,
+                            ],
+                            'foo' => 'bar',
+                        ],
+                        'weight' => 5,
+                        'filter' => [
+                            'terms' => [
+                                'foo' => ['bar'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            $functionScoreQuery->toArray()['function_score']
+        );
+    }
+
+    public function testAddWeightFunction(): void
+    {
+        $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
+        $functionScoreQuery->addWeightFunction(5, new TermsQuery('foo', ['bar']));
+
+        $this->assertEquals(
+            [
+                'query' => [
+                    'match_all' => new \stdClass(),
+                ],
+                'functions' => [
+                    [
+                        'weight' => 5,
+                        'filter' => [
+                            'terms' => [
+                                'foo' => ['bar'],
+                            ],
+                        ],
+                    ],
                 ],
             ],
             $functionScoreQuery->toArray()['function_score']
@@ -118,7 +208,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
     public function testRandomScore(): void
     {
         $fquery = new FunctionScoreQuery(new MatchAllQuery());
-        $fquery->addRandomFunction();
+        $fquery->addRandomFunction(null, new TermsQuery('foo', ['bar']));
         $fquery->addParameter('boost_mode', 'multiply');
 
         $search = new Search();
@@ -133,6 +223,11 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
                     'functions' => [
                         0 => [
                             'random_score' => [],
+                            'filter' => [
+                                'terms' => [
+                                    'foo' => ['bar'],
+                                ],
+                            ],
                         ],
                     ],
                     'boost_mode' => 'multiply',
@@ -157,7 +252,9 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             [
                 'target' => 10,
                 'charge' => 0.9,
-            ]
+            ],
+            ['foo' => 'bar'],
+            new TermsQuery('foo', ['bar']),
         );
 
         $search = new Search();
@@ -185,6 +282,12 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
                                         'target' => 10,
                                         'charge' => 0.9,
                                     ],
+                                    'foo' => 'bar',
+                                ],
+                            ],
+                            'filter' => [
+                                'terms' => [
+                                    'foo' => ['bar'],
                                 ],
                             ],
                         ],
@@ -194,5 +297,38 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
         ];
 
         static::assertEquals($expected, json_decode(json_encode($search->toArray()), true));
+    }
+
+    public function testAddSimpleFunction(): void
+    {
+        $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
+        $functionScoreQuery->addFieldValueFactorFunction('field1', 2);
+
+        $functionScoreQuery->addSimpleFunction(
+            [
+                'weight' => 5,
+            ]
+        );
+
+        $this->assertEquals(
+            [
+                'query' => [
+                    'match_all' => new \stdClass(),
+                ],
+                'functions' => [
+                    [
+                        'field_value_factor' => [
+                            'field' => 'field1',
+                            'factor' => 2,
+                            'modifier' => 'none',
+                        ],
+                    ],
+                    [
+                        'weight' => 5,
+                    ],
+                ],
+            ],
+            $functionScoreQuery->toArray()['function_score']
+        );
     }
 }

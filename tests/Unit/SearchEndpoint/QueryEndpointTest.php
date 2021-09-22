@@ -12,6 +12,7 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
 
 use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
+use ONGR\ElasticsearchDSL\Query\TermLevel\TermsQuery;
 use ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint;
 
 /**
@@ -72,5 +73,30 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
 
         $this->assertCount(1, $builders);
         $this->assertSame($query, $builders[$queryName]);
+    }
+
+    public function testSearchForFilterQueryReference(): void
+    {
+        $instance = new QueryEndpoint();
+        $normalizerInterface = $this->getMockForAbstractClass(
+            'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
+        );
+
+        $instance->addReference('filter_query', new TermsQuery('foo', ['bar']));
+
+        $this->assertSame(
+            [
+                'bool' => [
+                    'filter' => [
+                        [
+                            'terms' => [
+                                'foo' => ['bar'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            $instance->normalize($normalizerInterface)
+        );
     }
 }

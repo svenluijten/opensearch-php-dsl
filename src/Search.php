@@ -226,7 +226,7 @@ class Search
         return $this;
     }
 
-    private function getEndpoint(string $type): SearchEndpointInterface
+    public function getEndpoint(string $type): SearchEndpointInterface
     {
         if (!array_key_exists($type, $this->endpoints)) {
             $this->endpoints[$type] = SearchEndpointFactory::get($type);

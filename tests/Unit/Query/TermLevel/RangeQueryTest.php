@@ -18,6 +18,32 @@ use ONGR\ElasticsearchDSL\Query\TermLevel\RangeQuery;
  */
 class RangeQueryTest extends \PHPUnit\Framework\TestCase
 {
+    public function testItThrowsExceptionOnDuplicateGTParameter(): void
+    {
+        $this->expectException(\LogicException::class);
+
+        new RangeQuery(
+            'foo',
+            [
+                RangeQuery::GT => 5,
+                RangeQuery::GTE => 6,
+            ]
+        );
+    }
+
+    public function testItThrowsExceptionOnDuplicateLTParameter(): void
+    {
+        $this->expectException(\LogicException::class);
+
+        new RangeQuery(
+            'foo',
+            [
+                RangeQuery::LT => 6,
+                RangeQuery::LTE => 5,
+            ]
+        );
+    }
+
     /**
      * Tests toArray().
      */

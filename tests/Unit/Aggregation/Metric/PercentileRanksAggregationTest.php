@@ -64,7 +64,7 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
     /**
      * Test toArray method.
      */
-    public function testToArray(): void
+    public function testToArrayWithFieldValue(): void
     {
         $this->agg->setField('bar');
         $this->agg->setValues(['bar']);
@@ -72,6 +72,24 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
             [
                 'percentile_ranks' => [
                     'field' => 'bar',
+                    'values' => ['bar'],
+                ],
+            ],
+            $this->agg->toArray()
+        );
+    }
+
+    /**
+     * Test toArray method.
+     */
+    public function testToArrayWithScriptValue(): void
+    {
+        $this->agg->setScript('bar');
+        $this->agg->setValues(['bar']);
+        $this->assertSame(
+            [
+                'percentile_ranks' => [
+                    'script' => 'bar',
                     'values' => ['bar'],
                 ],
             ],

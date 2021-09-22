@@ -12,6 +12,7 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Joining;
 
 use ONGR\ElasticsearchDSL\Query\Joining\HasChildQuery;
+use ONGR\ElasticsearchDSL\Query\TermLevel\TermsQuery;
 
 /**
  * @internal
@@ -26,5 +27,26 @@ class HasChildQueryTest extends \PHPUnit\Framework\TestCase
         $parentQuery = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
         $query = new HasChildQuery('test_type', $parentQuery, ['test_parameter1']);
         $this->assertEquals(['test_parameter1'], $query->getParameters());
+    }
+
+    public function testToArray(): void
+    {
+        $query = new TermsQuery('foo', ['bar']);
+        $parentQuery = new HasChildQuery('type', $query, ['foo' => 'bar']);
+
+        static::assertSame(
+            [
+                'has_child' => [
+                    'type' => 'type',
+                    'query' => [
+                        'terms' => [
+                            'foo' => ['bar'],
+                        ],
+                    ],
+                    'foo' => 'bar',
+                ],
+            ],
+            $parentQuery->toArray(),
+        );
     }
 }

@@ -36,12 +36,7 @@ class OrderedSerializer extends Serializer
      */
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        return parent::denormalize(
-            is_array($data) ? $this->order($data) : $data,
-            $type,
-            $format,
-            $context
-        );
+        throw new \BadFunctionCallException(sprintf("%s doesn't support denormalizing", static::class));
     }
 
     /**

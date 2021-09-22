@@ -60,6 +60,8 @@ abstract class AbstractInnerHit implements NamedBuilderInterface
 
     private function getPathType(): ?string
     {
+        $type = null;
+
         switch ($this->getType()) {
             case NestedInnerHit::TYPE:
                 $type = 'path';
@@ -67,8 +69,6 @@ abstract class AbstractInnerHit implements NamedBuilderInterface
             case ParentInnerHit::TYPE:
                 $type = 'type';
                 break;
-            default:
-                $type = null;
         }
 
         return $type;

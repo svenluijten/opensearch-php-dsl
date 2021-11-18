@@ -30,11 +30,9 @@ class SuggestEndpoint extends AbstractSearchEndpoint
     public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
     {
         $output = [];
-        if (count($this->getAll()) > 0) {
-            /** @var TermSuggest $suggest */
-            foreach ($this->getAll() as $suggest) {
-                $output = array_merge($output, $suggest->toArray());
-            }
+        /** @var TermSuggest $suggest */
+        foreach ($this->getAll() as $suggest) {
+            $output = array_merge($output, $suggest->toArray());
         }
 
         return $output;

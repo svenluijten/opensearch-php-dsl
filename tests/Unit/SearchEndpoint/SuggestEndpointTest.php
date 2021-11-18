@@ -13,6 +13,7 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
 
 use ONGR\ElasticsearchDSL\SearchEndpoint\SuggestEndpoint;
 use ONGR\ElasticsearchDSL\Suggest\Suggest;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @internal
@@ -51,14 +52,16 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
         $instance = new SuggestEndpoint();
 
         $normalizerInterface = $this->getMockForAbstractClass(
-            'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
+            NormalizerInterface::class
         );
 
         $suggest = new Suggest('foo', 'bar', 'acme', 'foo');
+        $suggest2 = new Suggest('foo2', 'bar2', 'acme2', 'foo2');
         $instance->add($suggest);
+        $instance->add($suggest2);
 
-        static::assertEquals(
-            $suggest->toArray(),
+        static::assertSame(
+            array_merge($suggest->toArray(), $suggest2->toArray()),
             $instance->normalize($normalizerInterface)
         );
     }

@@ -23,6 +23,7 @@ abstract class AbstractSearchEndpoint extends AbstractNormalizable implements Se
     use ParametersTrait;
 
     public const NAME = 'search';
+    private const KEY_LENGTH = 30;
 
     /**
      * @var BuilderInterface[]
@@ -39,7 +40,7 @@ abstract class AbstractSearchEndpoint extends AbstractNormalizable implements Se
         }
 
         if (!$key) {
-            $key = bin2hex(random_bytes(30));
+            $key = bin2hex(random_bytes(self::KEY_LENGTH));
         }
 
         $this->container[$key] = $builder;

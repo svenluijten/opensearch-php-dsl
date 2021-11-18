@@ -10,7 +10,10 @@
         convertWarningsToExceptions="true"
         processIsolation="false"
         stopOnFailure="false"
-        bootstrap="vendor/autoload.php">
+        bootstrap="vendor/autoload.php"
+        executionOrder="random"
+        resolveDependencies="true"
+>
 
     <testsuites>
         <testsuite name="All">

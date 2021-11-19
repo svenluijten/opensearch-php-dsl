@@ -30,7 +30,7 @@ abstract class AbstractPipelineAggregation extends AbstractAggregation
     }
 
     /**
-     * @param $bucketsPath
+     * @param array|string $bucketsPath
      */
     public function setBucketsPath($bucketsPath): self
     {

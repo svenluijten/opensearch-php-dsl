@@ -12,6 +12,7 @@
 namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
 
 use ONGR\ElasticsearchDSL\Highlight\Highlight;
+use ONGR\ElasticsearchDSL\Search;
 use ONGR\ElasticsearchDSL\SearchEndpoint\HighlightEndpoint;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -22,14 +23,6 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * Tests constructor.
-     */
-    public function testItCanBeInstantiated(): void
-    {
-        static::assertInstanceOf(HighlightEndpoint::class, new HighlightEndpoint());
-    }
-
     /**
      * Tests adding builder.
      */
@@ -57,16 +50,15 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testEndpointGetter(): void
     {
-        $highlightName = 'acme_highlight';
         $highlight = new Highlight();
         $highlight->addField('acme');
 
         $endpoint = new HighlightEndpoint();
-        $endpoint->add($highlight, $highlightName);
+        $endpoint->add($highlight);
         $builders = $endpoint->getAll();
 
         static::assertCount(1, $builders);
-        static::assertSame($highlight, $builders[$highlightName]);
+        static::assertSame($highlight, $builders['']);
     }
 
     public function testItThrowsExceptionOnDuplicateHighlights(): void
@@ -79,5 +71,25 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\OverflowException::class);
 
         $endpoint->add($highlight, 'bar');
+    }
+
+    public function testHighlightSearch(): void
+    {
+        $search = new Search();
+
+        $highlight = new Highlight();
+        $highlight->addField('acme');
+
+        $search->addHighlight($highlight);
+
+        static::assertEquals([
+            'highlight' => [
+                    'fields' => [
+                        'acme' => new \stdClass()
+                    ],
+                ],
+            ],
+            $search->toArray()
+        );
     }
 }

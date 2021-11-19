@@ -83,7 +83,7 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
      *
      * @param string $name
      *
-     * @return MockBuilder|BuilderInterface
+     * @return BuilderInterface
      */
     private function getBuilder($name)
     {

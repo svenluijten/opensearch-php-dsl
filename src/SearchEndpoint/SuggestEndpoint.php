@@ -11,7 +11,7 @@
 
 namespace ONGR\ElasticsearchDSL\SearchEndpoint;
 
-use ONGR\ElasticsearchDSL\Suggest\TermSuggest;
+use ONGR\ElasticsearchDSL\Suggest\Suggest;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
@@ -30,7 +30,7 @@ class SuggestEndpoint extends AbstractSearchEndpoint
     public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
     {
         $output = [];
-        /** @var TermSuggest $suggest */
+        /** @var Suggest $suggest */
         foreach ($this->getAll() as $suggest) {
             $output = array_merge($output, $suggest->toArray());
         }

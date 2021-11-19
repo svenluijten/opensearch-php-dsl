@@ -27,7 +27,7 @@ class QueryEndpoint extends AbstractSearchEndpoint implements OrderedNormalizerI
     public const NAME = 'query';
 
     /**
-     * @var BoolQuery
+     * @var BoolQuery|null
      */
     private $bool;
 
@@ -37,7 +37,7 @@ class QueryEndpoint extends AbstractSearchEndpoint implements OrderedNormalizerI
     private $filtersSet = false;
 
     /**
-     * {@inheritdoc}
+     * @return array|bool|float|int|string|null
      */
     public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
     {
@@ -84,7 +84,7 @@ class QueryEndpoint extends AbstractSearchEndpoint implements OrderedNormalizerI
     }
 
     /**
-     * @return BoolQuery
+     * @return BoolQuery|null
      */
     public function getBool()
     {

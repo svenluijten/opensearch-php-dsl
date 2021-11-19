@@ -111,8 +111,8 @@ class TopHitsAggregation extends AbstractAggregation
                 'size' => $this->getSize(),
                 'from' => $this->getFrom(),
             ],
-            function ($val) {
-                return $val || \is_array($val) || ($val || \is_numeric($val));
+            static function ($val) {
+                return \is_array($val) || ($val || \is_numeric($val));
             }
         );
 

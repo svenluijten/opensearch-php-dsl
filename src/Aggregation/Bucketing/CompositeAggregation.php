@@ -24,9 +24,6 @@ class CompositeAggregation extends AbstractAggregation
 {
     use BucketingTrait;
 
-    /**
-     * @var BuilderInterface[]
-     */
     private array $sources = [];
 
     private ?int $size = null;
@@ -47,9 +44,7 @@ class CompositeAggregation extends AbstractAggregation
 
     public function addSource(AbstractAggregation $agg): self
     {
-        $array = $agg->processArray($agg->getArray());
-
-        $array = is_array($array) ? array_merge($array, $agg->getParameters()) : $array;
+        $array = array_merge($agg->processArray($agg->getArray()), $agg->getParameters());
 
         $this->sources[] = [
             $agg->getName() => [$agg->getType() => $array],

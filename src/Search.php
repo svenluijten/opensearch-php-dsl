@@ -377,8 +377,6 @@ class Search
     /**
      * Adds suggest into search.
      *
-     * @param BuilderInterface $suggest
-     *
      * @return $this
      */
     public function addSuggest(NamedBuilderInterface $suggest)

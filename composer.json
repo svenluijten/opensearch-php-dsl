@@ -26,6 +26,7 @@
         "infection/infection": "^0.25.3"
     },
     "suggest": {
+        "opensearch-project/opensearch-php": "Client library querying with the actual server",
         "elasticsearch/elasticsearch": "Client library querying with the actual server"
     },
     "autoload": {
@@ -38,12 +39,8 @@
             "ONGR\\ElasticsearchDSL\\Tests\\": "tests/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "7.2-dev"
-        }
-    },
     "scripts": {
+        "tests": "phpunit",
         "phpstan": "phpstan analyse",
         "fix-code-style": "php-cs-fixer fix"
     }

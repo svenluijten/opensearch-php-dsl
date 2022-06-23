@@ -116,7 +116,7 @@ class TopHitsAggregation extends AbstractAggregation
             }
         );
 
-        return $output ?? new \stdClass();
+        return $output;
     }
 
     public function getType(): string

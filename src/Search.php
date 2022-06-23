@@ -190,8 +190,8 @@ class Search
      */
     private function initializeSerializer(): void
     {
-        if (static::$serializer === null) {
-            static::$serializer = new OrderedSerializer(
+        if (self::$serializer === null) {
+            self::$serializer = new OrderedSerializer(
                 [
                     new CustomReferencedNormalizer(),
                     new CustomNormalizer(),
@@ -202,10 +202,8 @@ class Search
 
     /**
      * Destroys search endpoint.
-     *
-     * @param string $type endpoint type
      */
-    public function destroyEndpoint($type): void
+    public function destroyEndpoint(string $type): void
     {
         unset($this->endpoints[$type]);
     }
@@ -218,7 +216,7 @@ class Search
      *
      * @return $this
      */
-    public function addQuery(BuilderInterface $query, $boolType = BoolQuery::MUST, $key = null)
+    public function addQuery(BuilderInterface $query, string $boolType = BoolQuery::MUST, $key = null)
     {
         $endpoint = $this->getEndpoint(QueryEndpoint::NAME);
         $endpoint->addToBool($query, $boolType, $key);
@@ -718,7 +716,7 @@ class Search
 
     public function toArray()
     {
-        $output = array_filter(static::$serializer->normalize($this->endpoints));
+        $output = array_filter(self::$serializer->normalize($this->endpoints));
 
         $params = [
             'from' => 'from',

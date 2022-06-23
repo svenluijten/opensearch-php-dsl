@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Joining;
+namespace OpenSearchDSL\Tests\Unit\Query\Joining;
 
-use ONGR\ElasticsearchDSL\Query\Joining\ParentIdQuery;
+use OpenSearchDSL\Query\Joining\ParentIdQuery;
 use PHPUnit\Framework\TestCase;
 
 /**

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
+namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
-use ONGR\ElasticsearchDSL\Highlight\Highlight;
-use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchDSL\SearchEndpoint\HighlightEndpoint;
+use OpenSearchDSL\Highlight\Highlight;
+use OpenSearchDSL\Search;
+use OpenSearchDSL\SearchEndpoint\HighlightEndpoint;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**

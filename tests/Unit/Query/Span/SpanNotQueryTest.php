@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Span;
+namespace OpenSearchDSL\Tests\Unit\Query\Span;
 
-use ONGR\ElasticsearchDSL\Query\Span\SpanNotQuery;
+use OpenSearchDSL\Query\Span\SpanNotQuery;
 
 /**
  * Unit test for SpanNotQuery.
@@ -25,7 +25,7 @@ class SpanNotQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testSpanNotQueryToArray(): void
     {
-        $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\Query\Span\SpanQueryInterface')->getMock();
+        $mock = $this->getMockBuilder('OpenSearchDSL\Query\Span\SpanQueryInterface')->getMock();
         $mock
             ->expects(static::exactly(2))
             ->method('toArray')

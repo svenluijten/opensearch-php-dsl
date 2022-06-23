@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
+namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
-use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
-use ONGR\ElasticsearchDSL\SearchEndpoint\PostFilterEndpoint;
+use OpenSearchDSL\Query\MatchAllQuery;
+use OpenSearchDSL\SearchEndpoint\PostFilterEndpoint;
 
 /**
  * Class PostFilterEndpointTest.
@@ -26,7 +26,7 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        static::assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\PostFilterEndpoint', new PostFilterEndpoint());
+        static::assertInstanceOf('OpenSearchDSL\SearchEndpoint\PostFilterEndpoint', new PostFilterEndpoint());
     }
 
     /**

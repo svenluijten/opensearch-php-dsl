@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace ONGR\ElasticsearchDSL\InnerHit;
+namespace OpenSearchDSL\InnerHit;
 
-use ONGR\ElasticsearchDSL\NameAwareTrait;
-use ONGR\ElasticsearchDSL\NamedBuilderInterface;
-use ONGR\ElasticsearchDSL\ParametersTrait;
-use ONGR\ElasticsearchDSL\Search;
+use OpenSearchDSL\NameAwareTrait;
+use OpenSearchDSL\NamedBuilderInterface;
+use OpenSearchDSL\ParametersTrait;
+use OpenSearchDSL\Search;
 
 abstract class AbstractInnerHit implements NamedBuilderInterface
 {

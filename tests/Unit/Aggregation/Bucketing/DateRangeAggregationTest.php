@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Bucketing;
+namespace OpenSearchDSL\Tests\Unit\Aggregation\Bucketing;
 
-use ONGR\ElasticsearchDSL\Aggregation\Bucketing\DateRangeAggregation;
+use OpenSearchDSL\Aggregation\Bucketing\DateRangeAggregation;
 
 /**
  * @internal
@@ -109,7 +109,7 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testDateRangeAggregationConstructor($field = null, $format = null, ?array $ranges = null): void
     {
-        $aggregation = $this->getMockBuilder('ONGR\ElasticsearchDSL\Aggregation\Bucketing\DateRangeAggregation')
+        $aggregation = $this->getMockBuilder('OpenSearchDSL\Aggregation\Bucketing\DateRangeAggregation')
             ->onlyMethods(['setField', 'setFormat', 'addRange'])
             ->disableOriginalConstructor()
             ->getMock()

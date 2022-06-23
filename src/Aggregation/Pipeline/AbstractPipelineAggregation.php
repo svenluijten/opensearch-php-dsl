@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
+namespace OpenSearchDSL\Aggregation\Pipeline;
 
-use ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation;
-use ONGR\ElasticsearchDSL\Aggregation\Type\MetricTrait;
+use OpenSearchDSL\Aggregation\AbstractAggregation;
+use OpenSearchDSL\Aggregation\Type\MetricTrait;
 
 abstract class AbstractPipelineAggregation extends AbstractAggregation
 {

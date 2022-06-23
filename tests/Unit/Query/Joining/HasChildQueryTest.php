@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Joining;
+namespace OpenSearchDSL\Tests\Unit\Query\Joining;
 
-use ONGR\ElasticsearchDSL\Query\Joining\HasChildQuery;
-use ONGR\ElasticsearchDSL\Query\TermLevel\TermsQuery;
+use OpenSearchDSL\Query\Joining\HasChildQuery;
+use OpenSearchDSL\Query\TermLevel\TermsQuery;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ class HasChildQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructor(): void
     {
-        $parentQuery = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
+        $parentQuery = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
         $query = new HasChildQuery('test_type', $parentQuery, ['test_parameter1']);
         static::assertEquals(['test_parameter1'], $query->getParameters());
     }

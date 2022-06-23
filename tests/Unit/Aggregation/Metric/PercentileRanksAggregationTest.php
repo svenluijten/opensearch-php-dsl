@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Metric;
+namespace OpenSearchDSL\Tests\Unit\Aggregation\Metric;
 
-use ONGR\ElasticsearchDSL\Aggregation\Metric\PercentileRanksAggregation;
+use OpenSearchDSL\Aggregation\Metric\PercentileRanksAggregation;
 
 /**
  * Percentile ranks aggregation unit tests.

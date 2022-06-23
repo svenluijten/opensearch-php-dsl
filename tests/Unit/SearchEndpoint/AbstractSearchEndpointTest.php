@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
+namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
-use ONGR\ElasticsearchDSL\Aggregation\Bucketing\MissingAggregation;
-use ONGR\ElasticsearchDSL\SearchEndpoint\AbstractSearchEndpoint;
+use OpenSearchDSL\Aggregation\Bucketing\MissingAggregation;
+use OpenSearchDSL\SearchEndpoint\AbstractSearchEndpoint;
 use PHPUnit\Framework\TestCase;
 
 /**

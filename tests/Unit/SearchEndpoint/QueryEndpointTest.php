@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
+namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
-use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
-use ONGR\ElasticsearchDSL\Query\TermLevel\TermsQuery;
-use ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint;
+use OpenSearchDSL\Query\MatchAllQuery;
+use OpenSearchDSL\Query\TermLevel\TermsQuery;
+use OpenSearchDSL\SearchEndpoint\QueryEndpoint;
 
 /**
  * Unit test class for the QueryEndpoint.
@@ -27,7 +27,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        static::assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint', new QueryEndpoint());
+        static::assertInstanceOf('OpenSearchDSL\SearchEndpoint\QueryEndpoint', new QueryEndpoint());
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace ONGR\ElasticsearchDSL\Type;
+namespace OpenSearchDSL\Type;
 
 interface TypeInterface
 {

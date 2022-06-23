@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
+namespace OpenSearchDSL\Aggregation\Pipeline;
 
-use ONGR\ElasticsearchDSL\Sort\FieldSort;
+use OpenSearchDSL\Sort\FieldSort;
 
 /**
  * Class representing Bucket Script Pipeline Aggregation.

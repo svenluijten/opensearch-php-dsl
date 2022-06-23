@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit;
+namespace OpenSearchDSL\Tests\Unit;
 
-use ONGR\ElasticsearchDSL\ParametersTrait;
+use OpenSearchDSL\ParametersTrait;
 use PHPUnit\Framework\TestCase;
 
 /**

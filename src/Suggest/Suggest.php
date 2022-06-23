@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Suggest;
+namespace OpenSearchDSL\Suggest;
 
-use ONGR\ElasticsearchDSL\NameAwareTrait;
-use ONGR\ElasticsearchDSL\NamedBuilderInterface;
-use ONGR\ElasticsearchDSL\ParametersTrait;
+use OpenSearchDSL\NameAwareTrait;
+use OpenSearchDSL\NamedBuilderInterface;
+use OpenSearchDSL\ParametersTrait;
 
 class Suggest implements NamedBuilderInterface
 {

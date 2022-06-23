@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ONGR\ElasticsearchDSL\Query\Joining;
+namespace OpenSearchDSL\Query\Joining;
 
-use ONGR\ElasticsearchDSL\BuilderInterface;
-use ONGR\ElasticsearchDSL\ParametersTrait;
+use OpenSearchDSL\BuilderInterface;
+use OpenSearchDSL\ParametersTrait;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-parent-id-query.html

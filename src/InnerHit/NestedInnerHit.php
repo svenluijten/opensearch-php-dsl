@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\InnerHit;
+namespace OpenSearchDSL\InnerHit;
 
 /**
  * Represents Elasticsearch top level nested inner hits.

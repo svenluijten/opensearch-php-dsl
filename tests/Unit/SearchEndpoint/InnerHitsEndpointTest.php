@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
+namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
-use ONGR\ElasticsearchDSL\SearchEndpoint\InnerHitsEndpoint;
+use OpenSearchDSL\SearchEndpoint\InnerHitsEndpoint;
 
 /**
  * Class AggregationsEndpointTest.
@@ -26,7 +26,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
     public function testItCanBeInstantiated(): void
     {
         static::assertInstanceOf(
-            'ONGR\ElasticsearchDSL\SearchEndpoint\InnerHitsEndpoint',
+            'OpenSearchDSL\SearchEndpoint\InnerHitsEndpoint',
             new InnerHitsEndpoint()
         );
     }
@@ -37,7 +37,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
     public function testEndpointGetter(): void
     {
         $hitName = 'foo';
-        $innerHit = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
+        $innerHit = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
         $endpoint = new InnerHitsEndpoint();
         $endpoint->add($innerHit, $hitName);
         $builders = $endpoint->getAll();
@@ -56,7 +56,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
             ->getMock()
         ;
         $innerHit = $this
-            ->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')
+            ->getMockBuilder('OpenSearchDSL\BuilderInterface')
             ->onlyMethods(['toArray', 'getType'])
             ->addMethods(['getName'])
             ->getMock()

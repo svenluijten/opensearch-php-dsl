@@ -1,8 +1,8 @@
 <?php
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Bucketing;
+namespace OpenSearchDSL\Tests\Unit\Aggregation\Bucketing;
 
-use ONGR\ElasticsearchDSL\Aggregation\Bucketing\HistogramAggregation;
+use OpenSearchDSL\Aggregation\Bucketing\HistogramAggregation;
 use PHPUnit\Framework\TestCase;
 
 /**

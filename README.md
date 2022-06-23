@@ -61,9 +61,9 @@ require 'vendor/autoload.php'; //Composer autoload
 
 $client = ClientBuilder::create()->build(); //elasticsearch-php client
 
-$matchAll = new ONGR\ElasticsearchDSL\Query\MatchAllQuery();
+$matchAll = new OpenSearchDSL\Query\MatchAllQuery();
 
-$search = new ONGR\ElasticsearchDSL\Search();
+$search = new OpenSearchDSL\Search();
 $search->addQuery($matchAll);
 
 $params = [

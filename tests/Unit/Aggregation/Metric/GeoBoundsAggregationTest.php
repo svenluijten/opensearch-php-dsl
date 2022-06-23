@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Metric;
+namespace OpenSearchDSL\Tests\Unit\Aggregation\Metric;
 
-use ONGR\ElasticsearchDSL\Aggregation\Metric\GeoBoundsAggregation;
+use OpenSearchDSL\Aggregation\Metric\GeoBoundsAggregation;
 
 /**
  * Unit test for geo bounds aggregation.

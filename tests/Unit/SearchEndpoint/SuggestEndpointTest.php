@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
+namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
-use ONGR\ElasticsearchDSL\SearchEndpoint\SuggestEndpoint;
-use ONGR\ElasticsearchDSL\Suggest\Suggest;
+use OpenSearchDSL\SearchEndpoint\SuggestEndpoint;
+use OpenSearchDSL\Suggest\Suggest;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
@@ -25,7 +25,7 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        static::assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\SuggestEndpoint', new SuggestEndpoint());
+        static::assertInstanceOf('OpenSearchDSL\SearchEndpoint\SuggestEndpoint', new SuggestEndpoint());
     }
 
     /**

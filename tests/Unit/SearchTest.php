@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit;
+namespace OpenSearchDSL\Tests\Unit;
 
-use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
-use ONGR\ElasticsearchDSL\Highlight\Highlight;
-use ONGR\ElasticsearchDSL\InnerHit\NestedInnerHit;
-use ONGR\ElasticsearchDSL\Query\Compound\BoolQuery;
-use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
-use ONGR\ElasticsearchDSL\Query\TermLevel\TermsQuery;
-use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchDSL\Serializer\OrderedSerializer;
-use ONGR\ElasticsearchDSL\Sort\FieldSort;
-use ONGR\ElasticsearchDSL\Suggest\Suggest;
+use OpenSearchDSL\Aggregation\Bucketing\TermsAggregation;
+use OpenSearchDSL\Highlight\Highlight;
+use OpenSearchDSL\InnerHit\NestedInnerHit;
+use OpenSearchDSL\Query\Compound\BoolQuery;
+use OpenSearchDSL\Query\MatchAllQuery;
+use OpenSearchDSL\Query\TermLevel\TermsQuery;
+use OpenSearchDSL\Search;
+use OpenSearchDSL\Serializer\OrderedSerializer;
+use OpenSearchDSL\Sort\FieldSort;
+use OpenSearchDSL\Suggest\Suggest;
 
 /**
  * Test for Search.
@@ -34,7 +34,7 @@ class SearchTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        static::assertInstanceOf('ONGR\ElasticsearchDSL\Search', new Search());
+        static::assertInstanceOf('OpenSearchDSL\Search', new Search());
     }
 
     public function testScrollUriParameter(): void

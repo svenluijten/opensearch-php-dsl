@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Compound;
+namespace OpenSearchDSL\Tests\Unit\Query\Compound;
 
-use ONGR\ElasticsearchDSL\Query\Compound\BoostingQuery;
+use OpenSearchDSL\Query\Compound\BoostingQuery;
 
 /**
  * @internal
@@ -23,7 +23,7 @@ class BoostingQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
+        $mock = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
         $mock
             ->expects(static::any())
             ->method('toArray')

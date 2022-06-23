@@ -1,8 +1,8 @@
 <?php
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Metric;
+namespace OpenSearchDSL\Tests\Unit\Aggregation\Metric;
 
-use ONGR\ElasticsearchDSL\Aggregation\Metric\ScriptedMetricAggregation;
+use OpenSearchDSL\Aggregation\Metric\ScriptedMetricAggregation;
 use PHPUnit\Framework\TestCase;
 
 /**

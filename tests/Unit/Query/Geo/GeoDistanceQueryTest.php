@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Geo;
+namespace OpenSearchDSL\Tests\Unit\Query\Geo;
 
-use ONGR\ElasticsearchDSL\Query\Geo\GeoDistanceQuery;
-use ONGR\ElasticsearchDSL\Type\Location;
+use OpenSearchDSL\Query\Geo\GeoDistanceQuery;
+use OpenSearchDSL\Type\Location;
 
 /**
  * @internal

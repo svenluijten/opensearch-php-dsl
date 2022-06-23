@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Aggregation\Pipeline;
+namespace OpenSearchDSL\Aggregation\Pipeline;
 
-use ONGR\ElasticsearchDSL\ScriptAwareTrait;
+use OpenSearchDSL\ScriptAwareTrait;
 
 /**
  * Class representing Bucket Script Pipeline Aggregation.

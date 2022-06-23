@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Metric;
+namespace OpenSearchDSL\Tests\Unit\Aggregation\Metric;
 
-use ONGR\ElasticsearchDSL\Aggregation\Metric\GeoCentroidAggregation;
+use OpenSearchDSL\Aggregation\Metric\GeoCentroidAggregation;
 
 /**
  * Unit test for children aggregation.

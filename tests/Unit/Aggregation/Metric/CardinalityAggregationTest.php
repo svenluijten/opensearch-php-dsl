@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Metric;
+namespace OpenSearchDSL\Tests\Unit\Aggregation\Metric;
 
-use ONGR\ElasticsearchDSL\Aggregation\Metric\CardinalityAggregation;
+use OpenSearchDSL\Aggregation\Metric\CardinalityAggregation;
 
 /**
  * Unit test for cardinality aggregation.

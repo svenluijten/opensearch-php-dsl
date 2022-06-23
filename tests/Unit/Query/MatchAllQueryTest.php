@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Query;
+namespace OpenSearchDSL\Tests\Unit\Query;
 
-use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
-use ONGR\ElasticsearchDSL\Search;
+use OpenSearchDSL\Query\MatchAllQuery;
+use OpenSearchDSL\Search;
 
 /**
  * @internal

@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Serializer;
+namespace OpenSearchDSL\Tests\Unit\Serializer;
 
-use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
-use ONGR\ElasticsearchDSL\Query\TermLevel\TermsQuery;
-use ONGR\ElasticsearchDSL\Search;
-use ONGR\ElasticsearchDSL\SearchEndpoint\PostFilterEndpoint;
-use ONGR\ElasticsearchDSL\SearchEndpoint\QueryEndpoint;
-use ONGR\ElasticsearchDSL\Serializer\Normalizer\CustomReferencedNormalizer;
-use ONGR\ElasticsearchDSL\Serializer\OrderedSerializer;
+use OpenSearchDSL\Query\MatchAllQuery;
+use OpenSearchDSL\Query\TermLevel\TermsQuery;
+use OpenSearchDSL\Search;
+use OpenSearchDSL\SearchEndpoint\PostFilterEndpoint;
+use OpenSearchDSL\SearchEndpoint\QueryEndpoint;
+use OpenSearchDSL\Serializer\Normalizer\CustomReferencedNormalizer;
+use OpenSearchDSL\Serializer\OrderedSerializer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
 

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
+namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
-use ONGR\ElasticsearchDSL\Aggregation\Bucketing\MissingAggregation;
-use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
-use ONGR\ElasticsearchDSL\SearchEndpoint\AggregationsEndpoint;
+use OpenSearchDSL\Aggregation\Bucketing\MissingAggregation;
+use OpenSearchDSL\Aggregation\Bucketing\TermsAggregation;
+use OpenSearchDSL\SearchEndpoint\AggregationsEndpoint;
 
 /**
  * Class AggregationsEndpointTest.
@@ -28,7 +28,7 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
     public function testItCanBeInstantiated(): void
     {
         static::assertInstanceOf(
-            'ONGR\ElasticsearchDSL\SearchEndpoint\AggregationsEndpoint',
+            'OpenSearchDSL\SearchEndpoint\AggregationsEndpoint',
             new AggregationsEndpoint()
         );
     }

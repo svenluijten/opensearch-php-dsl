@@ -1,8 +1,8 @@
 <?php
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Bucketing;
+namespace OpenSearchDSL\Tests\Unit\Aggregation\Bucketing;
 
-use ONGR\ElasticsearchDSL\Aggregation\Bucketing\DiversifiedSamplerAggregation;
+use OpenSearchDSL\Aggregation\Bucketing\DiversifiedSamplerAggregation;
 use PHPUnit\Framework\TestCase;
 
 /**

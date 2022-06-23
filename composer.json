@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ONGR\\ElasticsearchDSL\\": "src/"
+            "OpenSearchDSL\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ONGR\\ElasticsearchDSL\\Tests\\": "tests/"
+            "OpenSearchDSL\\Tests\\": "tests/"
         }
     },
     "scripts": {

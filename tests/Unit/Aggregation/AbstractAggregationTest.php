@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation;
+namespace OpenSearchDSL\Tests\Unit\Aggregation;
 
-use ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation;
-use ONGR\ElasticsearchDSL\NamedBuilderInterface;
+use OpenSearchDSL\Aggregation\AbstractAggregation;
+use OpenSearchDSL\NamedBuilderInterface;
 use PHPUnit\Framework\TestCase;
 
 /**

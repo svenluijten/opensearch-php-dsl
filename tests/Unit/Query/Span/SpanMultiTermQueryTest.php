@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Query\Span;
+namespace OpenSearchDSL\Tests\Unit\Query\Span;
 
-use ONGR\ElasticsearchDSL\Query\Span\SpanMultiTermQuery;
+use OpenSearchDSL\Query\Span\SpanMultiTermQuery;
 
 /**
  * Unit test for SpanMultiTermQuery.
@@ -25,7 +25,7 @@ class SpanMultiTermQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $mock = $this->getMockBuilder('ONGR\ElasticsearchDSL\BuilderInterface')->getMock();
+        $mock = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
         $mock
             ->expects(static::once())
             ->method('toArray')

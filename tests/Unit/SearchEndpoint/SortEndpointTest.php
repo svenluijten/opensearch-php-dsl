@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\SearchEndpoint;
+namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
-use ONGR\ElasticsearchDSL\SearchEndpoint\SortEndpoint;
-use ONGR\ElasticsearchDSL\Sort\FieldSort;
+use OpenSearchDSL\SearchEndpoint\SortEndpoint;
+use OpenSearchDSL\Sort\FieldSort;
 
 /**
  * Class SortEndpointTest.
@@ -26,7 +26,7 @@ class SortEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        static::assertInstanceOf('ONGR\ElasticsearchDSL\SearchEndpoint\SortEndpoint', new SortEndpoint());
+        static::assertInstanceOf('OpenSearchDSL\SearchEndpoint\SortEndpoint', new SortEndpoint());
     }
 
     /**

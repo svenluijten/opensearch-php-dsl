@@ -17,21 +17,16 @@ is the preferred and recommended way to ask support questions.
 
 ### OpenSearch
 
-| OpenSearch version | ElasticsearchDSL version    |
-|--------------------| --------------------------- |
-| >= 1.0             | >= 7.0                      |
-| >= 2.0             | >= 7.0                      |
+| OpenSearch version | OpenSearchDSL version |
+|--------------------|-----------------------|
+| >= 1.0             | >= 1.0                |
+| >= 2.0             | >= 1.0                |
 
 ### Elasticsearch
 
-| Elasticsearch version | ElasticsearchDSL version    |
-| --------------------- | --------------------------- |
-| >= 7.0                | >= 7.0                      |
-| >= 6.0, < 7.0         | >= 6.0 (not supported)      |
-| >= 5.0, < 6.0         | >= 5.0 (not supported)      |
-| >= 2.0, < 5.0         | >= 2.0 (not supported)      |
-| >= 1.0, < 2.0         | 1.x (not supported)         |
-| <= 0.90.x             | not supported               |
+| Elasticsearch version | OpenSearchDSL version  |
+|-----------------------|------------------------|
+| >= 7.0                | >= 1.0                 |
 
 ## Documentation
 

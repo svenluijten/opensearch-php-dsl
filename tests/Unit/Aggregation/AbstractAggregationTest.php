@@ -59,7 +59,8 @@ class AbstractAggregationTest extends TestCase
     {
         $agg = $this->getMockBuilder(AbstractAggregation::class)
             ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+            ->getMockForAbstractClass()
+        ;
 
         $agg->addAggregation(new FilterAggregation('foo_bar', new TermsAggregation('foo_bar')));
         $agg->addAggregation(new TermsAggregation('foo_baz'));

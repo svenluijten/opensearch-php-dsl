@@ -211,7 +211,6 @@ class Search
     /**
      * Adds query to the search.
      *
-     * @param string $boolType
      * @param string $key
      *
      * @return $this

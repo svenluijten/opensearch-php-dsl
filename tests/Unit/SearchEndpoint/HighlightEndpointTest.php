@@ -84,11 +84,11 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
 
         static::assertEquals([
             'highlight' => [
-                    'fields' => [
-                        'acme' => new \stdClass()
-                    ],
+                'fields' => [
+                    'acme' => new \stdClass(),
                 ],
             ],
+        ],
             $search->toArray()
         );
     }

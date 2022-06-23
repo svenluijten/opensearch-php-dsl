@@ -13,7 +13,6 @@ namespace ONGR\ElasticsearchDSL\Aggregation\Bucketing;
 
 use ONGR\ElasticsearchDSL\Aggregation\AbstractAggregation;
 use ONGR\ElasticsearchDSL\Aggregation\Type\BucketingTrait;
-use ONGR\ElasticsearchDSL\BuilderInterface;
 
 /**
  * Class representing composite aggregation.

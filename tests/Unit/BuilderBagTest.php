@@ -13,7 +13,6 @@ namespace ONGR\ElasticsearchDSL\Tests\Unit;
 
 use ONGR\ElasticsearchDSL\BuilderBag;
 use ONGR\ElasticsearchDSL\BuilderInterface;
-use PHPUnit\Framework\MockObject\MockBuilder;
 
 /**
  * @internal

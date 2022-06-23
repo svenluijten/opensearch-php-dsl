@@ -42,6 +42,7 @@ class ParametersTraitTest extends TestCase
     }
 }
 
-class TestTraitClass {
+class TestTraitClass
+{
     use ParametersTrait;
 }

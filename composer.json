@@ -43,5 +43,10 @@
         "tests": "phpunit",
         "phpstan": "phpstan analyse",
         "fix-code-style": "php-cs-fixer fix"
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
     }
 }

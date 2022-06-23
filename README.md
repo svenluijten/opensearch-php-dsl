@@ -2,7 +2,7 @@
 
 Introducing OpenSearch/Elasticsearch DSL library to provide objective query builder for [elasticsearch-php](https://github.com/elastic/elasticsearch-php) client. You can easily build any Elasticsearch query and transform it to an array.
 
-This is a fork of `ongr-io/ElasticsearchDSL`, which will be more regulary updated. Thanks for ongr-io for building this Library!
+This is a fork of `ongr-io/ElasticsearchDSL`, which will be more regularly updated. Thanks for ongr-io for building this Library!
 
 If you need any help, [Github discussion](https://github.com/shyim/opensearch-dsl/discussions)
 is the preferred and recommended way to ask support questions.
@@ -17,9 +17,10 @@ is the preferred and recommended way to ask support questions.
 
 ### OpenSearch
 
-| OpenSearch version    | ElasticsearchDSL version    |
-| --------------------- | --------------------------- |
-| >= 1.0                | >= 7.0                      |
+| OpenSearch version | ElasticsearchDSL version    |
+|--------------------| --------------------------- |
+| >= 1.0             | >= 7.0                      |
+| >= 2.0             | >= 7.0                      |
 
 ### Elasticsearch
 
@@ -74,4 +75,4 @@ $params = [
 $results = $client->search($params);
 ```
 
-Elasticsearch DSL covers every elasticsearch query, all examples can be found in [the documentation](docs/index.md)
+Opensearch DSL covers every Opensearch query, all examples can be found in [the documentation](docs/index.md)

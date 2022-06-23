@@ -26,6 +26,7 @@ class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
     public function testDateHistogramAggregationGetType(): void
     {
         $aggregation = new DateHistogramAggregation('foo', 'test');
+        static::assertSame('foo', $aggregation->getName());
         $result = $aggregation->getType();
         static::assertEquals('date_histogram', $result);
     }

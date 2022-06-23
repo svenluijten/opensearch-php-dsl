@@ -25,6 +25,7 @@ class CompositeAggregationTest extends \PHPUnit\Framework\TestCase
     public function testToArray(): void
     {
         $compositeAgg = new CompositeAggregation('composite_test_agg');
+        static::assertSame('composite_test_agg', $compositeAgg->getName());
         $termsAgg = new TermsAggregation('test_term_agg', 'test_field');
         $compositeAgg->addSource($termsAgg);
 

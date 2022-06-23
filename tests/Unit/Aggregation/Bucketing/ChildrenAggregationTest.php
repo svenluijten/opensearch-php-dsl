@@ -50,6 +50,7 @@ class ChildrenAggregationTest extends \PHPUnit\Framework\TestCase
 
         $aggregation = new ChildrenAggregation('foo', '');
         $aggregation->setChildren('question');
+        static::assertSame('question', $aggregation->getChildren());
         $aggregation->toArray();
     }
 }

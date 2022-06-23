@@ -40,9 +40,12 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $mock = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
         $aggregation = new AdjacencyMatrixAggregation('test_agg');
+        $aggregation->setField('test_agg');
         $aggregation->addFilter('name', $mock);
         $result = $aggregation->getArray();
         static::assertArrayHasKey('filters', $result);
+        static::assertSame('test_agg', $aggregation->getField());
+        static::assertSame('test_agg', $aggregation->getName());
     }
 
     /**

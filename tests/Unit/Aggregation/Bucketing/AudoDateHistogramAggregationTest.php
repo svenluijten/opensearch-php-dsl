@@ -31,6 +31,9 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
         ];
 
         static::assertEquals($aggregation->toArray(), $result);
+        static::assertSame('test_field', $aggregation->getField());
+        static::assertSame('test_agg', $aggregation->getName());
+        static::assertSame(['field' => 'test_field'], $aggregation->getArray());
     }
 
     /**

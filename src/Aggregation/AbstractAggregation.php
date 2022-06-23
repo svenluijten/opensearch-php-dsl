@@ -103,7 +103,7 @@ abstract class AbstractAggregation implements NamedBuilderInterface
         return $result;
     }
 
-    protected function collectNestedAggregations(): array
+    private function collectNestedAggregations(): array
     {
         $result = [];
 

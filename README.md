@@ -55,7 +55,7 @@ Create search:
 
 require 'vendor/autoload.php'; //Composer autoload
 
-$client = ClientBuilder::create()->build(); //elasticsearch-php client
+$client = ClientBuilder::create()->build(); //opensearch-php client
 
 $matchAll = new OpenSearchDSL\Query\MatchAllQuery();
 

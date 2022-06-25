@@ -34,5 +34,9 @@ class StatsBucketAggregationTest extends \PHPUnit\Framework\TestCase
         ];
 
         static::assertEquals($expected, $aggregation->toArray());
+        static::assertSame('test', $aggregation->getBucketsPath());
+
+        $aggregation->setBucketsPath('test2');
+        static::assertSame('test2', $aggregation->getBucketsPath());
     }
 }

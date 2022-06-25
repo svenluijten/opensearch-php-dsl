@@ -30,8 +30,10 @@ class BucketScriptAggregationTest extends \PHPUnit\Framework\TestCase
             [
                 'my_var1' => 'foo',
                 'my_var2' => 'bar',
-            ]
+            ],
+            'test_script'
         );
+        static::assertSame('test_script', $aggregation->getScript());
         $aggregation->setScript('test script');
         $aggregation->addParameter('gap_policy', 'insert_zeros');
 

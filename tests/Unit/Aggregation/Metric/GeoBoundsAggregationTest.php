@@ -25,9 +25,22 @@ class GeoBoundsAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGeoBoundsAggregationGetType(): void
     {
-        $agg = new GeoBoundsAggregation('foo', '');
+        $agg = new GeoBoundsAggregation('foo', 'field');
         $result = $agg->getType();
         static::assertEquals('geo_bounds', $result);
+        static::assertSame('foo', $agg->getName());
+        static::assertSame('field', $agg->getField());
+        static::assertTrue($agg->isWrapLongitude());
+        $agg->setWrapLongitude(false);
+        static::assertFalse($agg->isWrapLongitude());
+
+        static::assertSame([
+            'field' => 'field',
+            'wrap_longitude' => false,
+        ], $agg->getArray());
+
+        $bla = new GeoBoundsAggregation('foo', 'field', false);
+        static::assertFalse($bla->isWrapLongitude());
     }
 
     /**

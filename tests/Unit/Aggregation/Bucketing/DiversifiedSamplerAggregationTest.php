@@ -13,6 +13,8 @@ class DiversifiedSamplerAggregationTest extends TestCase
     public function testConstructor(): void
     {
         $a = new DiversifiedSamplerAggregation('test', 'test', 5);
+        static::assertSame('test', $a->getName());
+        static::assertSame('test', $a->getField());
         static::assertSame(5, $a->getShardSize());
 
         static::assertSame([
@@ -30,5 +32,8 @@ class DiversifiedSamplerAggregationTest extends TestCase
                 'shard_size' => 5,
             ],
         ], $a->toArray());
+
+        $a->setShardSize(0);
+        static::assertSame(0, $a->getShardSize());
     }
 }

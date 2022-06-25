@@ -27,6 +27,7 @@ class PercentilesBucketAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new PercentilesBucketAggregation('acme', 'test');
         $aggregation->setPercents([25.0, 50.0, 75.0]);
+        static::assertSame([25.0, 50.0, 75.0], $aggregation->getPercents());
 
         $expected = [
             'percentiles_bucket' => [

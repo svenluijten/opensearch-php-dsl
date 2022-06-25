@@ -52,4 +52,24 @@ class PercentilesAggregationTest extends \PHPUnit\Framework\TestCase
             $aggregation->getArray()
         );
     }
+
+    public function testConstructor(): void
+    {
+        $aggregation = new PercentilesAggregation('bar', 'fieldValue', ['percentsValue'], 'scriptValue');
+        static::assertSame(
+            [
+                'percents' => ['percentsValue'],
+                'field' => 'fieldValue',
+                'script' => 'scriptValue',
+            ],
+            $aggregation->getArray()
+        );
+
+        static::assertSame('bar', $aggregation->getName());
+        static::assertSame('fieldValue', $aggregation->getField());
+        static::assertSame(['percentsValue'], $aggregation->getPercents());
+
+        $aggregation->setPercents(['bla']);
+        static::assertSame(['bla'], $aggregation->getPercents());
+    }
 }

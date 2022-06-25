@@ -12,6 +12,7 @@
 namespace OpenSearchDSL\Tests\Unit\Aggregation\Bucketing;
 
 use OpenSearchDSL\Aggregation\Bucketing\FiltersAggregation;
+use OpenSearchDSL\Query\MatchAllQuery;
 
 /**
  * Unit test for filters aggregation.
@@ -135,6 +136,39 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
                     'filters' => [
                         [],
                         [],
+                    ],
+                ],
+            ],
+            $aggregation->toArray()
+        );
+    }
+
+    public function testFilterWithoutName(): void
+    {
+        $aggregation = new FiltersAggregation('test_agg');
+        static::expectException(\LogicException::class);
+        static::expectExceptionMessage('In not anonymous filters, filter name must be set.');
+        $aggregation->addFilter(new MatchAllQuery());
+    }
+
+    public function testFilterNane(): void
+    {
+        $aggregation = new FiltersAggregation('test_agg');
+        $aggregation->setAnonymous(true);
+        $aggregation->addFilter(new MatchAllQuery());
+        $aggregation->addFilter(new MatchAllQuery(), 'test');
+
+        static::assertSame('test_agg', $aggregation->getName());
+        static::assertEquals(
+            [
+                'filters' => [
+                    'filters' => [
+                        [
+                            'match_all' => new \stdClass(),
+                        ],
+                        [
+                            'match_all' => new \stdClass(),
+                        ],
                     ],
                 ],
             ],

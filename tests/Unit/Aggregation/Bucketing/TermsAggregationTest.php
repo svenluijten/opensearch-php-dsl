@@ -201,4 +201,12 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
         $result = $aggregation->getType();
         static::assertEquals('terms', $result);
     }
+
+    public function testTermsAggregationSetScript(): void
+    {
+        $aggregation = new TermsAggregation('test_agg', 'test_field', 'test_script');
+        static::assertSame('test_script', $aggregation->getScript());
+        static::assertSame('test_agg', $aggregation->getName());
+        static::assertSame('test_field', $aggregation->getField());
+    }
 }

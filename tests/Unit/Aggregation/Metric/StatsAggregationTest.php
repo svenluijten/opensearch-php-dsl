@@ -48,5 +48,19 @@ class StatsAggregationTest extends \PHPUnit\Framework\TestCase
             ],
             $aggregation->toArray()
         );
+        static::assertSame('foo', $aggregation->getName());
+        static::assertSame('fieldValue', $aggregation->getField());
+        static::assertSame('scriptValue', $aggregation->getScript());
+
+        static::assertSame([
+            'field' => 'fieldValue',
+            'script' => 'scriptValue',
+        ], $aggregation->getArray());
+
+        $aggregation->setScript('');
+
+        static::assertSame([
+            'field' => 'fieldValue',
+        ], $aggregation->getArray());
     }
 }

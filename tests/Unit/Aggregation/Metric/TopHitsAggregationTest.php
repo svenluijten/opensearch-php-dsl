@@ -72,5 +72,43 @@ class TopHitsAggregationTest extends \PHPUnit\Framework\TestCase
 
         $aggregation->setSorts($sorts);
         static::assertSame($sorts, $aggregation->getSorts());
+        static::assertSame('acme', $aggregation->getName());
+        static::assertSame(0, $aggregation->getSize());
+        static::assertSame(1, $aggregation->getFrom());
+
+        $aggregation->setFrom(50);
+        static::assertSame(50, $aggregation->getFrom());
+
+        $aggregation->setSize(100);
+        static::assertSame(100, $aggregation->getSize());
+
+        static::assertSame([
+            'sort' => [
+                ['terms' => ['field' => 'test']],
+            ],
+            'size' => 100,
+            'from' => 50,
+        ], $aggregation->getArray());
+
+        $sorts[] = null;
+        $aggregation->setSorts($sorts);
+
+        static::assertSame([
+            'sort' => [
+                ['terms' => ['field' => 'test']],
+            ],
+            'size' => 100,
+            'from' => 50,
+        ], $aggregation->getArray());
+
+        $aggregation->addSort(new FieldSort('test', FieldSort::DESC));
+        static::assertSame([
+            'sort' => [
+                ['terms' => ['field' => 'test']],
+                ['test' => ['order' => 'desc']],
+            ],
+            'size' => 100,
+            'from' => 50,
+        ], $aggregation->getArray());
     }
 }

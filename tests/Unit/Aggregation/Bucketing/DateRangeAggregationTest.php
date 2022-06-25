@@ -35,8 +35,16 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
     public function testDateRangeAggregationGetArray(): void
     {
         $agg = new DateRangeAggregation('foo', 'baz');
-        static::assertSame('foo', $agg->getName());
         $agg->addRange('10', '20');
+        static::assertSame(['field' => 'baz',  'ranges' => [['from' => '10', 'to' => '20']], 'keyed' => false], $agg->getArray());
+        static::assertSame([
+            'date_range' => [
+                'field' => 'baz',
+                'ranges' => [['from' => '10', 'to' => '20']],
+                'keyed' => false,
+            ],
+        ], $agg->toArray());
+        static::assertSame('foo', $agg->getName());
         $agg->setFormat('bar');
         $agg->setKeyed(true);
         $result = $agg->getArray();
@@ -55,9 +63,11 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testDateRangeAggregationGetType(): void
     {
-        $aggregation = new DateRangeAggregation('foo', 'test');
+        $aggregation = new DateRangeAggregation('foo', 'test', null, [], true);
+        $aggregation->addRange('10', '20');
         $result = $aggregation->getType();
         static::assertEquals('date_range', $result);
+        static::assertTrue($aggregation->getArray()['keyed']);
     }
 
     public function testDateRangeNeedsRanges(): void

@@ -13,6 +13,8 @@ class MaxAggregationTest extends TestCase
     public function testConstructor(): void
     {
         $a = new MaxAggregation('test', 'test', ['test'], 'test');
+        static::assertSame('test', $a->getName());
+        static::assertSame('test', $a->getMode());
         static::assertSame(['test'], $a->getMissing());
         static::assertSame(['test'], $a->getFields());
         static::assertSame([
@@ -22,5 +24,14 @@ class MaxAggregationTest extends TestCase
                 'missing' => ['test'],
             ],
         ], $a->toArray());
+
+        $a->setFields(['test1', 'test2']);
+        static::assertSame(['test1', 'test2'], $a->getFields());
+
+        $a->setMissing(['test1', 'test2']);
+        static::assertSame(['test1', 'test2'], $a->getMissing());
+
+        $a->setMode('foo');
+        static::assertSame('foo', $a->getMode());
     }
 }

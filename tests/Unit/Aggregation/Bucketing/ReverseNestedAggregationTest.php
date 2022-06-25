@@ -27,6 +27,7 @@ class ReverseNestedAggregationTest extends \PHPUnit\Framework\TestCase
         $termAggregation = new TermsAggregation('acme');
 
         $aggregation = new ReverseNestedAggregation('test_nested_agg', 'path');
+        static::assertSame('test_nested_agg', $aggregation->getName());
         static::assertSame('path', $aggregation->getPath());
         $aggregation->setPath('test_path');
         $aggregation->addAggregation($termAggregation);

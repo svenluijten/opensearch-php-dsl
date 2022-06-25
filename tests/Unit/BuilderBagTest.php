@@ -133,4 +133,17 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
         $bag = new BuilderBag();
         $bag->get('test');
     }
+
+    public function testConstructor(): void
+    {
+        $bag = new BuilderBag(
+            [
+                $this->getBuilder('foo'),
+                $this->getBuilder('baz'),
+            ]
+        );
+
+        static::assertCount(2, $bag->all());
+        static::assertEmpty($bag->all('foo'));
+    }
 }

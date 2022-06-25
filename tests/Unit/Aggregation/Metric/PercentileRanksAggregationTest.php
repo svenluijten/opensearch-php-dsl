@@ -30,7 +30,7 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $this->agg = new PercentileRanksAggregation('foo', '');
+        $this->agg = new PercentileRanksAggregation('foo', 'field');
     }
 
     /**
@@ -58,6 +58,8 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetType(): void
     {
+        static::assertEquals('foo', $this->agg->getName());
+        static::assertEquals('field', $this->agg->getField());
         static::assertEquals('percentile_ranks', $this->agg->getType());
     }
 
@@ -84,6 +86,7 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArrayWithScriptValue(): void
     {
+        $this->agg->setField('');
         $this->agg->setScript('bar');
         $this->agg->setValues(['bar']);
         static::assertSame(
@@ -95,5 +98,21 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
             ],
             $this->agg->toArray()
         );
+
+        static::assertSame(
+            [
+                'script' => 'bar',
+                'values' => ['bar'],
+            ],
+            $this->agg->getArray()
+        );
+    }
+
+    public function testConstructorScript(): void
+    {
+        $agg = new PercentileRanksAggregation('foo', 'field', [], 'script');
+        static::assertSame('foo', $agg->getName());
+        static::assertSame('script', $agg->getScript());
+        static::assertSame([], $agg->getValues());
     }
 }

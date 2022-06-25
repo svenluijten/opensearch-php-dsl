@@ -219,4 +219,97 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
             $aggregation->toArray()
         );
     }
+
+    public function testRangeInConstructor(): void
+    {
+        $aggregation = new RangeAggregation('foo', 'fieldValue', [['from' => 10]], true);
+        static::assertSame(
+            [
+                'range' => [
+                    'keyed' => true,
+                    'ranges' => [
+                        [
+                            'from' => 10.0,
+                        ],
+                    ],
+                    'field' => 'fieldValue',
+                ],
+            ],
+            $aggregation->toArray()
+        );
+
+        $aggregation = new RangeAggregation('foo', 'fieldValue', [['to' => 10]], true);
+        static::assertSame(
+            [
+                'range' => [
+                    'keyed' => true,
+                    'ranges' => [
+                        [
+                            'to' => 10.0,
+                        ],
+                    ],
+                    'field' => 'fieldValue',
+                ],
+            ],
+            $aggregation->toArray()
+        );
+
+        $aggregation = new RangeAggregation('foo', 'fieldValue', [['key' => '10']], true);
+        static::assertSame(
+            [
+                'range' => [
+                    'keyed' => true,
+                    'ranges' => [
+                        [
+                            'key' => '10',
+                        ],
+                    ],
+                    'field' => 'fieldValue',
+                ],
+            ],
+            $aggregation->toArray()
+        );
+
+        $aggregation = new RangeAggregation('foo', 'fieldValue', [['key' => '10']], true);
+        $aggregation->removeRangeByKey('10');
+
+        static::assertSame(
+            [
+                'range' => [
+                    'keyed' => true,
+                    'ranges' => [],
+                    'field' => 'fieldValue',
+                ],
+            ],
+            $aggregation->toArray()
+        );
+
+        $aggregation->addRange(10, 20, 'key');
+        $aggregation->removeRange(10, 20);
+
+        static::assertSame(
+            [
+                'range' => [
+                    'keyed' => true,
+                    'ranges' => [],
+                    'field' => 'fieldValue',
+                ],
+            ],
+            $aggregation->toArray()
+        );
+
+        $aggregation->addRange(10);
+        static::assertTrue($aggregation->removeRange(10, null));
+
+        static::assertSame(
+            [
+                'range' => [
+                    'keyed' => true,
+                    'ranges' => [],
+                    'field' => 'fieldValue',
+                ],
+            ],
+            $aggregation->toArray()
+        );
+    }
 }

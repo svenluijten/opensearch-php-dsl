@@ -39,6 +39,7 @@ class SamplerAggregationTest extends \PHPUnit\Framework\TestCase
         $termAggregation = new TermsAggregation('acme');
 
         $aggregation = new SamplerAggregation('foo', 'field', 25);
+        static::assertSame('foo', $aggregation->getName());
         static::assertSame('field', $aggregation->getField());
         static::assertSame(25, $aggregation->getShardSize());
         static::assertSame(['field' => 'field', 'shard_size' => 25], $aggregation->getArray());

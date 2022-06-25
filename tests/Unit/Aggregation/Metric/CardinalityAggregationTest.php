@@ -11,6 +11,7 @@
 
 namespace OpenSearchDSL\Tests\Unit\Aggregation\Metric;
 
+use OpenSearchDSL\Aggregation\Bucketing\TermsAggregation;
 use OpenSearchDSL\Aggregation\Metric\CardinalityAggregation;
 
 /**
@@ -27,6 +28,8 @@ class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new CardinalityAggregation('bar');
 
+        static::assertSame([], $aggregation->getArray());
+
         $aggregation->setScript('foo');
         $result = $aggregation->getArray();
 
@@ -40,12 +43,14 @@ class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
         static::assertEquals('foo', $result['field'], 'field=foo when fields name=foo');
 
         $aggregation->setPrecisionThreshold(10);
+        static::assertSame(10, $aggregation->getPrecisionThreshold());
         $result = $aggregation->getArray();
 
         static::assertArrayHasKey('precision_threshold', $result, 'key=precision_threshold when is set');
         static::assertEquals(10, $result['precision_threshold'], 'precision_threshold=10 when is set');
 
         $aggregation->setRehash(true);
+        static::assertTrue($aggregation->isRehash());
         $result = $aggregation->getArray();
 
         static::assertArrayHasKey('rehash', $result, 'key=rehash when rehash is set');
@@ -60,5 +65,12 @@ class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation = new CardinalityAggregation('foo');
         $result = $aggregation->getType();
         static::assertEquals('cardinality', $result);
+
+        $aggregation->addAggregation(new TermsAggregation('bar'));
+
+        static::assertSame(
+            ['cardinality' => []],
+            $aggregation->toArray()
+        );
     }
 }

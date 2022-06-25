@@ -140,6 +140,7 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $matchAllFilter = new MatchAllQuery();
         $aggregation = new FilterAggregation('test', $matchAllFilter);
+        static::assertSame('test', $aggregation->getName());
         static::assertEquals(
             [
                 'filter' => $matchAllFilter->toArray(),
@@ -148,6 +149,7 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
         );
 
         static::assertSame('test', $aggregation->getName());
+        static::assertSame($matchAllFilter, $aggregation->getFilter());
         static::assertEquals(
             $matchAllFilter->toArray(),
             $aggregation->getArray()

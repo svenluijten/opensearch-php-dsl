@@ -25,8 +25,10 @@ class GeoCentroidAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGeoCentroidAggregationGetType(): void
     {
-        $aggregation = new GeoCentroidAggregation('foo', '');
+        $aggregation = new GeoCentroidAggregation('foo', 'field');
         static::assertEquals('geo_centroid', $aggregation->getType());
+        static::assertSame('foo', $aggregation->getName());
+        static::assertSame('field', $aggregation->getField());
     }
 
     /**

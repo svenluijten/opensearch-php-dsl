@@ -16,6 +16,8 @@ namespace OpenSearchDSL;
  */
 class BuilderBag
 {
+    private const LENGTH = 30;
+
     /**
      * @var BuilderInterface[]
      */
@@ -33,7 +35,7 @@ class BuilderBag
 
     public function add(BuilderInterface $builder): string
     {
-        $name = ($builder instanceof NamedBuilderInterface) ? $builder->getName() : bin2hex(random_bytes(30));
+        $name = ($builder instanceof NamedBuilderInterface) ? $builder->getName() : bin2hex(random_bytes(self::LENGTH));
 
         $this->bag[$name] = $builder;
 

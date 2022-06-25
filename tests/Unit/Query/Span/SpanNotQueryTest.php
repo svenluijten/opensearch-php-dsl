@@ -32,7 +32,7 @@ class SpanNotQueryTest extends \PHPUnit\Framework\TestCase
             ->willReturn(['span_term' => ['key' => 'value']])
         ;
 
-        $query = new SpanNotQuery($mock, $mock);
+        $query = new SpanNotQuery($mock, $mock, ['boost' => 1.0]);
         $result = [
             'span_not' => [
                 'include' => [
@@ -41,6 +41,7 @@ class SpanNotQueryTest extends \PHPUnit\Framework\TestCase
                 'exclude' => [
                     'span_term' => ['key' => 'value'],
                 ],
+                'boost' => 1.0,
             ],
         ];
         static::assertEquals($result, $query->toArray());

@@ -24,7 +24,6 @@ use OpenSearchDSL\SearchEndpoint\SearchEndpointFactory;
 use OpenSearchDSL\SearchEndpoint\SearchEndpointInterface;
 use OpenSearchDSL\SearchEndpoint\SortEndpoint;
 use OpenSearchDSL\SearchEndpoint\SuggestEndpoint;
-use OpenSearchDSL\Serializer\Normalizer\CustomReferencedNormalizer;
 use OpenSearchDSL\Serializer\OrderedSerializer;
 use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
 
@@ -193,7 +192,6 @@ class Search
         if (self::$serializer === null) {
             self::$serializer = new OrderedSerializer(
                 [
-                    new CustomReferencedNormalizer(),
                     new CustomNormalizer(),
                 ]
             );
@@ -715,7 +713,7 @@ class Search
 
     public function toArray()
     {
-        $output = array_filter(self::$serializer->normalize($this->endpoints));
+        $output = self::$serializer->normalize($this->endpoints);
 
         $params = [
             'from' => 'from',

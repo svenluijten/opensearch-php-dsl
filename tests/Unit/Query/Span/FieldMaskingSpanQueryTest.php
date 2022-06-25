@@ -32,6 +32,10 @@ class FieldMaskingSpanQueryTest extends \PHPUnit\Framework\TestCase
         $spanTermQueryForMask = new SpanTermQuery('text.stems', 'fox');
         $fieldMaskingSpanQuery = new FieldMaskingSpanQuery('text', $spanTermQueryForMask);
 
+        static::assertSame($spanTermQueryForMask, $fieldMaskingSpanQuery->getQuery());
+        static::assertSame($fieldMaskingSpanQuery, $fieldMaskingSpanQuery->setQuery($spanTermQueryForMask));
+        static::assertSame('text', $fieldMaskingSpanQuery->getField());
+
         $spanNearQuery = new SpanNearQuery();
         $spanNearQuery->addQuery($spanTermQuery);
         $spanNearQuery->addQuery($fieldMaskingSpanQuery);
@@ -57,5 +61,8 @@ class FieldMaskingSpanQueryTest extends \PHPUnit\Framework\TestCase
         ];
 
         static::assertEquals($result, $spanNearQuery->toArray());
+
+        $fieldMaskingSpanQuery->setField('text.stems');
+        static::assertSame('text.stems', $fieldMaskingSpanQuery->getField());
     }
 }

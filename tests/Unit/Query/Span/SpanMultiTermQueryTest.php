@@ -32,12 +32,13 @@ class SpanMultiTermQueryTest extends \PHPUnit\Framework\TestCase
             ->willReturn(['prefix' => ['user' => ['value' => 'ki']]])
         ;
 
-        $query = new SpanMultiTermQuery($mock);
+        $query = new SpanMultiTermQuery($mock, ['test' => 1]);
         $expected = [
             'span_multi' => [
                 'match' => [
                     'prefix' => ['user' => ['value' => 'ki']],
                 ],
+                'test' => 1,
             ],
         ];
 

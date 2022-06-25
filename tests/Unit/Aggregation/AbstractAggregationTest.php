@@ -57,10 +57,7 @@ class AbstractAggregationTest extends TestCase
 
     public function testMultipleAggregations(): void
     {
-        $agg = $this->getMockBuilder(AbstractAggregation::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass()
-        ;
+        $agg = new TermsAggregation('foo');
 
         $agg->addAggregation(new FilterAggregation('foo_bar', new TermsAggregation('foo_bar')));
         $agg->addAggregation(new TermsAggregation('foo_baz'));
@@ -68,6 +65,23 @@ class AbstractAggregationTest extends TestCase
         $aggs = $agg->getAggregations();
         static::assertArrayHasKey('foo_bar', $aggs);
         static::assertArrayHasKey('foo_baz', $aggs);
+
+        static::assertSame(
+            [
+                'terms' => [],
+                'aggregations' => [
+                    'foo_bar' => [
+                        'filter' => [
+                            'terms' => [],
+                        ],
+                    ],
+                    'foo_baz' => [
+                        'terms' => [],
+                    ],
+                ],
+            ],
+            $agg->toArray()
+        );
     }
 }
 

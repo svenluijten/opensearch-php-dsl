@@ -75,3 +75,20 @@ jobs:
 
       - name: Run PHP-CS-Fixer
         run: vendor/bin/phpstan
+  infection-php:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run PHP-CS-Fixer
+        run: vendor/bin/infection

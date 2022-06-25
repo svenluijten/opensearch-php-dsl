@@ -195,6 +195,15 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
         static::assertEquals($result, $expected, 'get expected array of ranges');
         $result = $aggregation->removeRange(500, 700);
         static::assertFalse($result, 'returns false after removing not-existing range');
+
+        $aggregation = new RangeAggregation('foo', 'price');
+        $aggregation->addRange(500, 200);
+        $aggregation->addRange(300, 200);
+
+        $aggregation->removeRange(500, 200);
+        $aggregation->removeRange(500, 200);
+        static::assertCount(1, $aggregation->getArray()['ranges']);
+        static::assertArrayHasKey(0, $aggregation->getArray()['ranges']);
     }
 
     /**
@@ -271,6 +280,7 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
         );
 
         $aggregation = new RangeAggregation('foo', 'fieldValue', [['key' => '10']], true);
+        static::assertFalse($aggregation->removeRangeByKey('5'));
         $aggregation->removeRangeByKey('10');
 
         static::assertSame(
@@ -299,6 +309,8 @@ class RangeAggregationTest extends \PHPUnit\Framework\TestCase
         );
 
         $aggregation->addRange(10);
+        static::assertFalse($aggregation->removeRange(10, 50));
+        static::assertFalse($aggregation->removeRange(800, 50));
         static::assertTrue($aggregation->removeRange(10, null));
 
         static::assertSame(

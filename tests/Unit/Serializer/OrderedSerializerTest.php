@@ -7,7 +7,6 @@ use OpenSearchDSL\Query\TermLevel\TermsQuery;
 use OpenSearchDSL\Search;
 use OpenSearchDSL\SearchEndpoint\PostFilterEndpoint;
 use OpenSearchDSL\SearchEndpoint\QueryEndpoint;
-use OpenSearchDSL\Serializer\Normalizer\CustomReferencedNormalizer;
 use OpenSearchDSL\Serializer\OrderedSerializer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
@@ -20,7 +19,6 @@ class OrderedSerializerTest extends TestCase
     public function testOrdering(): void
     {
         $serializer = new OrderedSerializer([
-            new CustomReferencedNormalizer(),
             new CustomNormalizer(),
         ]);
 

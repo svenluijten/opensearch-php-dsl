@@ -32,13 +32,14 @@ class SpanFirstQueryTest extends \PHPUnit\Framework\TestCase
             ->willReturn(['span_term' => ['user' => 'bob']])
         ;
 
-        $query = new SpanFirstQuery($mock, 5);
+        $query = new SpanFirstQuery($mock, 5, ['test' => 1]);
         $result = [
             'span_first' => [
                 'match' => [
                     'span_term' => ['user' => 'bob'],
                 ],
                 'end' => 5,
+                'test' => 1,
             ],
         ];
         static::assertEquals($result, $query->toArray());

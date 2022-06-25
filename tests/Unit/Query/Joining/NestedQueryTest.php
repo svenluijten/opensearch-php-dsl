@@ -62,9 +62,11 @@ class NestedQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray($path, $parameters, $expected): void
     {
-        $query = new TermsQuery('foo', ['bar']);
-        $query = new NestedQuery($path, $query, $parameters);
+        $termsQuery = new TermsQuery('foo', ['bar']);
+        $query = new NestedQuery($path, $termsQuery, $parameters);
         $result = $query->toArray();
+        static::assertSame($path, $query->getPath());
+        static::assertSame($termsQuery, $query->getQuery());
         static::assertEquals(['nested' => $expected], $result);
     }
 }

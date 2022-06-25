@@ -40,8 +40,8 @@ class GeoBoundingBoxQueryTest extends \PHPUnit\Framework\TestCase
             [
                 'location',
                 [
-                    ['lat' => 40.73, 'lon' => -74.1],
-                    ['lat' => 40.01, 'lon' => -71.12],
+                    'top_left' => ['lat' => 40.73, 'lon' => -74.1],
+                    'bottom_right' => ['lat' => 40.01, 'lon' => -71.12],
                 ],
                 ['parameter' => 'value'],
                 [
@@ -71,7 +71,7 @@ class GeoBoundingBoxQueryTest extends \PHPUnit\Framework\TestCase
             // Case #2 (4 values).
             [
                 'location',
-                [40.73, -74.1, 40.01, -71.12],
+                ['top' => 40.73, 'left' => -74.1, 'bottom' => 40.01, 'right' => -71.12],
                 ['parameter' => 'value'],
                 [
                     'location' => [

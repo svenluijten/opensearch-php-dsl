@@ -30,11 +30,9 @@ class InnerHitsEndpoint extends AbstractSearchEndpoint
     public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
     {
         $output = [];
-        if (count($this->getAll()) > 0) {
-            /** @var NestedInnerHit $innerHit */
-            foreach ($this->getAll() as $innerHit) {
-                $output[$innerHit->getName()] = $innerHit->toArray();
-            }
+        /** @var NestedInnerHit $innerHit */
+        foreach ($this->getAll() as $innerHit) {
+            $output[$innerHit->getName()] = $innerHit->toArray();
         }
 
         return $output;

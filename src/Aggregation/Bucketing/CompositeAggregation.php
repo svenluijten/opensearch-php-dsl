@@ -43,7 +43,7 @@ class CompositeAggregation extends AbstractAggregation
 
     public function addSource(AbstractAggregation $agg): self
     {
-        $array = array_merge($agg->processArray($agg->getArray()), $agg->getParameters());
+        $array = $agg->processArray($agg->getArray());
 
         $this->sources[] = [
             $agg->getName() => [$agg->getType() => $array],

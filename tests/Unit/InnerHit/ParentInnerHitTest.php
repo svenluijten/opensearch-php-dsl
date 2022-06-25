@@ -18,6 +18,7 @@ class ParentInnerHitTest extends \PHPUnit\Framework\TestCase
         $search->addQuery($query);
 
         $hit = new ParentInnerHit('test', 'acme', $search);
+        $hit->setParameters(['size' => 10]);
         $expected = [
             'type' => [
                 'acme' => [

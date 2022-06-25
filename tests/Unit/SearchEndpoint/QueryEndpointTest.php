@@ -78,6 +78,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
     public function testSearchForFilterQueryReference(): void
     {
         $instance = new QueryEndpoint();
+        $instance->add(new TermsQuery('foo', ['bla']));
         $normalizerInterface = $this->getMockForAbstractClass(
             'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
         );
@@ -87,10 +88,45 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
         static::assertSame(
             [
                 'bool' => [
+                    'must' => [[
+                        'terms' => [
+                            'foo' => [
+                                'bla',
+                            ],
+                        ],
+                    ],
+                    ],
                     'filter' => [
                         [
                             'terms' => [
-                                'foo' => ['bar'],
+                                'foo' => [
+                                    'bar',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            $instance->normalize($normalizerInterface)
+        );
+
+        static::assertSame(
+            [
+                'bool' => [
+                    'must' => [[
+                        'terms' => [
+                            'foo' => [
+                                'bla',
+                            ],
+                        ],
+                    ],
+                    ],
+                    'filter' => [
+                        [
+                            'terms' => [
+                                'foo' => [
+                                    'bar',
+                                ],
                             ],
                         ],
                     ],

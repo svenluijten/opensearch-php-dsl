@@ -26,9 +26,11 @@ class SpanContainingQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
+        $little = $this->getSpanQueryMock('foo');
+        $big = $this->getSpanQueryMock('bar');
         $query = new SpanContainingQuery(
-            $this->getSpanQueryMock('foo'),
-            $this->getSpanQueryMock('bar')
+            $little,
+            $big
         );
         $result = [
             'span_containing' => [
@@ -41,6 +43,11 @@ class SpanContainingQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
         static::assertEquals($result, $query->toArray());
+
+        static::assertSame($little, $query->getLittle());
+        static::assertSame($big, $query->getBig());
+        static::assertSame($query, $query->setLittle($little));
+        static::assertSame($query, $query->setBig($big));
     }
 
     /**

@@ -50,16 +50,16 @@ class GeoBoundingBoxQuery implements BuilderInterface
     {
         if (count($this->values) === 2) {
             return [
-                'top_left' => $this->values[0] ?? $this->values['top_left'],
-                'bottom_right' => $this->values[1] ?? $this->values['bottom_right'],
+                'top_left' => $this->values['top_left'],
+                'bottom_right' => $this->values['bottom_right'],
             ];
         }
         if (count($this->values) === 4) {
             return [
-                'top' => $this->values[0] ?? $this->values['top'],
-                'left' => $this->values[1] ?? $this->values['left'],
-                'bottom' => $this->values[2] ?? $this->values['bottom'],
-                'right' => $this->values[3] ?? $this->values['right'],
+                'top' => $this->values['top'],
+                'left' => $this->values['left'],
+                'bottom' => $this->values['bottom'],
+                'right' => $this->values['right'],
             ];
         }
 

@@ -68,14 +68,14 @@ class HighlightTest extends \PHPUnit\Framework\TestCase
     public function testTraitSetGetParameters(): void
     {
         $highlight = new Highlight();
-        $highlight->setParameters(
+        static::assertSame($highlight, $highlight->setParameters(
             [
                 '_source',
                 ['include' => 'title'],
                 'content',
                 ['force_source' => true],
             ]
-        );
+        ));
         $expectedResult = [
             '_source',
             ['include' => 'title'],

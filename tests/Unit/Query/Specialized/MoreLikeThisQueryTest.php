@@ -33,4 +33,54 @@ class MoreLikeThisQueryTest extends \PHPUnit\Framework\TestCase
 
         static::assertEquals($expected, $query->toArray());
     }
+
+    /**
+     * @dataProvider providerLike
+     */
+    public function testLike(array $params, array $expected): void
+    {
+        $query = new MoreLikeThisQuery('this is a test', $params);
+
+        static::assertSame(
+            [
+                'more_like_this' => $expected,
+            ],
+            $query->toArray()
+        );
+    }
+
+    public function providerLike(): iterable
+    {
+        yield 'with ids' => [
+            ['ids' => 'foo'],
+            [
+                'like' => 'this is a test',
+                'ids' => 'foo',
+            ],
+        ];
+
+        yield 'with ids and docs false' => [
+            ['ids' => 'foo', 'docs' => false],
+            [
+                'ids' => 'foo',
+                'docs' => false,
+            ],
+        ];
+
+        yield 'with ids and docs true' => [
+            ['ids' => 'foo', 'docs' => true],
+            [
+                'ids' => 'foo',
+                'docs' => true,
+            ],
+        ];
+
+        yield 'without ids and docs false' => [
+            ['docs' => false],
+            [
+                'like' => 'this is a test',
+                'docs' => false,
+            ],
+        ];
+    }
 }

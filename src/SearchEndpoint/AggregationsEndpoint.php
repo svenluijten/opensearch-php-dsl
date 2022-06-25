@@ -30,11 +30,9 @@ class AggregationsEndpoint extends AbstractSearchEndpoint
     public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
     {
         $output = [];
-        if (count($this->getAll()) > 0) {
-            /** @var AbstractAggregation $aggregation */
-            foreach ($this->getAll() as $aggregation) {
-                $output[$aggregation->getName()] = $aggregation->toArray();
-            }
+        /** @var AbstractAggregation $aggregation */
+        foreach ($this->getAll() as $aggregation) {
+            $output[$aggregation->getName()] = $aggregation->toArray();
         }
 
         return $output;

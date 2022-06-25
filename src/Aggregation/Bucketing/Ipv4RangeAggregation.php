@@ -79,7 +79,7 @@ class Ipv4RangeAggregation extends AbstractAggregation
 
         return [
             'field' => $this->getField(),
-            'ranges' => \array_values($this->ranges),
+            'ranges' => $this->ranges,
         ];
     }
 

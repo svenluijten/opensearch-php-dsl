@@ -114,7 +114,7 @@ class SearchTest extends \PHPUnit\Framework\TestCase
         static::assertSame($search, $search->addSort(new FieldSort('foo')));
         static::assertSame($search, $search->addSuggest(new Suggest('foo', 'suggest', 'foo_bar', 'bar')));
         static::assertSame($search, $search->addHighlight(new Highlight()));
-        static::assertSame($search, $search->addUriParam('timeout', 'bar'));
+        static::assertSame($search, $search->addUriParam('q', 'bar'));
 
         static::assertInstanceOf(TermsAggregation::class, $search->getAggregations()['acme']);
         static::assertInstanceOf(MatchAllQuery::class, $search->getQueries()->getQueries(BoolQuery::MUST)['foo']);
@@ -123,7 +123,7 @@ class SearchTest extends \PHPUnit\Framework\TestCase
         static::assertInstanceOf(FieldSort::class, \array_values($search->getSorts())[0]);
         static::assertInstanceOf(Suggest::class, \array_values($search->getSuggests())[0]);
         static::assertInstanceOf(Highlight::class, $search->getHighlights());
-        static::assertSame('bar', $search->getUriParams()['timeout']);
+        static::assertSame('bar', $search->getUriParams()['q']);
     }
 
     public function testGetters(): void
@@ -158,5 +158,40 @@ class SearchTest extends \PHPUnit\Framework\TestCase
         static::assertSame(7, $search->getMinScore());
         static::assertSame([], $search->getSearchAfter());
         static::assertSame('', $search->getScroll());
+    }
+
+    public function testSource(): void
+    {
+        $search = new Search();
+
+        static::assertTrue($search->isSource());
+        $search->setSource(false);
+        static::assertFalse($search->isSource());
+
+        $search->setSource(true);
+        static::assertTrue($search->isSource());
+
+        $search->setSource('');
+        static::assertFalse($search->isSource());
+        static::assertSame(['_source' => ''], $search->toArray());
+
+        $search->setSource('test');
+        static::assertTrue($search->isSource());
+    }
+
+    public function testFrom(): void
+    {
+        $search = new Search();
+        $search->setFrom(10);
+
+        static::assertSame(
+            [
+                'from' => 10,
+            ],
+            $search->toArray(),
+        );
+
+        $search->setFrom(null);
+        static::assertSame([], $search->toArray());
     }
 }

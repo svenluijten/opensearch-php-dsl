@@ -134,7 +134,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
     public function testAddDecayFunction(): void
     {
         $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
-        $functionScoreQuery->addDecayFunction(
+        static::assertSame($functionScoreQuery, $functionScoreQuery->addDecayFunction(
             'linear',
             'field1',
             [
@@ -146,7 +146,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             ['foo' => 'bar'],
             new TermsQuery('foo', ['bar']),
             5
-        );
+        ));
 
         static::assertEquals(
             [
@@ -175,12 +175,54 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             ],
             $functionScoreQuery->toArray()['function_score']
         );
+
+        $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
+        $functionScoreQuery->addDecayFunction(
+            'linear',
+            'field1',
+            [
+                'origin' => 10,
+                'scale' => 50,
+                'offset' => 0,
+                'decay' => 0.5,
+            ],
+            ['foo' => 'bar'],
+            new TermsQuery('foo', ['bar']),
+            null
+        );
+
+        static::assertEquals(
+            [
+                'query' => [
+                    'match_all' => new \stdClass(),
+                ],
+                'functions' => [
+                    [
+                        'linear' => [
+                            'field1' => [
+                                'origin' => 10,
+                                'scale' => 50,
+                                'offset' => 0,
+                                'decay' => 0.5,
+                            ],
+                            'foo' => 'bar',
+                        ],
+                        'filter' => [
+                            'terms' => [
+                                'foo' => ['bar'],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            $functionScoreQuery->toArray()['function_score']
+        );
     }
 
     public function testAddWeightFunction(): void
     {
         $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
-        $functionScoreQuery->addWeightFunction(5, new TermsQuery('foo', ['bar']));
+        static::assertSame($functionScoreQuery, $functionScoreQuery->addWeightFunction(5, new TermsQuery('foo', ['bar'])));
 
         static::assertEquals(
             [

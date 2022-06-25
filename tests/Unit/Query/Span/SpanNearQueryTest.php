@@ -33,6 +33,7 @@ class SpanNearQueryTest extends \PHPUnit\Framework\TestCase
         ;
 
         $query = new SpanNearQuery(5, [$mock], ['in_order' => false]);
+        static::assertSame(5, $query->getSlop());
 
         $result = [
             'span_near' => [

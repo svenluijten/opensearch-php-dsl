@@ -38,5 +38,14 @@ class NestedAggregationTest extends \PHPUnit\Framework\TestCase
         ];
 
         static::assertEquals($expectedResult, $aggregation->toArray());
+        static::assertSame('test_nested_agg', $aggregation->getName());
+        static::assertSame('test_path', $aggregation->getPath());
+
+        $aggregation->setPath('test_path_2');
+        static::assertSame('test_path_2', $aggregation->getPath());
+
+        static::assertSame([
+            'path' => 'test_path_2',
+        ], $aggregation->getArray());
     }
 }

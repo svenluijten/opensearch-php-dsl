@@ -58,7 +58,9 @@ class GeoHashGridAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGeoHashGridAggregationGetArray($filterData, $expected): void
     {
-        $aggregation = new GeoHashGridAggregation('foo', '');
+        $aggregation = new GeoHashGridAggregation('foo', 'field');
+        static::assertSame('foo', $aggregation->getName());
+        static::assertSame('field', $aggregation->getField());
         $aggregation->setPrecision($filterData['precision']);
         $aggregation->setSize($filterData['size']);
         $aggregation->setShardSize($filterData['shard_size']);
@@ -66,6 +68,7 @@ class GeoHashGridAggregationTest extends \PHPUnit\Framework\TestCase
 
         $result = $aggregation->getArray();
         static::assertEquals($result, $expected);
+        static::assertSame('location', $aggregation->getField());
     }
 
     /**
@@ -73,8 +76,12 @@ class GeoHashGridAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testGeoHashGridAggregationGetType(): void
     {
-        $aggregation = new GeoHashGridAggregation('foo', '');
+        $aggregation = new GeoHashGridAggregation('foo', 'field', 1, 2, 3);
         $result = $aggregation->getType();
         static::assertEquals('geohash_grid', $result);
+        static::assertSame('field', $aggregation->getField());
+        static::assertSame(1, $aggregation->getPrecision());
+        static::assertSame(2, $aggregation->getSize());
+        static::assertSame(3, $aggregation->getShardSize());
     }
 }

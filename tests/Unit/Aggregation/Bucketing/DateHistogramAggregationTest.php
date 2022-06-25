@@ -68,4 +68,14 @@ class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
             ],
         ], $aggregation->toArray());
     }
+
+    public function testCalenderInterval(): void
+    {
+        $aggregation = new DateHistogramAggregation('foo', 'test', '1m', '1m', 'test', 'Europe/Berlin');
+
+        static::assertSame('1m', $aggregation->getCalendarInterval());
+        static::assertSame('1m', $aggregation->getFixedInterval());
+        static::assertSame('test', $aggregation->getFormat());
+        static::assertSame('Europe/Berlin', $aggregation->getTimeZone());
+    }
 }

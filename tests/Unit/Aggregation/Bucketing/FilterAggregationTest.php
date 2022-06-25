@@ -146,5 +146,11 @@ class FilterAggregationTest extends \PHPUnit\Framework\TestCase
             ],
             $aggregation->toArray()
         );
+
+        static::assertSame('test', $aggregation->getName());
+        static::assertEquals(
+            $matchAllFilter->toArray(),
+            $aggregation->getArray()
+        );
     }
 }

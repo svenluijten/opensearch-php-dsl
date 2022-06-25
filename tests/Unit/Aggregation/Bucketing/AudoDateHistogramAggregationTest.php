@@ -100,6 +100,12 @@ class AudoDateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
         ];
 
         static::assertEquals($aggregation->toArray(), $result);
+        static::assertEquals($aggregation->getArray(), [
+            'field' => 'test_field',
+        ]);
+
+        $aggregation = new AutoDateHistogramAggregation('test_agg', '');
+        static::assertSame([], $aggregation->getArray());
     }
 
     /**

@@ -21,5 +21,14 @@ class DiversifiedSamplerAggregationTest extends TestCase
                 'shard_size' => 5,
             ],
         ], $a->toArray());
+        static::assertSame('test', $a->getField());
+        static::assertSame(5, $a->getShardSize());
+
+        $a->setField('');
+        static::assertSame([
+            'diversified_sampler' => [
+                'shard_size' => 5,
+            ],
+        ], $a->toArray());
     }
 }

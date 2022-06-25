@@ -66,6 +66,11 @@ class GeoDistanceAggregationTest extends \PHPUnit\Framework\TestCase
 
         $result = $aggregation->getArray();
         static::assertEquals($result, $expected);
+        static::assertSame('foo', $aggregation->getName());
+        static::assertSame($filterData['field'], $aggregation->getField());
+        static::assertSame($filterData['origin'], $aggregation->getOrigin());
+        static::assertSame($filterData['unit'], $aggregation->getUnit());
+        static::assertSame($filterData['distance_type'], $aggregation->getDistanceType());
     }
 
     /**

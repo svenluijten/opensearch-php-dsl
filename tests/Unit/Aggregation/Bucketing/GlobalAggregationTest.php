@@ -84,4 +84,10 @@ class GlobalAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation = new GlobalAggregation('test_agg');
         $aggregation->setField('test_field');
     }
+
+    public function testGetArray(): void
+    {
+        $aggregation = new GlobalAggregation('test_agg');
+        static::assertEquals(new \stdClass(), $aggregation->getArray());
+    }
 }

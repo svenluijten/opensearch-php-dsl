@@ -23,10 +23,11 @@ class SimpleQueryStringQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $query = new SimpleQueryStringQuery('"fried eggs" +(eggplant | potato) -frittata');
+        $query = new SimpleQueryStringQuery('"fried eggs" +(eggplant | potato) -frittata', ['test' => 1,]);
         $expected = [
             'simple_query_string' => [
                 'query' => '"fried eggs" +(eggplant | potato) -frittata',
+                'test' => 1,
             ],
         ];
 

@@ -47,6 +47,8 @@ class TemplateQueryTest extends \PHPUnit\Framework\TestCase
         $query = new TemplateQuery();
         $query->setFile($file);
         $query->setParams($params);
+        static::assertSame($params, $query->getParams());
+        static::assertSame($file, $query->getFile());
         $expected = [
             'template' => [
                 'file' => $file,
@@ -54,6 +56,9 @@ class TemplateQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
         static::assertEquals($expected, $query->toArray());
+
+        $query->setInline('bla');
+        static::assertSame('bla', $query->getInline());
     }
 
     /**

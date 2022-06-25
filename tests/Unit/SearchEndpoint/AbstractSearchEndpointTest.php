@@ -47,7 +47,7 @@ class AbstractSearchEndpointTest extends TestCase
         static::assertInstanceOf(MissingAggregation::class, $agg->get('bar'));
         static::assertTrue($agg->has('bar'));
 
-        $agg->remove('bar');
+        static::assertSame($agg, $agg->remove('bar'));
 
         static::assertNull($agg->get('bar'));
         static::assertFalse($agg->has('bar'));

@@ -302,13 +302,13 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
     public function testAddSimpleFunction(): void
     {
         $functionScoreQuery = new FunctionScoreQuery(new MatchAllQuery());
-        $functionScoreQuery->addFieldValueFactorFunction('field1', 2);
+        static::assertSame($functionScoreQuery, $functionScoreQuery->addFieldValueFactorFunction('field1', 2));
 
-        $functionScoreQuery->addSimpleFunction(
+        static::assertSame($functionScoreQuery, $functionScoreQuery->addSimpleFunction(
             [
                 'weight' => 5,
             ]
-        );
+        ));
 
         static::assertEquals(
             [
@@ -330,5 +330,14 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             ],
             $functionScoreQuery->toArray()['function_score']
         );
+    }
+
+    public function testConstructor(): void
+    {
+        $query = new MatchAllQuery();
+        $agg = new FunctionScoreQuery($query, ['a' => 'b']);
+        static::assertSame('b', $agg->getParameter('a'));
+        static::assertSame(['a' => 'b'], $agg->getParameters());
+        static::assertSame($query, $agg->getQuery());
     }
 }

@@ -23,10 +23,11 @@ class QueryStringQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $query = new QueryStringQuery('this AND that OR thus');
+        $query = new QueryStringQuery('this AND that OR thus', ['test' => 1]);
         $expected = [
             'query_string' => [
                 'query' => 'this AND that OR thus',
+                'test' => 1,
             ],
         ];
 

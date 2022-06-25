@@ -77,4 +77,11 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
             $endpoint->normalize($normalizer)
         );
     }
+
+    public function testEmptyHits(): void
+    {
+        $endpoint = new InnerHitsEndpoint();
+
+        static::assertEquals([], $endpoint->getAll());
+    }
 }

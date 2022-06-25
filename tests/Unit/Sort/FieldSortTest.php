@@ -27,10 +27,11 @@ class FieldSortTest extends \PHPUnit\Framework\TestCase
     public function testToArray(): void
     {
         $nestedFilter = new NestedSort('somePath', new TermQuery('somePath.id', 10));
-        $sort = new FieldSort('someField', 'asc', $nestedFilter);
+        $sort = new FieldSort('someField', 'asc', $nestedFilter, ['a' => 'b']);
 
         $expected = [
             'someField' => [
+                'a' => 'b',
                 'nested' => [
                     'path' => 'somePath',
                     'filter' => [

@@ -23,11 +23,12 @@ class PrefixQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $query = new PrefixQuery('user', 'ki');
+        $query = new PrefixQuery('user', 'ki', ['boost' => 1.2]);
         $expected = [
             'prefix' => [
                 'user' => [
                     'value' => 'ki',
+                    'boost' => 1.2,
                 ],
             ],
         ];

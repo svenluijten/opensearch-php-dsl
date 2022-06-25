@@ -25,6 +25,17 @@ class SuggestTest extends \PHPUnit\Framework\TestCase
     {
         $suggest = new Suggest('foo', 'term', 'acme', 'bar');
         static::assertEquals('term', $suggest->getType());
+        $suggest->setType('bla');
+        static::assertEquals('bla', $suggest->getType());
+
+        static::assertSame('acme', $suggest->getText());
+
+        $suggest->setText('baz');
+        static::assertEquals('baz', $suggest->getText());
+        static::assertSame('bar', $suggest->getField());
+
+        $suggest->setField('baz');
+        static::assertEquals('baz', $suggest->getField());
     }
 
     /**

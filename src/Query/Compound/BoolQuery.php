@@ -27,6 +27,7 @@ class BoolQuery implements BuilderInterface
     public const MUST_NOT = 'must_not';
     public const SHOULD = 'should';
     public const FILTER = 'filter';
+    private const LENGTH = 30;
 
     private array $container = [];
 
@@ -67,7 +68,7 @@ class BoolQuery implements BuilderInterface
         }
 
         if (!$key) {
-            $key = bin2hex(random_bytes(30));
+            $key = bin2hex(random_bytes(self::LENGTH));
         }
 
         $this->container[$type][$key] = $query;

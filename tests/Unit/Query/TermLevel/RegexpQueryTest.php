@@ -23,11 +23,12 @@ class RegexpQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $query = new RegexpQuery('user', 's.*y');
+        $query = new RegexpQuery('user', 's.*y', ['flags' => 'i']);
         $expected = [
             'regexp' => [
                 'user' => [
                     'value' => 's.*y',
+                    'flags' => 'i',
                 ],
             ],
         ];

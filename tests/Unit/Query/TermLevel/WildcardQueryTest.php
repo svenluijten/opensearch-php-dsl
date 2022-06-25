@@ -23,11 +23,12 @@ class WildcardQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $query = new WildcardQuery('user', 'ki*y');
+        $query = new WildcardQuery('user', 'ki*y', ['foo' => 'bar']);
         $expectedResult = [
             'wildcard' => [
                 'user' => [
                     'value' => 'ki*y',
+                    'foo' => 'bar',
                 ],
             ],
         ];

@@ -40,8 +40,14 @@ class SearchTest extends \PHPUnit\Framework\TestCase
     public function testScrollUriParameter(): void
     {
         $search = new Search();
+        $reflection = new \ReflectionClass($search);
+        $reflection->setStaticPropertyValue('serializer', null);
+
         $search->setScroll('5m');
         $search->__wakeup();
+
+        $val = $reflection->getStaticPropertyValue('serializer');
+        static::assertNotEmpty($val);
 
         static::assertArrayHasKey('scroll', $search->getUriParams());
     }
@@ -101,14 +107,14 @@ class SearchTest extends \PHPUnit\Framework\TestCase
     {
         $search = new Search();
 
-        $search->addAggregation(new TermsAggregation('acme'));
-        $search->addQuery(new MatchAllQuery(), BoolQuery::MUST, 'foo');
-        $search->addInnerHit(new NestedInnerHit('foo', 'foo'));
-        $search->addPostFilter(new TermsQuery('foo', ['bar']), BoolQuery::MUST, 'foo');
-        $search->addSort(new FieldSort('foo'));
-        $search->addSuggest(new Suggest('foo', 'suggest', 'foo_bar', 'bar'));
-        $search->addHighlight(new Highlight());
-        $search->addUriParam('timeout', 'bar');
+        static::assertSame($search, $search->addAggregation(new TermsAggregation('acme')));
+        static::assertSame($search, $search->addQuery(new MatchAllQuery(), BoolQuery::MUST, 'foo'));
+        static::assertSame($search, $search->addInnerHit(new NestedInnerHit('foo', 'foo')));
+        static::assertSame($search, $search->addPostFilter(new TermsQuery('foo', ['bar']), BoolQuery::MUST, 'foo'));
+        static::assertSame($search, $search->addSort(new FieldSort('foo')));
+        static::assertSame($search, $search->addSuggest(new Suggest('foo', 'suggest', 'foo_bar', 'bar')));
+        static::assertSame($search, $search->addHighlight(new Highlight()));
+        static::assertSame($search, $search->addUriParam('timeout', 'bar'));
 
         static::assertInstanceOf(TermsAggregation::class, $search->getAggregations()['acme']);
         static::assertInstanceOf(MatchAllQuery::class, $search->getQueries()->getQueries(BoolQuery::MUST)['foo']);
@@ -124,19 +130,19 @@ class SearchTest extends \PHPUnit\Framework\TestCase
     {
         $search = new Search();
 
-        $search->setDocValueFields([]);
-        $search->setFrom(5);
-        $search->setTrackTotalHits(true);
-        $search->setSize(10);
-        $search->setSource(true);
-        $search->setStoredFields([]);
-        $search->setScriptFields([]);
-        $search->setExplain(true);
-        $search->setVersion(true);
-        $search->setIndicesBoost([]);
-        $search->setMinScore(7);
-        $search->setSearchAfter([]);
-        $search->setScroll([]);
+        static::assertSame($search, $search->setDocValueFields([]));
+        static::assertSame($search, $search->setFrom(5));
+        static::assertSame($search, $search->setTrackTotalHits(true));
+        static::assertSame($search, $search->setSize(10));
+        static::assertSame($search, $search->setSource(true));
+        static::assertSame($search, $search->setStoredFields([]));
+        static::assertSame($search, $search->setScriptFields([]));
+        static::assertSame($search, $search->setExplain(true));
+        static::assertSame($search, $search->setVersion(true));
+        static::assertSame($search, $search->setIndicesBoost([]));
+        static::assertSame($search, $search->setMinScore(7));
+        static::assertSame($search, $search->setSearchAfter([]));
+        static::assertSame($search, $search->setScroll([]));
 
         static::assertSame([], $search->getDocValueFields());
         static::assertSame(5, $search->getFrom());

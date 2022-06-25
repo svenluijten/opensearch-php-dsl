@@ -23,10 +23,11 @@ class IdsQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $query = new IdsQuery(['foo', 'bar']);
+        $query = new IdsQuery(['foo', 'bar'], ['type' => 'type1']);
         $expected = [
             'ids' => [
                 'values' => ['foo', 'bar'],
+                'type' => 'type1',
             ],
         ];
 

@@ -23,11 +23,12 @@ class MatchQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $query = new MatchQuery('message', 'this is a test');
+        $query = new MatchQuery('message', 'this is a test', ['boost' => 1.5]);
         $expected = [
             'match' => [
                 'message' => [
                     'query' => 'this is a test',
+                    'boost' => 1.5,
                 ],
             ],
         ];

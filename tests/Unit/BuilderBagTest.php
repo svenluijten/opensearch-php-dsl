@@ -84,7 +84,7 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
      *
      * @return BuilderInterface
      */
-    private function getBuilder($name)
+    private function getBuilder($name, array $data = [])
     {
         $friendlyBuilderMock = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')
             ->onlyMethods(['toArray', 'getType'])
@@ -102,7 +102,7 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
         $friendlyBuilderMock
             ->expects(static::any())
             ->method('toArray')
-            ->willReturn([])
+            ->willReturn($data)
         ;
 
         return $friendlyBuilderMock;
@@ -138,12 +138,20 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
     {
         $bag = new BuilderBag(
             [
-                $this->getBuilder('foo'),
-                $this->getBuilder('baz'),
+                $this->getBuilder('foo', ['a' => 1]),
+                $this->getBuilder('baz', ['b' => 2]),
             ]
         );
 
         static::assertCount(2, $bag->all());
         static::assertEmpty($bag->all('foo'));
+
+        static::assertSame(
+            [
+                'a' => 1,
+                'b' => 2,
+            ],
+            $bag->toArray()
+        );
     }
 }

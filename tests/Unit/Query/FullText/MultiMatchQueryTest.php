@@ -23,11 +23,12 @@ class MultiMatchQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $query = new MultiMatchQuery(['message', 'title'], 'this is a test');
+        $query = new MultiMatchQuery(['message', 'title'], 'this is a test', ['test' => 1]);
         $expected = [
             'multi_match' => [
                 'query' => 'this is a test',
                 'fields' => ['message', 'title'],
+                'test' => 1,
             ],
         ];
 

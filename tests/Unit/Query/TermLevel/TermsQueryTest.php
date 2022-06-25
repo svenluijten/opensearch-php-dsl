@@ -23,10 +23,11 @@ class TermsQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $query = new TermsQuery('user', ['bob', 'elasticsearch']);
+        $query = new TermsQuery('user', ['bob', 'elasticsearch'], ['foo' => 'bar']);
         $expected = [
             'terms' => [
                 'user' => ['bob', 'elasticsearch'],
+                'foo' => 'bar',
             ],
         ];
 

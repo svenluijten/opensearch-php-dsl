@@ -41,7 +41,7 @@ class HighlightEndpoint extends AbstractSearchEndpoint
         return null;
     }
 
-    public function add(BuilderInterface $builder, $key = null)
+    public function add(BuilderInterface $builder, ?string $key = null): string
     {
         if ($this->highlight) {
             throw new \OverflowException('Only one highlight can be set');

@@ -49,7 +49,7 @@ trait ParametersTrait
     }
 
     /**
-     * @param array|string|int|float|bool|\stdClass $value
+     * @param array|string|int|float|bool|\stdClass|object $value
      *
      * @return static
      */

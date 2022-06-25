@@ -142,7 +142,7 @@ class SearchTest extends \PHPUnit\Framework\TestCase
         static::assertSame($search, $search->setIndicesBoost([]));
         static::assertSame($search, $search->setMinScore(7));
         static::assertSame($search, $search->setSearchAfter([]));
-        static::assertSame($search, $search->setScroll([]));
+        static::assertSame($search, $search->setScroll(''));
 
         static::assertSame([], $search->getDocValueFields());
         static::assertSame(5, $search->getFrom());
@@ -157,6 +157,6 @@ class SearchTest extends \PHPUnit\Framework\TestCase
         static::assertSame([], $search->getIndicesBoost());
         static::assertSame(7, $search->getMinScore());
         static::assertSame([], $search->getSearchAfter());
-        static::assertSame([], $search->getScroll());
+        static::assertSame('', $search->getScroll());
     }
 }

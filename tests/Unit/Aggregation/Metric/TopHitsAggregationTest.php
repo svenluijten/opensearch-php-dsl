@@ -90,7 +90,6 @@ class TopHitsAggregationTest extends \PHPUnit\Framework\TestCase
             'from' => 50,
         ], $aggregation->getArray());
 
-        $sorts[] = null;
         $aggregation->setSorts($sorts);
 
         static::assertSame([

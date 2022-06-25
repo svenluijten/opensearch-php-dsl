@@ -20,32 +20,14 @@ use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
  */
 interface SearchEndpointInterface extends NormalizableInterface
 {
-    /**
-     * Adds builder to search endpoint.
-     *
-     * @param BuilderInterface $builder builder to add
-     * @param array $key additional parameters relevant to builder
-     *
-     * @return string key of added builder
-     */
-    public function add(BuilderInterface $builder, $key = null);
+    public function add(BuilderInterface $builder, ?string $key = null): string;
 
-    /**
-     * Adds builder to search endpoint's specific bool type container.
-     *
-     * @param BuilderInterface $builder builder to add
-     * @param array $boolType Bool type for query or filter. If bool type is left null
-     *                        it will be treated as MUST.
-     * @param array $key additional parameters relevant to builder
-     *
-     * @return string key of added builder
-     */
-    public function addToBool(BuilderInterface $builder, $boolType = null, $key = null);
+    public function addToBool(BuilderInterface $builder, ?string $boolType = null, ?string $key = null): string;
 
     /**
      * Removes contained builder.
      *
-     * @param int $key
+     * @param int|string $key
      *
      * @return $this
      */
@@ -54,7 +36,7 @@ interface SearchEndpointInterface extends NormalizableInterface
     /**
      * Returns contained builder or null if Builder is not found.
      *
-     * @param int $key
+     * @param int|string $key
      *
      * @return BuilderInterface|null
      */

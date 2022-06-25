@@ -95,7 +95,7 @@ class TopHitsAggregation extends AbstractAggregation
     public function getArray()
     {
         $sortsOutput = null;
-        $addedSorts = \array_filter($this->getSorts());
+        $addedSorts = $this->getSorts();
 
         if ($addedSorts) {
             $sortsOutput = [];

@@ -13,18 +13,17 @@ namespace OpenSearchDSL\SearchEndpoint;
 
 use OpenSearchDSL\BuilderInterface;
 use OpenSearchDSL\Query\Compound\BoolQuery;
-use OpenSearchDSL\Serializer\Normalizer\OrderedNormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * Search query dsl endpoint.
  */
-class QueryEndpoint extends AbstractSearchEndpoint implements OrderedNormalizerInterface
+class QueryEndpoint extends AbstractSearchEndpoint
 {
     /**
      * Endpoint name
      */
     public const NAME = 'query';
+    private const DEFAULT_ORDER = 2;
 
     /**
      * @var BoolQuery|null
@@ -36,10 +35,7 @@ class QueryEndpoint extends AbstractSearchEndpoint implements OrderedNormalizerI
      */
     private $filtersSet = false;
 
-    /**
-     * @return array|bool|float|int|string|null
-     */
-    public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
+    public function normalize(): ?array
     {
         if (!$this->filtersSet && $this->hasReference('filter_query')) {
             /** @var BuilderInterface $filter */
@@ -69,12 +65,9 @@ class QueryEndpoint extends AbstractSearchEndpoint implements OrderedNormalizerI
         return $this->bool->add($builder, $boolType, $key);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
+    public function getOrder(): int
     {
-        return 2;
+        return self::DEFAULT_ORDER;
     }
 
     /**
@@ -88,7 +81,7 @@ class QueryEndpoint extends AbstractSearchEndpoint implements OrderedNormalizerI
     /**
      * {@inheritdoc}
      */
-    public function getAll($boolType = null)
+    public function getAll(?string $boolType = null): array
     {
         return $this->bool->getQueries($boolType);
     }

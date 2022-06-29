@@ -51,10 +51,6 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testNormalization(): void
     {
-        $normalizer = $this
-            ->getMockBuilder('Symfony\Component\Serializer\Normalizer\NormalizerInterface')
-            ->getMock()
-        ;
         $innerHit = $this
             ->getMockBuilder('OpenSearchDSL\BuilderInterface')
             ->onlyMethods(['toArray', 'getType'])
@@ -74,7 +70,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
 
         static::assertEquals(
             $expected,
-            $endpoint->normalize($normalizer)
+            $endpoint->normalize()
         );
     }
 

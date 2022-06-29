@@ -11,8 +11,6 @@
 
 namespace OpenSearchDSL\SearchEndpoint;
 
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 /**
  * Search post filter dsl endpoint.
  */
@@ -22,11 +20,9 @@ class PostFilterEndpoint extends QueryEndpoint
      * Endpoint name
      */
     public const NAME = 'post_filter';
+    private const DEFAULT_ORDER = 1;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
+    public function normalize(): ?array
     {
         if (!$this->getBool()) {
             return null;
@@ -35,11 +31,8 @@ class PostFilterEndpoint extends QueryEndpoint
         return $this->getBool()->toArray();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
+    public function getOrder(): int
     {
-        return 1;
+        return self::DEFAULT_ORDER;
     }
 }

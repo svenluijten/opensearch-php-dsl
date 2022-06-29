@@ -44,17 +44,14 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
     public function testNormalization(): void
     {
         $instance = new PostFilterEndpoint();
-        $normalizerInterface = $this->getMockForAbstractClass(
-            'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
-        );
-        static::assertNull($instance->normalize($normalizerInterface));
+        static::assertNull($instance->normalize());
 
         $matchAll = new MatchAllQuery();
         $instance->add($matchAll);
 
         static::assertEquals(
             json_encode($matchAll->toArray()),
-            json_encode($instance->normalize($normalizerInterface))
+            json_encode($instance->normalize())
         );
     }
 

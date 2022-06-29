@@ -11,15 +11,18 @@
 
 namespace OpenSearchDSL\Tests\Unit;
 
+use OpenSearchDSL\Aggregation\Bucketing\NestedAggregation;
 use OpenSearchDSL\Aggregation\Bucketing\TermsAggregation;
 use OpenSearchDSL\Highlight\Highlight;
 use OpenSearchDSL\InnerHit\NestedInnerHit;
 use OpenSearchDSL\Query\Compound\BoolQuery;
+use OpenSearchDSL\Query\FullText\MatchQuery;
 use OpenSearchDSL\Query\MatchAllQuery;
 use OpenSearchDSL\Query\TermLevel\TermsQuery;
 use OpenSearchDSL\Search;
 use OpenSearchDSL\Serializer\OrderedSerializer;
 use OpenSearchDSL\Sort\FieldSort;
+use OpenSearchDSL\Sort\NestedSort;
 use OpenSearchDSL\Suggest\Suggest;
 
 /**
@@ -193,5 +196,96 @@ class SearchTest extends \PHPUnit\Framework\TestCase
 
         $search->setFrom(null);
         static::assertSame([], $search->toArray());
+    }
+
+    public function testNestedQuery(): void
+    {
+        $search = new Search();
+        $bool = new BoolQuery();
+        $bool->addParameter('minimum_should_match', '2');
+        $bool->add(new BoolQuery([
+            BoolQuery::MUST => new MatchQuery('foo', 'bar'),
+            BoolQuery::SHOULD => new MatchQuery('foo', 'baz'),
+            BoolQuery::MUST_NOT => new BoolQuery([
+                BoolQuery::MUST => new MatchQuery('foo', 'bar'),
+                BoolQuery::SHOULD => new MatchQuery('foo', 'baz'),
+            ]),
+        ]));
+
+        $search->addQuery($bool);
+        $search->addSort(new NestedSort('foo', new FieldSort('foo')));
+        $search->addAggregation((new NestedAggregation('foo', 'path'))->addAggregation(new TermsAggregation('acme')));
+
+        static::assertSame(
+            [
+                'query' => [
+                    'bool' => [
+                        'must' => [
+                            [
+                                'match' => [
+                                    'foo' => [
+                                        'query' => 'bar',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'should' => [
+                            [
+                                'match' => [
+                                    'foo' => [
+                                        'query' => 'baz',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'must_not' => [
+                            [
+                                'bool' => [
+                                    'must' => [
+                                        [
+                                            'match' => [
+                                                'foo' => [
+                                                    'query' => 'bar',
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'should' => [
+                                        [
+                                            'match' => [
+                                                'foo' => [
+                                                    'query' => 'baz',
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'sort' => [
+                    [
+                        'path' => 'foo',
+                        'filter' => [
+                            'foo' => [],
+                        ],
+                    ],
+                ],
+                'aggregations' => [
+                    'foo' => [
+                        'nested' => [
+                            'path' => 'path',
+                        ],
+                        'aggregations' => [
+                            'acme' => [
+                                'terms' => [],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            $search->toArray(),
+        );
     }
 }

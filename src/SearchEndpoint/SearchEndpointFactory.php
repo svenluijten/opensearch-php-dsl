@@ -36,7 +36,7 @@ class SearchEndpointFactory
      *
      * @throws \RuntimeException endpoint does not exist
      *
-     * @return SearchEndpointInterface
+     * @return AbstractSearchEndpoint
      */
     public static function get($type)
     {

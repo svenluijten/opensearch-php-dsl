@@ -5,11 +5,11 @@ namespace OpenSearchDSL\Tests\Unit\Serializer;
 use OpenSearchDSL\Query\MatchAllQuery;
 use OpenSearchDSL\Query\TermLevel\TermsQuery;
 use OpenSearchDSL\Search;
+use OpenSearchDSL\SearchEndpoint\HighlightEndpoint;
 use OpenSearchDSL\SearchEndpoint\PostFilterEndpoint;
 use OpenSearchDSL\SearchEndpoint\QueryEndpoint;
 use OpenSearchDSL\Serializer\OrderedSerializer;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
 
 /**
  * @internal
@@ -18,9 +18,7 @@ class OrderedSerializerTest extends TestCase
 {
     public function testOrdering(): void
     {
-        $serializer = new OrderedSerializer([
-            new CustomNormalizer(),
-        ]);
+        $serializer = new OrderedSerializer();
 
         $search = new Search();
         $search->addQuery(new MatchAllQuery());
@@ -46,12 +44,39 @@ class OrderedSerializerTest extends TestCase
         );
     }
 
-    public function testDenormalizeThrowsExceptions(): void
+    public function testNullFieldGetsDropped(): void
     {
         $serializer = new OrderedSerializer();
 
-        $this->expectException(\BadFunctionCallException::class);
+        $search = new Search();
 
-        $serializer->denormalize(['foo'], 'test');
+        static::assertSame(
+            [],
+            $serializer->normalize(
+                [
+                    $search->getEndpoint(HighlightEndpoint::NAME),
+                ]
+            )
+        );
+    }
+
+    public function testNonObjects(): void
+    {
+        $serializer = new OrderedSerializer();
+
+        static::assertSame(
+            [
+                'test' => 'string',
+                'test1' => 1,
+                'test2' => 1.5,
+            ],
+            $serializer->normalize(
+                [
+                    'test' => 'string',
+                    'test1' => 1,
+                    'test2' => 1.5,
+                ]
+            )
+        );
     }
 }

@@ -18,12 +18,13 @@ use OpenSearchDSL\Serializer\Normalizer\AbstractNormalizable;
 /**
  * Abstract class used to define search endpoint with references.
  */
-abstract class AbstractSearchEndpoint extends AbstractNormalizable implements SearchEndpointInterface
+abstract class AbstractSearchEndpoint extends AbstractNormalizable
 {
     use ParametersTrait;
 
     public const NAME = 'search';
     private const KEY_LENGTH = 30;
+    private const DEFAULT_ORDER = 10;
 
     /**
      * @var BuilderInterface[]
@@ -45,18 +46,12 @@ abstract class AbstractSearchEndpoint extends AbstractNormalizable implements Se
         return $key;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addToBool(BuilderInterface $builder, ?string $boolType = null, ?string $key = null): string
     {
         throw new \BadFunctionCallException(sprintf("Endpoint %s doesn't support bool statements", static::NAME));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($key)
+    public function remove(string $key): self
     {
         if ($this->has($key)) {
             unset($this->container[$key]);
@@ -65,22 +60,12 @@ abstract class AbstractSearchEndpoint extends AbstractNormalizable implements Se
         return $this;
     }
 
-    /**
-     * Checks if builder with specific key exists.
-     *
-     * @param string $key key to check if it exists in container
-     *
-     * @return bool
-     */
-    public function has($key)
+    public function has(string $key): bool
     {
         return array_key_exists($key, $this->container);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function get($key)
+    public function get(string $key): ?BuilderInterface
     {
         if ($this->has($key)) {
             return $this->container[$key];
@@ -90,9 +75,9 @@ abstract class AbstractSearchEndpoint extends AbstractNormalizable implements Se
     }
 
     /**
-     * {@inheritdoc}
+     * @return BuilderInterface[]
      */
-    public function getAll($boolType = null)
+    public function getAll(?string $boolType = null): array
     {
         return $this->container;
     }
@@ -103,5 +88,12 @@ abstract class AbstractSearchEndpoint extends AbstractNormalizable implements Se
     public function getBool()
     {
         throw new \BadFunctionCallException(sprintf("Endpoint %s doesn't support bool statements", static::NAME));
+    }
+
+    abstract public function normalize(): ?array;
+
+    public function getOrder(): int
+    {
+        return self::DEFAULT_ORDER;
     }
 }

@@ -11,9 +11,9 @@
 
 namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
+use OpenSearchDSL\SearchEndpoint\AbstractSearchEndpoint;
 use OpenSearchDSL\SearchEndpoint\AggregationsEndpoint;
 use OpenSearchDSL\SearchEndpoint\SearchEndpointFactory;
-use OpenSearchDSL\SearchEndpoint\SearchEndpointInterface;
 
 /**
  * Unit test class for search endpoint factory.
@@ -37,6 +37,6 @@ class SearchEndpointFactoryTest extends \PHPUnit\Framework\TestCase
     public function testFactory(): void
     {
         $endpoint = SearchEndpointFactory::get(AggregationsEndpoint::NAME);
-        static::assertInstanceOf(SearchEndpointInterface::class, $endpoint);
+        static::assertInstanceOf(AbstractSearchEndpoint::class, $endpoint);
     }
 }

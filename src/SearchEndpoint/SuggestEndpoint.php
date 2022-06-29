@@ -12,7 +12,6 @@
 namespace OpenSearchDSL\SearchEndpoint;
 
 use OpenSearchDSL\Suggest\Suggest;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * Search suggest dsl endpoint.
@@ -24,10 +23,7 @@ class SuggestEndpoint extends AbstractSearchEndpoint
      */
     public const NAME = 'suggest';
 
-    /**
-     * {@inheritdoc}
-     */
-    public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
+    public function normalize(): ?array
     {
         $output = [];
         /** @var Suggest $suggest */

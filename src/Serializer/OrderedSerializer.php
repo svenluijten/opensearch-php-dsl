@@ -11,73 +11,47 @@
 
 namespace OpenSearchDSL\Serializer;
 
-use OpenSearchDSL\Serializer\Normalizer\OrderedNormalizerInterface;
-use Symfony\Component\Serializer\Serializer;
+use OpenSearchDSL\SearchEndpoint\AbstractSearchEndpoint;
 
-/**
- * Custom serializer which orders data before normalization.
- */
-class OrderedSerializer extends Serializer
+class OrderedSerializer
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function normalize($data, $format = null, array $context = [])
+    public function normalize($data)
     {
-        return parent::normalize(
-            is_array($data) ? $this->order($data) : $data,
-            $format,
-            $context
-        );
-    }
+        $data = is_array($data) ? $this->order($data) : $data;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function denormalize($data, $type, $format = null, array $context = [])
-    {
-        throw new \BadFunctionCallException(sprintf("%s doesn't support denormalizing", static::class));
-    }
+        if (is_iterable($data)) {
+            foreach ($data as $key => $value) {
+                if ($value instanceof AbstractSearchEndpoint) {
+                    $normalize = $value->normalize();
 
-    /**
-     * Orders objects if can be done.
-     *
-     * @param array $data data to order
-     *
-     * @return array
-     */
-    private function order(array $data)
-    {
-        $filteredData = $this->filterOrderable($data);
-
-        if (!empty($filteredData)) {
-            uasort(
-                $filteredData,
-                static function (OrderedNormalizerInterface $a, OrderedNormalizerInterface $b) {
-                    return $a->getOrder() <=> $b->getOrder();
+                    if ($normalize !== null) {
+                        $data[$key] = $normalize;
+                    } else {
+                        unset($data[$key]);
+                    }
                 }
-            );
-
-            return array_merge($filteredData, array_diff_key($data, $filteredData));
+            }
         }
 
         return $data;
     }
 
-    /**
-     * Filters out data which can be ordered.
-     *
-     * @param array $array data to filter out
-     *
-     * @return array
-     */
-    private function filterOrderable($array)
+    private function order(array $data): array
     {
-        return array_filter(
-            $array,
+        $filteredData = array_filter(
+            $data,
             static function ($value) {
-                return $value instanceof OrderedNormalizerInterface;
+                return $value instanceof AbstractSearchEndpoint;
             }
         );
+
+        uasort(
+            $filteredData,
+            static function (AbstractSearchEndpoint $a, AbstractSearchEndpoint $b) {
+                return $a->getOrder() <=> $b->getOrder();
+            }
+        );
+
+        return array_merge($filteredData, array_diff_key($data, $filteredData));
     }
 }

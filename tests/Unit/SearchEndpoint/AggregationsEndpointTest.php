@@ -56,10 +56,6 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
         $endpoint->add($agg1, 'bar');
         $endpoint->add($agg2, 'foo');
 
-        $normalizerInterface = $this->getMockForAbstractClass(
-            'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
-        );
-
         static::assertSame(
             [
                 'bar' => [
@@ -71,7 +67,7 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
                     'terms' => [],
                 ],
             ],
-            $endpoint->normalize($normalizerInterface)
+            $endpoint->normalize()
         );
     }
 }

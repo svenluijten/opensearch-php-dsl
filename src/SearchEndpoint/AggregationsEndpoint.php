@@ -12,7 +12,6 @@
 namespace OpenSearchDSL\SearchEndpoint;
 
 use OpenSearchDSL\Aggregation\AbstractAggregation;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * Search aggregations dsl endpoint.
@@ -24,10 +23,7 @@ class AggregationsEndpoint extends AbstractSearchEndpoint
      */
     public const NAME = 'aggregations';
 
-    /**
-     * {@inheritdoc}
-     */
-    public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
+    public function normalize(): ?array
     {
         $output = [];
         /** @var AbstractAggregation $aggregation */

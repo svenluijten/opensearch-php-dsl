@@ -45,18 +45,15 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
     public function testEndpoint(): void
     {
         $instance = new QueryEndpoint();
-        $normalizerInterface = $this->getMockForAbstractClass(
-            'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
-        );
 
-        static::assertNull($instance->normalize($normalizerInterface));
+        static::assertNull($instance->normalize());
 
         $matchAll = new MatchAllQuery();
         $instance->add($matchAll);
 
         static::assertEquals(
             $matchAll->toArray(),
-            $instance->normalize($normalizerInterface)
+            $instance->normalize()
         );
     }
 
@@ -79,9 +76,6 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
     {
         $instance = new QueryEndpoint();
         $instance->add(new TermsQuery('foo', ['bla']));
-        $normalizerInterface = $this->getMockForAbstractClass(
-            'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
-        );
 
         $instance->addReference('filter_query', new TermsQuery('foo', ['bar']));
 
@@ -107,7 +101,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
                     ],
                 ],
             ],
-            $instance->normalize($normalizerInterface)
+            $instance->normalize()
         );
 
         static::assertSame(
@@ -132,7 +126,7 @@ class QueryEndpointTest extends \PHPUnit\Framework\TestCase
                     ],
                 ],
             ],
-            $instance->normalize($normalizerInterface)
+            $instance->normalize()
         );
     }
 }

@@ -36,16 +36,12 @@ class SortEndpointTest extends \PHPUnit\Framework\TestCase
     {
         $instance = new SortEndpoint();
 
-        $normalizerInterface = $this->getMockForAbstractClass(
-            'Symfony\Component\Serializer\Normalizer\NormalizerInterface'
-        );
-
         $sort = new FieldSort('acme', FieldSort::ASC);
         $instance->add($sort);
 
         static::assertEquals(
             [$sort->toArray()],
-            $instance->normalize($normalizerInterface)
+            $instance->normalize()
         );
     }
 

@@ -15,17 +15,16 @@ use OpenSearchDSL\Aggregation\AbstractAggregation;
 use OpenSearchDSL\Highlight\Highlight;
 use OpenSearchDSL\InnerHit\NestedInnerHit;
 use OpenSearchDSL\Query\Compound\BoolQuery;
+use OpenSearchDSL\SearchEndpoint\AbstractSearchEndpoint;
 use OpenSearchDSL\SearchEndpoint\AggregationsEndpoint;
 use OpenSearchDSL\SearchEndpoint\HighlightEndpoint;
 use OpenSearchDSL\SearchEndpoint\InnerHitsEndpoint;
 use OpenSearchDSL\SearchEndpoint\PostFilterEndpoint;
 use OpenSearchDSL\SearchEndpoint\QueryEndpoint;
 use OpenSearchDSL\SearchEndpoint\SearchEndpointFactory;
-use OpenSearchDSL\SearchEndpoint\SearchEndpointInterface;
 use OpenSearchDSL\SearchEndpoint\SortEndpoint;
 use OpenSearchDSL\SearchEndpoint\SuggestEndpoint;
 use OpenSearchDSL\Serializer\OrderedSerializer;
-use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
 
 /**
  * Search object that can be executed by a manager.
@@ -164,7 +163,7 @@ class Search
     private static $serializer;
 
     /**
-     * @var SearchEndpointInterface[]
+     * @var AbstractSearchEndpoint[]
      */
     private $endpoints = [];
 
@@ -190,11 +189,7 @@ class Search
     private function initializeSerializer(): void
     {
         if (self::$serializer === null) {
-            self::$serializer = new OrderedSerializer(
-                [
-                    new CustomNormalizer(),
-                ]
-            );
+            self::$serializer = new OrderedSerializer();
         }
     }
 
@@ -221,7 +216,7 @@ class Search
         return $this;
     }
 
-    public function getEndpoint(string $type): SearchEndpointInterface
+    public function getEndpoint(string $type): AbstractSearchEndpoint
     {
         if (!array_key_exists($type, $this->endpoints)) {
             $this->endpoints[$type] = SearchEndpointFactory::get($type);

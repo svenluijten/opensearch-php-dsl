@@ -12,7 +12,6 @@
 namespace OpenSearchDSL\SearchEndpoint;
 
 use OpenSearchDSL\BuilderInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * Search highlight dsl endpoint.
@@ -29,10 +28,7 @@ class HighlightEndpoint extends AbstractSearchEndpoint
      */
     private $highlight;
 
-    /**
-     * @return array|bool|float|int|string|null
-     */
-    public function normalize(NormalizerInterface $normalizer, ?string $format = null, array $context = [])
+    public function normalize(): ?array
     {
         if ($this->highlight) {
             return $this->highlight->toArray();
@@ -52,18 +48,12 @@ class HighlightEndpoint extends AbstractSearchEndpoint
         return '';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAll($boolType = null)
+    public function getAll(?string $boolType = null): array
     {
         return ['' => $this->getHighlight()];
     }
 
-    /**
-     * @return BuilderInterface
-     */
-    public function getHighlight()
+    public function getHighlight(): BuilderInterface
     {
         return $this->highlight;
     }

@@ -13,7 +13,6 @@ namespace OpenSearchDSL\Tests\Unit\SearchEndpoint;
 
 use OpenSearchDSL\SearchEndpoint\SuggestEndpoint;
 use OpenSearchDSL\Suggest\Suggest;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @internal
@@ -51,10 +50,6 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
     {
         $instance = new SuggestEndpoint();
 
-        $normalizerInterface = $this->getMockForAbstractClass(
-            NormalizerInterface::class
-        );
-
         $suggest = new Suggest('foo', 'bar', 'acme', 'foo');
         $suggest2 = new Suggest('foo2', 'bar2', 'acme2', 'foo2');
         $instance->add($suggest);
@@ -62,7 +57,7 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
 
         static::assertSame(
             array_merge($suggest->toArray(), $suggest2->toArray()),
-            $instance->normalize($normalizerInterface)
+            $instance->normalize()
         );
     }
 }

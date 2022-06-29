@@ -62,8 +62,8 @@ class ReverseNestedAggregationTest extends \PHPUnit\Framework\TestCase
         ];
 
         static::assertEquals(
-            json_encode($expectedResult),
-            json_encode($aggregation->toArray())
+            json_encode($expectedResult, \JSON_THROW_ON_ERROR),
+            json_encode($aggregation->toArray(), \JSON_THROW_ON_ERROR)
         );
     }
 }

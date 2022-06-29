@@ -28,7 +28,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('In not anonymous filters, filter name must be set.');
-        $mock = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
+        $mock = $this->getMockBuilder(\OpenSearchDSL\BuilderInterface::class)->getMock();
         $aggregation = new FiltersAggregation('test_agg');
         $aggregation->addFilter($mock);
     }
@@ -38,7 +38,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testFiltersAggregationGetArray(): void
     {
-        $mock = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
+        $mock = $this->getMockBuilder(\OpenSearchDSL\BuilderInterface::class)->getMock();
         $aggregation = new FiltersAggregation('test_agg');
         $aggregation->setAnonymous(true);
         $aggregation->addFilter($mock, 'name');
@@ -62,7 +62,7 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
     public function testToArray(): void
     {
         $aggregation = new FiltersAggregation('test_agg');
-        $filter = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')
+        $filter = $this->getMockBuilder(\OpenSearchDSL\BuilderInterface::class)
             ->onlyMethods(['toArray', 'getType'])
             ->getMockForAbstractClass()
         ;
@@ -98,8 +98,8 @@ class FiltersAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructorFilter(): void
     {
-        $builderInterface1 = $this->getMockForAbstractClass('OpenSearchDSL\BuilderInterface');
-        $builderInterface2 = $this->getMockForAbstractClass('OpenSearchDSL\BuilderInterface');
+        $builderInterface1 = $this->getMockForAbstractClass(\OpenSearchDSL\BuilderInterface::class);
+        $builderInterface2 = $this->getMockForAbstractClass(\OpenSearchDSL\BuilderInterface::class);
 
         $aggregation = new FiltersAggregation(
             'test',

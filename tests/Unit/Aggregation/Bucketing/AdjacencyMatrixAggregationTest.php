@@ -28,7 +28,7 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('In not anonymous filters, filter name must be set.');
-        $mock = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
+        $mock = $this->getMockBuilder(\OpenSearchDSL\BuilderInterface::class)->getMock();
         $aggregation = new FiltersAggregation('test_agg');
         $aggregation->addFilter($mock);
     }
@@ -38,7 +38,7 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testFiltersAggregationGetArray(): void
     {
-        $mock = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
+        $mock = $this->getMockBuilder(\OpenSearchDSL\BuilderInterface::class)->getMock();
         $aggregation = new AdjacencyMatrixAggregation('test_agg');
         $aggregation->setField('test_agg');
         $aggregation->addFilter('name', $mock);
@@ -64,7 +64,7 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
     public function testToArray(): void
     {
         $aggregation = new AdjacencyMatrixAggregation('test_agg');
-        $filter = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')
+        $filter = $this->getMockBuilder(\OpenSearchDSL\BuilderInterface::class)
             ->onlyMethods(['toArray', 'getType'])
             ->getMockForAbstractClass()
         ;
@@ -101,8 +101,8 @@ class AdjacencyMatrixAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testFilterConstructor(): void
     {
-        $builderInterface1 = $this->getMockForAbstractClass('OpenSearchDSL\BuilderInterface');
-        $builderInterface2 = $this->getMockForAbstractClass('OpenSearchDSL\BuilderInterface');
+        $builderInterface1 = $this->getMockForAbstractClass(\OpenSearchDSL\BuilderInterface::class);
+        $builderInterface2 = $this->getMockForAbstractClass(\OpenSearchDSL\BuilderInterface::class);
 
         $aggregation = new AdjacencyMatrixAggregation(
             'test',

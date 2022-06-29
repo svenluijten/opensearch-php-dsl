@@ -24,7 +24,7 @@ class HasParentQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructor(): void
     {
-        $parentQuery = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
+        $parentQuery = $this->getMockBuilder(\OpenSearchDSL\BuilderInterface::class)->getMock();
         $query = new HasParentQuery('test_type', $parentQuery, ['test_parameter1']);
         static::assertEquals(['test_parameter1'], $query->getParameters());
     }

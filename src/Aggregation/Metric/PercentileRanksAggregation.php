@@ -59,9 +59,7 @@ class PercentileRanksAggregation extends AbstractAggregation
                 'script' => $this->getScript(),
                 'values' => $this->getValues(),
             ],
-            static function ($val) {
-                return $val || \is_numeric($val);
-            }
+            static fn ($val) => $val || \is_numeric($val)
         );
 
         $this->isRequiredParametersSet($out);

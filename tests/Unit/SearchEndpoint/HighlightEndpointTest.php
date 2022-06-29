@@ -36,8 +36,8 @@ class HighlightEndpointTest extends \PHPUnit\Framework\TestCase
         $instance->add($highlight);
 
         static::assertEquals(
-            json_encode($highlight->toArray()),
-            json_encode($instance->normalize())
+            json_encode($highlight->toArray(), \JSON_THROW_ON_ERROR),
+            json_encode($instance->normalize(), \JSON_THROW_ON_ERROR)
         );
     }
 

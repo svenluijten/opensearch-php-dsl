@@ -24,7 +24,7 @@ class SuggestEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        static::assertInstanceOf('OpenSearchDSL\SearchEndpoint\SuggestEndpoint', new SuggestEndpoint());
+        static::assertInstanceOf(\OpenSearchDSL\SearchEndpoint\SuggestEndpoint::class, new SuggestEndpoint());
     }
 
     /**

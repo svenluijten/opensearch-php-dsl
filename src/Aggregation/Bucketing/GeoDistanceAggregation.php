@@ -97,9 +97,7 @@ class GeoDistanceAggregation extends AbstractAggregation
                 'from' => $from,
                 'to' => $to,
             ],
-            static function ($v) {
-                return null !== $v;
-            }
+            static fn ($v) => null !== $v
         );
 
         if (empty($range)) {

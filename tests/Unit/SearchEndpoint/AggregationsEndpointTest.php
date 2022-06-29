@@ -28,7 +28,7 @@ class AggregationsEndpointTest extends \PHPUnit\Framework\TestCase
     public function testItCanBeInstantiated(): void
     {
         static::assertInstanceOf(
-            'OpenSearchDSL\SearchEndpoint\AggregationsEndpoint',
+            \OpenSearchDSL\SearchEndpoint\AggregationsEndpoint::class,
             new AggregationsEndpoint()
         );
     }

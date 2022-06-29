@@ -25,7 +25,7 @@ class SpanNearQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testToArray(): void
     {
-        $mock = $this->getMockBuilder('OpenSearchDSL\Query\Span\SpanQueryInterface')->getMock();
+        $mock = $this->getMockBuilder(\OpenSearchDSL\Query\Span\SpanQueryInterface::class)->getMock();
         $mock
             ->expects(static::once())
             ->method('toArray')

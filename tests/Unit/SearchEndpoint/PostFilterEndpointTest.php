@@ -26,7 +26,7 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        static::assertInstanceOf('OpenSearchDSL\SearchEndpoint\PostFilterEndpoint', new PostFilterEndpoint());
+        static::assertInstanceOf(\OpenSearchDSL\SearchEndpoint\PostFilterEndpoint::class, new PostFilterEndpoint());
     }
 
     /**
@@ -50,8 +50,8 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
         $instance->add($matchAll);
 
         static::assertEquals(
-            json_encode($matchAll->toArray()),
-            json_encode($instance->normalize())
+            json_encode($matchAll->toArray(), \JSON_THROW_ON_ERROR),
+            json_encode($instance->normalize(), \JSON_THROW_ON_ERROR)
         );
     }
 

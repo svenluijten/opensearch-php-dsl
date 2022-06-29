@@ -41,9 +41,7 @@ class CardinalityAggregation extends AbstractAggregation
                 'precision_threshold' => $this->getPrecisionThreshold(),
                 'rehash' => $this->isRehash(),
             ],
-            static function ($val) {
-                return $val || \is_bool($val);
-            }
+            static fn ($val) => $val || \is_bool($val)
         );
     }
 

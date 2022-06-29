@@ -48,6 +48,8 @@ return (new PhpCsFixer\Config())
         'phpdoc_to_comment' => false,
         'php_unit_test_class_requires_covers' => false,
         'php_unit_test_case_static_method_calls' => true,
+        'fully_qualified_strict_types' => true,
+        'php_unit_internal_class' => true,
     ])
     ->setFinder(PhpCsFixer\Finder::create()
         ->exclude('vendor')

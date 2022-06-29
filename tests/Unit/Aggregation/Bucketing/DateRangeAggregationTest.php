@@ -121,7 +121,7 @@ class DateRangeAggregationTest extends \PHPUnit\Framework\TestCase
      */
     public function testDateRangeAggregationConstructor($field = null, $format = null, ?array $ranges = null): void
     {
-        $aggregation = $this->getMockBuilder('OpenSearchDSL\Aggregation\Bucketing\DateRangeAggregation')
+        $aggregation = $this->getMockBuilder(\OpenSearchDSL\Aggregation\Bucketing\DateRangeAggregation::class)
             ->onlyMethods(['setField', 'setFormat', 'addRange'])
             ->disableOriginalConstructor()
             ->getMock()

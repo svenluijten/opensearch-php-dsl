@@ -80,7 +80,7 @@ class BoolQuery implements BuilderInterface
     {
         if (count($this->container) === 1
             && isset($this->container[self::MUST])
-            && count($this->container[self::MUST]) === 1
+            && (is_countable($this->container[self::MUST]) ? count($this->container[self::MUST]) : 0) === 1
         ) {
             $query = reset($this->container[self::MUST]);
 

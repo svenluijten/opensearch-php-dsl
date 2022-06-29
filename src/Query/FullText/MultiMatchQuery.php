@@ -29,7 +29,7 @@ class MultiMatchQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private $fields = [];
+    private array $fields = [];
 
     private string $query;
 

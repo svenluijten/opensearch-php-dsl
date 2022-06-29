@@ -19,14 +19,14 @@ class SearchEndpointFactory
     /**
      * @var array holds namespaces for endpoints
      */
-    private static $endpoints = [
-        'query' => 'OpenSearchDSL\SearchEndpoint\QueryEndpoint',
-        'post_filter' => 'OpenSearchDSL\SearchEndpoint\PostFilterEndpoint',
-        'sort' => 'OpenSearchDSL\SearchEndpoint\SortEndpoint',
-        'highlight' => 'OpenSearchDSL\SearchEndpoint\HighlightEndpoint',
-        'aggregations' => 'OpenSearchDSL\SearchEndpoint\AggregationsEndpoint',
-        'suggest' => 'OpenSearchDSL\SearchEndpoint\SuggestEndpoint',
-        'inner_hits' => 'OpenSearchDSL\SearchEndpoint\InnerHitsEndpoint',
+    private static array $endpoints = [
+        'query' => \OpenSearchDSL\SearchEndpoint\QueryEndpoint::class,
+        'post_filter' => \OpenSearchDSL\SearchEndpoint\PostFilterEndpoint::class,
+        'sort' => \OpenSearchDSL\SearchEndpoint\SortEndpoint::class,
+        'highlight' => \OpenSearchDSL\SearchEndpoint\HighlightEndpoint::class,
+        'aggregations' => \OpenSearchDSL\SearchEndpoint\AggregationsEndpoint::class,
+        'suggest' => \OpenSearchDSL\SearchEndpoint\SuggestEndpoint::class,
+        'inner_hits' => \OpenSearchDSL\SearchEndpoint\InnerHitsEndpoint::class,
     ];
 
     /**

@@ -144,9 +144,7 @@ class HistogramAggregation extends AbstractAggregation
                 'keyed' => $this->isKeyed(),
                 'order' => $this->getOrder(),
             ],
-            static function ($val) {
-                return $val || \is_numeric($val);
-            }
+            static fn ($val) => $val || \is_numeric($val)
         );
     }
 

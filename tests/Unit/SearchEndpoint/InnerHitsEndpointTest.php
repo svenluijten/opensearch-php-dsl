@@ -26,7 +26,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
     public function testItCanBeInstantiated(): void
     {
         static::assertInstanceOf(
-            'OpenSearchDSL\SearchEndpoint\InnerHitsEndpoint',
+            \OpenSearchDSL\SearchEndpoint\InnerHitsEndpoint::class,
             new InnerHitsEndpoint()
         );
     }
@@ -37,7 +37,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
     public function testEndpointGetter(): void
     {
         $hitName = 'foo';
-        $innerHit = $this->getMockBuilder('OpenSearchDSL\BuilderInterface')->getMock();
+        $innerHit = $this->getMockBuilder(\OpenSearchDSL\BuilderInterface::class)->getMock();
         $endpoint = new InnerHitsEndpoint();
         $endpoint->add($innerHit, $hitName);
         $builders = $endpoint->getAll();
@@ -52,7 +52,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
     public function testNormalization(): void
     {
         $innerHit = $this
-            ->getMockBuilder('OpenSearchDSL\BuilderInterface')
+            ->getMockBuilder(\OpenSearchDSL\BuilderInterface::class)
             ->onlyMethods(['toArray', 'getType'])
             ->addMethods(['getName'])
             ->getMock()

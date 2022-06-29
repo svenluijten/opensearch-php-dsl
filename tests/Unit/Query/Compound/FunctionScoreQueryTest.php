@@ -277,7 +277,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        static::assertEquals($expected, json_decode(json_encode($search->toArray()), true));
+        static::assertEquals($expected, json_decode(json_encode($search->toArray(), \JSON_THROW_ON_ERROR), true, 512, \JSON_THROW_ON_ERROR));
     }
 
     public function testScriptScore(): void
@@ -338,7 +338,7 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
-        static::assertEquals($expected, json_decode(json_encode($search->toArray()), true));
+        static::assertEquals($expected, json_decode(json_encode($search->toArray(), \JSON_THROW_ON_ERROR), true, 512, \JSON_THROW_ON_ERROR));
     }
 
     public function testAddSimpleFunction(): void

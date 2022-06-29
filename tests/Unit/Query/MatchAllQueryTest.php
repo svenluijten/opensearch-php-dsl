@@ -52,6 +52,6 @@ class MatchAllQueryTest extends \PHPUnit\Framework\TestCase
             'query' => [
                 'match_all' => [],
             ],
-        ], json_decode(json_encode($search->toArray()), true));
+        ], json_decode(json_encode($search->toArray(), \JSON_THROW_ON_ERROR), true, 512, \JSON_THROW_ON_ERROR));
     }
 }

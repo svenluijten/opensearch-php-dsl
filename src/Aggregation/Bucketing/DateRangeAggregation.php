@@ -78,9 +78,7 @@ class DateRangeAggregation extends AbstractAggregation
                 'to' => $to,
                 'key' => $key,
             ],
-            static function ($v) {
-                return null !== $v;
-            }
+            static fn ($v) => null !== $v
         );
 
         if (empty($range)) {

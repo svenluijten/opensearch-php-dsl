@@ -25,15 +25,9 @@ class QueryEndpoint extends AbstractSearchEndpoint
     public const NAME = 'query';
     private const DEFAULT_ORDER = 2;
 
-    /**
-     * @var BoolQuery|null
-     */
-    private $bool;
+    private ?\OpenSearchDSL\Query\Compound\BoolQuery $bool = null;
 
-    /**
-     * @var bool
-     */
-    private $filtersSet = false;
+    private bool $filtersSet = false;
 
     public function normalize(): ?array
     {

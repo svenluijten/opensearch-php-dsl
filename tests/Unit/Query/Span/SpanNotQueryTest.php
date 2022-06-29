@@ -25,7 +25,7 @@ class SpanNotQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testSpanNotQueryToArray(): void
     {
-        $mock = $this->getMockBuilder('OpenSearchDSL\Query\Span\SpanQueryInterface')->getMock();
+        $mock = $this->getMockBuilder(\OpenSearchDSL\Query\Span\SpanQueryInterface::class)->getMock();
         $mock
             ->expects(static::exactly(2))
             ->method('toArray')

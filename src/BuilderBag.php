@@ -73,9 +73,7 @@ class BuilderBag
     {
         return array_filter(
             $this->bag,
-            function (BuilderInterface $builder) use ($type) {
-                return $type === null || $builder->getType() === $type;
-            }
+            fn (BuilderInterface $builder) => $type === null || $builder->getType() === $type
         );
     }
 

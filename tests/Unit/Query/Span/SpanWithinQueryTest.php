@@ -50,7 +50,7 @@ class SpanWithinQueryTest extends \PHPUnit\Framework\TestCase
      */
     private function getSpanQueryMock($value)
     {
-        $mock = $this->getMockBuilder('OpenSearchDSL\Query\Span\SpanQueryInterface')->getMock();
+        $mock = $this->getMockBuilder(\OpenSearchDSL\Query\Span\SpanQueryInterface::class)->getMock();
         $mock
             ->expects(static::once())
             ->method('toArray')

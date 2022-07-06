@@ -15,18 +15,10 @@ is the preferred and recommended way to ask support questions.
 
 ## Version matrix
 
-### OpenSearch
-
 | OpenSearch version | OpenSearchDSL version |
 |--------------------|-----------------------|
 | >= 1.0             | >= 1.0                |
 | >= 2.0             | >= 1.0                |
-
-### Elasticsearch
-
-| Elasticsearch version | OpenSearchDSL version  |
-|-----------------------|------------------------|
-| >= 7.0                | >= 1.0                 |
 
 ## Documentation
 

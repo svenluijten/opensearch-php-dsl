@@ -1,6 +1,6 @@
 # OpenSearch DSL
 
-Introducing OpenSearch/Elasticsearch DSL library to provide objective query builder for [elasticsearch-php](https://github.com/elastic/elasticsearch-php) client. You can easily build any Elasticsearch query and transform it to an array.
+Introducing OpenSearch DSL library to provide objective query builder for [opensearch-php](https://github.com/opensearch-project/opensearch-php) client. You can easily build any Opensearch query and transform it to an array.
 
 This is a fork of `ongr-io/ElasticsearchDSL`, which will be more regularly updated. Thanks for ongr-io for building this Library!
 

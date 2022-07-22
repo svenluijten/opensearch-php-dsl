@@ -4,11 +4,10 @@ Introducing OpenSearch DSL library to provide objective query builder for [opens
 
 This is a fork of `ongr-io/ElasticsearchDSL`, which will be more regularly updated. Thanks for ongr-io for building this Library!
 
-If you need any help, [Github discussion](https://github.com/shyim/opensearch-dsl/discussions)
-is the preferred and recommended way to ask support questions.
+If you need any help, [Github issues](https://github.com/shyim/opensearch-dsl/issues) is the preferred and recommended way to ask support questions.
 
 [![Test](https://github.com/shyim/opensearch-dsl/actions/workflows/test.yml/badge.svg)](https://github.com/shyim/opensearch-dsl/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/shyim/opensearch-dsl/branch/7.2/graph/badge.svg)](https://codecov.io/gh/shyim/opensearch-dsl)
+[![codecov](https://codecov.io/gh/shyim/opensearch-dsl/branch/main/graph/badge.svg)](https://codecov.io/gh/shyim/opensearch-dsl)
 [![Latest Stable Version](https://poser.pugx.org/shyim/opensearch-dsl/v/stable)](https://packagist.org/packages/shyim/opensearch-dsl)
 [![Total Downloads](https://poser.pugx.org/shyim/opensearch-dsl/downloads)](https://packagist.org/packages/shyim/opensearch-dsl)
 

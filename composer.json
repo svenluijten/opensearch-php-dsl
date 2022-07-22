@@ -1,5 +1,5 @@
 {
-    "name": "shyim/opensearch-dsl",
+    "name": "shyim/opensearch-php-dsl",
     "description": "OpenSearch/Elasticsearch DSL library",
     "type": "library",
     "homepage": "https://github.com/shyim/opensearch-dsl",

@@ -3,6 +3,7 @@ name: Test
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,13 +16,10 @@ jobs:
         - "7.4"
         - "8.0"
         - "8.1"
+        - "8.2"
         dependencies:
         - lowest
         - highest
-        exclude:
-          # ringphp does not support PHP 8.1
-          - php-version: '8.1'
-            dependencies: 'lowest'
     steps:
     - uses: actions/checkout@v2
   
@@ -36,8 +34,8 @@ jobs:
       run: composer validate
 
     - name: Set composer platform version
-      if: matrix.php-version == '8.1'
-      run: composer config platform.php 8.0.9
+      if: matrix.php-version == '8.2'
+      run: composer config platform.php 8.1.9
 
     - name: Install lowest dependencies with composer
       if: matrix.dependencies == 'lowest'

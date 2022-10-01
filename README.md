@@ -6,10 +6,10 @@ This is a fork of `ongr-io/ElasticsearchDSL`, which will be more regularly updat
 
 If you need any help, [Github issues](https://github.com/shyim/opensearch-dsl/issues) is the preferred and recommended way to ask support questions.
 
-[![Test](https://github.com/shyim/opensearch-dsl/actions/workflows/test.yml/badge.svg)](https://github.com/shyim/opensearch-dsl/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/shyim/opensearch-dsl/branch/main/graph/badge.svg)](https://codecov.io/gh/shyim/opensearch-dsl)
-[![Latest Stable Version](https://poser.pugx.org/shyim/opensearch-dsl/v/stable)](https://packagist.org/packages/shyim/opensearch-dsl)
-[![Total Downloads](https://poser.pugx.org/shyim/opensearch-dsl/downloads)](https://packagist.org/packages/shyim/opensearch-dsl)
+[![Test](https://github.com/shyim/opensearch-php-dsl/actions/workflows/test.yml/badge.svg)](https://github.com/shyim/opensearch-php-dsl/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/shyim/opensearch-php-dsl/branch/main/graph/badge.svg)](https://codecov.io/gh/shyim/opensearch-php-dsl)
+[![Latest Stable Version](https://poser.pugx.org/shyim/opensearch-php-dsl/v/stable)](https://packagist.org/packages/shyim/opensearch-php-dsl)
+[![Total Downloads](https://poser.pugx.org/shyim/opensearch-php-dsl/downloads)](https://packagist.org/packages/shyim/opensearch-php-dsl)
 
 
 ## Version matrix

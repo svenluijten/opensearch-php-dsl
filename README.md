@@ -30,7 +30,7 @@ If you need any help, [Github issues](https://github.com/shyim/opensearch-dsl/is
 Install library with [composer](https://getcomposer.org):
 
 ```bash
-$ composer require shyim/opensearch-dsl
+$ composer require shyim/opensearch-php-dsl
 ```
 
 > [elasticsearch-php](https://github.com/elastic/elasticsearch-php) client is defined in the composer requirements, no need to install it.

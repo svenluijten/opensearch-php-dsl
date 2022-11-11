@@ -68,8 +68,28 @@ class PercentilesAggregationTest extends \PHPUnit\Framework\TestCase
         static::assertSame('bar', $aggregation->getName());
         static::assertSame('fieldValue', $aggregation->getField());
         static::assertSame(['percentsValue'], $aggregation->getPercents());
+        static::assertSame('scriptValue', $aggregation->getScript());
 
         $aggregation->setPercents(['bla']);
         static::assertSame(['bla'], $aggregation->getPercents());
+    }
+
+    public function testIdScript(): void
+    {
+        $idScript = ['id' => 'scriptId', 'params' => ['param' => 'value']];
+        $aggregation = new PercentilesAggregation('bar', 'fieldValue', ['percentsValue'], $idScript);
+        static::assertSame(
+            [
+                'percents' => ['percentsValue'],
+                'field' => 'fieldValue',
+                'script' => $idScript,
+            ],
+            $aggregation->getArray()
+        );
+
+        static::assertSame('bar', $aggregation->getName());
+        static::assertSame('fieldValue', $aggregation->getField());
+        static::assertSame(['percentsValue'], $aggregation->getPercents());
+        static::assertSame($idScript, $aggregation->getScript());
     }
 }

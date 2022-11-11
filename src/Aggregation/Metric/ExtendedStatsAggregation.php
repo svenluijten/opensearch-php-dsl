@@ -25,7 +25,10 @@ class ExtendedStatsAggregation extends AbstractAggregation
     use MetricTrait;
     use ScriptAwareTrait;
 
-    public function __construct(string $name, ?string $field = null, ?int $sigma = null, ?string $script = null)
+    /**
+     * @param string|array{id: string, params?: array<string, mixed>}|null $script
+     */
+    public function __construct(string $name, ?string $field = null, ?int $sigma = null, $script = null)
     {
         parent::__construct($name);
 

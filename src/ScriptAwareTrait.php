@@ -16,14 +16,23 @@ namespace OpenSearchDSL;
  */
 trait ScriptAwareTrait
 {
-    private ?string $script = null;
+    /**
+     * @var string|array{id: string, params?: array<string, mixed>}|null
+     */
+    private $script;
 
-    public function getScript(): ?string
+    /**
+     * @return array{id: string, params?: array<string, mixed>}|string|null
+     */
+    public function getScript()
     {
         return $this->script;
     }
 
-    public function setScript(?string $script): self
+    /**
+     * @param array{id: string, params?: array<string, mixed>}|string|null $script
+     */
+    public function setScript($script): self
     {
         $this->script = $script;
 

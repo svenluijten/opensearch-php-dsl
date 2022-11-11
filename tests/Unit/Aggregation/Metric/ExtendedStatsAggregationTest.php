@@ -35,4 +35,30 @@ class ExtendedStatsAggregationTest extends TestCase
             'script' => 'script',
         ], $a->getArray());
     }
+
+    public function testIdScript(): void
+    {
+        $idScript = ['id' => 'scriptId', 'params' => ['param' => 'value']];
+        $aggregation = new ExtendedStatsAggregation('foo', 'fieldValue', 5, $idScript);
+        static::assertSame(
+            [
+                'extended_stats' => [
+                    'field' => 'fieldValue',
+                    'script' => $idScript,
+                    'sigma' => 5,
+                ],
+            ],
+            $aggregation->toArray()
+        );
+        static::assertSame('foo', $aggregation->getName());
+        static::assertSame('fieldValue', $aggregation->getField());
+        static::assertSame(5, $aggregation->getSigma());
+        static::assertSame($idScript, $aggregation->getScript());
+
+        static::assertSame([
+            'field' => 'fieldValue',
+            'script' => $idScript,
+            'sigma' => 5,
+        ], $aggregation->getArray());
+    }
 }

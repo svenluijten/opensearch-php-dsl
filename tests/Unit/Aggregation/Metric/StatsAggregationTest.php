@@ -63,4 +63,27 @@ class StatsAggregationTest extends \PHPUnit\Framework\TestCase
             'field' => 'fieldValue',
         ], $aggregation->getArray());
     }
+
+    public function testIdScript(): void
+    {
+        $idScript = ['id' => 'scriptId', 'params' => ['param' => 'value']];
+        $aggregation = new StatsAggregation('foo', 'fieldValue', $idScript);
+        static::assertSame(
+            [
+                'stats' => [
+                    'field' => 'fieldValue',
+                    'script' => $idScript,
+                ],
+            ],
+            $aggregation->toArray()
+        );
+        static::assertSame('foo', $aggregation->getName());
+        static::assertSame('fieldValue', $aggregation->getField());
+        static::assertSame($idScript, $aggregation->getScript());
+
+        static::assertSame([
+            'field' => 'fieldValue',
+            'script' => $idScript,
+        ], $aggregation->getArray());
+    }
 }

@@ -115,4 +115,24 @@ class PercentileRanksAggregationTest extends \PHPUnit\Framework\TestCase
         static::assertSame('script', $agg->getScript());
         static::assertSame([], $agg->getValues());
     }
+
+    public function testIdScript(): void
+    {
+        $idScript = ['id' => 'scriptId', 'params' => ['param' => 'value']];
+        $agg = new PercentileRanksAggregation('foo', 'field', ['bar'], $idScript);
+        static::assertSame('foo', $agg->getName());
+        static::assertSame($idScript, $agg->getScript());
+        static::assertSame(['bar'], $agg->getValues());
+
+        static::assertSame(
+            [
+                'percentile_ranks' => [
+                    'field' => 'field',
+                    'script' => $idScript,
+                    'values' => ['bar'],
+                ],
+            ],
+            $agg->toArray()
+        );
+    }
 }

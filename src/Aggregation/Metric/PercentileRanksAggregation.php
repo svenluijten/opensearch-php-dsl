@@ -27,7 +27,10 @@ class PercentileRanksAggregation extends AbstractAggregation
 
     private array $values;
 
-    public function __construct(string $name, ?string $field, array $values = [], ?string $script = null)
+    /**
+     * @param string|array{id: string, params?: array<string, mixed>}|null $script
+     */
+    public function __construct(string $name, ?string $field, array $values = [], $script = null)
     {
         parent::__construct($name);
 
@@ -74,6 +77,7 @@ class PercentileRanksAggregation extends AbstractAggregation
 
     private function isRequiredParametersSet(array $out): void
     {
+        var_dump($out);
         if (\array_key_exists('values', $out)) {
             if (\array_key_exists('field', $out)) {
                 return;

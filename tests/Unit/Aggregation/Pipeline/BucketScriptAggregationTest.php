@@ -51,6 +51,34 @@ class BucketScriptAggregationTest extends \PHPUnit\Framework\TestCase
         static::assertEquals($expected, $aggregation->toArray());
     }
 
+    public function testIdScript(): void
+    {
+        $idScript = ['id' => 'scriptId', 'params' => ['param' => 'value']];
+        $aggregation = new BucketScriptAggregation(
+            'test',
+            [
+                'my_var1' => 'foo',
+                'my_var2' => 'bar',
+            ],
+            $idScript
+        );
+        static::assertSame($idScript, $aggregation->getScript());
+        $aggregation->addParameter('gap_policy', 'insert_zeros');
+
+        $expected = [
+            'bucket_script' => [
+                'buckets_path' => [
+                    'my_var1' => 'foo',
+                    'my_var2' => 'bar',
+                ],
+                'script' => $idScript,
+                'gap_policy' => 'insert_zeros',
+            ],
+        ];
+
+        static::assertEquals($expected, $aggregation->toArray());
+    }
+
     /**
      * Tests if the exception is thrown in getArray method if no
      * buckets_path or script is set

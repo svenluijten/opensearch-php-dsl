@@ -208,5 +208,28 @@ class TermsAggregationTest extends \PHPUnit\Framework\TestCase
         static::assertSame('test_script', $aggregation->getScript());
         static::assertSame('test_agg', $aggregation->getName());
         static::assertSame('test_field', $aggregation->getField());
+
+        static::assertEquals([
+            'terms' => [
+                'field' => 'test_field',
+                'script' => 'test_script',
+            ],
+        ], $aggregation->toArray());
+    }
+
+    public function testTermsAggregationIdScript(): void
+    {
+        $idScript = ['id' => 'scriptId', 'params' => ['param' => 'value']];
+        $aggregation = new TermsAggregation('test_agg', 'test_field', $idScript);
+        static::assertSame($idScript, $aggregation->getScript());
+        static::assertSame('test_agg', $aggregation->getName());
+        static::assertSame('test_field', $aggregation->getField());
+
+        static::assertEquals([
+            'terms' => [
+                'field' => 'test_field',
+                'script' => $idScript,
+            ],
+        ], $aggregation->toArray());
     }
 }

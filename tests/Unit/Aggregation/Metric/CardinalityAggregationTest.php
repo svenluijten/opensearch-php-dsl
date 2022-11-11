@@ -73,4 +73,17 @@ class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
             $aggregation->toArray()
         );
     }
+
+    public function testCardinallyAggregationWithIdScript(): void
+    {
+        $idScript = ['id' => 'scriptId', 'params' => ['param' => 'value']];
+        $aggregation = new CardinalityAggregation('foo');
+        $aggregation->setScript($idScript);
+
+        static::assertSame($idScript, $aggregation->getScript());
+        static::assertSame(
+            ['cardinality' => ['script' => $idScript]],
+            $aggregation->toArray()
+        );
+    }
 }

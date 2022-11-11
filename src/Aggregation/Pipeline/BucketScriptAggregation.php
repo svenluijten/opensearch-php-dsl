@@ -22,7 +22,10 @@ class BucketScriptAggregation extends AbstractPipelineAggregation
 {
     use ScriptAwareTrait;
 
-    public function __construct(string $name, array $bucketsPath, ?string $script = null)
+    /**
+     * @param string|array{id: string, params?: array<string, mixed>}|null $script
+     */
+    public function __construct(string $name, array $bucketsPath, $script = null)
     {
         parent::__construct($name, $bucketsPath);
 

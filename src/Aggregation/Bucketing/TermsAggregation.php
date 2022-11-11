@@ -25,7 +25,10 @@ class TermsAggregation extends AbstractAggregation
     use BucketingTrait;
     use ScriptAwareTrait;
 
-    public function __construct($name, ?string $field = null, ?string $script = null)
+    /**
+     * @param string|array{id: string, params?: array<string, mixed>}|null $script
+     */
+    public function __construct(string $name, ?string $field = null, $script = null)
     {
         parent::__construct($name);
 

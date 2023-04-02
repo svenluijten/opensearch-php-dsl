@@ -40,7 +40,7 @@ class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
         $aggregation->setField('date');
         $aggregation->setCalendarInterval('month');
         $result = $aggregation->getArray();
-        $expected = ['field' => 'date', 'calender_interval' => 'month'];
+        $expected = ['field' => 'date', 'calendar_interval' => 'month'];
         static::assertEquals($expected, $result);
     }
 
@@ -61,7 +61,7 @@ class DateHistogramAggregationTest extends \PHPUnit\Framework\TestCase
         static::assertSame([
             'date_histogram' => [
                 'field' => 'test',
-                'calender_interval' => '1m',
+                'calendar_interval' => '1m',
                 'fixed_interval' => '1m',
                 'time_zone' => 'Europe/Berlin',
                 'format' => 'YYYY-mm-dd',

@@ -31,9 +31,15 @@ class MultiMatchQuery implements BuilderInterface
 
     private array $fields = [];
 
-    private string $query;
+    /**
+     * @var string|int|float
+     */
+    private $query;
 
-    public function __construct(array $fields, string $query, array $parameters = [])
+    /**
+     * @param string|int|float $query
+     */
+    public function __construct(array $fields, $query, array $parameters = [])
     {
         $this->fields = $fields;
         $this->query = $query;

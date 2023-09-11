@@ -77,7 +77,6 @@ class PercentileRanksAggregation extends AbstractAggregation
 
     private function isRequiredParametersSet(array $out): void
     {
-        var_dump($out);
         if (\array_key_exists('values', $out)) {
             if (\array_key_exists('field', $out)) {
                 return;

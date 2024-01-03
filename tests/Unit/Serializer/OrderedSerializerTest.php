@@ -5,6 +5,7 @@ namespace OpenSearchDSL\Tests\Unit\Serializer;
 use OpenSearchDSL\Query\MatchAllQuery;
 use OpenSearchDSL\Query\TermLevel\TermsQuery;
 use OpenSearchDSL\Search;
+use OpenSearchDSL\SearchEndpoint\AggregationsEndpoint;
 use OpenSearchDSL\SearchEndpoint\HighlightEndpoint;
 use OpenSearchDSL\SearchEndpoint\PostFilterEndpoint;
 use OpenSearchDSL\SearchEndpoint\QueryEndpoint;
@@ -44,7 +45,7 @@ class OrderedSerializerTest extends TestCase
         );
     }
 
-    public function testNullFieldGetsDropped(): void
+    public function testNullOrEmptyArrayFieldGetsDropped(): void
     {
         $serializer = new OrderedSerializer();
 
@@ -55,6 +56,7 @@ class OrderedSerializerTest extends TestCase
             $serializer->normalize(
                 [
                     $search->getEndpoint(HighlightEndpoint::NAME),
+                    $search->getEndpoint(AggregationsEndpoint::NAME),
                 ]
             )
         );

@@ -37,7 +37,7 @@ class SearchTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        static::assertInstanceOf(\OpenSearchDSL\Search::class, new Search());
+        static::assertInstanceOf(Search::class, new Search());
     }
 
     public function testScrollUriParameter(): void

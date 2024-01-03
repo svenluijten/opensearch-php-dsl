@@ -36,9 +36,6 @@ class TermsAggregation extends AbstractAggregation
         $this->setScript($script);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         return \array_filter(

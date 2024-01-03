@@ -96,9 +96,6 @@ class DateHistogramAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         if ($this->getCalendarInterval() === null && $this->getFixedInterval() === null) {

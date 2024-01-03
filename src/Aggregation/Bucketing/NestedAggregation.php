@@ -44,9 +44,6 @@ class NestedAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         return ['path' => $this->getPath()];

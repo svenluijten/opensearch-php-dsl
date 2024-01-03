@@ -29,9 +29,6 @@ class CardinalityAggregation extends AbstractAggregation
 
     private ?bool $rehash = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         return \array_filter(

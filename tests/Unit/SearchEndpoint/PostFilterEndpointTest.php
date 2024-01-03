@@ -26,7 +26,7 @@ class PostFilterEndpointTest extends \PHPUnit\Framework\TestCase
      */
     public function testItCanBeInstantiated(): void
     {
-        static::assertInstanceOf(\OpenSearchDSL\SearchEndpoint\PostFilterEndpoint::class, new PostFilterEndpoint());
+        static::assertInstanceOf(PostFilterEndpoint::class, new PostFilterEndpoint());
     }
 
     /**

@@ -97,9 +97,6 @@ class RangeAggregation extends AbstractAggregation
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         $data = [

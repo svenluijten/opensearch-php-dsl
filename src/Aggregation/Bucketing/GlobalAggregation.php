@@ -28,9 +28,6 @@ class GlobalAggregation extends AbstractAggregation
         throw new \LogicException("Global aggregation, doesn't support `field` parameter");
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         return new \stdClass();

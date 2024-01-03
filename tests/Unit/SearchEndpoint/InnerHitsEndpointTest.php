@@ -26,7 +26,7 @@ class InnerHitsEndpointTest extends \PHPUnit\Framework\TestCase
     public function testItCanBeInstantiated(): void
     {
         static::assertInstanceOf(
-            \OpenSearchDSL\SearchEndpoint\InnerHitsEndpoint::class,
+            InnerHitsEndpoint::class,
             new InnerHitsEndpoint()
         );
     }

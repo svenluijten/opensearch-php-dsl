@@ -66,9 +66,6 @@ class Ipv4RangeAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         if (empty($this->ranges)) {

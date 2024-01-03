@@ -65,7 +65,6 @@ class FunctionScoreQueryTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests addRandomFunction method.
      *
-     * @param mixed $seed
      * @param array $expectedArray
      *
      * @dataProvider addRandomFunctionProvider

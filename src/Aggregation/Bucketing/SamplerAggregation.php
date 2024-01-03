@@ -45,9 +45,6 @@ class SamplerAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         return \array_filter(

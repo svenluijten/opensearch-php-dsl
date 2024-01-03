@@ -51,9 +51,6 @@ class PercentileRanksAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         $out = \array_filter(

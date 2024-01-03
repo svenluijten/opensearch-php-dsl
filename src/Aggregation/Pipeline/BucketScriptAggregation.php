@@ -32,9 +32,6 @@ class BucketScriptAggregation extends AbstractPipelineAggregation
         $this->setScript($script);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         if (!$this->getScript()) {

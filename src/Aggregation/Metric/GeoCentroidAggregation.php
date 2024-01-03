@@ -30,9 +30,6 @@ class GeoCentroidAggregation extends AbstractAggregation
         $this->setField($field);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         return [

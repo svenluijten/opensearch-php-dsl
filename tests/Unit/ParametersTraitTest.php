@@ -21,9 +21,6 @@ class ParametersTraitTest extends TestCase
 {
     private TestTraitClass $parametersTraitMock;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->parametersTraitMock = new TestTraitClass();

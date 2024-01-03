@@ -50,9 +50,6 @@ class FilterAggregation extends AbstractAggregation
         throw new \LogicException("Filter aggregation, doesn't support `field` parameter");
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         return $this->getFilter()->toArray();

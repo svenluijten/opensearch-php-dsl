@@ -36,9 +36,6 @@ class StatsAggregation extends AbstractAggregation
         $this->setScript($script);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         $out = [];

@@ -44,9 +44,6 @@ class ChildrenAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         if (count($this->getAggregations()) === 0) {

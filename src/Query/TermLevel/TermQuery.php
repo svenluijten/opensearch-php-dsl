@@ -25,9 +25,6 @@ class TermQuery implements BuilderInterface
 
     private string $field;
 
-    /**
-     * @var mixed
-     */
     private $value;
 
     /**

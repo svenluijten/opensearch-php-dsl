@@ -89,9 +89,6 @@ class TopHitsAggregation extends AbstractAggregation
         return $this->size;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         $sortsOutput = null;

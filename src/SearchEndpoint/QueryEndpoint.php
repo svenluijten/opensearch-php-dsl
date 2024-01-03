@@ -72,9 +72,6 @@ class QueryEndpoint extends AbstractSearchEndpoint
         return $this->bool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAll(?string $boolType = null): array
     {
         return $this->bool->getQueries($boolType);

@@ -82,9 +82,6 @@ abstract class AbstractSearchEndpoint extends AbstractNormalizable
         return $this->container;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBool()
     {
         throw new \BadFunctionCallException(sprintf("Endpoint %s doesn't support bool statements", static::NAME));

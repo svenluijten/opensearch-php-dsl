@@ -88,9 +88,6 @@ class CompositeAggregation extends AbstractAggregation
         return $this->after;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray(): array
     {
         $array = [

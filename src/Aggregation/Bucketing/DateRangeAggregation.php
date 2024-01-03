@@ -90,9 +90,6 @@ class DateRangeAggregation extends AbstractAggregation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getArray()
     {
         if (empty($this->ranges)) {

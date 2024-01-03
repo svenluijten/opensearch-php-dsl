@@ -20,13 +20,13 @@ class SearchEndpointFactory
      * @var array holds namespaces for endpoints
      */
     private static array $endpoints = [
-        'query' => \OpenSearchDSL\SearchEndpoint\QueryEndpoint::class,
-        'post_filter' => \OpenSearchDSL\SearchEndpoint\PostFilterEndpoint::class,
-        'sort' => \OpenSearchDSL\SearchEndpoint\SortEndpoint::class,
-        'highlight' => \OpenSearchDSL\SearchEndpoint\HighlightEndpoint::class,
-        'aggregations' => \OpenSearchDSL\SearchEndpoint\AggregationsEndpoint::class,
-        'suggest' => \OpenSearchDSL\SearchEndpoint\SuggestEndpoint::class,
-        'inner_hits' => \OpenSearchDSL\SearchEndpoint\InnerHitsEndpoint::class,
+        'query' => QueryEndpoint::class,
+        'post_filter' => PostFilterEndpoint::class,
+        'sort' => SortEndpoint::class,
+        'highlight' => HighlightEndpoint::class,
+        'aggregations' => AggregationsEndpoint::class,
+        'suggest' => SuggestEndpoint::class,
+        'inner_hits' => InnerHitsEndpoint::class,
     ];
 
     /**
@@ -34,9 +34,9 @@ class SearchEndpointFactory
      *
      * @param string $type type of endpoint
      *
-     * @throws \RuntimeException endpoint does not exist
-     *
      * @return AbstractSearchEndpoint
+     *
+     * @throws \RuntimeException endpoint does not exist
      */
     public static function get($type)
     {

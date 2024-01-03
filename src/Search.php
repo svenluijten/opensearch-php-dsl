@@ -37,7 +37,7 @@ class Search
      *
      * @var bool|int|null
      */
-    private $trackTotalHits = null;
+    private $trackTotalHits;
 
     /**
      * To retrieve hits from a certain offset. Defaults to 0.
@@ -389,6 +389,7 @@ class Search
 
     /**
      * @param bool|int|null $trackTotalHits
+     *
      * @return $this
      */
     public function setTrackTotalHits($trackTotalHits)

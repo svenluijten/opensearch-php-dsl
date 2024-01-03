@@ -24,11 +24,13 @@ class OrderedSerializer
                 if ($value instanceof AbstractSearchEndpoint) {
                     $normalize = $value->normalize();
 
-                    if ($normalize !== null) {
-                        $data[$key] = $normalize;
-                    } else {
+                    if ($normalize === null || count($normalize) === 0) {
                         unset($data[$key]);
+
+                        continue;
                     }
+
+                    $data[$key] = $normalize;
                 }
             }
         }

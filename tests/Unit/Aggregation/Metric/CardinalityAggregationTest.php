@@ -13,13 +13,14 @@ namespace OpenSearchDSL\Tests\Unit\Aggregation\Metric;
 
 use OpenSearchDSL\Aggregation\Bucketing\TermsAggregation;
 use OpenSearchDSL\Aggregation\Metric\CardinalityAggregation;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit test for cardinality aggregation.
  *
  * @internal
  */
-class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
+class CardinalityAggregationTest extends TestCase
 {
     /**
      * Tests getArray method.
@@ -28,7 +29,8 @@ class CardinalityAggregationTest extends \PHPUnit\Framework\TestCase
     {
         $aggregation = new CardinalityAggregation('bar');
 
-        static::assertSame([], $aggregation->getArray());
+        $value = $aggregation->getArray();
+        static::assertSame([], $value);
 
         $aggregation->setScript('foo');
         $result = $aggregation->getArray();

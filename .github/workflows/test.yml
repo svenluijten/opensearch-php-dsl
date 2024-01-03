@@ -11,17 +11,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-
         php-version:
-        - "7.4"
-        - "8.0"
-        - "8.1"
-        - "8.2"
+          - "7.4"
+          - "8.0"
+          - "8.1"
+          - "8.2"
+          - "8.3"
         dependencies:
-        - lowest
-        - highest
+          - lowest
+          - highest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
   
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -32,10 +32,6 @@ jobs:
 
     - name: Validate composer.json and composer.lock
       run: composer validate
-
-    - name: Set composer platform version
-      if: matrix.php-version == '8.2'
-      run: composer config platform.php 8.1.9
 
     - name: Install lowest dependencies with composer
       if: matrix.dependencies == 'lowest'
@@ -53,6 +49,7 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         file: ./coverage.xml
+
   static-analyse:
     runs-on: ubuntu-latest
     steps:
@@ -61,7 +58,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "7.4"
+          php-version: "8.3"
           tools: composer:v2
           coverage: xdebug
 
@@ -81,7 +78,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "7.4"
+          php-version: "8.3"
           tools: composer:v2
           coverage: xdebug
 

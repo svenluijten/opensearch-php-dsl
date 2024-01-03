@@ -85,5 +85,5 @@ jobs:
       - name: Install dependencies
         run: composer install
 
-      - name: Run PHP-CS-Fixer
+      - name: Run Infection
         run: vendor/bin/infection

@@ -34,8 +34,10 @@ class Search
     /**
      * If you don’t need to track the total number of hits at all you can improve
      * query times by setting this option to false. Defaults to true.
+     *
+     * @var bool|int|null
      */
-    private ?bool $trackTotalHits = null;
+    private $trackTotalHits = null;
 
     /**
      * To retrieve hits from a certain offset. Defaults to 0.
@@ -378,7 +380,7 @@ class Search
     }
 
     /**
-     * @return bool
+     * @return bool|int|null
      */
     public function isTrackTotalHits()
     {
@@ -386,9 +388,10 @@ class Search
     }
 
     /**
+     * @param bool|int|null $trackTotalHits
      * @return $this
      */
-    public function setTrackTotalHits(bool $trackTotalHits)
+    public function setTrackTotalHits($trackTotalHits)
     {
         $this->trackTotalHits = $trackTotalHits;
 

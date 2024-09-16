@@ -36,7 +36,7 @@ class ScriptedMetricAggregation extends AbstractAggregation
         ?string $initScript = null,
         ?string $mapScript = null,
         ?string $combineScript = null,
-        ?string $reduceScript = null
+        ?string $reduceScript = null,
     ) {
         parent::__construct($name);
 

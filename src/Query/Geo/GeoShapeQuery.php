@@ -64,7 +64,7 @@ class GeoShapeQuery implements BuilderInterface
         string $type,
         array $coordinates,
         string $relation = self::INTERSECTS,
-        array $parameters = []
+        array $parameters = [],
     ): void {
         $filter = array_merge(
             $parameters,
@@ -87,7 +87,7 @@ class GeoShapeQuery implements BuilderInterface
         string $index,
         string $path,
         string $relation = self::INTERSECTS,
-        array $parameters = []
+        array $parameters = [],
     ): void {
         $filter = array_merge(
             $parameters,

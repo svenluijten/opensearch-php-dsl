@@ -25,7 +25,7 @@ class QueryEndpoint extends AbstractSearchEndpoint
     public const NAME = 'query';
     private const DEFAULT_ORDER = 2;
 
-    private ?\OpenSearchDSL\Query\Compound\BoolQuery $bool = null;
+    private ?BoolQuery $bool = null;
 
     private bool $filtersSet = false;
 

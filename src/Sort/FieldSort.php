@@ -36,7 +36,7 @@ class FieldSort implements BuilderInterface
         string $field,
         ?string $order = null,
         ?BuilderInterface $nestedFilter = null,
-        array $parameters = []
+        array $parameters = [],
     ) {
         $this->field = $field;
         $this->order = $order;

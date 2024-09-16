@@ -133,7 +133,7 @@ class Search
      */
     private ?string $scroll = null;
 
-    private static ?\OpenSearchDSL\Serializer\OrderedSerializer $serializer = null;
+    private static ?OrderedSerializer $serializer = null;
 
     /**
      * @var AbstractSearchEndpoint[]

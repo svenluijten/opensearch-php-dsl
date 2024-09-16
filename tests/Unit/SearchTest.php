@@ -158,7 +158,7 @@ class SearchTest extends \PHPUnit\Framework\TestCase
         static::assertTrue($search->isExplain());
         static::assertTrue($search->isVersion());
         static::assertSame([], $search->getIndicesBoost());
-        static::assertSame(7, $search->getMinScore());
+        static::assertSame(7.0, $search->getMinScore());
         static::assertSame([], $search->getSearchAfter());
         static::assertSame('', $search->getScroll());
     }

@@ -47,7 +47,7 @@ class HistogramAggregation extends AbstractAggregation
         ?string $orderDirection = self::DIRECTION_ASC,
         ?int $extendedBoundsMin = null,
         ?int $extendedBoundsMax = null,
-        ?bool $keyed = null
+        ?bool $keyed = null,
     ) {
         parent::__construct($name);
 

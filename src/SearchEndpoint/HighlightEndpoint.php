@@ -23,7 +23,7 @@ class HighlightEndpoint extends AbstractSearchEndpoint
      */
     public const NAME = 'highlight';
 
-    private ?\OpenSearchDSL\BuilderInterface $highlight = null;
+    private ?BuilderInterface $highlight = null;
 
     public function normalize(): ?array
     {

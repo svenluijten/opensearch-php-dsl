@@ -111,7 +111,7 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
     public function testAddWithoutName(): void
     {
         $bag = new BuilderBag();
-        $bag->add(new class() implements BuilderInterface {
+        $bag->add(new class implements BuilderInterface {
             public function toArray(): array
             {
                 return [];

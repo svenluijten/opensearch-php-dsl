@@ -33,7 +33,7 @@ class NestedSort implements BuilderInterface
         string $path,
         ?BuilderInterface $filter = null,
         ?BuilderInterface $nestedFilter = null,
-        array $parameters = []
+        array $parameters = [],
     ) {
         $this->path = $path;
         $this->filter = $filter;

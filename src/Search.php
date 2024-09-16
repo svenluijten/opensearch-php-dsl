@@ -576,13 +576,13 @@ class Search
     }
 
     /**
-     * @param float $minScore
+     * @param int|float $minScore
      *
      * @return $this
      */
     public function setMinScore($minScore)
     {
-        $this->minScore = $minScore;
+        $this->minScore = (float) $minScore;
 
         return $this;
     }

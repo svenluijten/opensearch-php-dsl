@@ -271,9 +271,9 @@ class Search
      *
      * @return $this
      */
-    public function addInnerHit(NestedInnerHit $innerHit)
+    public function addInnerHit(NestedInnerHit $innerHit, ?string $key = null)
     {
-        $this->getEndpoint(InnerHitsEndpoint::NAME)->add($innerHit, $innerHit->getName());
+        $this->getEndpoint(InnerHitsEndpoint::NAME)->add($innerHit, $key ?: $innerHit->getName());
 
         return $this;
     }
@@ -293,9 +293,9 @@ class Search
      *
      * @return $this
      */
-    public function addSort(BuilderInterface $sort)
+    public function addSort(BuilderInterface $sort, ?string $key = null)
     {
-        $this->getEndpoint(SortEndpoint::NAME)->add($sort);
+        $this->getEndpoint(SortEndpoint::NAME)->add($sort, $key);
 
         return $this;
     }
@@ -342,9 +342,9 @@ class Search
      *
      * @return $this
      */
-    public function addSuggest(NamedBuilderInterface $suggest)
+    public function addSuggest(NamedBuilderInterface $suggest, ?string $key = null)
     {
-        $this->getEndpoint(SuggestEndpoint::NAME)->add($suggest, $suggest->getName());
+        $this->getEndpoint(SuggestEndpoint::NAME)->add($suggest, $key ?: $suggest->getName());
 
         return $this;
     }

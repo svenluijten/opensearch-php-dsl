@@ -249,9 +249,9 @@ class Search
      *
      * @return $this
      */
-    public function addAggregation(AbstractAggregation $aggregation)
+    public function addAggregation(AbstractAggregation $aggregation, ?string $key = null)
     {
-        $this->getEndpoint(AggregationsEndpoint::NAME)->add($aggregation, $aggregation->getName());
+        $this->getEndpoint(AggregationsEndpoint::NAME)->add($aggregation, $key ?: $aggregation->getName());
 
         return $this;
     }

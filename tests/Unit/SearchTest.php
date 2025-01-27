@@ -129,6 +129,38 @@ class SearchTest extends \PHPUnit\Framework\TestCase
         static::assertSame('bar', $search->getUriParams()['q']);
     }
 
+    public function testAggregationCanHaveKey(): void
+    {
+        $search = new Search();
+
+        static::assertSame($search, $search->addAggregation(new TermsAggregation('acme'), 'aggregation-key'));
+        static::assertArrayHasKey('aggregation-key', $search->getAggregations());
+    }
+
+    public function testSortsCanHaveKey(): void
+    {
+        $search = new Search();
+
+        static::assertSame($search, $search->addSort(new FieldSort('foo'), 'sort-key'));
+        static::assertArrayHasKey('sort-key', $search->getSorts());
+    }
+
+    public function testInnerHitCanHaveKey(): void
+    {
+        $search = new Search();
+
+        static::assertSame($search, $search->addInnerHit(new NestedInnerHit('foo', 'foo'), 'inner-hit-key'));
+        static::assertArrayHasKey('inner-hit-key', $search->getInnerHits());
+    }
+
+    public function testSuggestCanHaveKey(): void
+    {
+        $search = new Search();
+
+        static::assertSame($search, $search->addSuggest(new Suggest('foo', 'suggest', 'foo_bar', 'bar'), 'suggest-key'));
+        static::assertArrayHasKey('suggest-key', $search->getSuggests());
+    }
+
     public function testGetters(): void
     {
         $search = new Search();

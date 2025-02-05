@@ -47,7 +47,7 @@ class FunctionScoreQuery implements BuilderInterface
         string $modifier = 'none',
         ?BuilderInterface $query = null,
         $missing = null,
-        ?string $name = ''
+        ?string $name = '',
     ): self {
         $function = [
             'field_value_factor' => array_filter([
@@ -78,7 +78,7 @@ class FunctionScoreQuery implements BuilderInterface
         array $options = [],
         ?BuilderInterface $query = null,
         ?int $weight = null,
-        ?string $name = ''
+        ?string $name = '',
     ) {
         $function = array_filter(
             [
@@ -146,7 +146,7 @@ class FunctionScoreQuery implements BuilderInterface
         array $params = [],
         array $options = [],
         ?BuilderInterface $query = null,
-        ?string $name = ''
+        ?string $name = '',
     ): self {
         $function = [
             'script_score' => [

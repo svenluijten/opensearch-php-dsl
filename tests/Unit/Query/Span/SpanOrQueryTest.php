@@ -45,7 +45,6 @@ class SpanOrQueryTest extends \PHPUnit\Framework\TestCase
         static::assertEquals($result, $query->toArray());
 
         $result = $query->getQueries();
-        static::assertIsArray($result);
         static::assertEquals(1, count($result));
     }
 }

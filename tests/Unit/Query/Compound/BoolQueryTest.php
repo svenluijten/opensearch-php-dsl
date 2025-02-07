@@ -190,7 +190,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
     {
         $bool = new BoolQuery();
 
-        static::assertIsArray($bool->getQueries());
+        static::assertSame([], $bool->getQueries());
     }
 
     /**
@@ -215,7 +215,7 @@ class BoolQueryTest extends \PHPUnit\Framework\TestCase
     {
         $bool = new BoolQuery();
 
-        static::assertIsArray($bool->getQueries(BoolQuery::MUST));
+        static::assertSame([], $bool->getQueries(BoolQuery::MUST));
     }
 
     /**

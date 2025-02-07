@@ -31,11 +31,11 @@ class ParametersTraitTest extends TestCase
      */
     public function testGetAndAddParameter(): void
     {
-        static::assertIsObject($this->parametersTraitMock->addParameter('acme', 123));
+        $this->parametersTraitMock->addParameter('acme', 123);
         static::assertEquals(123, $this->parametersTraitMock->getParameter('acme'));
         $this->parametersTraitMock->addParameter('bar', 321);
         static::assertEquals(321, $this->parametersTraitMock->getParameter('bar'));
-        static::assertTrue(is_object($this->parametersTraitMock->removeParameter('acme')));
+        $this->parametersTraitMock->removeParameter('acme');
     }
 }
 

@@ -47,11 +47,7 @@ class Highlight implements BuilderInterface
 
     public function toArray(): array
     {
-        $output = [];
-
-        if (is_array($this->tags)) {
-            $output = $this->tags;
-        }
+        $output = $this->tags;
 
         $output = $this->processArray($output);
 

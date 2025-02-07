@@ -74,7 +74,7 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
         $bazBuilder = $this->getBuilder('baz');
         $builderName = $bag->add($bazBuilder);
 
-        static::assertNotEmpty($bag->get($builderName));
+        static::assertEmpty($bag->get($builderName)->toArray());
     }
 
     /**
